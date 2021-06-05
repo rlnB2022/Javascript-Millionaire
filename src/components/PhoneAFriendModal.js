@@ -20,11 +20,15 @@ const PhoneAFriendModal = (props) => {
 
     const listFriends = props.friends.map((e, idx) => <Friend activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
 
-    function btnCall() {
-
+    const btnCall = () => {
         // randomly pick one of the remaining answers
-        props.changePhoneAFriendSuggestion();
-    }
+        // props.changePhoneAFriendSuggestion();
+        setIsPhoneAFriendModalHidden(true);
+
+        const btnCallTimeout = setTimeout(() => {
+            props.changeViewPhoneAFriendModal();
+        },500);
+    };
 
     function changeFriend(key) {
         setActiveFriend(key);
@@ -39,7 +43,7 @@ const PhoneAFriendModal = (props) => {
             <div className='phone-a-friend-modal__inner'>
                 <img className='lifeline-image' src={phoneafriend} alt="modal__image" />
                 <div className='friend-container'>{listFriends}</div>
-                <div className='btn-call-name' onClick={() => setIsPhoneAFriendModalHidden(true)}>{buttonText}</div>
+                <div className='btn-call-name' onClick={btnCall}>{buttonText}</div>
             </div>
         </div>
     )

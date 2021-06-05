@@ -10,6 +10,7 @@ const LifeLineModal = (props) => {
     const imgs = [fiftyfifty, phoneafriend, asktheaudience];
     const lifelineName = ['50:50', 'Phone A Friend', 'Ask the Audience'];
     const [isHidden, setIsHidden] = useState(false);
+    const [usingLifeline, setUsingLifeline] = useState(false);
 
     const modalImg = imgs[props.lifeLineModalImage];
 
@@ -17,10 +18,20 @@ const LifeLineModal = (props) => {
         if (isHidden) {
             const myTimer = setTimeout(() => {
                 props.changeViewLifeLineModal();
+
+                if(usingLifeline) {
+                    props.useLifeLine(props.lifeLineModalImage);
+                }
                 clearTimeout(myTimer);
             }, 500);
         }
     }, [isHidden]);
+
+    useEffect(() => {
+        if(usingLifeline) {
+            setIsHidden(true);
+        }
+    },[usingLifeline]);
 
     return (
         <div className={`lifeline__modal--container ${isHidden ? 'hide-modal' : 'show-modal'}`}>
@@ -29,7 +40,7 @@ const LifeLineModal = (props) => {
                 <p>Are you sure you want to use your {lifelineName[props.lifeLineModalImage]} lifeline?</p>
                 <div className='lifeline__modal--options'>
                     <div className='lifeline__button lifeline__modal--option-no' onClick={() => setIsHidden(true)}>No</div>
-                    <div className='lifeline__button lifeline__modal--option-yes' onClick={() => props.useLifeLine(props.lifeLineModalImage)}>Yes</div>
+                    <div className='lifeline__button lifeline__modal--option-yes' onClick={() => setUsingLifeline(true)}>Yes</div>
                 </div>
             </div>
         </div>
