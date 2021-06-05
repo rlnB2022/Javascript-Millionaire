@@ -16,9 +16,17 @@
     color: #fff;
 }
 
+div > div {
+    transition: .4s ease-in-out;
+}
+
 .friend img {
-    width: 5.25rem;
-    height: 5.25rem;
+    width: 3.25rem;
+    height: 3.25rem;
+}
+
+.profile-bounce {
+    animation: profileBounce .4s ease-in-out;
 }
 
 @keyframes animateTextIn {
@@ -27,5 +35,17 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes profileBounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
     }
 }
