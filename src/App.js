@@ -1,9 +1,9 @@
-import './App.css';
+import LifeLineContainer from './components/LifeLineContainer';
 
 function App() {
   return (
     <div className="App">
-      
+      <LifeLineContainer />
     </div>
   );
 }
