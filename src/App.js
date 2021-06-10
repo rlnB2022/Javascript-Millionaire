@@ -1,9 +1,12 @@
-import LifeLineContainer from './components/LifeLineContainer';
+import './App.css';
+import Main from './components/Main';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
-    <div className="App">
-      <LifeLineContainer />
+    <div className="app">
+      <Main />
+      <Sidebar />
     </div>
   );
 }

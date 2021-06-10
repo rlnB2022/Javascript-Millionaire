@@ -1,0 +1,52 @@
+.answer {
+    position: relative;
+    margin: 2px 0;
+}
+
+.answer img {
+    position: relative;
+    min-width: 90%;
+    max-height: 8vh;
+}
+
+.answer::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 5vw;
+    background-color: blue;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.answer::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 5vw;
+    background-color: blue;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.answer .answer-text {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80%;
+    height: 90%;
+}
+
+.answer .answer-text p {
+    color: #fff;
+    font-size: 16px;
+    padding-left: 5px;
+}
+
+.answer-text span {
+    color: orange;
+}

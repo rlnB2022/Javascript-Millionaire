@@ -1,11 +1,14 @@
 import './LifeLineContainer.css';
 import LifeLine from './LifeLine';
+import fiftyfifty from '../fiftyfifty.jpg';
+import phoneafriend from '../phoneafriend.jpg';
+import asktheaudience from '../asktheaudience.jpg';
 
 function LifeLineContainer() {
-    let imageNames = ['./fiftyfifty.jpg', './phoneafriend.jpg', './asktheaudience.jpg'];
+    let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
     let imageItems = imageNames.map((item, index) => {
-        return <LifeLine imageName={item} key={index} />
+        return <LifeLine imagename={item} key={index} />
     });
 
     return (

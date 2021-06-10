@@ -1,0 +1,12 @@
+.answer-container {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr;
+}
+
+.answer-container .answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}

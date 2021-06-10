@@ -1,0 +1,42 @@
+.current-money {
+    position: relative;
+    margin-right: 5vw;
+}
+
+.current-money img {
+    display: block;
+}
+
+.current-money::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 5vw;
+    background-color: blue;
+    right: -5vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.current-money p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.df {
+    display: flex;
+}
+
+.jcc {
+    justify-content: center;
+}
+
+.aic {
+    align-items: center;
+}
