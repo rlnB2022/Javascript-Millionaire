@@ -3,28 +3,33 @@ import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 import firebase from './firebase';
 import React, { useState, useEffect } from 'react';
+import Question from './components/Question';
 
 function App() {
-  const [schools, setSchools] = useState([]);
+  const [question, setQuestion] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const ref = firebase.firestore().collection('schools');
+  const ref = firebase.firestore().collection('questions');
 
-  function getSchools() {
+  function getQuestion() {
     setLoading(true);
     ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach(doc => {
-        const data = doc.data();
-        items.push(data);
-      });
-      setSchools(items);
+      // const items = [];
+
+      // console.log(querySnapshot.docs[0].data());
+
+      // querySnapshot.forEach(doc => {
+      //   const data = doc.data();
+      //   items.push(data);
+      // });
+
+      setQuestion(querySnapshot.docs[0].data());
       setLoading(false);
     })
   }
 
   useEffect(() => {
-    getSchools();
+    getQuestion();
   }, []);
 
   if(loading) {
@@ -33,15 +38,7 @@ function App() {
 
   return (
     <div className="app">
-      {schools.map(school => {
-        return (
-          <div key={school.id}>
-            <h2>{school.title}</h2>
-            <p>{school.desc}</p>
-          </div>
-        )
-      })}
-      <Main />
+      <Main question={question.question} answer1={question.answer1} answer2={question.answer2} answer3={question.answer3} answer4={question.answer4} correct={question.correct} questionID={question.id}/>
       <Sidebar />
     </div>
   );
