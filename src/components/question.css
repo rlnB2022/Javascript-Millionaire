@@ -1,3 +1,46 @@
 .question {
-    
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.question img {
+    position: relative;
+    height: 100%;
+    max-height: 100%;
+    width: 90%;
+}
+
+.question::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 5vw;
+    background-color: blue;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.question::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 5vw;
+    background-color: blue;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.question p {
+    display: block;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80%;
+    font-size: 20px;
+    text-align: center;
 }

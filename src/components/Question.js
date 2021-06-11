@@ -1,14 +1,11 @@
 import './question.css';
 import background from '../answer-bg.png';
 
-let style = {
-    background: `url(${background})`
-};
-
-function Question() {
+function Question(props) {
     return (
-        <div className='question' style={style}>
-            
+        <div className='question'>
+            <img src={background} alt="question"/>
+            <p>{props.question}</p>
         </div>
     );
 }

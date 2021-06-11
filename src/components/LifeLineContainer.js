@@ -4,11 +4,17 @@ import fiftyfifty from '../fiftyfifty.jpg';
 import phoneafriend from '../phoneafriend.jpg';
 import asktheaudience from '../asktheaudience.jpg';
 
-function LifeLineContainer() {
+function LifeLineContainer(props) {
+    let propsArr = [];
+    
+    for(const prop in props) {
+        propsArr.push(`${props[prop]}`);
+    }
+
     let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
     let imageItems = imageNames.map((item, index) => {
-        return <LifeLine imagename={item} key={index} />
+        return <LifeLine imagename={item} key={index} isvisible={propsArr[index]} />
     });
 
     return (

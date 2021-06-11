@@ -43,10 +43,11 @@
 
 .answer .answer-text p {
     color: #fff;
-    font-size: 16px;
+    font-size: 20px;
     padding-left: 5px;
 }
 
 .answer-text span {
     color: orange;
+    margin-left: 10px;
 }

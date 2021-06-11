@@ -4,12 +4,12 @@ import Timer from './Timer';
 import CurrentMoney from './CurrentMoney';
 
 
-function LifeLinePopUps() {
+function LifeLinePopUps(props) {
     return (
         <div className="lifeline-popups">
             <AskTheAudiencePopUp />
             <Timer />
-            <CurrentMoney />
+            <CurrentMoney amount={props.current_money}/>
         </div>
     )
 }
