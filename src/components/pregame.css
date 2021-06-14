@@ -12,16 +12,19 @@
     font-size: 36px;
     width: 100%;
     text-align: center;
-    animation: animateTextIn .4s forwards ease-out;
+    animation: animateTextIn .3s forwards ease-out;
     transform: translate(-50%,-50%);
+    opacity: 0;
 }
 
 @keyframes animateTextIn {
     0% {
         top: 0%;
+        opacity: 0;
     }
 
     100% {
         top: 50%;
+        opacity: 1;
     }
 }
