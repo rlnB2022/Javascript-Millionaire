@@ -1,4 +1,4 @@
-import background from '../answer-bg.png';
+import background from '../answer-box.svg';
 import './answer.css';
 
 function Answer(props) {

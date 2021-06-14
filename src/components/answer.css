@@ -5,8 +5,7 @@
 
 .answer img {
     position: relative;
-    min-width: 90%;
-    max-height: 8vh;
+    width: 90%;
 }
 
 .answer::after {
@@ -14,7 +13,7 @@
     position: absolute;
     height: 2px;
     width: 5vw;
-    background-color: blue;
+    background-color: #155eaef7;
     right: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -25,9 +24,9 @@
     position: absolute;
     height: 2px;
     width: 5vw;
-    background-color: blue;
+    background-color: #155eaef7;
     left: 0;
-    top: 50%;
+    top: 51%;
     transform: translateY(-50%);
 }
 
