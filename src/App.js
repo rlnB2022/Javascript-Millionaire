@@ -10,6 +10,9 @@ function App() {
   const [question, setQuestion] = useState([]);
   const [loading, setLoading] = useState(false);
   let [gameState, setGameState] = useState(0);
+  let [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
+  let [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1);
+  let [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1);
 
   const ref = firebase.firestore().collection('questions');
 
