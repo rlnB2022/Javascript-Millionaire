@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 function PreGame(props) {
     const txtArr = ['GET READY!', '3', '2', '1'];
-    let count = 0;
+    let count = 1;
 
     useEffect(() => {
         let txt = document.querySelector('.pregame-text');
@@ -16,11 +16,10 @@ function PreGame(props) {
             else {
                 txt.innerHTML = txtArr[count];
                 count++;
+                // play beep sound?
             }
         },1000);
     });
-
-    
 
     return (
         <div className='pregame'>

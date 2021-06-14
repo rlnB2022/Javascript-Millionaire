@@ -7,21 +7,21 @@
 
 .pregame-text {
     position: absolute;
-    top: 50%;
-    left: -100%;
-    transform: translateY(-50%);
+    top: 0%;
+    left: 0%;
     font-size: 36px;
     width: 100%;
+    height: 100%;
     text-align: center;
-    animation: animateTextIn 1s forwards ease-out;
+    animation: animateTextIn .4s forwards ease-out;
 }
 
 @keyframes animateTextIn {
     0% {
-        transform: translateX(0%);
+        transform: translateY(0%);
     }
 
     100% {
-        transform: translateX(100%);
+        transform: translateY(50%);
     }
 }
