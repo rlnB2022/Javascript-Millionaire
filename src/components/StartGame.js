@@ -4,7 +4,7 @@ import './startgame.css';
 function StartGame(props) {
     return (
         <div className='start-game'>
-            <button onClick={() => props.gameOverFlag()}>Start Game</button>
+            <button onClick={() => props.gameStateFlag()}>Start Game</button>
         </div>
     );
 }

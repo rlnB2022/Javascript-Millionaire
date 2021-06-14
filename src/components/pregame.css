@@ -1,0 +1,27 @@
+.pregame {
+    height: 100vh;
+    width: 100vw;
+    background-color: #000;
+    color: #fff;
+}
+
+.pregame-text {
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    width: 100%;
+    text-align: center;
+    animation: animateTextIn 1s forwards ease-out;
+}
+
+@keyframes animateTextIn {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}

@@ -1,5 +1,6 @@
 import './App.css';
 import StartGame from './components/StartGame';
+import PreGame from './components/PreGame';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 import firebase from './firebase';
@@ -8,12 +9,12 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [question, setQuestion] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [gameOver, setGameOver] = useState(true);
+  let [gameState, setGameState] = useState(0);
 
   const ref = firebase.firestore().collection('questions');
 
-  function changeGameOver() {
-    setGameOver(false);
+  function changeGameState() {
+    setGameState(++gameState);
   }
 
   function getQuestion() {
@@ -44,9 +45,10 @@ function App() {
 
   return (
     <div className='app'>
-      {gameOver ? <StartGame gameOverFlag={changeGameOver} /> : null}
-      {!gameOver ? <Main question={question.question} answer1={question.answer1} answer2={question.answer2} answer3={question.answer3} answer4={question.answer4} correct={question.correct} questionID={question.id}/>  : null}
-      {!gameOver ? <Sidebar /> : null}
+      {gameState === 0 ? <StartGame gameStateFlag={changeGameState} /> : null}
+      {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
+      {gameState === 2 ? <Main question={question.question} answer1={question.answer1} answer2={question.answer2} answer3={question.answer3} answer4={question.answer4} correct={question.correct} questionID={question.id}/>  : null}
+      {gameState === 2 ? <Sidebar /> : null}
     </div>
   );
 }
