@@ -20,7 +20,7 @@ function Answer(props) {
         <div className='answer' onClick={() => props.selectAnswer()}>
             <img src={background} alt='answer'/>
             <div className='answer-text'>
-                <span style={answer_selected_color}>{props.letter}</span><p>{props.answer}</p>
+                <span style={answer_selected_color}>{props.letter}</span><p style={answer_selected_color}>{props.answer}</p>
             </div>
         </div>
     );
