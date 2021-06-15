@@ -1,5 +1,5 @@
 import './currentmoney.css';
-import background from '../answer-bg.png';
+import background from '../answer-box.svg';
 
 function CurrentMoney(props) {
     return (

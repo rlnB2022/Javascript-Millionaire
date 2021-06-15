@@ -1,8 +1,8 @@
 import './LifeLineContainer.css';
 import LifeLine from './LifeLine';
-import fiftyfifty from '../fiftyfifty.jpg';
-import phoneafriend from '../phoneafriend.jpg';
-import asktheaudience from '../asktheaudience.jpg';
+import fiftyfifty from '../fiftyfifty.png';
+import phoneafriend from '../phoneafriend.png';
+import asktheaudience from '../asktheaudience.png';
 
 function LifeLineContainer(props) {
     let propsArr = [];

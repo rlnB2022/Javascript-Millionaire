@@ -1,10 +1,18 @@
 .current-money {
-    position: relative;
-    margin-right: 5vw;
+    position: absolute;
+    top: 50%;
+    right: 5vw;
+    width: 60%;
+    height: 80%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .current-money img {
-    display: block;
+    position: absolute;
+    right: 0;
 }
 
 .current-money::after {
