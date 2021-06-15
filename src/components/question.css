@@ -16,7 +16,7 @@
 .question::after {
     content: '';
     position: absolute;
-    height: 2px;
+    height: 3px;
     width: 5vw;
     background-color: #155eaef7;
     right: -5vw;
@@ -27,7 +27,7 @@
 .question::before {
     content: '';
     position: absolute;
-    height: 2px;
+    height: 3px;
     width: 5vw;
     background-color: #155eaef7;
     left: -5vw;
