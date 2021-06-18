@@ -11,6 +11,7 @@ const PhoneAFriendModal = (props) => {
     const listFriends = props.friends.map((e, idx) => <Friend activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
 
     function btnCall() {
+
         // randomly pick one of the remaining answers
         props.changePhoneAFriendSuggestion();
         props.changeViewPhoneAFriendModal();

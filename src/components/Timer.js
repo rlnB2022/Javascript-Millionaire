@@ -13,9 +13,6 @@ const Timer = (props) => {
             timerText.classList.add('timer-text-anim');
             props.changeLifelineClickable();
         }
-        else {
-
-        }
     }, [props.timerVisible]);
 
     useEffect(() => {

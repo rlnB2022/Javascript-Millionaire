@@ -2,9 +2,10 @@ import './Friend.css';
 import { useState, useEffect } from 'react';
 
 const Friend = (props) => {
+
     let imageName = require('../' + props.twitter_id + '.jpg');
 
-    let [bColor, setBorderColor] = useState('gray');
+    const [bColor, setBorderColor] = useState('gray');
     
     function changeBorderColor(color) {
         setBorderColor(color);
@@ -16,7 +17,6 @@ const Friend = (props) => {
         }
         else {
             changeBorderColor('#0172FF');
-            
         }
     }, [props.activeFriend]);
 

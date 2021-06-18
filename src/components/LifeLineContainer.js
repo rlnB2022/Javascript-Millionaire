@@ -19,15 +19,18 @@ const LifeLineContainer = (props) => {
     return (
         <div className="lifeline-container">
             {props.lifeline_fiftyfifty ?
-                <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
+                <LifeLine changeLifelineClickable={props.changeLifelineClickable}
+                    changeViewLifeLineModal={props.changeViewLifeLineModal}
                     lifelineindex={0}
                     imagename={imageNames[0]} alt='50:50 LifeLine' /> : <div></div>}
             {props.lifeline_phoneafriend ?
-                <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
+                <LifeLine changeLifelineClickable={props.changeLifelineClickable}
+                    changeViewLifeLineModal={props.changeViewLifeLineModal}
                     lifelineindex={1}
                     imagename={imageNames[1]} alt='Phone A Friend LifeLine' /> : <div></div>}
             {props.lifeline_asktheaudience ?
-                <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
+                <LifeLine changeLifelineClickable={props.changeLifelineClickable}
+                    changeViewLifeLineModal={props.changeViewLifeLineModal}
                     lifelineindex={2}
                     imagename={imageNames[2]} alt='Ask The Audience LifeLine' /> : <div></div>}
         </div>

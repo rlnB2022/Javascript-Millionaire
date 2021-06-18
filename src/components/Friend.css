@@ -20,3 +20,12 @@
     width: 5.25rem;
     height: 5.25rem;
 }
+
+@keyframes animateTextIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

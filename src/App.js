@@ -10,7 +10,6 @@ import GameOver from './components/GameOver';
 import FinalAnswer from './components/FinalAnswer';
 import AnswerPopup from './components/AnswerPopup';
 import LifeLineModal from './components/LifeLineModal';
-import BlurModal from './components/BlurModal';
 import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
 
@@ -41,8 +40,7 @@ function App() {
   const [answerButtonText, setAnswerButtonText] = useState('End Game');
   const [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
-  const [viewBlurModal, setViewBlurModal] = useState(false);
-  const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
+    const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
   const [friends, setFriends] = useState([]);
   const [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
@@ -107,23 +105,19 @@ function App() {
   }
 
   function changeViewPhoneAFriend() {
-    setViewBlurModal(!viewPhoneAFriendModal);
     setViewPhoneAFriendModal(!viewPhoneAFriendModal);
   }
 
   function changeViewAskTheAudienceModal() {
-    setViewBlurModal(true);
     setViewAskTheAudienceModal(true);
   }
 
   function hideAskTheAudienceModal() {
-    setViewBlurModal(false);
     setViewAskTheAudienceModal(false);
   }
 
   function changeViewLifeLineModal(img) {
     if (lifelineClickable) {
-      changeViewBlurModal();
       setLifeLineModalImage(img);
       setViewLifeLineModal(!viewLifeLineModal);
     }
@@ -131,10 +125,6 @@ function App() {
 
   function changeLifelineClickable() {
     setLifelineClickable(!lifelineClickable);
-  }
-
-  function changeViewBlurModal() {
-    setViewBlurModal(!viewBlurModal);
   }
 
   function changeTimerVisible() {
@@ -421,8 +411,6 @@ function App() {
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
       {viewPhoneAFriendModal ? <PhoneAFriendModal changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
-
-      {viewBlurModal ? <BlurModal /> : null}
     </div>
   );
 }

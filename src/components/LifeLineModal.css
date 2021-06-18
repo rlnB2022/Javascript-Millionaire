@@ -1,3 +1,10 @@
+.lifeline__modal--container {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .9);
+    transition: .4s ease-in-out;
+}
+
 .lifeline__modal{
     position: absolute;
     top: 50%;
@@ -46,4 +53,30 @@
     padding: 10px 15px;
     color: #fff;
     font-size: 2rem;
+}
+
+.show-modal {
+    animation: showModal .4s ease-in-out forwards;
+}
+
+.hide-modal {
+    animation: hideModal .4s ease-in-out forwards;
+}
+
+@keyframes showModal {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hideModal {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
