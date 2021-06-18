@@ -15,7 +15,10 @@ const LifeLineModal = (props) => {
 
     useEffect(() => {
         if(isHidden) {
-            props.changeViewLifeLineModal();
+            const myTimer = setTimeout(() => {
+                props.changeViewLifeLineModal();
+                clearTimeout(myTimer);
+            },500);
         }
     },[isHidden]);
 
