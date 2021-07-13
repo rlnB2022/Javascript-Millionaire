@@ -22,8 +22,9 @@ function App() {
   let [bgColor2, setBgColor2] = useState('transparent');
   let [bgColor3, setBgColor3] = useState('transparent');
   let [bgColor4, setBgColor4] = useState('transparent');
+  let [difficulty, setDifficulty] = useState(1);
 
-  const ref = firebase.firestore().collection('questions');
+  let ref = firebase.firestore().collection('questions_easy');
 
   function changeGameState() {
     setGameState(++gameState);
@@ -57,21 +58,34 @@ function App() {
     setBgColor4('orange');
   }
 
-  function getQuestion() {
+  async function getQuestion() {
     setLoading(true);
 
-    ref.where('difficulty', '==', 1).onSnapshot(querySnapshot => {
-      const items = [];
-      querySnapshot.forEach(doc => {
-        items.push(doc.data());
-      });
+    if(difficulty === 1) {
+      ref = firebase.firestore().collection('questions_easy');
+    }
+    else if(difficulty === 2) {
+      ref = firebase.firestore().collection('questions_medium');
+    }
+    else {
+      ref = firebase.firestore().collection('questions_hard');
+    }
 
-      // get random question
-      const randomIndex = Math.floor(Math.random() * items.length);
+    const snapshot = await ref.get();
 
-      setQuestion(items[randomIndex]);
-      setLoading(false);
+    // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
+    const items = [];
+
+    snapshot.forEach(doc => {
+      items.push(doc.data());
     });
+
+    // get random question
+    const randomIndex = Math.floor(Math.random() * items.length);
+
+    setQuestion(items[randomIndex]);
+    setLoading(false);
+    // });
 
   }
 
@@ -87,7 +101,7 @@ function App() {
     <div className='app'>
       {gameState === 0 ? <StartGame gameStateFlag={changeGameState} /> : null}
       {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
-      {gameState === 2 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={question.question} answer1={question.answer1} answer2={question.answer2} answer3={question.answer3} answer4={question.answer4} correct={question.correct} questionID={question.id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
+      {gameState === 2 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={question.question} answer1={question.answer_1} answer2={question.answer_2} answer3={question.answer_3} answer4={question.answer_4} correct={question.answer_correct} questionID={question.id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
       {gameState === 2 ? <Sidebar /> : null}
     </div>
   );
