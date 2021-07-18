@@ -16,13 +16,13 @@ function App() {
   let [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1); // 1 = available
   let [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
   let [moneylevel, setMoneyLevel] = useState(moneyArr[0]);
-  let [currentLevel, setCurrentLevel] = useState(1);
+  let [currentLevel, setCurrentLevel] = useState(0);
   let [selectedAnswer, setSelectedAnswer] = useState(0); // 0 = not selected
   let [bgColor1, setBgColor1] = useState('transparent');
   let [bgColor2, setBgColor2] = useState('transparent');
   let [bgColor3, setBgColor3] = useState('transparent');
   let [bgColor4, setBgColor4] = useState('transparent');
-  let [difficulty, setDifficulty] = useState(1);
+  // let [difficulty, setDifficulty] = useState(1);
   
   let ref = firebase.firestore().collection('questions_easy');
 
@@ -38,21 +38,17 @@ function App() {
   }
 
   function isAnswerCorrect(num) {
-    // if(num === question.answer_correct) {
-    //   if(currentLevel < moneyArr.length - 1) {
-    //     setCurrentLevel(++currentLevel);
-    //   }
+    if(num === questions[currentLevel].answer_correct) {
+      if(currentLevel < moneyArr.length - 1) {
+        setCurrentLevel(++currentLevel);
+      }
 
-    //   if(currentLevel <= 5) {
-    //     setDifficulty(++difficulty);
-    //   }
+      // // getQuestion();
 
-    //   // getQuestion();
+      setMoneyLevel(moneyArr[currentLevel - 1]);
 
-    //   setMoneyLevel(moneyArr[currentLevel - 1]);
-
-    //   resetSelection();
-    // }
+      resetSelection();
+    }
   }
 
   function selectAnswer1() {
@@ -86,16 +82,9 @@ function App() {
   }
 
   function shuffle(arr) {
-    let currentIndex = arr.length, randomIndex;
-
-    while (0 !== currentIndex) {
-
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex--;
-
-      [arr[currentIndex], arr[randomIndex]] = [
-        arr[randomIndex], arr[currentIndex]];
-    }
+    arr.sort(function() {
+      return Math.random() - 0.5;
+    });
 
     return arr;
   }
@@ -126,57 +115,59 @@ function App() {
     // shuffle the array
     shuffle(items_easy);
 
-    console.log(items_easy);
+    // console.log(items_easy);
 
     // get random question
     // const randomIndex = Math.floor(Math.random() * items.length);
 
-    setQuestions([...questions, items_easy]);
+    setQuestions(questions => [...questions, ...items_easy]);
+
+    console.log(questions);
 
     // medium questions
     ref = firebase.firestore().collection('questions_medium');
     const snapshot_medium = await ref.limit(5).get();
 
-    // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
+    // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
     const items_medium = [];
 
     snapshot_medium.forEach(doc => {
       items_medium.push(doc.data());
     });
 
-    // shuffle the array
+    // // shuffle the array
     shuffle(items_medium);
 
-    console.log(items_medium);
+    // console.log(items_medium);
 
-    setQuestions([...questions, items_medium]);
+    setQuestions(questions => [...questions, ...items_medium]);
 
-    // hard questions
+        // // hard questions
     ref = firebase.firestore().collection('questions_hard');
     const snapshot_hard = await ref.limit(5).get();
 
-    // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
+    // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
     const items_hard = [];
 
     snapshot_hard.forEach(doc => {
       items_hard.push(doc.data());
     });
 
-    // shuffle the array
+    // // shuffle the array
     shuffle(items_hard);
 
-    console.log(items_hard);
+    // console.log(items_hard);
 
-    setQuestions([...questions, items_hard]);
+    setQuestions(questions => [...questions, ...items_hard]);
 
-    // millionaire questions
+    // // millionaire questions
     ref = firebase.firestore().collection('questions_million');
-    const snapshot_million = await ref.get();
+    const snapshot_million = await ref.limit(1).get();
 
-    // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
+    // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
     console.log(snapshot_million.docs.length);
 
-    let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
+    // let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
 
     const items_million = [];
 
@@ -184,9 +175,9 @@ function App() {
       items_million.push(doc.data());
     });
 
-    console.log(items_million[randomMillionQuestion]);
+    // console.log(items_million[randomMillionQuestion]);
 
-    setQuestions([...questions, items_million[0]]);
+    setQuestions(questions => [...questions, ...items_million]);
 
     setLoading(false);
     // });
@@ -197,6 +188,10 @@ function App() {
     getQuestions();
   }, []);
 
+  useEffect(() => {
+    console.log(questions);
+  }, [questions]);
+
   if(loading) {
     return <h1>Loading...</h1>;
   }
@@ -205,7 +200,7 @@ function App() {
     <div className='app'>
       {gameState === 0 ? <StartGame gameStateFlag={changeGameState} /> : null}
       {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
-      {gameState === 2 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions.question} answer1={questions.answer_1} answer2={questions.answer_2} answer3={questions.answer_3} answer4={questions.answer_4} correct={questions.answer_correct} questionID={questions.id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
+      {gameState === 2 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
       {gameState === 2 ? <Sidebar /> : null}
     </div>
   );

@@ -1,0 +1,29 @@
+.winners {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.winners h1 {
+    background-color: orange;
+    text-align: center;
+    color: white;
+}
+
+.winners ul {
+    border: 2px solid orange;
+}
+
+.winners li {
+    color: white;
+    list-style-type: none;
+    text-align: center;
+    padding: 10px;
+}
+
+.winners a {
+    display: block;
+    text-decoration: none;
+    text-align: end;
+    padding: 10px;
+    background-color: orange;
+}
