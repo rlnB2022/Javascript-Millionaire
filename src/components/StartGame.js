@@ -8,7 +8,8 @@ function StartGame(props) {
         <div className='start-game'>
             <img src={imgTitle} alt="title"/>
             <Winners />
-            <button onClick={() => props.gameStateFlag()}>Start Game</button>
+            <button onTransitionEnd={() => props.gameStateFlag()} onClick={() => props.animateElems()}>Start Game</button>
+            <p className="created-by">Created by <a href="https://twitter.com/rick99gtp">@rick99gtp</a></p>
         </div>
     );
 }

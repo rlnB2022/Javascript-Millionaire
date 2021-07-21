@@ -7,14 +7,46 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: space-evenly;
+    align-items: space-between;
 }
 
-.start-game button {
+.start-game img {
+    position: relative;
+    transition: .4s ease-in-out;
+}
+
+button {
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 10%;
+    transform: translateX(-50%);
     padding: 15px 25px;
     border-radius: 5px;
+    background-color: orange;
+    color: white;
+    font-size: 2rem;
+    transition: 1.4s ease-in-out;
+    transition-delay: .2s;
+}
+
+.created-by {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    transition: 1.4s ease-in-out;
+    transition-delay: .2s;
+}
+
+.created-by a:active, .created-by a:visited {
+    color: white;
+}
+
+.move-offscreen-left {
+    transform: translateX(-100vw);
+}
+
+.move-offscreen-down {
+    transform: translate(-50%, 100vh);
 }

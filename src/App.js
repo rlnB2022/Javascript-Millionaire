@@ -22,12 +22,26 @@ function App() {
   let [bgColor2, setBgColor2] = useState('transparent');
   let [bgColor3, setBgColor3] = useState('transparent');
   let [bgColor4, setBgColor4] = useState('transparent');
+
   // let [difficulty, setDifficulty] = useState(1);
   
   let ref = firebase.firestore().collection('questions_easy');
 
   function changeGameState() {
     setGameState(++gameState);
+  }
+
+  function animateStartGame() {
+    const startTitleImg = document.querySelector('.start-game img');
+    const startWinners = document.querySelector('.winners');
+    const startButton = document.querySelector('.start-game button');
+    const footer = document.querySelector('.created-by');
+    
+    startTitleImg.classList.add('move-offscreen-left');
+    startWinners.classList.add('move-offscreen-right');
+    startButton.classList.add('move-offscreen-down');
+    footer.classList.add('move-offscreen-down');
+    // changeGameState();
   }
 
   function resetSelection() {
@@ -198,8 +212,8 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame gameStateFlag={changeGameState} /> : null}
-      {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
+      {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} /> : null}
+      {gameState === 1 ? <PreGame money={moneyArr[currentLevel]} gameStateFlag={changeGameState}/> : null}
       {gameState === 2 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
       {gameState === 2 ? <Sidebar /> : null}
     </div>

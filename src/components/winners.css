@@ -1,6 +1,9 @@
 .winners {
     width: 80%;
     margin: 0 auto;
+    position: relative;
+    transition: all .4s ease-in-out;
+    transition-delay: .1s;
 }
 
 .winners h1 {
@@ -22,8 +25,11 @@
 
 .winners a {
     display: block;
-    text-decoration: none;
     text-align: end;
     padding: 10px;
     background-color: orange;
+}
+
+.move-offscreen-right {
+    transform: translateX(100vw);
 }
