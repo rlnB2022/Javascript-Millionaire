@@ -14,7 +14,7 @@ function LifeLineContainer(props) {
     let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
     let imageItems = imageNames.map((item, index) => {
-        return <LifeLine imagename={item} key={index} isvisible={propsArr[index]} />
+        return <LifeLine gameStateFlag={props.gameStateFlag} lifelineindex={index} imagename={item} key={index} isvisible={propsArr[index]} />
     });
 
     return (

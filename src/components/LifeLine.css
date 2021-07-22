@@ -9,4 +9,31 @@
 .lifeline img {
     width: 90%;
     height: 90%;
+    opacity: 0;
+}
+
+.lifeline-visible-0 {
+    animation: showLifeLine 1s ease-in-out forwards;
+}
+
+.lifeline-visible-1 {
+    animation: showLifeLine 1s ease-in-out forwards .25s;
+}
+
+.lifeline-visible-2 {
+    animation: showLifeLine 1s ease-in-out forwards .5s;
+}
+
+@keyframes showLifeLine {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    75% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(.9);
+        opacity: 1;
+    }
 }
