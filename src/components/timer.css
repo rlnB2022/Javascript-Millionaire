@@ -12,8 +12,12 @@
     opacity: 0;
 }
 
+.timer span {
+    opacity: 0;
+}
+
 .show-timer {
-    animation: showTimer .4s ease-in-out forwards 1s;
+    animation: showTimer 21s ease-in-out forwards;
 }
 
 @keyframes showTimer {
@@ -21,11 +25,19 @@
         opacity: 0;
         transform: scale(0);
     }
-    75% {
+    1% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    2% {
+        transform: scale(1);
+    }
+    99% {
+        opacity: 1;
         transform: scale(1.2);
     }
     100% {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 0;
+        transform: scale(0);
     }
 }

@@ -15,18 +15,18 @@ function LifeLinePopUps(props) {
         },2000);
     },[]);
 
-    // start timer
-    useEffect(() => {
-        const txtInterval = setInterval(function() {
-            clearInterval(txtInterval);
-            // props.mainStateFlag();
-        },10000);
-    },[]);
+    // // start timer
+    // useEffect(() => {
+    //     const txtInterval = setInterval(function() {
+    //         clearInterval(txtInterval);
+    //         // props.mainStateFlag();
+    //     },10000);
+    // },[]);
 
     return (
         <div className="lifeline-popups">
             <AskTheAudiencePopUp />
-            <Timer />
+            <Timer initTimer={props.initTimer} timerSeconds={props.timerSeconds} changeTimerSeconds={props.changeTimerSeconds} />
             <CurrentMoney amount={props.current_money}/>
         </div>
     )

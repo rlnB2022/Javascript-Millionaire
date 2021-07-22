@@ -25,10 +25,19 @@ function App() {
   let [bgColor2, setBgColor2] = useState('transparent');
   let [bgColor3, setBgColor3] = useState('transparent');
   let [bgColor4, setBgColor4] = useState('transparent');
+  let [timerSeconds, setTimerSeconds] = useState(20);
 
-  // let [difficulty, setDifficulty] = useState(1);
-  
   let ref = firebase.firestore().collection('questions_easy');
+
+  function changeTimerSeconds() {
+    setTimerSeconds(--timerSeconds);
+  }
+
+  function initTimer() {
+    setTimerSeconds(20);
+    const timerText = document.querySelector('.timer span');
+    timerText.classList.add('show-timer');
+  }
 
   function changeGameState() {
     setGameState(++gameState);
@@ -236,7 +245,7 @@ function App() {
       {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} /> : null}
       {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
       {gameState === 2 ? <ShowMoney gameStateFlag={changeGameState} hidemoney={addHideMoneyClass} money={moneyArr[currentLevel]} /> : null}
-      {gameState === 3 ? <Main theAnswerState={answerState} answerStateFlag={changeAnswerState} mainStateFlag={changeMainState} theMainState={mainState} gameStateFlag={changeGameState} selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
+      {gameState === 3 ? <Main initTimer={initTimer} timerSeconds={timerSeconds} changeTimerSeconds={changeTimerSeconds} theAnswerState={answerState} answerStateFlag={changeAnswerState} mainStateFlag={changeMainState} theMainState={mainState} gameStateFlag={changeGameState} selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
       {gameState === 4 ? <Sidebar /> : null}
     </div>
   );
