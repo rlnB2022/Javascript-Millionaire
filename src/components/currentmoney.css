@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.show-current-money {
+    animation: showCurrentMoney .5s ease-in-out forwards;
+}
+
 .current-money img {
     position: absolute;
     right: 0;
@@ -47,4 +51,16 @@
 
 .aic {
     align-items: center;
+}
+
+@keyframes showCurrentMoney {
+    0% {
+        transform: translateY(-50%) scale(0);
+    }
+    75% {
+        transform: translateY(-50%) scale(1.2);
+    }
+    100% {
+        transform: translateY(-50%) scale(1);
+    }
 }

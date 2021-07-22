@@ -1,4 +1,5 @@
 .answer {
+    opacity: 0;
     position: relative;
     margin: 2px 0;
 }
@@ -6,6 +7,22 @@
 .answer img {
     position: relative;
     width: 90%;
+}
+
+.answer-visible-0 {
+    animation: showAnswer .5s ease-in-out forwards;
+}
+
+.answer-visible-1 {
+    animation: showAnswer .5s ease-in-out forwards .05s;
+}
+
+.answer-visible-2 {
+    animation: showAnswer .5s ease-in-out forwards .1s;
+}
+
+.answer-visible-3 {
+    animation: showAnswer .5s ease-in-out forwards .15s;
 }
 
 .answer::after {
@@ -49,4 +66,18 @@
 .answer-text span {
     margin-left: 10px;
     color: orange;
+}
+
+@keyframes showAnswer {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

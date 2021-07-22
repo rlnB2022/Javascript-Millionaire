@@ -3,8 +3,19 @@ import LifeLine from './LifeLine';
 import fiftyfifty from '../fiftyfifty.png';
 import phoneafriend from '../phoneafriend.png';
 import asktheaudience from '../asktheaudience.png';
+import { useEffect } from 'react';
 
 function LifeLineContainer(props) {
+
+    useEffect(() => {
+        const txtInterval = setInterval(function() {
+            clearInterval(txtInterval);
+            props.mainStateFlag();
+            const moneyElem = document.querySelector('.current-money');
+            moneyElem.classList.add('show-current-money');
+        },2000);
+    },[]);
+
     let propsArr = [];
     
     for(const prop in props) {
@@ -14,7 +25,7 @@ function LifeLineContainer(props) {
     let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
     let imageItems = imageNames.map((item, index) => {
-        return <LifeLine gameStateFlag={props.gameStateFlag} lifelineindex={index} imagename={item} key={index} isvisible={propsArr[index]} />
+        return <LifeLine mainStateFlag={props.mainStateFlag} lifelineindex={index} imagename={item} key={index} isvisible={propsArr[index]} />
     });
 
     return (

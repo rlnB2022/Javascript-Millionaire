@@ -1,14 +1,6 @@
 import './LifeLine.css';
-import { useEffect } from 'react';
 
 function LifeLine(props) {
-
-    // useEffect(() => {
-    //     const txtInterval = setInterval(function() {
-    //         clearInterval(txtInterval);
-    //         props.gameStateFlag();
-    //     },2000);
-    // },[]);
 
     if(props.isvisible) {
         if(props.lifelineindex === 0) {

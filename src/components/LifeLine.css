@@ -13,15 +13,15 @@
 }
 
 .lifeline-visible-0 {
-    animation: showLifeLine 1s ease-in-out forwards;
+    animation: showLifeLine .3s ease-in-out forwards;
 }
 
 .lifeline-visible-1 {
-    animation: showLifeLine 1s ease-in-out forwards .25s;
+    animation: showLifeLine .3s ease-in-out forwards .1s;
 }
 
 .lifeline-visible-2 {
-    animation: showLifeLine 1s ease-in-out forwards .5s;
+    animation: showLifeLine .3s ease-in-out forwards .2s;
 }
 
 @keyframes showLifeLine {

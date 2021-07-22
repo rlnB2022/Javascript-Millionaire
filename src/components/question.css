@@ -13,6 +13,10 @@
     margin: 0 auto;
 }
 
+.show-question {
+    animation: showQuestion .5s ease-in-out forwards;
+}
+
 .question::after {
     content: '';
     position: absolute;
@@ -41,4 +45,16 @@
     font-size: 2.5vh;
     text-align: center;
     padding: 2.5vh 0;
+}
+
+@keyframes showQuestion {
+    0% {
+        transform: scale(0);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
