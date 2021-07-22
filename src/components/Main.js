@@ -3,8 +3,16 @@ import LifeLinePopUps from './LifeLinePopUps';
 import Question from './Question';
 import AnswerContainer from './AnswerContainer';
 import './main.css';
+import { useEffect } from 'react';
 
 function Main(props) {
+
+    useEffect(() => {
+        if(props.theAnswerState === 4) {
+            const timer = document.querySelector('.timer');
+            timer.classList.add('show-timer');
+        }
+    },[props.theAnswerState]);
 
     return (
         <div className='main'>
