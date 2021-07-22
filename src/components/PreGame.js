@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 function PreGame(props) {
 
     useEffect(() => {
-        let txtInterval = setInterval(function() {
+        const txtInterval = setInterval(function() {
             clearInterval(txtInterval);
             props.gameStateFlag();
         },2000);

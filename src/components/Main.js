@@ -3,7 +3,6 @@ import LifeLinePopUps from './LifeLinePopUps';
 import Question from './Question';
 import AnswerContainer from './AnswerContainer';
 import './main.css';
-import { useState } from 'react';
 
 function Main(props) {
     return (

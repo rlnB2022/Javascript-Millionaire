@@ -3,6 +3,7 @@ import StartGame from './components/StartGame';
 import PreGame from './components/PreGame';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
+import ShowMoney from './components/ShowMoney';
 import firebase from './firebase';
 import React, { useState, useEffect } from 'react';
 
@@ -30,6 +31,12 @@ function App() {
   function changeGameState() {
     setGameState(++gameState);
   }
+
+  function addHideMoneyClass() {
+    const el = document.querySelector('.show-money');
+
+    el.classList.add('hide-money');
+};
 
   function animateStartGame() {
     const startTitleImg = document.querySelector('.start-game img');
@@ -213,9 +220,10 @@ function App() {
   return (
     <div className='app'>
       {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} /> : null}
-      {gameState === 1 ? <PreGame money={moneyArr[currentLevel]} gameStateFlag={changeGameState}/> : null}
-      {gameState === 2 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
-      {gameState === 2 ? <Sidebar /> : null}
+      {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
+      {gameState === 2 ? <ShowMoney gameStateFlag={changeGameState} hidemoney={addHideMoneyClass} money={moneyArr[currentLevel]} /> : null}
+      {gameState === 3 ? <Main selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
+      {gameState === 4 ? <Sidebar /> : null}
     </div>
   );
 }
