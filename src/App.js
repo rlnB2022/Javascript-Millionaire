@@ -6,12 +6,14 @@ import Sidebar from './components/Sidebar';
 import ShowMoney from './components/ShowMoney';
 import firebase from './firebase';
 import React, { useState, useEffect } from 'react';
+import GameOver from './components/GameOver';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
 
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
+  let [gamesPlayed, setGamesPlayed] = useState();
   let [gameState, setGameState] = useState(0);
   let [mainState, setMainState] = useState(0);
   let [answerState, setAnswerState] = useState(0);
@@ -34,7 +36,7 @@ function App() {
   }
 
   function initTimer() {
-    setTimerSeconds(20);
+    setTimerSeconds(30);
     const timerText = document.querySelector('.timer span');
     timerText.classList.add('show-timer');
   }
@@ -71,7 +73,13 @@ function App() {
     startWinners.classList.add('move-offscreen-right');
     startButton.classList.add('move-offscreen-down');
     footer.classList.add('move-offscreen-down');
-    // changeGameState();
+
+    // record game played in database
+    storeGamePlayed();
+  }
+
+  function storeGamePlayed() {
+    const res = firebase.firestore().collection('stats').doc('games').set({played: gamesPlayed + 1});
   }
 
   function resetSelection() {
@@ -133,6 +141,14 @@ function App() {
     return arr;
   }
 
+  async function getStats() {
+    const statRef = firebase.firestore().collection('stats');
+    const snapshot_totalgames = await statRef.get();
+    const gp = snapshot_totalgames.docs[0].data().played;
+
+    setGamesPlayed(gp);
+  }
+
   async function getQuestions() {
     setLoading(true);
 
@@ -166,7 +182,7 @@ function App() {
 
     setQuestions(questions => [...questions, ...items_easy]);
 
-    console.log(questions);
+    // console.log(questions);
 
     // medium questions
     ref = firebase.firestore().collection('questions_medium');
@@ -209,9 +225,7 @@ function App() {
     const snapshot_million = await ref.limit(1).get();
 
     // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
-    console.log(snapshot_million.docs.length);
-
-    // let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
+        // let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
 
     const items_million = [];
 
@@ -230,10 +244,11 @@ function App() {
 
   useEffect(() => {
     getQuestions();
+    getStats();
   }, []);
 
   useEffect(() => {
-    console.log(questions);
+    // console.log(questions);
   }, [questions]);
 
   if(loading) {
@@ -242,11 +257,12 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} /> : null}
+      {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed}/> : null}
       {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
       {gameState === 2 ? <ShowMoney gameStateFlag={changeGameState} hidemoney={addHideMoneyClass} money={moneyArr[currentLevel]} /> : null}
       {gameState === 3 ? <Main initTimer={initTimer} timerSeconds={timerSeconds} changeTimerSeconds={changeTimerSeconds} theAnswerState={answerState} answerStateFlag={changeAnswerState} mainStateFlag={changeMainState} theMainState={mainState} gameStateFlag={changeGameState} selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
       {gameState === 4 ? <Sidebar /> : null}
+      {gameState === 5 ? <GameOver /> : null}
     </div>
   );
 }

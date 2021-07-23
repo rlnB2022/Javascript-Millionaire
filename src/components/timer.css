@@ -17,7 +17,7 @@
 }
 
 .show-timer {
-    animation: showTimer 21s ease-in-out forwards;
+    animation: showTimer 31s ease-in-out forwards;
 }
 
 @keyframes showTimer {
