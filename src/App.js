@@ -22,11 +22,7 @@ function App() {
   let [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
   let [moneylevel, setMoneyLevel] = useState(moneyArr[0]);
   let [currentLevel, setCurrentLevel] = useState(0);
-  let [selectedAnswer, setSelectedAnswer] = useState(0); // 0 = not selected
-  let [bgColor1, setBgColor1] = useState('transparent');
-  let [bgColor2, setBgColor2] = useState('transparent');
-  let [bgColor3, setBgColor3] = useState('transparent');
-  let [bgColor4, setBgColor4] = useState('transparent');
+  let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
   let [timerSeconds, setTimerSeconds] = useState(20);
 
   let ref = firebase.firestore().collection('questions_easy');
@@ -61,14 +57,14 @@ function App() {
     const el = document.querySelector('.show-money');
 
     el.classList.add('hide-money');
-};
+  };
 
   function animateStartGame() {
     const startTitleImg = document.querySelector('.start-game img');
     const startWinners = document.querySelector('.winners');
     const startButton = document.querySelector('.start-game button');
     const footer = document.querySelector('.created-by');
-    
+
     startTitleImg.classList.add('move-offscreen-left');
     startWinners.classList.add('move-offscreen-right');
     startButton.classList.add('move-offscreen-down');
@@ -79,19 +75,12 @@ function App() {
   }
 
   function storeGamePlayed() {
-    const res = firebase.firestore().collection('stats').doc('games').set({played: gamesPlayed + 1});
+    const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
   }
 
-  function resetSelection() {
-    setBgColor1('transparent');
-    setBgColor2('transparent');
-    setBgColor3('transparent');
-    setBgColor4('transparent');
-  }
-
-  function isAnswerCorrect(num) {
-    if(num === questions[currentLevel].answer_correct) {
-      if(currentLevel < moneyArr.length - 1) {
+    function isAnswerCorrect(num) {
+    if (num === questions[currentLevel].answer_correct) {
+      if (currentLevel < moneyArr.length - 1) {
         setCurrentLevel(++currentLevel);
       }
 
@@ -99,42 +88,46 @@ function App() {
 
       setMoneyLevel(moneyArr[currentLevel - 1]);
 
-      resetSelection();
+      // resetSelection();
     }
   }
 
-  function selectAnswer1() {
-    resetSelection();
-    setSelectedAnswer(1);
-    setBgColor1('orange');
-
-    // check for correct answer
-    isAnswerCorrect(1);
+  function answerSelected(num) {
+    setSelectedAnswer(num);
   }
 
-  function selectAnswer2() {
-    resetSelection();
-    setSelectedAnswer(2);
-    setBgColor2('orange');
-    isAnswerCorrect(2);
-  }
+  // function selectAnswer1() {
+  //   resetSelection();
+  //   setSelectedAnswer(1);
+  //   setBgColor1('orange');
 
-  function selectAnswer3() {
-    resetSelection();
-    setSelectedAnswer(3);
-    setBgColor3('orange');
-    isAnswerCorrect(3);
-  }
-  
-  function selectAnswer4() {
-    resetSelection();
-    setSelectedAnswer(4);
-    setBgColor4('orange');
-    isAnswerCorrect(4);
-  }
+  //   // check for correct answer
+  //   isAnswerCorrect(1);
+  // }
+
+  // function selectAnswer2() {
+  //   resetSelection();
+  //   setSelectedAnswer(2);
+  //   setBgColor2('orange');
+  //   isAnswerCorrect(2);
+  // }
+
+  // function selectAnswer3() {
+  //   resetSelection();
+  //   setSelectedAnswer(3);
+  //   setBgColor3('orange');
+  //   isAnswerCorrect(3);
+  // }
+
+  // function selectAnswer4() {
+  //   resetSelection();
+  //   setSelectedAnswer(4);
+  //   setBgColor4('orange');
+  //   isAnswerCorrect(4);
+  // }
 
   function shuffle(arr) {
-    arr.sort(function() {
+    arr.sort(function () {
       return Math.random() - 0.5;
     });
 
@@ -202,7 +195,7 @@ function App() {
 
     setQuestions(questions => [...questions, ...items_medium]);
 
-        // // hard questions
+    // // hard questions
     ref = firebase.firestore().collection('questions_hard');
     const snapshot_hard = await ref.limit(5).get();
 
@@ -225,7 +218,7 @@ function App() {
     const snapshot_million = await ref.limit(1).get();
 
     // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
-        // let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
+    // let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
 
     const items_million = [];
 
@@ -251,16 +244,37 @@ function App() {
     // console.log(questions);
   }, [questions]);
 
-  if(loading) {
+  if (loading) {
     return <h1>Loading...</h1>;
   }
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed}/> : null}
-      {gameState === 1 ? <PreGame gameStateFlag={changeGameState}/> : null}
+      {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney gameStateFlag={changeGameState} hidemoney={addHideMoneyClass} money={moneyArr[currentLevel]} /> : null}
-      {gameState === 3 ? <Main initTimer={initTimer} timerSeconds={timerSeconds} changeTimerSeconds={changeTimerSeconds} theAnswerState={answerState} answerStateFlag={changeAnswerState} mainStateFlag={changeMainState} theMainState={mainState} gameStateFlag={changeGameState} selectAnswer1={selectAnswer1} selectAnswer2={selectAnswer2} selectAnswer3={selectAnswer3} selectAnswer4={selectAnswer4} bgColor1={bgColor1} bgColor2={bgColor2} bgColor3={bgColor3} bgColor4={bgColor4} currentMoney={moneylevel} question={questions[currentLevel].question} answer1={questions[currentLevel].answer_1} answer2={questions[currentLevel].answer_2} answer3={questions[currentLevel].answer_3} answer4={questions[currentLevel].answer_4} correct={questions[currentLevel].answer_correct} questionID={questions[currentLevel].id} lifeline_fiftyfifty={lifeLineFiftyFifty} lifeline_asktheaudience={lifeLineAskTheAudience} lifeline_phoneafriend={lifeLinePhoneAFriend}/>  : null}
+      {gameState === 3 ? <Main initTimer={initTimer}
+        timerSeconds={timerSeconds}
+        changeTimerSeconds={changeTimerSeconds}
+        theAnswerState={answerState}
+        answerStateFlag={changeAnswerState}
+        mainStateFlag={changeMainState}
+        theMainState={mainState}
+        gameStateFlag={changeGameState}
+        currentMoney={moneylevel}
+        answers={questions[currentLevel]}
+        changeAnswerSelected={answerSelected}
+        answerSelected={selectedAnswer}
+        // answer1={questions[currentLevel].answer_1}
+        // answer2={questions[currentLevel].answer_2}
+        // answer3={questions[currentLevel].answer_3}
+        // answer4={questions[currentLevel].answer_4}
+        // correct={questions[currentLevel].answer_correct}
+        questionID={questions[currentLevel].id}
+        lifeline_fiftyfifty={lifeLineFiftyFifty}
+        lifeline_asktheaudience={lifeLineAskTheAudience}
+        lifeline_phoneafriend={lifeLinePhoneAFriend}
+      /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
     </div>

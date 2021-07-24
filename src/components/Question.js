@@ -13,7 +13,7 @@ function Question(props) {
 
     return (
         <div className='question' key={props.questionID}>
-            <p>{props.question}</p>
+            <p>{props.answers.question}</p>
         </div>
     );
 }

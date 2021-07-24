@@ -1,15 +1,44 @@
 import './answers.css';
 import Answer from './Answer';
-import { useEffect } from 'react';
 
 function AnswerContainer(props) {
 
+    let bgColors = [,,,];
+
+    bgColors[props.answerSelected] = 'orange';
+
     return (
         <div className='answer-container'>
-            {props.theAnswerState >= 0 ? <Answer answerStateFlag={props.answerStateFlag} answerIndex={0} selectAnswer={props.selectAnswer1} bgColor={props.bgColor1} letter={props.letter_1} answer={props.answer1} /> : null}
-            {props.theAnswerState >= 1 ? <Answer answerStateFlag={props.answerStateFlag} answerIndex={1} selectAnswer={props.selectAnswer2} bgColor={props.bgColor2} letter={props.letter_2} answer={props.answer2} /> : null}
-            {props.theAnswerState >= 2 ? <Answer answerStateFlag={props.answerStateFlag} answerIndex={2} selectAnswer={props.selectAnswer3} bgColor={props.bgColor3} letter={props.letter_3} answer={props.answer3} /> : null}
-            {props.theAnswerState >= 3 ? <Answer answerStateFlag={props.answerStateFlag} answerIndex={3} selectAnswer={props.selectAnswer4} bgColor={props.bgColor4} letter={props.letter_4} answer={props.answer4}/> : null}
+            {props.theAnswerState >= 0 ? <Answer answerStateFlag={props.answerStateFlag}
+                answerIndex={0}
+                changeAnswerSelected={props.changeAnswerSelected}
+                bgColor={bgColors[0]}
+                letter='A:'
+                answer={props.answers.answer_1}
+            /> : null}
+            {props.theAnswerState >= 1 ? <Answer
+                answerStateFlag={props.answerStateFlag}
+                answerIndex={1}
+                changeAnswerSelected={props.changeAnswerSelected}
+                bgColor={bgColors[1]}
+                letter='B:'
+                answer={props.answers.answer_2} /> : null}
+            {props.theAnswerState >= 2 ? <Answer
+                answerStateFlag={props.answerStateFlag}
+                answerIndex={2}
+                changeAnswerSelected={props.changeAnswerSelected}
+                bgColor={bgColors[2]}
+                letter='C:'
+                answer={props.answers.answer_3}
+            /> : null}
+            {props.theAnswerState >= 3 ? <Answer
+                answerStateFlag={props.answerStateFlag}
+                answerIndex={3}
+                changeAnswerSelected={props.changeAnswerSelected}
+                bgColor={bgColors[3]}
+                letter='D:'
+                answer={props.answers.answer_4}
+            /> : null}
         </div>
     );
 }
