@@ -13,18 +13,6 @@
     animation: showAnswer .5s ease-in-out forwards;
 }
 
-.answer-visible-1 {
-    animation: showAnswer .5s ease-in-out forwards .05s;
-}
-
-.answer-visible-2 {
-    animation: showAnswer .5s ease-in-out forwards .1s;
-}
-
-.answer-visible-3 {
-    animation: showAnswer .5s ease-in-out forwards .15s;
-}
-
 .answer::after {
     content: '';
     position: absolute;

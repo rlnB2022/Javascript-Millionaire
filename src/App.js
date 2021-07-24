@@ -7,6 +7,7 @@ import ShowMoney from './components/ShowMoney';
 import firebase from './firebase';
 import React, { useState, useEffect } from 'react';
 import GameOver from './components/GameOver';
+import FinalAnswer from './components/FinalAnswer';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
@@ -24,8 +25,13 @@ function App() {
   let [currentLevel, setCurrentLevel] = useState(0);
   let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
   let [timerSeconds, setTimerSeconds] = useState(20);
+  let [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
 
   let ref = firebase.firestore().collection('questions_easy');
+
+  function hideFinalAnswerVisible() {
+    setFinalAnswerVisible(false);
+  }
 
   function changeTimerSeconds() {
     setTimerSeconds(--timerSeconds);
@@ -95,36 +101,6 @@ function App() {
   function answerSelected(num) {
     setSelectedAnswer(num);
   }
-
-  // function selectAnswer1() {
-  //   resetSelection();
-  //   setSelectedAnswer(1);
-  //   setBgColor1('orange');
-
-  //   // check for correct answer
-  //   isAnswerCorrect(1);
-  // }
-
-  // function selectAnswer2() {
-  //   resetSelection();
-  //   setSelectedAnswer(2);
-  //   setBgColor2('orange');
-  //   isAnswerCorrect(2);
-  // }
-
-  // function selectAnswer3() {
-  //   resetSelection();
-  //   setSelectedAnswer(3);
-  //   setBgColor3('orange');
-  //   isAnswerCorrect(3);
-  // }
-
-  // function selectAnswer4() {
-  //   resetSelection();
-  //   setSelectedAnswer(4);
-  //   setBgColor4('orange');
-  //   isAnswerCorrect(4);
-  // }
 
   function shuffle(arr) {
     arr.sort(function () {
@@ -236,9 +212,24 @@ function App() {
   }
 
   useEffect(() => {
+    if(selectedAnswer !== null) {
+
+      // show popup for 'Final Answer?'
+      const myTimeout = setTimeout(() => {
+        setFinalAnswerVisible(true);
+        clearTimeout(myTimeout);
+      }, 500);
+    }
+  }, [selectedAnswer]);
+
+  useEffect(() => {
     getQuestions();
     getStats();
   }, []);
+
+  useEffect(() => {
+    // console.log(questions);
+  }, [questions]);
 
   useEffect(() => {
     // console.log(questions);
@@ -277,6 +268,7 @@ function App() {
       /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
+      {finalAnswerVisible === true ? <FinalAnswer cancelSelected={answerSelected} visible={setFinalAnswerVisible} answers={questions[currentLevel]} answerSelected={selectedAnswer}/> : null}
     </div>
   );
 }

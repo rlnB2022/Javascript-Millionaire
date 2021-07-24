@@ -1,0 +1,26 @@
+.final-answer-container {
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+    right: 10px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+.final-answer-container > div {
+    padding: 30px 0;
+}
+
+.final-answer-container > div > p {
+    height: 100%;
+}
+
+.final-answer-no {
+    background-color: red;
+}
+
+.final-answer-yes {
+    background-color: green;
+}
