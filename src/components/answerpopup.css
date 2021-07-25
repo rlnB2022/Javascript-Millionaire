@@ -1,0 +1,28 @@
+.answer-popup {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    right: 10px;
+    transform: translateY(-50%);
+    background-color: black;
+    color: white;
+    text-align: center;
+    border: 2px solid #fff;
+    border-radius: 10px;
+}
+
+.answer-popup__padding {
+    padding: 20px 0;
+}
+
+.answer-popup__message {
+
+}
+
+.answer-popup__correct {
+
+}
+
+.answer-popup__button {
+
+}

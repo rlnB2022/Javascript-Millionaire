@@ -8,6 +8,7 @@ import firebase from './firebase';
 import React, { useState, useEffect } from 'react';
 import GameOver from './components/GameOver';
 import FinalAnswer from './components/FinalAnswer';
+import AnswerPopup from './components/AnswerPopup';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
@@ -28,22 +29,24 @@ function App() {
   let [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
   let [finalAnswerOpacity, setFinalAnswerOpacity] = useState(0);
   let [finalAnswerScale, setFinalAnswerScale] = useState(0);
+  let [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
+  let [answerMessageScale, setAnswerMessageScale] = useState(0);
+  let [correctAnswerText, setCorrectAnswerText] = useState('Incorrect');
+  let [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
+  let [answerMessageVisible, setAnswerMessageVisible] = useState(false);
+  let [answerButtonText, setAnswerButtonText] = useState('End Game');
 
   let ref = firebase.firestore().collection('questions_easy');
 
   function showFinalAnswerVisible() {
     setFinalAnswerVisible(!finalAnswerVisible);
 
-    if(finalAnswerVisible) {
-      console.log(finalAnswerOpacity);
-      console.log(finalAnswerScale);
+    if (finalAnswerVisible) {
       setFinalAnswerOpacity(0);
       setFinalAnswerScale(0);
       setSelectedAnswer(null);
     }
     else {
-      console.log(finalAnswerOpacity);
-      console.log(finalAnswerScale);
       setFinalAnswerOpacity(1);
       setFinalAnswerScale(1);
     }
@@ -101,16 +104,47 @@ function App() {
   }
 
   function isAnswerCorrect(num) {
+    setFinalAnswerVisible(false);
+
+    setFinalAnswerOpacity(0);
+    setFinalAnswerScale(0);
+
     if (num === questions[currentLevel].answer_correct) {
-      if (currentLevel < moneyArr.length - 1) {
-        setCurrentLevel(++currentLevel);
-      }
+      // if (currentLevel < moneyArr.length - 1) {
+      //   setCurrentLevel(++currentLevel);
+      // }
 
       // // getQuestion();
 
-      setMoneyLevel(moneyArr[currentLevel - 1]);
+      // setMoneyLevel(moneyArr[currentLevel - 1]);
 
       // resetSelection();
+
+      setCorrectAnswerText('Correct');
+      setAnswerButtonText('Next Question');
+    }
+    
+    // incorrect answer
+    showAnswerMessageVisible();
+
+
+  }
+
+  function showAnswerMessageVisible() {
+    
+    setAnswerMessageVisible(!answerMessageVisible);
+
+    if (answerMessageVisible) {
+      setAnswerMessageOpacity(0);
+      setAnswerMessageScale(0);
+    }
+    else {
+      setAnswerMessageOpacity(1);
+      setAnswerMessageScale(1);
+    }
+
+    if(correctAnswerText === 'Incorrect') {
+
     }
   }
 
@@ -254,7 +288,7 @@ function App() {
     return <h1>Loading...</h1>;
   }
 
-    return (
+  return (
     <div className='app'>
       {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
       {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
@@ -283,13 +317,25 @@ function App() {
       /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
+
       {gameState === 3 ? <FinalAnswer
+        isAnswerCorrect={isAnswerCorrect}
         cancelSelected={answerSelected}
         op={finalAnswerOpacity}
         sc={finalAnswerScale}
         answers={questions[currentLevel]}
         visible={showFinalAnswerVisible}
         answerSelected={selectedAnswer} /> : null}
+
+      {gameState === 3 ? <AnswerPopup
+        correctAnswerText={correctAnswerText}
+        correctAnswerResponse={correctAnswerResponse}
+        visible={answerMessageVisible}
+        op={answerMessageOpacity}
+        sc={answerMessageScale}
+        answers={questions[currentLevel]}
+        correctAnswer={questions[currentLevel].answer_correct}
+        answer_popup_button={answerButtonText} /> : null}
     </div>
   );
 }
