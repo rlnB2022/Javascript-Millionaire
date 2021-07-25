@@ -26,11 +26,26 @@ function App() {
   let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
   let [timerSeconds, setTimerSeconds] = useState(20);
   let [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
+  let [finalAnswerOpacity, setFinalAnswerOpacity] = useState(0);
+  let [finalAnswerScale, setFinalAnswerScale] = useState(0);
 
   let ref = firebase.firestore().collection('questions_easy');
 
-  function hideFinalAnswerVisible() {
-    setFinalAnswerVisible(false);
+  function showFinalAnswerVisible() {
+    setFinalAnswerVisible(!finalAnswerVisible);
+
+    if(finalAnswerVisible) {
+      console.log(finalAnswerOpacity);
+      console.log(finalAnswerScale);
+      setFinalAnswerOpacity(0);
+      setFinalAnswerScale(0);
+    }
+    else {
+      console.log(finalAnswerOpacity);
+      console.log(finalAnswerScale);
+      setFinalAnswerOpacity(1);
+      setFinalAnswerScale(1);
+    }
   }
 
   function changeTimerSeconds() {
@@ -84,7 +99,7 @@ function App() {
     const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
   }
 
-    function isAnswerCorrect(num) {
+  function isAnswerCorrect(num) {
     if (num === questions[currentLevel].answer_correct) {
       if (currentLevel < moneyArr.length - 1) {
         setCurrentLevel(++currentLevel);
@@ -212,14 +227,18 @@ function App() {
   }
 
   useEffect(() => {
-    if(selectedAnswer !== null) {
+    if (selectedAnswer !== null) {
 
       // show popup for 'Final Answer?'
       const myTimeout = setTimeout(() => {
-        setFinalAnswerVisible(true);
+        showFinalAnswerVisible();
+        // const finalAnswerContainer = document.querySelector('.final-answer-container');
+        // finalAnswerContainer.classList.add('show-final-answer-container');
+
         clearTimeout(myTimeout);
       }, 500);
     }
+
   }, [selectedAnswer]);
 
   useEffect(() => {
@@ -228,18 +247,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // console.log(questions);
-  }, [questions]);
-
-  useEffect(() => {
-    // console.log(questions);
   }, [questions]);
 
   if (loading) {
     return <h1>Loading...</h1>;
   }
 
-  return (
+    return (
     <div className='app'>
       {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
       {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
@@ -268,7 +282,13 @@ function App() {
       /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
-      {finalAnswerVisible === true ? <FinalAnswer cancelSelected={answerSelected} visible={setFinalAnswerVisible} answers={questions[currentLevel]} answerSelected={selectedAnswer}/> : null}
+      {gameState === 3 ? <FinalAnswer
+        cancelSelected={answerSelected}
+        op={finalAnswerOpacity}
+        sc={finalAnswerScale}
+        answers={questions[currentLevel]}
+        visible={showFinalAnswerVisible}
+        answerSelected={selectedAnswer} /> : null}
     </div>
   );
 }

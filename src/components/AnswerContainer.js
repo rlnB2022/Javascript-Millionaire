@@ -15,11 +15,13 @@ function AnswerContainer(props) {
                 bgColor={bgColors[0]}
                 letter='A:'
                 answer={props.answers.answer_1}
+                changeFinalAnswerVisible={props.changeFinalAnswerVisible}
             /> : null}
             {props.theAnswerState >= 1 ? <Answer
                 answerStateFlag={props.answerStateFlag}
                 answerIndex={1}
                 changeAnswerSelected={props.changeAnswerSelected}
+                changeFinalAnswerVisible={props.changeFinalAnswerVisible}
                 bgColor={bgColors[1]}
                 letter='B:'
                 answer={props.answers.answer_2} /> : null}
@@ -27,6 +29,7 @@ function AnswerContainer(props) {
                 answerStateFlag={props.answerStateFlag}
                 answerIndex={2}
                 changeAnswerSelected={props.changeAnswerSelected}
+                changeFinalAnswerVisible={props.changeFinalAnswerVisible}
                 bgColor={bgColors[2]}
                 letter='C:'
                 answer={props.answers.answer_3}
