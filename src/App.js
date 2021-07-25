@@ -39,6 +39,7 @@ function App() {
       console.log(finalAnswerScale);
       setFinalAnswerOpacity(0);
       setFinalAnswerScale(0);
+      setSelectedAnswer(null);
     }
     else {
       console.log(finalAnswerOpacity);
