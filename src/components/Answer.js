@@ -3,7 +3,7 @@ import background2 from '../answer-box_selected.svg';
 import { useEffect } from 'react';
 import './answer.css';
 
-function Answer(props) {
+const Answer = (props) => {
 
     useEffect(() => {
         const txtInterval = setInterval(function () {

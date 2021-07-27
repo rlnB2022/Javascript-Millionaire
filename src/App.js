@@ -13,6 +13,7 @@ import AnswerPopup from './components/AnswerPopup';
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
 
+  const [winners, setWinners] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   let [gamesPlayed, setGamesPlayed] = useState();
@@ -26,6 +27,7 @@ function App() {
   let [currentLevel, setCurrentLevel] = useState(0);
   let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
   let [timerSeconds, setTimerSeconds] = useState(20);
+  let [timerVisible, setTimerVisible] = useState(false);
   let [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
   let [finalAnswerOpacity, setFinalAnswerOpacity] = useState(0);
   let [finalAnswerScale, setFinalAnswerScale] = useState(0);
@@ -54,12 +56,6 @@ function App() {
 
   function changeTimerSeconds() {
     setTimerSeconds(--timerSeconds);
-  }
-
-  function initTimer() {
-    setTimerSeconds(30);
-    const timerText = document.querySelector('.timer span');
-    timerText.classList.add('show-timer');
   }
 
   function changeGameState() {
@@ -109,6 +105,8 @@ function App() {
     setFinalAnswerOpacity(0);
     setFinalAnswerScale(0);
 
+    setTimerSeconds(0);
+
     if (num === questions[currentLevel].answer_correct) {
       // if (currentLevel < moneyArr.length - 1) {
       //   setCurrentLevel(++currentLevel);
@@ -123,15 +121,14 @@ function App() {
       setCorrectAnswerText('Correct');
       setAnswerButtonText('Next Question');
     }
-    
+
     // incorrect answer
     showAnswerMessageVisible();
-
 
   }
 
   function showAnswerMessageVisible() {
-    
+
     setAnswerMessageVisible(!answerMessageVisible);
 
     if (answerMessageVisible) {
@@ -143,7 +140,7 @@ function App() {
       setAnswerMessageScale(1);
     }
 
-    if(correctAnswerText === 'Incorrect') {
+    if (correctAnswerText === 'Incorrect') {
 
     }
   }
@@ -262,6 +259,19 @@ function App() {
   }
 
   useEffect(() => {
+    if (timerSeconds <= 0) {
+      setTimerVisible(false);
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      changeTimerSeconds(timerSeconds - 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [timerSeconds]);
+
+  useEffect(() => {
     if (selectedAnswer !== null) {
 
       // show popup for 'Final Answer?'
@@ -276,9 +286,22 @@ function App() {
 
   }, [selectedAnswer]);
 
+  async function getWinners() {
+    let ref = firebase.firestore().collection('winners');
+    const snapshotRecentWinners = await ref.get();
+    const newArray = [];
+
+    snapshotRecentWinners.forEach(doc => {
+        newArray.push(doc.data().name);
+    });
+
+    setWinners(oldArray => [...oldArray, ...newArray]);
+}
+
   useEffect(() => {
     getQuestions();
     getStats();
+    getWinners();
   }, []);
 
   useEffect(() => {
@@ -290,10 +313,11 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
-      {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
+      {gameState === 0 ? <StartGame winners={winners} animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {/* {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney gameStateFlag={changeGameState} hidemoney={addHideMoneyClass} money={moneyArr[currentLevel]} /> : null}
-      {gameState === 3 ? <Main initTimer={initTimer}
+      {gameState === 3 ? <Main
+        timerVisible={timerVisible}
         timerSeconds={timerSeconds}
         changeTimerSeconds={changeTimerSeconds}
         theAnswerState={answerState}
@@ -305,11 +329,6 @@ function App() {
         answers={questions[currentLevel]}
         changeAnswerSelected={answerSelected}
         answerSelected={selectedAnswer}
-        // answer1={questions[currentLevel].answer_1}
-        // answer2={questions[currentLevel].answer_2}
-        // answer3={questions[currentLevel].answer_3}
-        // answer4={questions[currentLevel].answer_4}
-        // correct={questions[currentLevel].answer_correct}
         questionID={questions[currentLevel].id}
         lifeline_fiftyfifty={lifeLineFiftyFifty}
         lifeline_asktheaudience={lifeLineAskTheAudience}
@@ -335,7 +354,7 @@ function App() {
         sc={answerMessageScale}
         answers={questions[currentLevel]}
         correctAnswer={questions[currentLevel].answer_correct}
-        answer_popup_button={answerButtonText} /> : null}
+        answer_popup_button={answerButtonText} /> : null} */}
     </div>
   );
 }

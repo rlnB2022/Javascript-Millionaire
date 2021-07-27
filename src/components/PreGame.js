@@ -1,7 +1,7 @@
 import './pregame.css';
 import { useEffect } from 'react';
 
-function PreGame(props) {
+const PreGame = (props) => {
 
     useEffect(() => {
         const txtInterval = setInterval(function() {

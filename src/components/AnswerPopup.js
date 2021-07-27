@@ -1,6 +1,6 @@
 import './answerpopup.css';
 
-function AnswerPopup(props) {
+const AnswerPopup = (props) => {
     const styles = {
         transition: '.25s ease-in-out'
     }

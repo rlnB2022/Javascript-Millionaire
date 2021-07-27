@@ -1,7 +1,7 @@
 import './currentmoney.css';
 import background from '../answer-box.svg';
 
-function CurrentMoney(props) {
+const CurrentMoney = (props) => {
     return (
         <div className='current-money'>
             <img src={background} alt='current money' />

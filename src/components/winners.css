@@ -12,7 +12,7 @@
     color: white;
 }
 
-.winners ul {
+.winners ul.winners-list {
     border: 2px solid orange;
 }
 

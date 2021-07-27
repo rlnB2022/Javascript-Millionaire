@@ -1,6 +1,6 @@
 import './gameover.css';
 
-function GameOver(props) {
+const GameOver = (props) => {
     return (
         <div className="game-over">
 

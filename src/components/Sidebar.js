@@ -1,6 +1,6 @@
 import './sidebar.css';
 
-function Sidebar() {
+const Sidebar = () => {
     return (
         <div className='sidebar'>
         </div>

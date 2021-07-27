@@ -1,7 +1,7 @@
 import './answers.css';
 import Answer from './Answer';
 
-function AnswerContainer(props) {
+const AnswerContainer = (props) => {
 
     let bgColors = [,,,];
 

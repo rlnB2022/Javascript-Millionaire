@@ -1,4 +1,4 @@
-function AskTheAudiencePopUp() {
+const AskTheAudiencePopUp = () => {
     return (
         <div className='ask-the-audience-popup'>
             

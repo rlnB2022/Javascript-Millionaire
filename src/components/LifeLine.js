@@ -1,6 +1,6 @@
 import './LifeLine.css';
 
-function LifeLine(props) {
+const LifeLine = (props) => {
 
     if(props.isvisible) {
         if(props.lifelineindex === 0) {

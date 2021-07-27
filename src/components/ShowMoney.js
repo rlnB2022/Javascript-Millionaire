@@ -1,7 +1,7 @@
 import './showmoney.css';
 import { useEffect } from 'react';
 
-function ShowMoney(props) {
+const ShowMoney = (props) => {
 
     useEffect(() => {
         const txtInterval = setInterval(function() {

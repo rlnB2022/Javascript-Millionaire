@@ -5,7 +5,7 @@ import phoneafriend from '../phoneafriend.png';
 import asktheaudience from '../asktheaudience.png';
 import { useEffect } from 'react';
 
-function LifeLineContainer(props) {
+const LifeLineContainer = (props) => {
 
     useEffect(() => {
         const txtInterval = setInterval(function() {

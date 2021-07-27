@@ -1,0 +1,8 @@
+.stats {
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    transition: all .4s ease-in-out;
+    transition-delay: .1s;
+}

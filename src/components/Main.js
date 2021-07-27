@@ -5,7 +5,7 @@ import AnswerContainer from './AnswerContainer';
 import './main.css';
 import { useEffect } from 'react';
 
-function Main(props) {
+const Main = (props) => {
 
     useEffect(() => {
         if (props.theAnswerState === 4) {
@@ -23,6 +23,7 @@ function Main(props) {
                 lifeline_asktheaudience={props.lifeline_asktheaudience}
             /> : null}
             {props.theMainState >= 1 ? <LifeLinePopUps
+                timerVisible={props.timerVisible}
                 initTimer={props.initTimer}
                 timerSeconds={props.timerSeconds}
                 changeTimerSeconds={props.changeTimerSeconds}

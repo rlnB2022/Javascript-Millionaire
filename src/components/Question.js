@@ -1,7 +1,7 @@
 import './question.css';
 import { useEffect } from 'react';
 
-function Question(props) {
+const Question = (props) => {
     useEffect(() => {
         const txtInterval = setInterval(function() {
             clearInterval(txtInterval);

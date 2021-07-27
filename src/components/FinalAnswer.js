@@ -1,6 +1,6 @@
 import './finalanswer.css';
 
-function FinalAnswer(props) {
+const FinalAnswer = (props) => {
 
     const styles = {
         transition: '.25s ease-in-out'

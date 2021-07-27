@@ -4,7 +4,7 @@ import Timer from './Timer';
 import CurrentMoney from './CurrentMoney';
 import { useEffect } from 'react';
 
-function LifeLinePopUps(props) {
+const LifeLinePopUps = (props) => {
 
     useEffect(() => {
         const txtInterval = setInterval(function() {
@@ -15,18 +15,10 @@ function LifeLinePopUps(props) {
         },2000);
     },[]);
 
-    // // start timer
-    // useEffect(() => {
-    //     const txtInterval = setInterval(function() {
-    //         clearInterval(txtInterval);
-    //         // props.mainStateFlag();
-    //     },10000);
-    // },[]);
-
     return (
         <div className="lifeline-popups">
             <AskTheAudiencePopUp />
-            <Timer initTimer={props.initTimer} timerSeconds={props.timerSeconds} changeTimerSeconds={props.changeTimerSeconds} />
+            {props.timerVisible ? <Timer timerVisible={props.timerVisible} changeTimerSeconds={props.changeTimerSeconds} initTimer={props.initTimer} timerSeconds={props.timerSeconds} changeTimerSeconds={props.changeTimerSeconds} /> : null}
             <CurrentMoney amount={props.current_money}/>
         </div>
     )
