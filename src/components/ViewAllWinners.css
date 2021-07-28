@@ -1,5 +1,45 @@
 .view-all-winners-container {
-    background-color: red;
+    background-color: white;
     position: absolute;
-    inset: 0;   
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 1fr 8fr 1fr;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: orange;
+    color: #fff;
+}
+
+ul {
+    height: 100%;
+}
+
+ul li {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.winners-list {
+    /* background-color: green; */
+}
+
+.btn-container {
+    padding: 10px;
+}
+
+.btn-close-all-winners-list {
+    width: 70%;
+    text-align: center;
+    background-color: orange;
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 7px;
+    margin: 0 auto;
 }

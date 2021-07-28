@@ -23,11 +23,18 @@
     padding: 10px;
 }
 
-.winners a {
-    display: block;
+#viewAllWinners {
     text-align: end;
     padding: 10px;
     background-color: orange;
+}
+
+.view-all-winners__button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #fff;
+    color: orange;
+    box-shadow: 2px 2px 5px black;
 }
 
 .move-offscreen-right {

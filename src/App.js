@@ -37,8 +37,13 @@ function App() {
   let [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
   let [answerMessageVisible, setAnswerMessageVisible] = useState(false);
   let [answerButtonText, setAnswerButtonText] = useState('End Game');
+  let [viewAllWinnersVisible, setViewAllWinnersVisible] = useState(false);
 
   let ref = firebase.firestore().collection('questions_easy');
+
+  function showViewAllWinners() {
+    setViewAllWinnersVisible(!viewAllWinnersVisible);
+  }
 
   function showFinalAnswerVisible() {
     setFinalAnswerVisible(!finalAnswerVisible);
@@ -292,7 +297,7 @@ function App() {
     const newArray = [];
 
     snapshotRecentWinners.forEach(doc => {
-        newArray.push(doc.data().name);
+        newArray.push(doc.data());
     });
 
     setWinners(oldArray => [...oldArray, ...newArray]);
@@ -313,7 +318,7 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame winners={winners} animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 0 ? <StartGame showViewAllWinners={showViewAllWinners} allWinnersVisible={viewAllWinnersVisible} winners={winners} animateElems={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
       {/* {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney gameStateFlag={changeGameState} hidemoney={addHideMoneyClass} money={moneyArr[currentLevel]} /> : null}
       {gameState === 3 ? <Main
