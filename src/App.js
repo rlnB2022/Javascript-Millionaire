@@ -10,6 +10,7 @@ import GameOver from './components/GameOver';
 import FinalAnswer from './components/FinalAnswer';
 import AnswerPopup from './components/AnswerPopup';
 import LifeLineModal from './components/LifeLineModal';
+import BlurModal from './components/BlurModal';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
@@ -40,11 +41,27 @@ function App() {
   let [answerButtonText, setAnswerButtonText] = useState('End Game');
   let [viewAllWinnersVisible, setViewAllWinnersVisible] = useState(false);
   let [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
+  let [lifeLineModalImage, setLifeLineModalImage] = useState(0);
+  let [viewBlurModal, setViewBlurModal] = useState(false);
+  let [lifeLineAvailable, setLifeLineAvailable] = useState(false);
 
   let ref = firebase.firestore().collection('questions_easy');
 
-  function changeViewLifeLineModal() {
-    setViewLifeLineModal(!viewLifeLineModal);
+  function changeLifeLineAvailable() {
+    setLifeLineAvailable(!lifeLineAvailable);
+  }
+
+  function changeViewLifeLineModal(img) {
+    // set image
+    if(lifeLineAvailable) {
+      changeViewBlurModal(!viewBlurModal);
+      setLifeLineModalImage(img);
+      setViewLifeLineModal(!viewLifeLineModal);
+    }
+  }
+
+  function changeViewBlurModal() {
+    setViewBlurModal(!viewBlurModal);
   }
 
   function changeTimerVisible() {
@@ -334,7 +351,7 @@ function App() {
         gameStateFlag={changeGameState}
         hidemoney={addHideMoneyClass}
         money={moneyArr[currentLevel]}
-        /> : null}
+      /> : null}
       {gameState === 3 ? <Main
         timerVisible={timerVisible}
         changeTimerVisible={changeTimerVisible}
@@ -355,6 +372,8 @@ function App() {
         lifeline_phoneafriend={lifeLinePhoneAFriend}
         viewLifeLineModal={viewLifeLineModal}
         changeViewLifeLineModal={changeViewLifeLineModal}
+        lifeLineAvailable={lifeLineAvailable}
+        changeLifeLineAvailable={changeLifeLineAvailable}
       /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
@@ -377,7 +396,10 @@ function App() {
         answers={questions[currentLevel]}
         correctAnswer={questions[currentLevel].answer_correct}
         answer_popup_button={answerButtonText} /> : null}
-        {viewLifeLineModal ? <LifeLineModal /> : null}
+
+      {viewLifeLineModal ? <LifeLineModal changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
+
+      {viewBlurModal ? <BlurModal /> : null}
     </div>
   );
 }

@@ -29,6 +29,7 @@ const Main = (props) => {
                 changeTimerSeconds={props.changeTimerSeconds}
                 mainStateFlag={props.mainStateFlag}
                 current_money={props.currentMoney}
+                changeLifeLineAvailable={props.changeLifeLineAvailable}
             /> : null}
             {props.theMainState >= 2 ? <Question
                 answers={props.answers}
