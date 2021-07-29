@@ -43,21 +43,43 @@ function App() {
   let [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
   let [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   let [viewBlurModal, setViewBlurModal] = useState(false);
-  let [lifeLineAvailable, setLifeLineAvailable] = useState(false);
-
+  
   let ref = firebase.firestore().collection('questions_easy');
 
-  function changeLifeLineAvailable() {
-    setLifeLineAvailable(!lifeLineAvailable);
+  function useLifeLine(index) {
+    changeViewLifeLineModal();
+
+    if (index === 0) {
+      // 50:50 lifeline used
+      const cor = questions[currentLevel].answer_correct - 1;
+
+      // fix array so that only incorrect answer indexes are included
+      const incorrectAnswers = [0, 1, 2, 3];
+      incorrectAnswers.splice(cor, 1);
+
+      // randomly choose one of these arrays to stay
+      const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
+
+      // remove chosenNumber from array leaving only answers that should be hidden
+      incorrectAnswers.splice(chosenNumber, 1);
+
+      // get all elements with .lifeline
+      const answerElems = document.querySelectorAll('.answer');
+      answerElems[incorrectAnswers[0]].classList.add('hide-answer');
+      answerElems[incorrectAnswers[1]].classList.add('hide-answer');
+      answerElems[incorrectAnswers[0]].classList.remove('answer-visible-0');
+      answerElems[incorrectAnswers[1]].classList.remove('answer-visible-0');
+
+      // disable 50:50 lifeline
+      setLifeLineFiftyFifty(0);
+    }
   }
 
   function changeViewLifeLineModal(img) {
     // set image
-    if(lifeLineAvailable) {
-      changeViewBlurModal(!viewBlurModal);
-      setLifeLineModalImage(img);
-      setViewLifeLineModal(!viewLifeLineModal);
-    }
+    changeViewBlurModal(!viewBlurModal);
+    setLifeLineModalImage(img);
+    setViewLifeLineModal(!viewLifeLineModal);
   }
 
   function changeViewBlurModal() {
@@ -372,8 +394,6 @@ function App() {
         lifeline_phoneafriend={lifeLinePhoneAFriend}
         viewLifeLineModal={viewLifeLineModal}
         changeViewLifeLineModal={changeViewLifeLineModal}
-        lifeLineAvailable={lifeLineAvailable}
-        changeLifeLineAvailable={changeLifeLineAvailable}
       /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
@@ -397,7 +417,7 @@ function App() {
         correctAnswer={questions[currentLevel].answer_correct}
         answer_popup_button={answerButtonText} /> : null}
 
-      {viewLifeLineModal ? <LifeLineModal changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
+      {viewLifeLineModal ? <LifeLineModal useLifeLine={useLifeLine} changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
 
       {viewBlurModal ? <BlurModal /> : null}
     </div>

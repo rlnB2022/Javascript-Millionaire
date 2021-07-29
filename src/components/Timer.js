@@ -9,12 +9,7 @@ const Timer = (props) => {
         timer.classList.add('show-timer');
         timerText.classList.add('timer-text-anim');
         props.initTimer(30);
-        props.changeLifeLineAvailable();
     }, []);
-
-    // useEffect(() => {
-    //     timerText.classList.add('show-timer');
-    // },[timerSeconds]);
 
     return (
         <div className='timer'>

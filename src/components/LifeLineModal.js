@@ -16,7 +16,7 @@ const LifeLineModal = (props) => {
             <p>Are you sure you want to use your {lifelineName[props.lifeLineModalImage]} lifeline?</p>
             <div className='lifeline__modal--options'>
                 <div className='lifeline__button lifeline__modal--option-no' onClick={props.changeViewLifeLineModal}>No</div>
-                <div className='lifeline__button lifeline__modal--option-yes'>Yes</div>
+                <div className='lifeline__button lifeline__modal--option-yes' onClick={() => props.useLifeLine(props.lifeLineModalImage)}>Yes</div>
             </div>
         </div>
     )

@@ -4,12 +4,12 @@
     align-items: center;
     width: 100%;
     padding: 10px;
+    transition: .4s ease-in-out forwards;
 }
 
 .lifeline img {
     width: 90%;
     height: 90%;
-    opacity: 0;
 }
 
 .lifeline-visible-0 {
@@ -24,16 +24,13 @@
     animation: showLifeLine .3s ease-in-out forwards .2s;
 }
 
-@keyframes showLifeLine {
+@keyframes hideLifeLine {
     0% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    75% {
+        opacity: 1;
         transform: scale(1);
     }
     100% {
-        transform: scale(.9);
-        opacity: 1;
+        transform: scale(0);
+        opacity: 0;
     }
 }

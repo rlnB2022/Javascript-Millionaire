@@ -10,3 +10,18 @@
     align-items: center;
     font-size: 2rem;
 }
+
+.hide-answer {
+    animation: hideAnswer .3s ease-in-out forwards;
+}
+
+@keyframes hideAnswer {
+    0% {
+        opacity: 1;
+        transform: scale(.9);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
