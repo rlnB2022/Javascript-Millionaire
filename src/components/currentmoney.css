@@ -1,6 +1,7 @@
 .current-money {
     position: relative;
     width: 60%;
+    left: -1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,8 +22,9 @@
     position: absolute;
     height: 2px;
     width: 5vw;
-    background-color: blue;
+    background-color: rgb(42, 42, 255);
     top: 50%;
+    right: -1rem;
     transform: translateY(-50%);
 }
 
