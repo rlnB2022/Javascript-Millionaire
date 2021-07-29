@@ -1,21 +1,14 @@
 .start-game {
-    background: url('../bg.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: space-between;
-}
-
-.start-game img {
-    position: relative;
-    transition: .4s ease-in-out;
+    transition: opacity;
 }
 
 button {
+    width: 80%;
     position: absolute;
     left: 50%;
     bottom: 10%;
@@ -25,8 +18,6 @@ button {
     background-color: orange;
     color: white;
     font-size: 2rem;
-    transition: 1.4s ease-in-out;
-    transition-delay: .2s;
 }
 
 .created-by {
@@ -35,18 +26,18 @@ button {
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    transition: 1.4s ease-in-out;
-    transition-delay: .2s;
 }
 
 .created-by a:active, .created-by a:visited {
     color: white;
 }
 
-.move-offscreen-left {
-    transform: translateX(-100vw);
+.fade-out-start-game {
+    animation: fade-out-start-game .4s ease-in-out forwards;
 }
 
-.move-offscreen-down {
-    transform: translate(-50%, 100vh);
+@keyframes fade-out-start-game {
+    100% {
+        opacity: 0;
+    }
 }

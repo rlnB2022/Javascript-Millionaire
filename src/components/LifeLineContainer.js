@@ -17,7 +17,7 @@ const LifeLineContainer = (props) => {
     },[]);
 
     let propsArr = [];
-    
+
     for(const prop in props) {
         propsArr.push(`${props[prop]}`);
     }
@@ -25,7 +25,7 @@ const LifeLineContainer = (props) => {
     let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
     let imageItems = imageNames.map((item, index) => {
-        return <LifeLine mainStateFlag={props.mainStateFlag} lifelineindex={index} imagename={item} key={index} isvisible={propsArr[index]} />
+        return <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal} mainStateFlag={props.mainStateFlag} lifelineindex={index} imagename={item} key={index} isvisible={propsArr[index]} />
     });
 
     return (

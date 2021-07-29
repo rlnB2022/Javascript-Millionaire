@@ -6,7 +6,7 @@ const LifeLine = (props) => {
         if(props.lifelineindex === 0) {
             return (
                 <div className="lifeline">
-                    <img src={props.imagename} alt='Lifeline' className='lifeline-visible-0'/>
+                    <img src={props.imagename} alt='Lifeline' className='lifeline-visible-0' onClick={props.changeViewLifeLineModal}/>
                 </div>
             );
         }

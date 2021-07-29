@@ -9,8 +9,7 @@ const Main = (props) => {
 
     useEffect(() => {
         if (props.theAnswerState === 4) {
-            const timer = document.querySelector('.timer');
-            timer.classList.add('show-timer');
+            props.changeTimerVisible();
         }
     }, [props.theAnswerState]);
 
@@ -21,6 +20,7 @@ const Main = (props) => {
                 lifeline_fiftyfifty={props.lifeline_fiftyfifty}
                 lifeline_phoneafriend={props.lifeline_phoneafriend}
                 lifeline_asktheaudience={props.lifeline_asktheaudience}
+                changeViewLifeLineModal={props.changeViewLifeLineModal}
             /> : null}
             {props.theMainState >= 1 ? <LifeLinePopUps
                 timerVisible={props.timerVisible}
