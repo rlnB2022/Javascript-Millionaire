@@ -1,14 +1,14 @@
 .ask-the-audience-modal {
     width: 80%;
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 5%;
+    transform: translateX(-50%);
     z-index: 10;
     border-radius: 5px;
     padding: .25rem;
     background-color: gray;
-    /* height: 50vh; */
+    height: 50vh;
 }
 
 .ask-the-audience-modal__inner {

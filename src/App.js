@@ -336,6 +336,7 @@ function App() {
   useEffect(() => {
     if (timerSeconds < 0) {
       setTimerVisible(false);
+      setGameState(5);
       return;
     }
 

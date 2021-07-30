@@ -20,8 +20,7 @@ const LifeLinePopUps = (props) => {
                 changeLifeLineAvailable={props.changeLifeLineAvailable}
                 timerVisible={props.timerVisible}
                 initTimer={props.initTimer}
-                timerSeconds={props.timerSeconds}
-                changeTimerSeconds={props.changeTimerSeconds} /> : <div></div>}
+                timerSeconds={props.timerSeconds}/> : <div></div>}
             <CurrentMoney amount={props.current_money} />
         </div>
     )
