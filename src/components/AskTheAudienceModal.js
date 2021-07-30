@@ -15,7 +15,7 @@ const AskTheAudienceModal = (props) => {
 
     // set bars to percentage
     const pctBars = document.querySelectorAll('.answer-percentage');
-    
+
     pctBars.forEach((e, index) => {
         e.style.transform = 'translateY(' + pct[index] + '%)';
     });
@@ -49,6 +49,9 @@ const AskTheAudienceModal = (props) => {
                     <div className='ask-the-audience-modal__grid-item'>B</div>
                     <div className='ask-the-audience-modal__grid-item'>C</div>
                     <div className='ask-the-audience-modal__grid-item'>D</div>
+                </div>
+                <div className='ask-the-audience-modal__ok-button-container'>
+                    <div className='ask-the-audience-modal__ok-button' onClick={() => props.hideAskTheAudienceModal()}>OK</div>
                 </div>
             </div>
 

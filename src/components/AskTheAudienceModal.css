@@ -3,12 +3,12 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     z-index: 10;
     border-radius: 5px;
     padding: .25rem;
     background-color: gray;
-    height: 50vh;
+    /* height: 50vh; */
 }
 
 .ask-the-audience-modal__inner {
@@ -19,7 +19,7 @@
     height: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 8fr 1fr 1fr;
     padding-top: 3.125rem;
     border-radius: 5px;
 }
@@ -87,3 +87,11 @@
 .answer-percentage_4 {
     transform: translateY(100%);
 }
+
+.ask-the-audience-modal__ok-button-container {
+    background-color: orange;
+    color: #fff;
+    padding: 10px 15px;
+    text-align: center;
+}
+

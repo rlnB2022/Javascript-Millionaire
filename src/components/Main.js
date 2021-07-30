@@ -32,6 +32,7 @@ const Main = (props) => {
                 changeLifeLineAvailable={props.changeLifeLineAvailable}
                 viewAskTheAudienceModal={props.viewAskTheAudienceModal}
                 answers={props.answers}
+                changeViewAskTheAudienceModal={props.changeViewAskTheAudienceModal}
             /> : null}
             {props.theMainState >= 2 ? <Question
                 answers={props.answers}
