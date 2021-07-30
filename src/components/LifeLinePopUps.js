@@ -1,5 +1,5 @@
 import './lifelinepopups.css';
-import AskTheAudiencePopUp from './AskTheAudienceModal';
+import AskTheAudienceModal from './AskTheAudienceModal';
 import Timer from './Timer';
 import CurrentMoney from './CurrentMoney';
 import { useEffect } from 'react';
@@ -17,13 +17,13 @@ const LifeLinePopUps = (props) => {
 
     return (
         <div className="lifeline-popups">
-            {/* <AskTheAudiencePopUp /> */}
+            {props.viewAskTheAudienceModal ? <AskTheAudienceModal answer={props.answers} /> : null}
             {props.timerVisible ? <Timer
                 changeLifeLineAvailable={props.changeLifeLineAvailable}
                 timerVisible={props.timerVisible}
                 initTimer={props.initTimer}
                 timerSeconds={props.timerSeconds}
-                changeTimerSeconds={props.changeTimerSeconds} /> : null}
+                changeTimerSeconds={props.changeTimerSeconds} /> : <div></div>}
             <CurrentMoney amount={props.current_money} />
         </div>
     )

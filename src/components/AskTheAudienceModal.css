@@ -1,0 +1,87 @@
+.ask-the-audience-modal {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    border-radius: 10px;
+    padding: .5rem;
+    background-color: gray;
+    height: 50vh;
+}
+
+.ask-the-audience-modal__inner {
+    background: url('../asktheaudience-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 8fr 1fr;
+    padding-top: 3.125rem;
+}
+
+.ask-the-audience-modal img {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.ask-the-audience-modal__percentages {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.ask-the-audience-modal__grid-item {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    align-items: center;
+}
+
+.ask-the-audience-modal__letters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.percentage-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1fr;
+}
+
+.percentage-column {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.answer-percentage {
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    background-color: red;
+    transition: .4s ease-in-out;
+}
+
+.answer-percentage_1 {
+    transform: translateY(100%);
+}
+
+.answer-percentage_2 {
+    transform: translateY(100%);
+}
+.answer-percentage_3 {
+    transform: translateY(100%);
+}
+.answer-percentage_4 {
+    transform: translateY(100%);
+}

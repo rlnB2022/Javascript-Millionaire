@@ -11,7 +11,6 @@ import FinalAnswer from './components/FinalAnswer';
 import AnswerPopup from './components/AnswerPopup';
 import LifeLineModal from './components/LifeLineModal';
 import BlurModal from './components/BlurModal';
-import AskTheAudienceModal from './components/AskTheAudienceModal';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
@@ -81,6 +80,7 @@ function App() {
     }
     else {
       // Ask The Audience lifeline used
+      setViewBlurModal(true);
       setViewAskTheAudienceModal(true);
     }
   }
@@ -404,6 +404,7 @@ function App() {
         lifeline_phoneafriend={lifeLinePhoneAFriend}
         viewLifeLineModal={viewLifeLineModal}
         changeViewLifeLineModal={changeViewLifeLineModal}
+        viewAskTheAudienceModal={viewAskTheAudienceModal}
       /> : null}
       {gameState === 4 ? <Sidebar /> : null}
       {gameState === 5 ? <GameOver /> : null}
@@ -428,8 +429,6 @@ function App() {
         answer_popup_button={answerButtonText} /> : null}
 
       {viewLifeLineModal ? <LifeLineModal useLifeLine={useLifeLine} changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
-
-      {viewAskTheAudienceModal ? <AskTheAudienceModal /> : null}
 
       {viewBlurModal ? <BlurModal /> : null}
     </div>
