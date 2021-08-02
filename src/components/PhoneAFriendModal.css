@@ -1,0 +1,44 @@
+.phone-a-friend-modal__container {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+    z-index: 10;
+    border-radius: 5px;
+    background-color: gray;
+}
+
+.phone-a-friend-modal__inner {
+    padding: 50px 0 20px;
+}
+
+.phone-a-friend-modal__inner .lifeline-image {
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.list-of-friends {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.btn-call-name {
+    background-color: orange;
+    color: #fff;
+    width: 94%;
+    margin: 0 auto;
+    padding: 30px 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.friend-container {
+    padding: 10px 0;
+}

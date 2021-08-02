@@ -35,12 +35,12 @@ const LifeLineContainer = (props) => {
                 <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
                     mainStateFlag={props.mainStateFlag}
                     lifelineindex={1}
-                    imagename={imageNames[1]} /> : null}
+                    imagename={imageNames[1]} /> : <div></div>}
             {props.lifeline_asktheaudience ?
                 <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
                     mainStateFlag={props.mainStateFlag}
                     lifelineindex={2}
-                    imagename={imageNames[2]} /> : null}
+                    imagename={imageNames[2]} /> : <div></div>}
         </div>
     );
 }

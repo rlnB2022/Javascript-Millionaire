@@ -1,0 +1,21 @@
+.friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1.25rem;
+    background-color: #0172FF;
+    color: #fff;
+}
+
+.active-friend {
+    background-color: blue;
+    color: #fff;
+}
+
+.friend img {
+    width: 100px;
+    height: 100px;
+}

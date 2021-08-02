@@ -12,6 +12,7 @@ import AnswerPopup from './components/AnswerPopup';
 import LifeLineModal from './components/LifeLineModal';
 import BlurModal from './components/BlurModal';
 import AskTheAudienceModal from './components/AskTheAudienceModal';
+import PhoneAFriendModal from './components/PhoneAFriendModal';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
@@ -45,6 +46,8 @@ function App() {
   let [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   let [viewBlurModal, setViewBlurModal] = useState(false);
   let [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
+  let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(true);
+  let [friends, setFriends] = useState([]);
 
   let ref = firebase.firestore().collection('questions_easy');
 
@@ -78,12 +81,26 @@ function App() {
     }
     else if (index === 1) {
       // Phone A Friend lifeline used
+      changeViewPhoneAFriend();
 
+      setLifeLinePhoneAFriend(0);
     }
     else {
       // Ask The Audience lifeline used
       changeViewAskTheAudienceModal()
+
+      setLifeLineAskTheAudience(0);
     }
+  }
+
+  function changeViewPhoneAFriend() {
+    setViewBlurModal(true);
+    setViewPhoneAFriendModal(true);
+  }
+
+  function hidePhoneAFriendModal() {
+    setViewBlurModal(false);
+    setViewPhoneAFriendModal(false);
   }
 
   function changeViewAskTheAudienceModal() {
@@ -243,20 +260,9 @@ function App() {
   async function getQuestions() {
     setLoading(true);
 
-    // if(difficulty === 1) {
-    //   ref = firebase.firestore().collection('questions_easy');
-    // }
-    // else if(difficulty === 2) {
-    //   ref = firebase.firestore().collection('questions_medium');
-    // }
-    // else {
-    //   ref = firebase.firestore().collection('questions_hard');
-    // }
-
     ref = firebase.firestore().collection('questions_easy');
-    const snapshot_easy = await ref.limit(5).get();
+    const snapshot_easy = await ref.get();
 
-    // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
     const items_easy = [];
 
     snapshot_easy.forEach(doc => {
@@ -266,21 +272,13 @@ function App() {
     // shuffle the array
     shuffle(items_easy);
 
-    // console.log(items_easy);
-
-    // get random question
-    // const randomIndex = Math.floor(Math.random() * items.length);
-
-    setQuestions(questions => [...questions, ...items_easy]);
-
-    // console.log(questions);
+    setQuestions(questions => [...questions, ...items_easy.slice(-5)]);
 
     // medium questions
     ref = firebase.firestore().collection('questions_medium');
     const snapshot_medium = await ref.limit(5).get();
 
-    // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
-    const items_medium = [];
+        const items_medium = [];
 
     snapshot_medium.forEach(doc => {
       items_medium.push(doc.data());
@@ -289,16 +287,13 @@ function App() {
     // // shuffle the array
     shuffle(items_medium);
 
-    // console.log(items_medium);
-
-    setQuestions(questions => [...questions, ...items_medium]);
+        setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
 
     // // hard questions
     ref = firebase.firestore().collection('questions_hard');
     const snapshot_hard = await ref.limit(5).get();
 
-    // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
-    const items_hard = [];
+        const items_hard = [];
 
     snapshot_hard.forEach(doc => {
       items_hard.push(doc.data());
@@ -307,16 +302,11 @@ function App() {
     // // shuffle the array
     shuffle(items_hard);
 
-    // console.log(items_hard);
-
-    setQuestions(questions => [...questions, ...items_hard]);
+    setQuestions(questions => [...questions, ...items_hard.slice(-5)]);
 
     // // millionaire questions
     ref = firebase.firestore().collection('questions_million');
-    const snapshot_million = await ref.limit(1).get();
-
-    // // ref.where('difficulty', '==', difficulty).onSnapshot(querySnapshot => {
-    // let randomMillionQuestion = Math.floor(Math.random() * snapshot_million.docs.length);
+    const snapshot_million = await ref.get();
 
     const items_million = [];
 
@@ -324,12 +314,9 @@ function App() {
       items_million.push(doc.data());
     });
 
-    // console.log(items_million[randomMillionQuestion]);
-
-    setQuestions(questions => [...questions, ...items_million]);
+    setQuestions(questions => [...questions, ...items_million.slice(-1)]);
 
     setLoading(false);
-    // });
 
   }
 
@@ -374,10 +361,25 @@ function App() {
     setWinners(oldArray => [...oldArray, ...newArray]);
   }
 
+  async function getFriends() {
+    let ref = firebase.firestore().collection('Friends');
+    const snapshotFriends = await ref.get();
+    const newArr = [];
+
+    snapshotFriends.forEach(doc => {
+      newArr.push(doc.data());
+    });
+
+    shuffle(newArr);
+
+    setFriends(oldArr => [...oldArr, ...newArr.slice(-3)]);
+  }
+
   useEffect(() => {
     getQuestions();
     getStats();
     getWinners();
+    getFriends();
   }, []);
 
   useEffect(() => {
@@ -444,6 +446,8 @@ function App() {
       {viewLifeLineModal ? <LifeLineModal useLifeLine={useLifeLine} changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
 
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
+      
+      {viewPhoneAFriendModal ? <PhoneAFriendModal friends={friends} hidePhoneAFriendModal={hidePhoneAFriendModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
       {viewBlurModal ? <BlurModal /> : null}
     </div>
