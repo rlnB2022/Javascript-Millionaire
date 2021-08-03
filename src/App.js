@@ -30,8 +30,8 @@ function App() {
   let [moneylevel, setMoneyLevel] = useState(moneyArr[0]);
   let [currentLevel, setCurrentLevel] = useState(0);
   let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
-  let [timerSeconds, setTimerSeconds] = useState(30);
   let [timerVisible, setTimerVisible] = useState(false);
+  let [timerInitSeconds, setTimerInitSeconds] = useState(0);
   let [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
   let [finalAnswerOpacity, setFinalAnswerOpacity] = useState(0);
   let [finalAnswerScale, setFinalAnswerScale] = useState(0);
@@ -46,9 +46,9 @@ function App() {
   let [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   let [viewBlurModal, setViewBlurModal] = useState(false);
   let [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
-  let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(true);
+  let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
   let [friends, setFriends] = useState([]);
-
+  
   let ref = firebase.firestore().collection('questions_easy');
 
   function useLifeLine(index) {
@@ -93,6 +93,10 @@ function App() {
     }
   }
 
+  function changeTimerInitSeconds(num) {
+    setTimerInitSeconds(num);
+  }
+
   function changeViewPhoneAFriend() {
     setViewBlurModal(true);
     setViewPhoneAFriendModal(true);
@@ -128,10 +132,6 @@ function App() {
     setTimerVisible(!timerVisible);
   }
 
-  function initTimer(num) {
-    setTimerSeconds(num);
-  }
-
   function showViewAllWinners() {
     setViewAllWinnersVisible(!viewAllWinnersVisible);
   }
@@ -150,9 +150,9 @@ function App() {
     }
   }
 
-  function changeTimerSeconds() {
-    setTimerSeconds(--timerSeconds);
-  }
+  // function changeTimerSeconds() {
+  //   setTimerSeconds(--timerSeconds);
+  // }
 
   function changeGameState() {
     setGameState(++gameState);
@@ -185,6 +185,8 @@ function App() {
     storeGamePlayed();
 
     changeGameState();
+
+    changeTimerInitSeconds(30);
   }
 
   function storeGamePlayed() {
@@ -197,7 +199,7 @@ function App() {
     setFinalAnswerOpacity(0);
     setFinalAnswerScale(0);
 
-    setTimerSeconds(0);
+    // setTimerSeconds(0);
 
     if (num === questions[currentLevel].answer_correct) {
       // if (currentLevel < moneyArr.length - 1) {
@@ -320,19 +322,19 @@ function App() {
 
   }
 
-  useEffect(() => {
-    if (timerSeconds < 0) {
-      setTimerVisible(false);
-      setGameState(5);
-      return;
-    }
+  // useEffect(() => {
+  //   if (timerSeconds < 0) {
+  //     setTimerVisible(false);
+  //     setGameState(5);
+  //     return;
+  //   }
 
-    const timer = setTimeout(() => {
-      changeTimerSeconds(timerSeconds - 1);
-    }, 1000);
+  //   const timer = setTimeout(() => {
+  //     changeTimerSeconds(timerSeconds - 1);
+  //   }, 1000);
 
-    return () => clearTimeout(timer);
-  }, [timerSeconds]);
+  //   return () => clearTimeout(timer);
+  // }, [timerSeconds]);
 
   useEffect(() => {
     if (selectedAnswer !== null) {
@@ -391,23 +393,22 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame showViewAllWinners={showViewAllWinners} allWinnersVisible={viewAllWinnersVisible} winners={winners} fadeScreen={animateStartGame} gameStateFlag={changeGameState} gamesPlayed={gamesPlayed} /> : null}
-      {gameState === 1 ? <PreGame gameStateFlag={changeGameState} /> : null}
+      {gameState === 0 ? <StartGame showViewAllWinners={showViewAllWinners} allWinnersVisible={viewAllWinnersVisible} winners={winners} fadeScreen={animateStartGame} changeGameState={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
-        gameStateFlag={changeGameState}
+        changeGameState={changeGameState}
         hidemoney={addHideMoneyClass}
         money={moneyArr[currentLevel]}
       /> : null}
       {gameState === 3 ? <Main
         timerVisible={timerVisible}
         changeTimerVisible={changeTimerVisible}
-        timerSeconds={timerSeconds}
-        initTimer={initTimer}
+        timerInitSeconds={timerInitSeconds}
         theAnswerState={answerState}
         answerStateFlag={changeAnswerState}
         mainStateFlag={changeMainState}
         theMainState={mainState}
-        gameStateFlag={changeGameState}
+        changeGameState={changeGameState}
         currentMoney={moneylevel}
         answers={questions[currentLevel]}
         changeAnswerSelected={answerSelected}
@@ -421,8 +422,8 @@ function App() {
         viewAskTheAudienceModal={viewAskTheAudienceModal}
         changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
       /> : null}
-      {gameState === 4 ? <Sidebar /> : null}
-      {gameState === 5 ? <GameOver /> : null}
+      {/* {gameState === 4 ? <Sidebar /> : null} */}
+      {gameState === 4 ? <GameOver /> : null}
 
       {gameState === 3 ? <FinalAnswer
         isAnswerCorrect={isAnswerCorrect}

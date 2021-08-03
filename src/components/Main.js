@@ -23,16 +23,16 @@ const Main = (props) => {
                 changeViewLifeLineModal={props.changeViewLifeLineModal}
             /> : null}
             {props.theMainState >= 1 ? <LifeLinePopUps
+                changeTimerVisible={props.changeTimerVisible}
                 timerVisible={props.timerVisible}
-                initTimer={props.initTimer}
-                timerSeconds={props.timerSeconds}
-                changeTimerSeconds={props.changeTimerSeconds}
+                timerInitSeconds={props.timerInitSeconds}
                 mainStateFlag={props.mainStateFlag}
                 current_money={props.currentMoney}
                 changeLifeLineAvailable={props.changeLifeLineAvailable}
                 viewAskTheAudienceModal={props.viewAskTheAudienceModal}
                 answers={props.answers}
                 changeViewAskTheAudienceModal={props.changeViewAskTheAudienceModal}
+                changeGameState={props.changeGameState}
             /> : null}
             {props.theMainState >= 2 ? <Question
                 answers={props.answers}

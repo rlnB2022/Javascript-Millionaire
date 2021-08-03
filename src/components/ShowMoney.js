@@ -13,7 +13,7 @@ const ShowMoney = (props) => {
     useEffect(() => {
         const txtInterval = setInterval(function() {
             clearInterval(txtInterval);
-            props.gameStateFlag();
+            props.changeGameState();
         },3000);
     },[]);
 

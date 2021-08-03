@@ -18,9 +18,11 @@ const LifeLinePopUps = (props) => {
         <div className="lifeline-popups">
             {props.timerVisible ? <Timer
                 changeLifeLineAvailable={props.changeLifeLineAvailable}
+                changeTimerVisible={props.changeTimerVisible}
                 timerVisible={props.timerVisible}
-                initTimer={props.initTimer}
-                timerSeconds={props.timerSeconds}/> : <div></div>}
+                timerInitSeconds={props.timerInitSeconds}
+                changeGameState={props.changeGameState}
+                /> : <div></div>}
             <CurrentMoney amount={props.current_money} />
         </div>
     )

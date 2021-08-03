@@ -6,7 +6,7 @@ const PreGame = (props) => {
     useEffect(() => {
         const txtInterval = setInterval(function() {
             clearInterval(txtInterval);
-            props.gameStateFlag();
+            props.changeGameState();
         },2000);
     },[]);
 

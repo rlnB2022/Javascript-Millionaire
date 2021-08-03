@@ -8,8 +8,6 @@ const FinalAnswer = (props) => {
 
     let answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
 
-    console.log(props.answerSelected);
-
     return (
         <div className='final-answer-container' style={{ ...styles, opacity: props.op, transform: 'scale(' + props.sc + ')' }}>
             <div>
