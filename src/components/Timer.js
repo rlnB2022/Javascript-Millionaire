@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const Timer = (props) => {
 
     let [seconds, setSeconds] = useState(0);
-    let [timerActive, setTimerActive] = useState(false);
+    // let [timerActive, setTimerActive] = useState(false);
 
     useEffect(() => {
         if(props.timerVisible) {
@@ -21,7 +21,7 @@ const Timer = (props) => {
     useEffect(() => {
         setSeconds(props.timerInitSeconds);
         // start the timer
-        setTimerActive(true);
+        // setTimerActive(true);
     },[props.timerInitSeconds]);
 
     useEffect(() => {

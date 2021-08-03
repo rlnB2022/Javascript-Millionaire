@@ -98,14 +98,14 @@ function App() {
   }
 
   function changeViewPhoneAFriend() {
-    setViewBlurModal(true);
-    setViewPhoneAFriendModal(true);
+    setViewBlurModal(!viewPhoneAFriendModal);
+    setViewPhoneAFriendModal(!viewPhoneAFriendModal);
   }
 
-  function hidePhoneAFriendModal() {
-    setViewBlurModal(false);
-    setViewPhoneAFriendModal(false);
-  }
+  // function hidePhoneAFriendModal() {
+  //   setViewBlurModal(false);
+  //   setViewPhoneAFriendModal(false);
+  // }
 
   function changeViewAskTheAudienceModal() {
     setViewBlurModal(true);
@@ -447,8 +447,8 @@ function App() {
       {viewLifeLineModal ? <LifeLineModal useLifeLine={useLifeLine} changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
 
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
-      
-      {viewPhoneAFriendModal ? <PhoneAFriendModal friends={friends} hidePhoneAFriendModal={hidePhoneAFriendModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
+
+      {viewPhoneAFriendModal ? <PhoneAFriendModal friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
 
       {viewBlurModal ? <BlurModal /> : null}
     </div>

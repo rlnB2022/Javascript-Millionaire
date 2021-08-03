@@ -2,7 +2,6 @@ import './StartGame.css';
 import RecentWinners from './RecentWinners';
 import imgTitle from '../title.png';
 import Stats from './Stats';
-import { useEffect, useState } from 'react';
 import ViewAllWinners from './ViewAllWinners';
 
 const StartGame = (props) => {
