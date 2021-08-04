@@ -8,7 +8,7 @@ The idea behind this was it could be used to help new Javascript developers lear
 
 The game has 3 lifelines:
 * Ask the Audience - Each question records each answer the user gives to the database, so I can then use this data to create a bar graph representing the percentage of the audience that answered each question. It is then up to the user to choose the answer they believe is correct.
-* 50:50 - Selecting this lifeline randomly removes two of the four availble answers, leaving the correct answer and one other.
+* 50:50 - Selecting this lifeline randomly removes two of the four available answers, leaving the correct answer and one other.
 * Phone A Friend - This randomly choose from a choice of popular Twitter users to help them with the question. Their answers aren't always correct. Depending on the difficulty of the question, their suggestions accuracy diminishes.
 
 There is a 30-second timer which I added as a component. It tracks the seconds in useState. When it detects that the timer is active again useEffect will trigger to reset the timer.
