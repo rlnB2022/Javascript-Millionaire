@@ -1,6 +1,8 @@
 # Project title
 Javascript Millionaire
 
+https://user-images.githubusercontent.com/5834000/128256119-40132fe6-28a9-46ce-85fd-90ceb2fec24b.mp4
+
 # Project Description
 
 This project was created to further my React knowledge using React, Firebase, and a Firestore database.
