@@ -2,13 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
-    padding: 10px 15px;
-    border-radius: 10px;
+    margin: 0.625rem;
+    padding: 0.625rem 0.9375rem;
+    border-radius: 0.625rem;
     font-size: 1.25rem;
     background-color: #0172FF;
     color: #fff;
-    border: 3px solid #0172ff;
+    border: 0.1875rem solid #0172ff;
 }
 
 .active-friend {
@@ -17,6 +17,6 @@
 }
 
 .friend img {
-    width: 100px;
-    height: 100px;
+    width: 5.25rem;
+    height: 5.25rem;
 }

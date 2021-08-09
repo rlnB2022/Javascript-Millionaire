@@ -28,7 +28,6 @@ const Main = (props) => {
                 timerInitSeconds={props.timerInitSeconds}
                 mainStateFlag={props.mainStateFlag}
                 current_money={props.currentMoney}
-                changeLifeLineAvailable={props.changeLifeLineAvailable}
                 viewAskTheAudienceModal={props.viewAskTheAudienceModal}
                 answers={props.answers}
                 changeViewAskTheAudienceModal={props.changeViewAskTheAudienceModal}

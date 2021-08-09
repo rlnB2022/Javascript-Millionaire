@@ -5,17 +5,18 @@ import { useState } from 'react';
 
 const PhoneAFriendModal = (props) => {
 
-    let [activeFriend,setActiveFriend] = useState(-1);
+    let [activeFriend, setActiveFriend] = useState(0);
 
     const listFriends = props.friends.map((e, idx) => <Friend activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
 
     function btnCall() {
+        // randomly pick one of the remaining answers
+        props.changePhoneAFriendSuggestion();
         props.changeViewPhoneAFriendModal();
     }
 
     function changeFriend(key) {
         setActiveFriend(key);
-        console.log(key);
     }
 
     return (

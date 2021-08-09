@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 const Timer = (props) => {
 
     let [seconds, setSeconds] = useState(0);
-    // let [timerActive, setTimerActive] = useState(false);
 
     useEffect(() => {
         if(props.timerVisible) {
@@ -20,12 +19,11 @@ const Timer = (props) => {
 
     useEffect(() => {
         setSeconds(props.timerInitSeconds);
-        // start the timer
-        // setTimerActive(true);
     },[props.timerInitSeconds]);
 
     useEffect(() => {
         if (seconds < 0) {
+            // game is over, advance gameState
           props.changeTimerVisible(false);
           props.changeGameState();
           return;
@@ -33,7 +31,7 @@ const Timer = (props) => {
     
         const timer = setTimeout(() => {
             setSeconds(seconds - 1);
-          }, 1000);
+        }, 1000);
     
         return () => clearTimeout(timer);
       }, [seconds]);

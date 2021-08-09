@@ -48,8 +48,9 @@ function App() {
   let [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
   let [friends, setFriends] = useState([]);
+  let [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
   
-  let ref = firebase.firestore().collection('questions_easy');
+  let ref;
 
   function useLifeLine(index) {
 
@@ -102,11 +103,6 @@ function App() {
     setViewPhoneAFriendModal(!viewPhoneAFriendModal);
   }
 
-  // function hidePhoneAFriendModal() {
-  //   setViewBlurModal(false);
-  //   setViewPhoneAFriendModal(false);
-  // }
-
   function changeViewAskTheAudienceModal() {
     setViewBlurModal(true);
     setViewAskTheAudienceModal(true);
@@ -118,7 +114,6 @@ function App() {
   }
 
   function changeViewLifeLineModal(img) {
-    // set image
     changeViewBlurModal();
     setLifeLineModalImage(img);
     setViewLifeLineModal(!viewLifeLineModal);
@@ -149,10 +144,6 @@ function App() {
       setFinalAnswerScale(1);
     }
   }
-
-  // function changeTimerSeconds() {
-  //   setTimerSeconds(--timerSeconds);
-  // }
 
   function changeGameState() {
     setGameState(++gameState);
@@ -193,12 +184,31 @@ function App() {
     const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
   }
 
+  function changePhoneAFriendSuggestion() {
+    let sugg = -1;
+
+    const suggestionCorrectChance = (16 - currentLevel) * 7;
+
+    const suggestionCorrectPCT = Math.floor(Math.random() * 100) + 1;
+
+    if(suggestionCorrectPCT <= suggestionCorrectChance) {
+      // guesses the correct answer
+      sugg = questions[currentLevel].answer_correct;
+    }
+    else {
+      // guesses an incorrect answer
+    }
+
+    setPhoneAFriendSuggestion(sugg);
+  }
+
   function isAnswerCorrect(num) {
     setFinalAnswerVisible(false);
 
     setFinalAnswerOpacity(0);
     setFinalAnswerScale(0);
 
+    setTimerVisible(false);
     // setTimerSeconds(0);
 
     if (num === questions[currentLevel].answer_correct) {
@@ -322,20 +332,6 @@ function App() {
 
   }
 
-  // useEffect(() => {
-  //   if (timerSeconds < 0) {
-  //     setTimerVisible(false);
-  //     setGameState(5);
-  //     return;
-  //   }
-
-  //   const timer = setTimeout(() => {
-  //     changeTimerSeconds(timerSeconds - 1);
-  //   }, 1000);
-
-  //   return () => clearTimeout(timer);
-  // }, [timerSeconds]);
-
   useEffect(() => {
     if (selectedAnswer !== null) {
 
@@ -350,6 +346,12 @@ function App() {
     }
 
   }, [selectedAnswer]);
+
+  useEffect(() => {
+    // highlight suggested answer
+
+
+  },[phoneAFriendSuggestion]);
 
   async function getWinners() {
     let ref = firebase.firestore().collection('winners');
@@ -448,7 +450,7 @@ function App() {
 
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
-      {viewPhoneAFriendModal ? <PhoneAFriendModal friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
+      {viewPhoneAFriendModal ? <PhoneAFriendModal changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
 
       {viewBlurModal ? <BlurModal /> : null}
     </div>
