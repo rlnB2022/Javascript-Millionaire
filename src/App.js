@@ -27,7 +27,7 @@ function App() {
   let [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
   let [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1); // 1 = available
   let [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
-  let [moneylevel, setMoneyLevel] = useState(moneyArr[0]);
+  let [moneyLevel, setMoneyLevel] = useState(moneyArr[0]);
   let [currentLevel, setCurrentLevel] = useState(0);
   let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
   let [timerVisible, setTimerVisible] = useState(false);
@@ -49,8 +49,6 @@ function App() {
   let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
   let [friends, setFriends] = useState([]);
   let [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
-  
-  let ref;
 
   function useLifeLine(index) {
 
@@ -146,20 +144,35 @@ function App() {
   }
 
   function changeGameState() {
-    setGameState(++gameState);
+    setGameState(gameState + 1);
   }
 
   function changeMainState() {
-    setMainState(++mainState);
+    setMainState(mainState + 1);
   }
 
   function changeAnswerState() {
-    setAnswerState(++answerState);
+    setAnswerState(answerState + 1);
   }
 
   function nextQuestion() {
-    setGameState(1);
+    if (currentLevel < moneyArr.length - 1) {
+      setCurrentLevel(currentLevel + 1);
+    }
+
+    // setMoneyLevel(moneyArr[currentLevel]);
+
+    setAnswerMessageVisible(false);
+    setGameState(2);
   }
+
+  useEffect(() => {
+    console.log(`MoneyLevel: ${moneyLevel}`);
+  },[moneyLevel]);
+
+  useEffect(() => {
+    setMoneyLevel(moneyArr[currentLevel]);
+  },[currentLevel]);
 
   function addHideMoneyClass() {
     const el = document.querySelector('.show-money');
@@ -191,7 +204,7 @@ function App() {
 
     const suggestionCorrectPCT = Math.floor(Math.random() * 100) + 1;
 
-    if(suggestionCorrectPCT <= suggestionCorrectChance) {
+    if (suggestionCorrectPCT <= suggestionCorrectChance) {
       // guesses the correct answer
       sugg = questions[currentLevel].answer_correct;
     }
@@ -209,19 +222,8 @@ function App() {
     setFinalAnswerScale(0);
 
     setTimerVisible(false);
-    // setTimerSeconds(0);
 
     if (num === questions[currentLevel].answer_correct) {
-      // if (currentLevel < moneyArr.length - 1) {
-      //   setCurrentLevel(++currentLevel);
-      // }
-
-      // // getQuestion();
-
-      // setMoneyLevel(moneyArr[currentLevel - 1]);
-
-      // resetSelection();
-
       setCorrectAnswerText('Correct');
       setAnswerButtonText('Next Question');
     }
@@ -242,10 +244,6 @@ function App() {
     else {
       setAnswerMessageOpacity(1);
       setAnswerMessageScale(1);
-    }
-
-    if (correctAnswerText === 'Incorrect') {
-
     }
   }
 
@@ -272,7 +270,7 @@ function App() {
   async function getQuestions() {
     setLoading(true);
 
-    ref = firebase.firestore().collection('questions_easy');
+    let ref = firebase.firestore().collection('questions_easy');
     const snapshot_easy = await ref.get();
 
     const items_easy = [];
@@ -290,7 +288,7 @@ function App() {
     ref = firebase.firestore().collection('questions_medium');
     const snapshot_medium = await ref.limit(5).get();
 
-        const items_medium = [];
+    const items_medium = [];
 
     snapshot_medium.forEach(doc => {
       items_medium.push(doc.data());
@@ -299,13 +297,13 @@ function App() {
     // // shuffle the array
     shuffle(items_medium);
 
-        setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
+    setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
 
     // // hard questions
     ref = firebase.firestore().collection('questions_hard');
     const snapshot_hard = await ref.limit(5).get();
 
-        const items_hard = [];
+    const items_hard = [];
 
     snapshot_hard.forEach(doc => {
       items_hard.push(doc.data());
@@ -338,8 +336,6 @@ function App() {
       // show popup for 'Final Answer?'
       const myTimeout = setTimeout(() => {
         showFinalAnswerVisible();
-        // const finalAnswerContainer = document.querySelector('.final-answer-container');
-        // finalAnswerContainer.classList.add('show-final-answer-container');
 
         clearTimeout(myTimeout);
       }, 500);
@@ -351,7 +347,7 @@ function App() {
     // highlight suggested answer
 
 
-  },[phoneAFriendSuggestion]);
+  }, [phoneAFriendSuggestion]);
 
   async function getWinners() {
     let ref = firebase.firestore().collection('winners');
@@ -411,7 +407,7 @@ function App() {
         mainStateFlag={changeMainState}
         theMainState={mainState}
         changeGameState={changeGameState}
-        currentMoney={moneylevel}
+        currentMoney={moneyLevel}
         answers={questions[currentLevel]}
         changeAnswerSelected={answerSelected}
         answerSelected={selectedAnswer}
@@ -436,15 +432,15 @@ function App() {
         visible={showFinalAnswerVisible}
         answerSelected={selectedAnswer} /> : null}
 
-      {gameState === 3 ? <AnswerPopup
+      {answerMessageVisible ? <AnswerPopup
         correctAnswerText={correctAnswerText}
         correctAnswerResponse={correctAnswerResponse}
-        visible={answerMessageVisible}
         op={answerMessageOpacity}
         sc={answerMessageScale}
         answers={questions[currentLevel]}
         correctAnswer={questions[currentLevel].answer_correct}
-        answer_popup_button={answerButtonText} /> : null}
+        answer_popup_button={answerButtonText}
+        nextQuestion={nextQuestion} /> : null}
 
       {viewLifeLineModal ? <LifeLineModal useLifeLine={useLifeLine} changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
 

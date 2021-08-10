@@ -9,9 +9,9 @@ const AnswerPopup = (props) => {
 
     return (
         <div className='answer-popup' style={{...styles, opacity: props.op, transform: 'scale(' + props.sc + ')'}}>
-            <div className="answer-popup__message answer-popup__padding">{props.correctAnswerText}</div>
-            <div className="answer-popup__correct answer-popup__padding">{answers[props.correctAnswer-1]}</div>
-            <div className="answer-popup__button answer-popup__padding">{props.answer_popup_button}</div>
+            <div className='answer-popup__message answer-popup__padding'>{props.correctAnswerText}</div>
+            <div className='answer-popup__correct answer-popup__padding'>{answers[props.correctAnswer-1]}</div>
+            <div className='answer-popup__button answer-popup__padding' onClick={props.nextQuestion}>{props.answer_popup_button}</div>
         </div>
     )
 }
