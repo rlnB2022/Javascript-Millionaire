@@ -158,6 +158,7 @@ function App() {
   function nextQuestion() {
     if (currentLevel < moneyArr.length - 1) {
       setCurrentLevel(currentLevel + 1);
+      setSelectedAnswer(null);
     }
 
     // setMoneyLevel(moneyArr[currentLevel]);
