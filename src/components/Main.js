@@ -22,7 +22,7 @@ const Main = (props) => {
                 lifeline_asktheaudience={props.lifeline_asktheaudience}
                 changeViewLifeLineModal={props.changeViewLifeLineModal}
             /> : null}
-            {props.theMainState >= 1 ? <LifeLinePopUps
+            {/* {props.theMainState >= 1 ? <LifeLinePopUps
                 changeTimerVisible={props.changeTimerVisible}
                 timerVisible={props.timerVisible}
                 timerInitSeconds={props.timerInitSeconds}
@@ -45,7 +45,7 @@ const Main = (props) => {
                 answerStateFlag={props.answerStateFlag}
                 mainStateFlag={props.mainStateFlag}
                 answers={props.answers}
-            /> : null}
+            /> : null} */}
         </div>
     );
 }

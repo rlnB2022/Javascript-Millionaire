@@ -3,24 +3,20 @@ import LifeLine from './LifeLine';
 import fiftyfifty from '../fiftyfifty.png';
 import phoneafriend from '../phoneafriend.png';
 import asktheaudience from '../asktheaudience.png';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const LifeLineContainer = (props) => {
 
-    useEffect(() => {
-        const txtInterval = setInterval(function () {
-            clearInterval(txtInterval);
-            props.mainStateFlag();
-            const moneyElem = document.querySelector('.current-money');
-            moneyElem.classList.add('show-current-money');
-        }, 2000);
-    }, []);
+    const [animIn, setAnimIn] = useState([false, false, false]);
 
-    let propsArr = [];
-
-    for (const prop in props) {
-        propsArr.push(`${props[prop]}`);
-    }
+    // useEffect(() => {
+    //     const txtInterval = setInterval(function () {
+    //         clearInterval(txtInterval);
+    //         props.mainStateFlag();
+    //         const moneyElem = document.querySelector('.current-money');
+    //         moneyElem.classList.add('show-current-money');
+    //     }, 2000);
+    // }, []);
 
     let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
@@ -30,17 +26,17 @@ const LifeLineContainer = (props) => {
                 <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
                     mainStateFlag={props.mainStateFlag}
                     lifelineindex={0}
-                    imagename={imageNames[0]} /> : <div></div>}
+                    imagename={imageNames[0]} alt='50:50 LifeLine' /> : <div></div>}
             {props.lifeline_phoneafriend ?
                 <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
                     mainStateFlag={props.mainStateFlag}
                     lifelineindex={1}
-                    imagename={imageNames[1]} /> : <div></div>}
+                    imagename={imageNames[1]} alt='Phone A Friend LifeLine' /> : <div></div>}
             {props.lifeline_asktheaudience ?
                 <LifeLine changeViewLifeLineModal={props.changeViewLifeLineModal}
                     mainStateFlag={props.mainStateFlag}
                     lifelineindex={2}
-                    imagename={imageNames[2]} /> : <div></div>}
+                    imagename={imageNames[2]} alt='Ask The Audience LifeLine' /> : <div></div>}
         </div>
     );
 }

@@ -173,20 +173,10 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(`MoneyLevel: ${moneyLevel}`);
-  },[moneyLevel]);
-
-  useEffect(() => {
     setMoneyLevel(moneyArr[currentLevel]);
   },[currentLevel]);
 
-  function addHideMoneyClass() {
-    const el = document.querySelector('.show-money');
-
-    el.classList.add('hide-money');
-  };
-
-  function animateStartGame() {
+    function animateStartGame() {
     // record game played in database
     storeGamePlayed();
 
@@ -385,7 +375,6 @@ function App() {
       {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
         changeGameState={changeGameState}
-        hidemoney={addHideMoneyClass}
         money={moneyArr[currentLevel]}
       /> : null}
       {gameState === 3 ? <Main

@@ -5,6 +5,9 @@
     width: 100%;
     padding: 10px;
     transition: .4s ease-in-out forwards;
+    opacity: 0;
+    transform: scale(0);
+    animation: showLifeLine .3s ease-in-out forwards;
 }
 
 .lifeline img {
@@ -13,15 +16,26 @@
 }
 
 .lifeline-visible-0 {
-    animation: showLifeLine .3s ease-in-out forwards;
+    animation-delay: .25s;
 }
 
 .lifeline-visible-1 {
-    animation: showLifeLine .3s ease-in-out forwards .1s;
+    animation-delay: .35s;
 }
 
 .lifeline-visible-2 {
-    animation: showLifeLine .3s ease-in-out forwards .2s;
+    animation-delay: .45s;
+}
+
+@keyframes showLifeLine {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes hideLifeLine {

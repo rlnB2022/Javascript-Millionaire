@@ -3,8 +3,8 @@ import './LifeLine.css';
 const LifeLine = (props) => {
 
     return (
-        <div className='lifeline'>
-            <img src={props.imagename} alt='Lifeline' className='' onClick={() => props.changeViewLifeLineModal(props.lifelineindex)} />
+        <div className={`lifeline lifeline-visible-${props.lifelineindex}`}>
+            <img src={props.imagename} alt={props.alt} onClick={() => props.changeViewLifeLineModal(props.lifelineindex)} />
         </div>
     );
 
