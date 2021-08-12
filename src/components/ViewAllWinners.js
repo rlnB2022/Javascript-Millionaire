@@ -6,21 +6,21 @@ const ViewAllWinners = (props) => {
 
     const [allWinners, setAllWinners] = useState([]);
 
-    async function getAllWinners() {
-        let ref = firebase.firestore().collection('winners');
-        const snapshotAllWinners = await ref.get();
-        const newArray = [];
+    // async function getAllWinners() {
+    //     let ref = firebase.firestore().collection('winners');
+    //     const snapshotAllWinners = await ref.get();
+    //     const newArray = [];
     
-        snapshotAllWinners.forEach(doc => {
-          newArray.push(doc.data());
-        });
+    //     snapshotAllWinners.forEach(doc => {
+    //       newArray.push(doc.data());
+    //     });
     
-        setAllWinners(oldArray => [...oldArray, ...newArray]);
-    }
+    //     setAllWinners(oldArray => [...oldArray, ...newArray]);
+    // }
 
-    useEffect(() => {
+    // useEffect(() => {
         // getAllWinners();
-    }, []);
+    // }, []);
 
     const listItems = allWinners.map((e, idx) => <li key={idx}><div>{e.name}</div><div>{e.date}</div></li>);
 

@@ -16,6 +16,7 @@ import PhoneAFriendModal from './components/PhoneAFriendModal';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
+  const [winners, setWinners] = useState([]);
 
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -47,6 +48,18 @@ function App() {
   let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
   let [friends, setFriends] = useState([]);
   let [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
+
+  async function getWinners() {
+    let ref = firebase.firestore().collection('winners');
+    const snapshotRecentWinners = await ref.limit(3).get();
+    const newArray = [];
+
+    snapshotRecentWinners.forEach(doc => {
+      newArray.push(doc.data());
+    });
+
+    setWinners(oldArray => [...oldArray, ...newArray]);
+  }
 
   function useLifeLine(index) {
 
@@ -354,6 +367,7 @@ function App() {
 
   useEffect(() => {
     getQuestions();
+    getWinners();
     getStats();
     getFriends();
   }, []);
@@ -367,7 +381,7 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame fadeScreen={animateStartGame} changeGameState={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 0 ? <StartGame winners={winners} fadeScreen={animateStartGame} changeGameState={changeGameState} gamesPlayed={gamesPlayed} /> : null}
       {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
         changeGameState={changeGameState}

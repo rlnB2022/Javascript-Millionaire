@@ -3,16 +3,12 @@ import RecentWinners from './RecentWinners';
 import imgTitle from '../title.png';
 import Stats from './Stats';
 import ViewAllWinners from './ViewAllWinners';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const StartGame = (props) => {
     
     const [startGameVisible, setStartGameVisible] = useState(true);
     const [viewAllWinnersVisible, setViewAllWinnersVisible] = useState(false);
-
-    useEffect(() => {
-        
-    }, [startGameVisible]);
 
     const showViewAllWinners = () => {
         setViewAllWinnersVisible(!viewAllWinnersVisible);
@@ -25,7 +21,7 @@ const StartGame = (props) => {
     return (
         <div className={`start-game ${startGameVisible ? '' : 'fade-out-start-game'}`}>
             <img src={imgTitle} alt="title"/>
-            <RecentWinners showViewAllWinners={props.showViewAllWinners}/>
+            <RecentWinners winners={props.winners} showViewAllWinners={showViewAllWinners}/>
             {viewAllWinnersVisible ? <ViewAllWinners showViewAllWinners={showViewAllWinners} /> : null}
             <Stats gamesPlayed={props.gamesPlayed}/>
             <button onClick={() => startGameButton()}>Start Game</button>
