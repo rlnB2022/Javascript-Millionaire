@@ -1,46 +1,25 @@
 .money {
     width: 100vw;
     height: 100vh;
-    /* background: url('../bg.jpg'); */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: animateMoneyIn 2s forwards ease-out;
+    color: #fff;
+    font-size: 3rem;
 }
 
-.show-money {
-    font-size: 1rem;
-    transition: 2s ease-in-out;
-    animation: showmoney .4s ease-in-out forwards;
-    color: white;
-}
-
-.hide-money {
-    animation: hidemoney .4s ease-in-out forwards;
-}
-
-@keyframes showmoney {
+@keyframes animateMoneyIn {
     0% {
-        transform: scale(1);
+        opacity: 0;
     }
-    75% {
-        transform: scale(6);
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
     }
     100% {
-        transform: scale(5);
-    }
-}
-
-@keyframes hidemoney {
-    0% {
-        transform: scale(5);
-    }
-    25% {
-        transform: scale(6);
-    }
-    100% {
-        transform: scale(0);
+        opacity: 0;
     }
 }

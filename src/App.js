@@ -381,7 +381,7 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame winners={winners} fadeScreen={animateStartGame} changeGameState={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 0 ? <StartGame winners={winners} startGame={animateStartGame} gamesPlayed={gamesPlayed} /> : null}
       {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
         changeGameState={changeGameState}

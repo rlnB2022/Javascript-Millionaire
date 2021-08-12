@@ -6,15 +6,8 @@ const ShowMoney = (props) => {
     useEffect(() => {
         const txtInterval = setInterval(function() {
             clearInterval(txtInterval);
-            props.hidemoney();
-        },1500);
-    },[]);
-
-    useEffect(() => {
-        const txtInterval = setInterval(function() {
-            clearInterval(txtInterval);
             props.changeGameState();
-        },3000);
+        },2000);
     },[]);
 
     return (
