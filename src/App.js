@@ -17,7 +17,6 @@ import PhoneAFriendModal from './components/PhoneAFriendModal';
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
 
-  const [winners, setWinners] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   let [gamesPlayed, setGamesPlayed] = useState();
@@ -41,7 +40,6 @@ function App() {
   let [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
   let [answerMessageVisible, setAnswerMessageVisible] = useState(false);
   let [answerButtonText, setAnswerButtonText] = useState('End Game');
-  let [viewAllWinnersVisible, setViewAllWinnersVisible] = useState(false);
   let [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
   let [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   let [viewBlurModal, setViewBlurModal] = useState(false);
@@ -125,10 +123,6 @@ function App() {
     setTimerVisible(!timerVisible);
   }
 
-  function showViewAllWinners() {
-    setViewAllWinnersVisible(!viewAllWinnersVisible);
-  }
-
   function showFinalAnswerVisible() {
     setFinalAnswerVisible(!finalAnswerVisible);
 
@@ -161,8 +155,6 @@ function App() {
       setSelectedAnswer(null);
     }
 
-    // setMoneyLevel(moneyArr[currentLevel]);
-
     setAnswerMessageVisible(false);
     setGameState(2);
   }
@@ -182,10 +174,6 @@ function App() {
   };
 
   function animateStartGame() {
-    const startGame = document.querySelector('.start-game');
-
-    startGame.classList.add('fade-out-start-game');
-
     // record game played in database
     storeGamePlayed();
 
@@ -350,18 +338,6 @@ function App() {
 
   }, [phoneAFriendSuggestion]);
 
-  async function getWinners() {
-    let ref = firebase.firestore().collection('winners');
-    const snapshotRecentWinners = await ref.get();
-    const newArray = [];
-
-    snapshotRecentWinners.forEach(doc => {
-      newArray.push(doc.data());
-    });
-
-    setWinners(oldArray => [...oldArray, ...newArray]);
-  }
-
   async function getFriends() {
     let ref = firebase.firestore().collection('Friends');
     const snapshotFriends = await ref.get();
@@ -379,7 +355,6 @@ function App() {
   useEffect(() => {
     getQuestions();
     getStats();
-    getWinners();
     getFriends();
   }, []);
 
@@ -392,7 +367,7 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame showViewAllWinners={showViewAllWinners} allWinnersVisible={viewAllWinnersVisible} winners={winners} fadeScreen={animateStartGame} changeGameState={changeGameState} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 0 ? <StartGame fadeScreen={animateStartGame} changeGameState={changeGameState} gamesPlayed={gamesPlayed} /> : null}
       {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
         changeGameState={changeGameState}

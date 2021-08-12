@@ -1,8 +1,28 @@
 import './ViewAllWinners.css';
+import { useState, useEffect } from 'react';
+import firebase from '../firebase';
 
 const ViewAllWinners = (props) => {
 
-    const listItems = props.winners.map((e, idx) => <li key={idx}><div>{e.name}</div><div>{e.date}</div></li>);
+    const [allWinners, setAllWinners] = useState([]);
+
+    async function getAllWinners() {
+        let ref = firebase.firestore().collection('winners');
+        const snapshotAllWinners = await ref.get();
+        const newArray = [];
+    
+        snapshotAllWinners.forEach(doc => {
+          newArray.push(doc.data());
+        });
+    
+        setAllWinners(oldArray => [...oldArray, ...newArray]);
+    }
+
+    useEffect(() => {
+        // getAllWinners();
+    }, []);
+
+    const listItems = allWinners.map((e, idx) => <li key={idx}><div>{e.name}</div><div>{e.date}</div></li>);
 
     return (
         <div className='view-all-winners-container'>
