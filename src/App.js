@@ -138,16 +138,6 @@ function App() {
 
   function showFinalAnswerVisible() {
     setFinalAnswerVisible(!finalAnswerVisible);
-
-    if (finalAnswerVisible) {
-      setFinalAnswerOpacity(0);
-      setFinalAnswerScale(0);
-      setSelectedAnswer(null);
-    }
-    else {
-      setFinalAnswerOpacity(1);
-      setFinalAnswerScale(1);
-    }
   }
 
   function changeGameState() {
@@ -166,6 +156,8 @@ function App() {
     if (currentLevel < moneyArr.length - 1) {
       setCurrentLevel(currentLevel + 1);
       setSelectedAnswer(null);
+      setMainState(0);
+      setAnswerState(0);
     }
 
     setAnswerMessageVisible(false);
@@ -402,13 +394,12 @@ function App() {
       {/* {gameState === 4 ? <Sidebar /> : null} */}
       {gameState === 4 ? <GameOver /> : null}
 
-      {gameState === 3 ? <FinalAnswer
+      {finalAnswerVisible ? <FinalAnswer
         isAnswerCorrect={isAnswerCorrect}
         cancelSelected={answerSelected}
         op={finalAnswerOpacity}
         sc={finalAnswerScale}
         answers={questions[currentLevel]}
-        visible={showFinalAnswerVisible}
         answerSelected={selectedAnswer} /> : null}
 
       {answerMessageVisible ? <AnswerPopup

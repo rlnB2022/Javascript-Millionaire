@@ -26,7 +26,7 @@ const Answer = (props) => {
     }
 
     return (
-        <div className='answer answer-visible-0' onClick={() => props.changeAnswerSelected(props.answerIndex)}>
+        <div className='answer answer-visible' onClick={() => props.changeAnswerSelected(props.answerIndex)}>
             <img src={background} alt='answer' />
             <div className='answer-text'>
                 <span style={answer_selected_color}>{props.letter}</span><p style={answer_selected_color}>{props.answer}</p>

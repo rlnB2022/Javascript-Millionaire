@@ -38,14 +38,14 @@ const Main = (props) => {
                 mainStateFlag={props.mainStateFlag}
                 questionID={props.questionID}
             /> : null}
-            {/* {props.theMainState >= 3 ? <AnswerContainer
+            {props.theMainState >= 3 ? <AnswerContainer
                 changeAnswerSelected={props.changeAnswerSelected}
                 answerSelected={props.answerSelected}
                 theAnswerState={props.theAnswerState}
                 answerStateFlag={props.answerStateFlag}
                 mainStateFlag={props.mainStateFlag}
                 answers={props.answers}
-            /> : null} */}
+            /> : null}
         </div>
     );
 }

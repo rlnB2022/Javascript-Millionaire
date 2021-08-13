@@ -2,14 +2,14 @@ import './finalanswer.css';
 
 const FinalAnswer = (props) => {
 
-    const styles = {
-        transition: '.25s ease-in-out'
-    }
+    // const styles = {
+    //     transition: '.25s ease-in-out'
+    // }
 
     let answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
 
     return (
-        <div className='final-answer-container' style={{ ...styles, opacity: props.op, transform: 'scale(' + props.sc + ')' }}>
+        <div className='final-answer-container'>
             <div>
                 <p>Final Answer?</p>
             </div>

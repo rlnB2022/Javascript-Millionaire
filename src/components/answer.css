@@ -2,15 +2,12 @@
     opacity: 0;
     position: relative;
     margin: 2px 0;
+    animation: showAnswer .5s ease-in-out forwards;
 }
 
 .answer img {
     position: relative;
     width: 90%;
-}
-
-.answer-visible-0 {
-    animation: showAnswer .5s ease-in-out forwards;
 }
 
 .answer::after {
