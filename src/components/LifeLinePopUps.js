@@ -9,8 +9,6 @@ const LifeLinePopUps = (props) => {
         const txtInterval = setInterval(function () {
             clearInterval(txtInterval);
             props.mainStateFlag();
-            const moneyElem = document.querySelector('.question');
-            moneyElem.classList.add('show-question');
         }, 1000);
     }, []);
 

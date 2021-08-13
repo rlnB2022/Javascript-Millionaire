@@ -1,27 +1,18 @@
 .current-money {
-    position: relative;
+    position: absolute;
     width: 60%;
-    left: -1rem;
+    right: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: green;
-}
-
-.show-current-money {
-    animation: showCurrentMoney .5s ease-in-out forwards;
-}
-
-.current-money img {
-    position: absolute;
-    right: 0;
+    animation: showCurrentMoneyContainer .25s ease-in-out forwards;
 }
 
 .current-money::after {
     content: '';
     position: absolute;
     height: 2px;
-    width: 5vw;
+    width: 1.1rem;
     background-color: rgb(42, 42, 255);
     top: 50%;
     right: -1rem;
@@ -37,28 +28,24 @@
     width: 100%;
     text-align: center;
     font-size: 2rem;
+    animation: showCurrentMoney .5s ease-in-out forwards .25s;
+    opacity: 0;
 }
 
-.df {
-    display: flex;
-}
-
-.jcc {
-    justify-content: center;
-}
-
-.aic {
-    align-items: center;
+@keyframes showCurrentMoneyContainer {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 @keyframes showCurrentMoney {
     0% {
-        transform: translateY(-50%) scale(0);
-    }
-    75% {
-        transform: translateY(-50%) scale(1.2);
+        opacity: 0;
     }
     100% {
-        transform: translateY(-50%) scale(1);
+        opacity: 1;
     }
 }

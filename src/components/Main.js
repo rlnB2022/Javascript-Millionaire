@@ -22,7 +22,7 @@ const Main = (props) => {
                 lifeline_asktheaudience={props.lifeline_asktheaudience}
                 changeViewLifeLineModal={props.changeViewLifeLineModal}
             /> : null}
-            {/* {props.theMainState >= 1 ? <LifeLinePopUps
+            {props.theMainState >= 1 ? <LifeLinePopUps
                 changeTimerVisible={props.changeTimerVisible}
                 timerVisible={props.timerVisible}
                 timerInitSeconds={props.timerInitSeconds}
@@ -38,7 +38,7 @@ const Main = (props) => {
                 mainStateFlag={props.mainStateFlag}
                 questionID={props.questionID}
             /> : null}
-            {props.theMainState >= 3 ? <AnswerContainer
+            {/* {props.theMainState >= 3 ? <AnswerContainer
                 changeAnswerSelected={props.changeAnswerSelected}
                 answerSelected={props.answerSelected}
                 theAnswerState={props.theAnswerState}
