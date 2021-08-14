@@ -1,11 +1,16 @@
 .current-money {
     position: absolute;
-    width: 60%;
+    height: 35%;
+    width: 55%;
     right: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: showCurrentMoneyContainer .25s ease-in-out forwards;
+    background: url('../answer-box.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .current-money::after {

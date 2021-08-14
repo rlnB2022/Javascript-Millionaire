@@ -4,17 +4,13 @@
     padding: 1.25rem;
     border-radius: 50%;
     border: 0.3125rem solid #fff;
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
     opacity: 0;
     margin-left: 5%;
-}
-
-.timer span {
-    /* opacity: 0; */
 }
 
 .timer-text-anim {

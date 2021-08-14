@@ -9,8 +9,8 @@
 .question-container::after {
     content: '';
     position: absolute;
-    height: 3px;
-    width: 6%;
+    height: 0.1875rem;
+    width: 1.4rem;
     background-color: #155eaef7;
     right: -6%;
     top: 50%;
@@ -20,8 +20,8 @@
 .question-container::before {
     content: '';
     position: absolute;
-    height: 3px;
-    width: 5vw;
+    height: 0.1875rem;
+    width: 1.4rem;
     background-color: #155eaef7;
     left: -5vw;
     top: 50%;

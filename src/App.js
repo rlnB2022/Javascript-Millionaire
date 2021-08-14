@@ -20,7 +20,7 @@ function App() {
 
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-  let [gamesPlayed, setGamesPlayed] = useState();
+    let [gamesPlayed, setGamesPlayed] = useState();
   let [gameState, setGameState] = useState(0);
   let [mainState, setMainState] = useState(0);
   let [answerState, setAnswerState] = useState(0);
@@ -32,9 +32,7 @@ function App() {
   let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
   let [timerVisible, setTimerVisible] = useState(false);
   let [timerInitSeconds, setTimerInitSeconds] = useState(0);
-  let [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
-  let [finalAnswerOpacity, setFinalAnswerOpacity] = useState(0);
-  let [finalAnswerScale, setFinalAnswerScale] = useState(0);
+  const [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
   let [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
   let [answerMessageScale, setAnswerMessageScale] = useState(0);
   let [correctAnswerText, setCorrectAnswerText] = useState('Incorrect');
@@ -136,7 +134,8 @@ function App() {
     setTimerVisible(!timerVisible);
   }
 
-  function showFinalAnswerVisible() {
+  function changeFinalAnswerVisible() {
+    setSelectedAnswer(null);
     setFinalAnswerVisible(!finalAnswerVisible);
   }
 
@@ -201,9 +200,6 @@ function App() {
 
   function isAnswerCorrect(num) {
     setFinalAnswerVisible(false);
-
-    setFinalAnswerOpacity(0);
-    setFinalAnswerScale(0);
 
     setTimerVisible(false);
 
@@ -318,18 +314,13 @@ function App() {
     if (selectedAnswer !== null) {
 
       // show popup for 'Final Answer?'
-      const myTimeout = setTimeout(() => {
-        showFinalAnswerVisible();
-
-        clearTimeout(myTimeout);
-      }, 500);
+        changeFinalAnswerVisible();
     }
 
   }, [selectedAnswer]);
 
   useEffect(() => {
     // highlight suggested answer
-
 
   }, [phoneAFriendSuggestion]);
 
@@ -395,10 +386,9 @@ function App() {
       {gameState === 4 ? <GameOver /> : null}
 
       {finalAnswerVisible ? <FinalAnswer
+        changeVisible={changeFinalAnswerVisible}
         isAnswerCorrect={isAnswerCorrect}
         cancelSelected={answerSelected}
-        op={finalAnswerOpacity}
-        sc={finalAnswerScale}
         answers={questions[currentLevel]}
         answerSelected={selectedAnswer} /> : null}
 
