@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './LifeLine.css';
 
 const LifeLine = (props) => {

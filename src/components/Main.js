@@ -21,6 +21,7 @@ const Main = (props) => {
                 lifeline_phoneafriend={props.lifeline_phoneafriend}
                 lifeline_asktheaudience={props.lifeline_asktheaudience}
                 changeViewLifeLineModal={props.changeViewLifeLineModal}
+                clickable={props.clickable}
             /> : null}
             {props.theMainState >= 1 ? <LifeLinePopUps
                 changeTimerVisible={props.changeTimerVisible}
@@ -32,6 +33,7 @@ const Main = (props) => {
                 answers={props.answers}
                 changeViewAskTheAudienceModal={props.changeViewAskTheAudienceModal}
                 changeGameState={props.changeGameState}
+                changeLifelineClickable={props.changeLifelineClickable}
             /> : null}
             {props.theMainState >= 2 ? <Question
                 answers={props.answers}

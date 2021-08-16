@@ -11,6 +11,7 @@ const Timer = (props) => {
             const timer = document.querySelector('.timer');
             timer.classList.add('show-timer');
             timerText.classList.add('timer-text-anim');
+            props.changeLifelineClickable();
         }
         else {
 

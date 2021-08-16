@@ -20,32 +20,33 @@ function App() {
 
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
-    let [gamesPlayed, setGamesPlayed] = useState();
-  let [gameState, setGameState] = useState(0);
-  let [mainState, setMainState] = useState(0);
-  let [answerState, setAnswerState] = useState(0);
-  let [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
-  let [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1); // 1 = available
-  let [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
-  let [moneyLevel, setMoneyLevel] = useState(moneyArr[0]);
-  let [currentLevel, setCurrentLevel] = useState(0);
-  let [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
-  let [timerVisible, setTimerVisible] = useState(false);
-  let [timerInitSeconds, setTimerInitSeconds] = useState(0);
+  const [gamesPlayed, setGamesPlayed] = useState();
+  const [gameState, setGameState] = useState(0);
+  const [mainState, setMainState] = useState(0);
+  const [answerState, setAnswerState] = useState(0);
+  const [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
+  const [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1); // 1 = available
+  const [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
+  const [moneyLevel, setMoneyLevel] = useState(moneyArr[0]);
+  const [currentLevel, setCurrentLevel] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
+  const [timerVisible, setTimerVisible] = useState(false);
+  const [timerInitSeconds, setTimerInitSeconds] = useState(0);
   const [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
-  let [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
-  let [answerMessageScale, setAnswerMessageScale] = useState(0);
-  let [correctAnswerText, setCorrectAnswerText] = useState('Incorrect');
-  let [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
-  let [answerMessageVisible, setAnswerMessageVisible] = useState(false);
-  let [answerButtonText, setAnswerButtonText] = useState('End Game');
-  let [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
-  let [lifeLineModalImage, setLifeLineModalImage] = useState(0);
-  let [viewBlurModal, setViewBlurModal] = useState(false);
-  let [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
-  let [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
-  let [friends, setFriends] = useState([]);
-  let [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
+  const [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
+  const [answerMessageScale, setAnswerMessageScale] = useState(0);
+  const [correctAnswerText, setCorrectAnswerText] = useState('Incorrect');
+  const [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
+  const [answerMessageVisible, setAnswerMessageVisible] = useState(false);
+  const [answerButtonText, setAnswerButtonText] = useState('End Game');
+  const [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
+  const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
+  const [viewBlurModal, setViewBlurModal] = useState(false);
+  const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
+  const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
+  const [friends, setFriends] = useState([]);
+  const [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
+  const [lifelineClickable, setLifelineClickable] = useState(false);
 
   async function getWinners() {
     let ref = firebase.firestore().collection('winners');
@@ -121,9 +122,15 @@ function App() {
   }
 
   function changeViewLifeLineModal(img) {
-    changeViewBlurModal();
-    setLifeLineModalImage(img);
-    setViewLifeLineModal(!viewLifeLineModal);
+    if (lifelineClickable) {
+      changeViewBlurModal();
+      setLifeLineModalImage(img);
+      setViewLifeLineModal(!viewLifeLineModal);
+    }
+  }
+
+  function changeLifelineClickable() {
+    setLifelineClickable(!lifelineClickable);
   }
 
   function changeViewBlurModal() {
@@ -156,6 +163,7 @@ function App() {
       setSelectedAnswer(null);
       setMainState(0);
       setAnswerState(0);
+      setLifelineClickable(false);
     }
 
     setAnswerMessageVisible(false);
@@ -164,9 +172,9 @@ function App() {
 
   useEffect(() => {
     setMoneyLevel(moneyArr[currentLevel]);
-  },[currentLevel]);
+  }, [currentLevel]);
 
-    function animateStartGame() {
+  function animateStartGame() {
     // record game played in database
     storeGamePlayed();
 
@@ -313,16 +321,16 @@ function App() {
     if (selectedAnswer !== null) {
 
       // show popup for 'Final Answer?'
-        changeFinalAnswerVisible();
+      changeFinalAnswerVisible();
     }
 
   }, [selectedAnswer]);
 
   useEffect(() => {
-    if(!finalAnswerVisible) {
+    if (!finalAnswerVisible) {
       setSelectedAnswer(null);
     }
-  },[finalAnswerVisible]);
+  }, [finalAnswerVisible]);
 
   useEffect(() => {
     // highlight suggested answer
@@ -386,6 +394,7 @@ function App() {
         changeViewLifeLineModal={changeViewLifeLineModal}
         viewAskTheAudienceModal={viewAskTheAudienceModal}
         changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
+        changeLifelineClickable={changeLifelineClickable}
       /> : null}
       {/* {gameState === 4 ? <Sidebar /> : null} */}
       {gameState === 4 ? <GameOver /> : null}

@@ -19,7 +19,8 @@ const LifeLinePopUps = (props) => {
                 timerVisible={props.timerVisible}
                 timerInitSeconds={props.timerInitSeconds}
                 changeGameState={props.changeGameState}
-                /> : <div></div>}
+                changeLifelineClickable={props.changeLifelineClickable}
+            /> : <div></div>}
             <CurrentMoney amount={props.current_money} />
         </div>
     )
