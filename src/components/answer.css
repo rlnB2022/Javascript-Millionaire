@@ -53,6 +53,10 @@
     color: orange;
 }
 
+.hide-answer {
+    animation: hideAnswer .4s ease-in-out forwards;
+}
+
 @keyframes showAnswer {
     0% {
         opacity: 0;
@@ -64,5 +68,19 @@
     100% {
         opacity: 1;
         transform: scale(1);
+    }
+}
+
+@keyframes hideAnswer {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
     }
 }

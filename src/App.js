@@ -81,8 +81,8 @@ function App() {
       const answerElems = document.querySelectorAll('.answer');
       answerElems[incorrectAnswers[0]].classList.add('hide-answer');
       answerElems[incorrectAnswers[1]].classList.add('hide-answer');
-      answerElems[incorrectAnswers[0]].classList.remove('answer-visible-0');
-      answerElems[incorrectAnswers[1]].classList.remove('answer-visible-0');
+      answerElems[incorrectAnswers[0]].classList.remove('answer-visible');
+      answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
 
       // disable 50:50 lifeline
       setLifeLineFiftyFifty(0);
@@ -135,7 +135,6 @@ function App() {
   }
 
   function changeFinalAnswerVisible() {
-    setSelectedAnswer(null);
     setFinalAnswerVisible(!finalAnswerVisible);
   }
 
@@ -318,6 +317,12 @@ function App() {
     }
 
   }, [selectedAnswer]);
+
+  useEffect(() => {
+    if(!finalAnswerVisible) {
+      setSelectedAnswer(null);
+    }
+  },[finalAnswerVisible]);
 
   useEffect(() => {
     // highlight suggested answer
