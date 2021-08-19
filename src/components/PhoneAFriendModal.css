@@ -1,20 +1,21 @@
 .phone-a-friend-modal__container {
-    width: 80%;
     position: absolute;
-    left: 50%;
-    bottom: 5%;
-    transform: translateX(-50%);
-    z-index: 10;
-    border-radius: 0.3125rem;
-    background-color: gray;
-    border: 0.125rem solid gray;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .9);
 }
 
 .phone-a-friend-modal__inner {
     padding: 3.125rem 0 1.25rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: gray;
+    border-radius: 10px;
 }
 
-.phone-a-friend-modal__inner .lifeline-image {
+.lifeline-image {
     width: 50%;
     position: absolute;
     top: 0;

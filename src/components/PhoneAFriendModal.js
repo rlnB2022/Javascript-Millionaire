@@ -8,6 +8,7 @@ const PhoneAFriendModal = (props) => {
     const [activeFriend, setActiveFriend] = useState(0);
     const [buttonText, setButtonText] = useState('Call');
     const [isPhoneAFriendModalHidden, setIsPhoneAFriendModalHidden] = useState(false);
+    const [callTimeLeft, setCallTimeLeft] = useState(10);
 
     useEffect(() => {
         if (isPhoneAFriendModalHidden) {
@@ -18,6 +19,15 @@ const PhoneAFriendModal = (props) => {
         }
     }, [isPhoneAFriendModalHidden]);
 
+    useEffect(() => {
+        const callTimer = setTimeout(() => {
+            setCallTimeLeft(callTimeLeft - 1);
+            clearTimeout(callTimer);
+        }, 1000);
+
+        return () => clearTimeout(callTimer);
+    }, [callTimeLeft]);
+
     const listFriends = props.friends.map((e, idx) => <Friend activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
 
     const btnCall = () => {
@@ -27,7 +37,7 @@ const PhoneAFriendModal = (props) => {
 
         const btnCallTimeout = setTimeout(() => {
             props.changeViewPhoneAFriendModal();
-        },500);
+        }, 500);
     };
 
     function changeFriend(key) {
@@ -36,14 +46,18 @@ const PhoneAFriendModal = (props) => {
 
     useEffect(() => {
         setButtonText(`Call ${props.friends[activeFriend].name}`);
-    },[activeFriend]);
+    }, [activeFriend]);
+
+    useEffect(() => {
+        props.changeTimerVisible();
+    }, []);
 
     return (
         <div className={`phone-a-friend-modal__container ${isPhoneAFriendModalHidden ? 'hide-modal' : 'show-modal'}`}>
             <div className='phone-a-friend-modal__inner'>
                 <img className='lifeline-image' src={phoneafriend} alt="modal__image" />
                 <div className='friend-container'>{listFriends}</div>
-                <div className='btn-call-name' onClick={btnCall}>{buttonText}</div>
+                <div className='btn-call-name' onClick={btnCall}>{buttonText} - {callTimeLeft}</div>
             </div>
         </div>
     )

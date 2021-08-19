@@ -410,7 +410,7 @@ function App() {
 
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
-      {viewPhoneAFriendModal ? <PhoneAFriendModal changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
+      {viewPhoneAFriendModal ? <PhoneAFriendModal changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
     </div>
   );
 }
