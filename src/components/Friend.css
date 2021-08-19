@@ -9,6 +9,7 @@
     background-color: #0172FF;
     color: #fff;
     border: 0.1875rem solid #0172ff;
+    transform: scale(1);
 }
 
 .active-friend {
@@ -26,7 +27,11 @@ div > div {
 }
 
 .profile-bounce {
-    animation: profileBounce .4s ease-in-out;
+    animation: profileBounce .4s ease-in-out forwards;
+}
+
+.profile-bounce-back {
+    animation: profileBounceBack .4s ease-in-out forwards;
 }
 
 @keyframes animateTextIn {
@@ -42,8 +47,14 @@ div > div {
     0% {
         transform: scale(1);
     }
-    50% {
-        transform: scale(1.2);
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes profileBounceBack {
+    0% {
+        transform: scale(1.05);
     }
     100% {
         transform: scale(1);

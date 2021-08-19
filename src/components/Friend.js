@@ -18,19 +18,19 @@ const Friend = (props) => {
             setFriendHasChanged(true);
 
             const friendTimeOut = setTimeout(() => {
-                setFriendHasChanged(false);
                 clearTimeout(friendTimeOut);
             }, 500);
         }
         else {
+            setFriendHasChanged(false);
             changeBorderColor('#0172FF');
         }
     }, [props.activeFriend]);
 
     return (
-        <div className='friend' style={{borderColor: bColor}} onClick={() => props.changeFriend(props.friendNum)}>
-            <img className={friendHasChanged ? 'profile-bounce' : ''} src={imageName.default} alt="friend" />
-            <div className={friendHasChanged ? 'profile-bounce' : ''}>{props.name}</div>
+        <div className={`friend ${friendHasChanged ? 'profile-bounce' : 'profile-bounce-back'}`} style={{borderColor: bColor}} onClick={() => props.changeFriend(props.friendNum)}>
+            <img src={imageName.default} alt="friend" />
+            <div>{props.name}</div>
         </div>
     )
 };
