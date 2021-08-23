@@ -40,10 +40,9 @@ function App() {
   const [answerButtonText, setAnswerButtonText] = useState('End Game');
   const [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
-    const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
+  const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
   const [friends, setFriends] = useState([]);
-  const [phoneAFriendSuggestion, setPhoneAFriendSuggestion] = useState(0);
   const [lifelineClickable, setLifelineClickable] = useState(false);
 
   async function getWinners() {
@@ -177,7 +176,7 @@ function App() {
     const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
   }
 
-  function changePhoneAFriendSuggestion() {
+  const changePhoneAFriendSuggestion = () => {
     let sugg = -1;
 
     const suggestionCorrectChance = (16 - currentLevel) * 7;
@@ -190,9 +189,27 @@ function App() {
     }
     else {
       // guesses an incorrect answer
+      const answerElems = document.querySelectorAll('.answer');
+
+      const cor = questions[currentLevel].answer_correct - 1;
+
+      const incorrectAnswersArray = [0, 1, 2, 3];
+
+      // remove correct answer from array leaving only incorrect answers
+      incorrectAnswersArray.splice(cor, 1);
+
+      // check to make sure the incorrect answers have not been removed already with the 50:50 lifeline
+      for (let i = 0; i < incorrectAnswersArray.length; i++) {
+        if (answerElems[i].classList.contains('answer-hidden')) {
+          // if there is a match, remove from array
+          incorrectAnswersArray.splice(i, 1);
+        }
+      }
+
+      sugg = Math.floor(Math.random() * incorrectAnswersArray.length);
     }
 
-    setPhoneAFriendSuggestion(sugg);
+    return sugg;
   }
 
   function isAnswerCorrect(num) {
@@ -322,11 +339,6 @@ function App() {
     }
   }, [finalAnswerVisible]);
 
-  useEffect(() => {
-    // highlight suggested answer
-
-  }, [phoneAFriendSuggestion]);
-
   async function getFriends() {
     let ref = firebase.firestore().collection('Friends');
     const snapshotFriends = await ref.get();
@@ -410,7 +422,7 @@ function App() {
 
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
-      {viewPhoneAFriendModal ? <PhoneAFriendModal changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
+      {viewPhoneAFriendModal ? <PhoneAFriendModal answers={questions[currentLevel]} changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
     </div>
   );
 }

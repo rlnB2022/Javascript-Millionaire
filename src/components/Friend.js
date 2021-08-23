@@ -12,6 +12,10 @@ const Friend = (props) => {
         setBorderColor(color);
     }
 
+    useState(() => {
+
+    },[props.friendIsVisible]);
+
     useEffect(() => {
         if(props.activeFriend === props.friendNum) {
             changeBorderColor('orange');
@@ -28,7 +32,7 @@ const Friend = (props) => {
     }, [props.activeFriend]);
 
     return (
-        <div className={`friend ${friendHasChanged ? 'profile-bounce' : 'profile-bounce-back'}`} style={{borderColor: bColor}} onClick={() => props.changeFriend(props.friendNum)}>
+        <div className={`friend ${props.friendIsVisible ? '' : 'friend-hidden'} ${friendHasChanged ? 'profile-bounce' : 'profile-bounce-back'}`} style={{borderColor: bColor}} onClick={() => props.changeFriend(props.friendNum)}>
             <img src={imageName.default} alt="friend" />
             <div>{props.name}</div>
         </div>

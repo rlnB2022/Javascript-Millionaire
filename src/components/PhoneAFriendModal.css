@@ -23,18 +23,12 @@
     transform: translate(-50%, -50%);
 }
 
-.list-of-friends {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-}
-
 .btn-call-name {
     background-color: orange;
     color: #fff;
     width: 94%;
     margin: 0 auto;
-    padding: 1rem 0.425rem;
+    padding: 1.5rem 0.425rem;
     border-radius: 0.3125rem;
     display: flex;
     justify-content: center;
@@ -43,8 +37,27 @@
     transition: .4s ease-in-out;
 }
 
+.suggestion-box {
+    grid-row: 2 / 4;
+    background-color: black;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.friend-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    
+}
+
 .friend-container {
-    padding: 0.625rem 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    transition: all .4s ease-in-out;
 }
 
 .active-button {

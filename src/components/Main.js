@@ -30,7 +30,6 @@ const Main = (props) => {
                 mainStateFlag={props.mainStateFlag}
                 current_money={props.currentMoney}
                 viewAskTheAudienceModal={props.viewAskTheAudienceModal}
-                answers={props.answers}
                 changeViewAskTheAudienceModal={props.changeViewAskTheAudienceModal}
                 changeGameState={props.changeGameState}
                 changeLifelineClickable={props.changeLifelineClickable}

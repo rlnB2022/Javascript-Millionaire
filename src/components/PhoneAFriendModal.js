@@ -9,6 +9,10 @@ const PhoneAFriendModal = (props) => {
     const [buttonText, setButtonText] = useState('Call');
     const [isPhoneAFriendModalHidden, setIsPhoneAFriendModalHidden] = useState(false);
     const [callTimeLeft, setCallTimeLeft] = useState(10);
+    const [suggestion, setSuggestion] = useState('');
+    const [showSuggestion, setShowSuggestion] = useState(false);
+    const [visibleFriends, setVisibleFriends] = useState(true);
+    const [friendAnswer, setFriendAnswer] = useState('');
 
     useEffect(() => {
         if (isPhoneAFriendModalHidden) {
@@ -28,16 +32,41 @@ const PhoneAFriendModal = (props) => {
         return () => clearTimeout(callTimer);
     }, [callTimeLeft]);
 
-    const listFriends = props.friends.map((e, idx) => <Friend activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
+    useEffect(() => {
+        const answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
+        const letterAnswer = ['A: ', 'B: ', 'C: ', 'D: '];
+        setFriendAnswer(`${letterAnswer[suggestion]} ${answers[suggestion]}`);
+    }, [suggestion]);
+
+    // when visibleFriends change, remove them from DOM
+    useEffect(() => {
+        if(!visibleFriends) {
+            const friendTimer = setTimeout(() => {
+                const friendElems = document.querySelectorAll('.friend-hidden');
+    
+                [...friendElems].map(e => e.style.display = 'none');
+    
+                setShowSuggestion(true);
+    
+            }, 500);
+    
+            return () => clearTimeout(friendTimer);
+        }
+    }, [visibleFriends]);
+
+    const listFriends = props.friends.map((e, idx) => <Friend friendIsVisible={visibleFriends} activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
 
     const btnCall = () => {
         // randomly pick one of the remaining answers
-        // props.changePhoneAFriendSuggestion();
-        setIsPhoneAFriendModalHidden(true);
+        setSuggestion(props.changePhoneAFriendSuggestion());
+        // setIsPhoneAFriendModalHidden(true);
 
-        const btnCallTimeout = setTimeout(() => {
-            props.changeViewPhoneAFriendModal();
-        }, 500);
+        setVisibleFriends(false);
+
+        // const btnCallTimeout = setTimeout(() => {
+        //     props.changeViewPhoneAFriendModal();
+        //     clearTimeout(btnCallTimeout);
+        // }, 500);
     };
 
     function changeFriend(key) {
@@ -56,7 +85,8 @@ const PhoneAFriendModal = (props) => {
         <div className={`phone-a-friend-modal__container ${isPhoneAFriendModalHidden ? 'hide-modal' : 'show-modal'}`}>
             <div className='phone-a-friend-modal__inner'>
                 <img className='lifeline-image' src={phoneafriend} alt="modal__image" />
-                <div className='friend-container'>{listFriends}</div>
+                {showSuggestion ? null : <div className='friend-container'>{listFriends}</div>}
+                {showSuggestion ? <div className='friend-grid'><Friend friendIsVisible={true} name={props.friends[activeFriend].name} twitter_id={props.friends[activeFriend].twitter_id} /><div className='suggestion-box'>{friendAnswer}</div></div> : null}
                 <div className='btn-call-name' onClick={btnCall}>{buttonText} - {callTimeLeft}</div>
             </div>
         </div>

@@ -10,6 +10,8 @@
     color: #fff;
     border: 0.1875rem solid #0172ff;
     transform: scale(1);
+    transition: all .4s ease-in-out;
+    flex-grow: 1;
 }
 
 .active-friend {
@@ -24,6 +26,10 @@ div > div {
 .friend img {
     width: 3.25rem;
     height: 3.25rem;
+}
+
+.friend-hidden {
+    opacity: 0;
 }
 
 .profile-bounce {
