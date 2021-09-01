@@ -67,9 +67,16 @@ const PhoneAFriendModal = (props) => {
 
     const btnCall = () => {
         // randomly pick one of the remaining answers
-        setSuggestion(props.changePhoneAFriendSuggestion());
 
-        setVisibleFriends(false);
+        if(buttonText.search('Call') === 0) {
+            setSuggestion(props.changePhoneAFriendSuggestion());
+
+            setVisibleFriends(false);
+        }
+        else {
+            setCallTimeLeft(0);
+        }
+        
     };
 
     function changeFriend(key) {
