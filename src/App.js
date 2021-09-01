@@ -25,7 +25,6 @@ function App() {
   const [gameState, setGameState] = useState(0);
   const [mainState, setMainState] = useState(0);
   const [answerState, setAnswerState] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
 
   // Lifeline state
   const [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
@@ -110,6 +109,10 @@ function App() {
       setLifeLineAskTheAudience(0);
     }
   }
+
+  const homeScreen = () => {
+    setGameState(0);
+  };
 
   function changeTimerInitSeconds(num) {
     setTimerInitSeconds(num);
@@ -448,7 +451,7 @@ function App() {
 
       {viewPhoneAFriendModal ? <PhoneAFriendModal changeTimerVisible={changeTimerVisible} changeTimerInitSeconds={changeTimerInitSeconds} answers={questions[currentLevel]} changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
       
-      {gameState === 4 ? <GameOver /> : null}
+      {gameState === 4 ? <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> : null}
     </div>
   );
 }
