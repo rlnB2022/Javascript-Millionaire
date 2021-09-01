@@ -25,6 +25,7 @@ function App() {
   const [gameState, setGameState] = useState(0);
   const [mainState, setMainState] = useState(0);
   const [answerState, setAnswerState] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
   // Lifeline state
   const [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
@@ -145,7 +146,7 @@ function App() {
     setFinalAnswerVisible(!finalAnswerVisible);
   }
 
-  function changeGameState() {
+  const changeGameState = () => {
     setGameState(gameState + 1);
   }
 
@@ -158,6 +159,13 @@ function App() {
   }
 
   function nextQuestion() {
+
+    if(answerButtonText === 'End Game') {
+      setAnswerMessageVisible(false);
+      changeGameState();
+      return;
+    }
+
     if (currentLevel < moneyArr.length - 1) {
       setCurrentLevel(currentLevel + 1);
       setSelectedAnswer(null);
@@ -168,6 +176,10 @@ function App() {
 
     setAnswerMessageVisible(false);
     setGameState(2);
+
+    // reset messages
+    setCorrectAnswerText('Incorrect');
+    setAnswerButtonText('End Game');
   }
 
   useEffect(() => {
@@ -191,7 +203,6 @@ function App() {
     let sugg = -1;
 
     const suggestionCorrectChance = (16 - currentLevel) * 7;
-
     const suggestionCorrectPCT = Math.floor(Math.random() * 100) + 1;
 
     if (suggestionCorrectPCT <= suggestionCorrectChance) {
@@ -201,9 +212,7 @@ function App() {
     else {
       // guesses an incorrect answer
       const answerElems = document.querySelectorAll('.answer');
-
       const cor = questions[currentLevel].answer_correct - 1;
-
       const incorrectAnswersArray = [0, 1, 2, 3];
 
       // remove correct answer from array leaving only incorrect answers
@@ -228,9 +237,14 @@ function App() {
 
     setTimerVisible(false);
 
+    console.log('num: ' + num);
+    console.log('correct: ' + questions[currentLevel].answer_correct);
+
     if (num === questions[currentLevel].answer_correct) {
-      setCorrectAnswerText('Correct');
+      setCorrectAnswerText('Correct!');
       setAnswerButtonText('Next Question');
+      showAnswerMessageVisible();
+      return;
     }
 
     // incorrect answer
@@ -410,7 +424,6 @@ function App() {
         changeLifelineClickable={changeLifelineClickable}
       /> : null}
       {/* {gameState === 4 ? <Sidebar /> : null} */}
-      {gameState === 4 ? <GameOver /> : null}
 
       {finalAnswerVisible ? <FinalAnswer
         changeVisible={changeFinalAnswerVisible}
@@ -434,6 +447,8 @@ function App() {
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
       {viewPhoneAFriendModal ? <PhoneAFriendModal changeTimerVisible={changeTimerVisible} changeTimerInitSeconds={changeTimerInitSeconds} answers={questions[currentLevel]} changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
+      
+      {gameState === 4 ? <GameOver /> : null}
     </div>
   );
 }

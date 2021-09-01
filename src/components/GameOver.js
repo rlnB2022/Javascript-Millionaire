@@ -1,4 +1,4 @@
-import './gameover.css';
+import './GameOver.css';
 
 const GameOver = (props) => {
     return (

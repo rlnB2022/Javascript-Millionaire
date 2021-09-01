@@ -47,6 +47,7 @@
     line-height: 1.5;
     opacity: 0;
     animation: revealQuestion .25s ease-in-out forwards .5s;
+    white-space: pre-wrap;
 }
 
 @keyframes showQuestionContainer {
