@@ -74,7 +74,9 @@ const PhoneAFriendModal = (props) => {
             setVisibleFriends(false);
         }
         else {
-            setCallTimeLeft(0);
+            props.changeTimerInitSeconds(15);
+            props.changeTimerVisible();
+            props.changeViewPhoneAFriendModal();
         }
         
     };

@@ -196,7 +196,7 @@ function App() {
 
     if (suggestionCorrectPCT <= suggestionCorrectChance) {
       // guesses the correct answer
-      sugg = questions[currentLevel].answer_correct;
+      sugg = questions[currentLevel].answer_correct - 1;
     }
     else {
       // guesses an incorrect answer
