@@ -25,6 +25,11 @@ const PhoneAFriendModal = (props) => {
 
     useEffect(() => {
         const callTimer = setTimeout(() => {
+            if(callTimeLeft <= 0) {
+                props.changeViewPhoneAFriendModal();
+                props.changeTimerInitSeconds(15);
+                props.changeTimerVisible();
+            }
             setCallTimeLeft(callTimeLeft - 1);
             clearTimeout(callTimer);
         }, 1000);
@@ -33,9 +38,13 @@ const PhoneAFriendModal = (props) => {
     }, [callTimeLeft]);
 
     useEffect(() => {
+        // when suggestion changes, show what answer the friend chooses
         const answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
         const letterAnswer = ['A: ', 'B: ', 'C: ', 'D: '];
         setFriendAnswer(`${letterAnswer[suggestion]} ${answers[suggestion]}`);
+
+        // change button text
+        setButtonText('OK');
     }, [suggestion]);
 
     // when visibleFriends change, remove them from DOM
@@ -59,14 +68,8 @@ const PhoneAFriendModal = (props) => {
     const btnCall = () => {
         // randomly pick one of the remaining answers
         setSuggestion(props.changePhoneAFriendSuggestion());
-        // setIsPhoneAFriendModalHidden(true);
 
         setVisibleFriends(false);
-
-        // const btnCallTimeout = setTimeout(() => {
-        //     props.changeViewPhoneAFriendModal();
-        //     clearTimeout(btnCallTimeout);
-        // }, 500);
     };
 
     function changeFriend(key) {

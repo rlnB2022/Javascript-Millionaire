@@ -20,17 +20,25 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [gamesPlayed, setGamesPlayed] = useState();
+
+  // game states
   const [gameState, setGameState] = useState(0);
   const [mainState, setMainState] = useState(0);
   const [answerState, setAnswerState] = useState(0);
+
+  // Lifeline state
   const [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
   const [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1); // 1 = available
   const [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
+
   const [moneyLevel, setMoneyLevel] = useState(moneyArr[0]);
   const [currentLevel, setCurrentLevel] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
+
+  // Timer state
   const [timerVisible, setTimerVisible] = useState(false);
   const [timerInitSeconds, setTimerInitSeconds] = useState(0);
+
   const [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
   const [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
   const [answerMessageScale, setAnswerMessageScale] = useState(0);
@@ -38,10 +46,13 @@ function App() {
   const [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
   const [answerMessageVisible, setAnswerMessageVisible] = useState(false);
   const [answerButtonText, setAnswerButtonText] = useState('End Game');
+
+  // modals
   const [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
+
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
 
@@ -422,7 +433,7 @@ function App() {
 
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
-      {viewPhoneAFriendModal ? <PhoneAFriendModal answers={questions[currentLevel]} changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
+      {viewPhoneAFriendModal ? <PhoneAFriendModal changeTimerVisible={changeTimerVisible} changeTimerInitSeconds={changeTimerInitSeconds} answers={questions[currentLevel]} changeTimerVisible={changeTimerVisible} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
     </div>
   );
 }
