@@ -1,14 +1,18 @@
+.ask-the-audience-container {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, .9);
+}
+
 .ask-the-audience-modal {
-    width: 80%;
+    padding: 3.125rem 0 1.25rem;
     position: absolute;
     left: 50%;
-    bottom: 5%;
-    transform: translateX(-50%);
-    z-index: 10;
-    border-radius: 5px;
-    padding: .25rem;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
     background-color: gray;
-    height: 50vh;
+    border-radius: 10px;
 }
 
 .ask-the-audience-modal__inner {

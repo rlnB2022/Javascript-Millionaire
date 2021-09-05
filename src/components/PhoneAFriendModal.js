@@ -91,6 +91,7 @@ const PhoneAFriendModal = (props) => {
 
     useEffect(() => {
         props.changeTimerVisible();
+        props.changeLifeLineClickable();
     }, []);
 
     return (
