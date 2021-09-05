@@ -1,5 +1,6 @@
 import './AskTheAudienceModal.css';
 import asktheaudience from '../asktheaudience.png';
+import { useEffect } from 'react';
 
 const AskTheAudienceModal = (props) => {
 
@@ -13,12 +14,21 @@ const AskTheAudienceModal = (props) => {
 
     const pct = [100 - pctOne, 100 - pctTwo, 100 - pctThree, 100 - pctFour];
 
-    // set bars to percentage
-    const pctBars = document.querySelectorAll('.answer-percentage');
+    useEffect(() => {
+        const audienceTimeout = setTimeout(() => {
+            clearTimeout(audienceTimeout);
 
-    pctBars.forEach((e, index) => {
-        e.style.transform = 'translateY(' + pct[index] + '%)';
-    });
+            const pctBars = document.querySelectorAll('.answer-percentage');
+
+            pctBars.forEach((e, index) => {
+                e.style.transform = 'translateY(' + pct[index] + '%)';
+            });
+
+            return () => clearTimeout(audienceTimeout);
+        }, 500);
+        
+    }, []);
+    // set bars to percentage
 
     return (
         <div className='ask-the-audience-modal'>

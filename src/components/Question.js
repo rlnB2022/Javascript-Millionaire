@@ -9,10 +9,13 @@ const Question = (props) => {
         }, 1000);
     }, []);
 
+    const newQuestion = props.answers.question.replace(/\n/g, "<br />");
+    console.log(newQuestion);
+
     return (
         <div className='question-container'>
             <div className='question'>
-                <p>{props.answers.question}</p>
+                <p dangerouslySetInnerHTML={{__html:newQuestion}}></p>
             </div>
         </div>
     );
