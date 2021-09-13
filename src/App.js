@@ -18,6 +18,7 @@ function App() {
   const [winners, setWinners] = useState([]);
 
   const [questions, setQuestions] = useState([]);
+  const [questionName, setQuestionName] = useState(['questions_easy', 'questions_medium', 'questions_hard', 'questions_million']);
   const [loading, setLoading] = useState(false);
   const [gamesPlayed, setGamesPlayed] = useState();
 
@@ -43,12 +44,11 @@ function App() {
   const [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
   const [answerMessageScale, setAnswerMessageScale] = useState(0);
   const [correctAnswerText, setCorrectAnswerText] = useState('Incorrect');
-  const [correctAnswerResponse, setCorrectAnswerResponse] = useState(0); // 0 = Incorrect, 1 = Correct
   const [answerMessageVisible, setAnswerMessageVisible] = useState(false);
   const [answerButtonText, setAnswerButtonText] = useState('End Game');
 
   // modals
-  const [viewLifeLineModal, setViewLifeLineModal] = useState(false); // change to false for production
+  const [viewLifeLineModal, setViewLifeLineModal] = useState(false);
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
@@ -111,7 +111,17 @@ function App() {
   }
 
   const homeScreen = () => {
+    resetGame();
+  };
+
+  const resetGame = () => {
     setGameState(0);
+    setMainState(0);
+    setLifeLineFiftyFifty(1);
+    setLifeLinePhoneAFriend(1);
+    setLifeLineAskTheAudience(1);
+    setCurrentLevel(0);
+    setLifelineClickable(false);
   };
 
   function changeTimerInitSeconds(num) {
@@ -163,7 +173,7 @@ function App() {
 
   function nextQuestion() {
 
-    if(answerButtonText === 'End Game') {
+    if (answerButtonText === 'End Game') {
       setAnswerMessageVisible(false);
       changeGameState();
       return;
@@ -236,12 +246,10 @@ function App() {
   }
 
   function isAnswerCorrect(num) {
+    storeAnswerSelected();
     setFinalAnswerVisible(false);
 
     setTimerVisible(false);
-
-    console.log('num: ' + num);
-    console.log('correct: ' + questions[currentLevel].answer_correct);
 
     if (num === questions[currentLevel].answer_correct) {
       setCorrectAnswerText('Correct!');
@@ -254,6 +262,56 @@ function App() {
     showAnswerMessageVisible();
 
   }
+
+  const getDifficultyName = () => {
+    switch (currentLevel) {
+      case 5:
+        return questionName[0];
+        break;
+      case 10:
+        return questionName[1];
+        break;
+      case 15:
+        break;
+      case 16:
+        break;
+      default:
+        return;
+    }
+  };
+
+  async function storeAnswerSelected() {
+
+    // get name of question difficulty
+    const diff = questionName[currentLevel];
+
+    // get reference to collection
+    const collRef = firebase.firestore().collection(diff);
+
+    // query collection for specific document
+    const queryRef = await collRef.where('question', '==', questions[currentLevel].question).get();
+
+    if (queryRef.empty) {
+      console.log('No doc exists.');
+    }
+    else {
+
+      // get id of document
+      const docId = queryRef.docs[0].id;
+
+      // get value of user_selected answer
+      const totalSelected = queryRef.docs[0].data()['user_selected_' + (selectedAnswer + 1)] + 1;
+      console.log('totalSelected: ' + totalSelected);
+
+      const cityRef = collRef.doc(docId);
+
+      const userSel = 'user_selected_' + (selectedAnswer + 1);
+
+      const res = cityRef.update({ [userSel]: totalSelected });
+
+    }
+
+  };
 
   function showAnswerMessageVisible() {
 
@@ -346,7 +404,7 @@ function App() {
       items_million.push(doc.data());
     });
 
-    setQuestions(questions => [...questions, ...items_million.slice(-1)]);
+    setQuestions(a => [...a, ...items_million.slice(-1)]);
 
     setLoading(false);
 
@@ -389,6 +447,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+
   }, [questions]);
 
   if (loading) {
@@ -437,7 +496,6 @@ function App() {
 
       {answerMessageVisible ? <AnswerPopup
         correctAnswerText={correctAnswerText}
-        correctAnswerResponse={correctAnswerResponse}
         op={answerMessageOpacity}
         sc={answerMessageScale}
         answers={questions[currentLevel]}
@@ -450,7 +508,7 @@ function App() {
       {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
 
       {viewPhoneAFriendModal ? <PhoneAFriendModal changeLifeLineClickable={changeLifelineClickable} changeTimerVisible={changeTimerVisible} changeTimerInitSeconds={changeTimerInitSeconds} answers={questions[currentLevel]} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
-      
+
       {gameState === 4 ? <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> : null}
     </div>
   );
