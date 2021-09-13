@@ -264,26 +264,14 @@ function App() {
   }
 
   const getDifficultyName = () => {
-    switch (currentLevel) {
-      case 5:
-        return questionName[0];
-        break;
-      case 10:
-        return questionName[1];
-        break;
-      case 15:
-        break;
-      case 16:
-        break;
-      default:
-        return;
-    }
+    return questionName[Math.floor((currentLevel / 5))];
   };
 
   async function storeAnswerSelected() {
 
     // get name of question difficulty
-    const diff = questionName[currentLevel];
+    const diff = getDifficultyName();
+    console.log(diff);
 
     // get reference to collection
     const collRef = firebase.firestore().collection(diff);
@@ -301,7 +289,6 @@ function App() {
 
       // get value of user_selected answer
       const totalSelected = queryRef.docs[0].data()['user_selected_' + (selectedAnswer + 1)] + 1;
-      console.log('totalSelected: ' + totalSelected);
 
       const cityRef = collRef.doc(docId);
 
