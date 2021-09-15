@@ -12,6 +12,7 @@ import AnswerPopup from './components/AnswerPopup';
 import LifeLineModal from './components/LifeLineModal';
 import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
+import MillionaireWinner from './components/MillionaireWinner';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
@@ -52,6 +53,7 @@ function App() {
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
+  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(false);
 
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
@@ -253,9 +255,20 @@ function App() {
 
     if (num === questions[currentLevel].answer_correct) {
       setCorrectAnswerText('Correct!');
-      setAnswerButtonText('Next Question');
-      showAnswerMessageVisible();
-      return;
+
+      // if answered the last question, they won!
+      if (currentLevel === 14) {
+        setViewMillionaireWinner(true);
+        // hide everything else
+        
+        return;
+      }
+      else {
+        setAnswerButtonText('Next Question');
+        showAnswerMessageVisible();
+        return;
+      }
+
     }
 
     // incorrect answer
@@ -497,6 +510,8 @@ function App() {
       {viewPhoneAFriendModal ? <PhoneAFriendModal changeLifeLineClickable={changeLifelineClickable} changeTimerVisible={changeTimerVisible} changeTimerInitSeconds={changeTimerInitSeconds} answers={questions[currentLevel]} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
 
       {gameState === 4 ? <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> : null}
+
+      {viewMillionaireWinner ? <MillionaireWinner /> : null}
     </div>
   );
 }
