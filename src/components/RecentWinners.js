@@ -8,14 +8,15 @@ const RecentWinners = (props) => {
 
     const listItems = props.winners.map((e, idx) => <li key={idx}><div>{ e.name }</div><div>{ e.date }</div></li>);
 
+    // set length of listItems array - if 0, should show "No Recent Winners"
     useEffect(() => {
         setNumWinners(listItems.length)
     }, []);
 
     return (
         <div className="winners">
-            <h1>Recent Winners</h1>
-            <ul>
+            <h1 className='recent-winners-h1'>Recent Winners</h1>
+            <ul className='recent-winners-list'>
                 {numWinners === 0 ? <li>No Recent Winners</li> : null}
                 {listItems}
             </ul>

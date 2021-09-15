@@ -70,7 +70,7 @@ function App() {
     setWinners(oldArray => [...oldArray, ...newArray]);
   }
 
-  function useLifeLine(index) {
+  const useLifeLine = (index) => {
 
     changeViewLifeLineModal();
 
@@ -133,7 +133,7 @@ function App() {
     const d = new Date();
     const newDate = d.getMonth() + '/' + d.getDay() + '/' + d.getFullYear();
 
-    const res = firebase.firestore().collection('winners').add({ name: name, date: newDate});
+    const res = firebase.firestore().collection('winners').add({ name: name, date: newDate });
 
     homeScreen();
 
@@ -162,15 +162,15 @@ function App() {
     }
   }
 
-  function changeLifelineClickable() {
+  const changeLifelineClickable = () => {
     setLifelineClickable(!lifelineClickable);
   }
 
-  function changeTimerVisible() {
+  const changeTimerVisible = () => {
     setTimerVisible(!timerVisible);
   }
 
-  function changeFinalAnswerVisible() {
+  const changeFinalAnswerVisible = () => {
     setFinalAnswerVisible(!finalAnswerVisible);
   }
 
@@ -178,15 +178,15 @@ function App() {
     setGameState(gameState + 1);
   }
 
-  function changeMainState() {
+  const changeMainState = () => {
     setMainState(mainState + 1);
   }
 
-  function changeAnswerState() {
+  const changeAnswerState = () => {
     setAnswerState(answerState + 1);
   }
 
-  function nextQuestion() {
+  const nextQuestion = () => {
 
     if (answerButtonText === 'End Game') {
       setAnswerMessageVisible(false);
@@ -214,7 +214,7 @@ function App() {
     setMoneyLevel(moneyArr[currentLevel]);
   }, [currentLevel]);
 
-  function animateStartGame() {
+  const animateStartGame = () => {
     // record game played in database
     storeGamePlayed();
 
@@ -223,7 +223,7 @@ function App() {
     changeTimerInitSeconds(30);
   }
 
-  function storeGamePlayed() {
+  const storeGamePlayed = () => {
     const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
   }
 
@@ -260,7 +260,7 @@ function App() {
     return sugg;
   }
 
-  function isAnswerCorrect(num) {
+  const isAnswerCorrect = (num) => {
     storeAnswerSelected();
     setFinalAnswerVisible(false);
 
@@ -332,7 +332,7 @@ function App() {
 
   };
 
-  function showAnswerMessageVisible() {
+  const showAnswerMessageVisible = () => {
 
     setAnswerMessageVisible(!answerMessageVisible);
 
@@ -346,11 +346,11 @@ function App() {
     }
   }
 
-  function answerSelected(num) {
+  const answerSelected= (num) => {
     setSelectedAnswer(num);
   }
 
-  function shuffle(arr) {
+  const shuffle = (arr) => {
     arr.sort(function () {
       return Math.random() - 0.5;
     });

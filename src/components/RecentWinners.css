@@ -4,17 +4,24 @@
     position: relative;
     transition: all .4s ease-in-out;
     transition-delay: .1s;
-    border: 3px solid orange;
 }
 
-.winners h1 {
-    background-color: orange;
+.winners h1.recent-winners-h1 {
     text-align: center;
     color: white;
+    border-radius: 10px 10px 0 0;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+    padding: 10px;
 }
 
 .winners ul.winners-list {
     border: 2px solid orange;
+}
+
+ul.recent-winners-list {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 0 0 10px 10px;
 }
 
 .winners li {
@@ -27,15 +34,19 @@
 #viewAllWinners {
     text-align: end;
     padding: 10px;
-    background-color: orange;
 }
 
 .view-all-winners__button {
     display: inline-block;
     padding: 10px 15px;
-    background-color: #fff;
-    color: orange;
-    box-shadow: 2px 2px 5px black;
+    border: 1px solid white;
+    color: white;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.view-all-winners__button:hover {
+    background-color: orange;
 }
 
 .move-offscreen-right {

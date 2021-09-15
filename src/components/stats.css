@@ -6,3 +6,7 @@
     transition: all .4s ease-in-out;
     transition-delay: .1s;
 }
+
+.stats h2.games-played {
+    font-size: 1.25rem;
+}

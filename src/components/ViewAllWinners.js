@@ -26,7 +26,7 @@ const ViewAllWinners = (props) => {
 
     return (
         <div className='view-all-winners-container'>
-            <h1>Total Winners:</h1>
+            <h1 className='total-winners'>Total Winners:</h1>
             <div className='winners-list'>
                 <ul id='ul-all-winners'>
                     {listItems}
