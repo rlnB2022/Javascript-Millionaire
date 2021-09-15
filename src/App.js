@@ -24,7 +24,7 @@ function App() {
   const [gamesPlayed, setGamesPlayed] = useState();
 
   // game states
-  const [gameState, setGameState] = useState(0);
+  const [gameState, setGameState] = useState(5);
   const [mainState, setMainState] = useState(0);
   const [answerState, setAnswerState] = useState(0);
 
@@ -53,7 +53,7 @@ function App() {
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
-  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(false);
+  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(true);
 
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
@@ -258,9 +258,16 @@ function App() {
 
       // if answered the last question, they won!
       if (currentLevel === 14) {
+        setGameState(5);
+        setFinalAnswerVisible(false);
+        setAnswerMessageVisible(false);
+        setViewLifeLineModal(false);
+        setViewAskTheAudienceModal(false);
+        setViewPhoneAFriendModal(false);
+
         setViewMillionaireWinner(true);
         // hide everything else
-        
+
         return;
       }
       else {

@@ -1,3 +1,67 @@
+.millionaire-winner {
+    background: url('../bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
 .millionaire-winner-container {
-    
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 0.625rem;
+}
+
+h1.congrats {
+    font-size: 2.5rem;
+    padding: 0.625rem 0;
+}
+
+h2.latest-millionaire {
+    text-align: center;
+    font-size: 2rem;
+    padding: 1.25rem 0;
+}
+
+.millionaire-winner-container p {
+    width: 80%;
+    margin: 0 auto;
+}
+
+p.disclaimer {
+    color: red;
+    font-size: 1.25rem;
+}
+
+p.enter-your-name {
+    padding: 1.25rem 0;
+    font-size: 1.25rem;
+}
+
+input[type="text"] {
+    border: 2px solid orange;
+    width: 80%;
+    margin: 0 auto;
+    font-size: 1.25rem;
+    padding: 0.625rem;
+    border-radius: 0.625rem;
+}
+
+.submit-name {
+    padding: 0.625rem 0;
+    background: orange;
+    color: white;
+    border-radius: 0.625rem;
+    margin: 1.25rem auto;
+    width: 60%;
+    text-align: center;
+    font-size: 2rem;
 }
