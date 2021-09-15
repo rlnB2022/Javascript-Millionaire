@@ -1,6 +1,6 @@
 import './RecentWinners.css';
 import { useState } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import { useEffect } from 'react';
 
 const RecentWinners = (props) => {
 

@@ -136,6 +136,7 @@ function App() {
     const res = firebase.firestore().collection('winners').add({ name: name, date: newDate});
 
     homeScreen();
+
   };
 
   const changeTimerInitSeconds = (num) => {
@@ -296,14 +297,13 @@ function App() {
   }
 
   const getDifficultyName = () => {
-    return questionName[Math.floor((currentLevel / 5))];
+    return questionName[Math.floor((currentLevel + 1) / 5)];
   };
 
   async function storeAnswerSelected() {
 
     // get name of question difficulty
     const diff = getDifficultyName();
-    console.log(diff);
 
     // get reference to collection
     const collRef = firebase.firestore().collection(diff);
@@ -411,7 +411,7 @@ function App() {
     // // shuffle the array
     shuffle(items_hard);
 
-    setQuestions(questions => [...questions, ...items_hard.slice(-5)]);
+    setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
 
     // // millionaire questions
     ref = firebase.firestore().collection('questions_million');
