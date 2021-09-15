@@ -2,13 +2,6 @@ import './RecentWinners.css';
 
 const RecentWinners = (props) => {
 
-    // sort recent winners by date
-    // const sorted = [...props.winners].sort((a,b) => b-a);
-
-    // console.log(sorted);
-
-    // const sortedArr = props.winners;//.sort((a,b) => b.date-a.date);
-
     const listItems = props.winners.map((e, idx) => <li key={idx}><div>{ e.name }</div><div>{ e.date }</div></li>);
 
     return (

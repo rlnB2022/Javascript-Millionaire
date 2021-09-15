@@ -1,9 +1,9 @@
 import './MillionaireWinner.css';
 import { useState } from 'react';
 
-const MillionaireWinner = () => {
+const MillionaireWinner = (props) => {
     // input element
-    const [thisUserName, setThisUserName] = useState('Player');
+    const [thisUserName, setThisUserName] = useState('');
 
     // update input element value
     const changeUserName = (e) => {
@@ -17,7 +17,10 @@ const MillionaireWinner = () => {
 
     // submit button
     const handleClick = () => {
-        
+        // if user has entered a name
+        if(thisUserName.length) {
+            {props.storeWinnerName(thisUserName)}
+        }
     };
     
     return (

@@ -24,7 +24,7 @@ function App() {
   const [gamesPlayed, setGamesPlayed] = useState();
 
   // game states
-  const [gameState, setGameState] = useState(5);
+  const [gameState, setGameState] = useState(0);
   const [mainState, setMainState] = useState(0);
   const [answerState, setAnswerState] = useState(0);
 
@@ -53,7 +53,7 @@ function App() {
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
-  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(true);
+  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(false);
 
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
@@ -124,25 +124,37 @@ function App() {
     setLifeLineAskTheAudience(1);
     setCurrentLevel(0);
     setLifelineClickable(false);
+    setViewMillionaireWinner(false);
   };
 
-  function changeTimerInitSeconds(num) {
+  const storeWinnerName = (name) => {
+
+    // get today's date
+    const d = new Date();
+    const newDate = d.getMonth() + '/' + d.getDay() + '/' + d.getFullYear();
+
+    const res = firebase.firestore().collection('winners').add({ name: name, date: newDate});
+
+    homeScreen();
+  };
+
+  const changeTimerInitSeconds = (num) => {
     setTimerInitSeconds(num);
   }
 
-  function changeViewPhoneAFriend() {
+  const changeViewPhoneAFriend = () => {
     setViewPhoneAFriendModal(!viewPhoneAFriendModal);
   }
 
-  function changeViewAskTheAudienceModal() {
+  const changeViewAskTheAudienceModal = () => {
     setViewAskTheAudienceModal(true);
   }
 
-  function hideAskTheAudienceModal() {
+  const hideAskTheAudienceModal = () => {
     setViewAskTheAudienceModal(false);
   }
 
-  function changeViewLifeLineModal(img) {
+  const changeViewLifeLineModal = img => {
     if (lifelineClickable) {
       setLifeLineModalImage(img);
       setViewLifeLineModal(!viewLifeLineModal);
@@ -518,7 +530,7 @@ function App() {
 
       {gameState === 4 ? <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> : null}
 
-      {viewMillionaireWinner ? <MillionaireWinner /> : null}
+      {viewMillionaireWinner ? <MillionaireWinner storeWinnerName={storeWinnerName} /> : null}
     </div>
   );
 }
