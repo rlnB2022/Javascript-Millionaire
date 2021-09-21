@@ -43,12 +43,21 @@ ul.recent-winners-list {
     color: white;
     border-radius: 10px;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: .3s ease-in-out;
 }
 
 .view-all-winners__button:hover {
-    background-color: orange;
+    background-color: white;
+    color: orange;
 }
 
 .move-offscreen-right {
     transform: translateX(100vw);
+}
+
+@media screen and (min-width: 768px) {
+    .winners {
+        width: 50%;
+    }
 }

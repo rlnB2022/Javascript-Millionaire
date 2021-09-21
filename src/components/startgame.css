@@ -4,15 +4,12 @@
     flex-direction: column;
     justify-content: space-around;
     transition: opacity .4s;
+    flex: 3;
 }
 
 button {
     width: 80%;
     margin: 0 auto;
-    /* position: absolute;
-    left: 50%;
-    bottom: 10%; */
-    /* transform: translateX(-50%); */
     padding: 15px 25px;
     border-radius: 5px;
     background-color: orange;
@@ -36,5 +33,16 @@ button {
 @keyframes fade-out-start-game {
     100% {
         opacity: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+ 
+    button {
+        width: 20%;
+    }
+
+    .title-img {
+        margin: 0 auto;
     }
 }

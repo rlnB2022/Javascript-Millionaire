@@ -21,7 +21,7 @@ const StartGame = (props) => {
 
     return (
         <div className={`start-game ${startGameVisible ? '' : 'fade-out-start-game'}`}>
-            <img src={imgTitle} alt="title"/>
+            <img className='title-img' src={imgTitle} alt="title"/>
             <RecentWinners winners={props.winners} showViewAllWinners={showViewAllWinners}/>
             {viewAllWinnersVisible ? <ViewAllWinners showViewAllWinners={showViewAllWinners} /> : null}
             <Stats gamesPlayed={props.gamesPlayed}/>
