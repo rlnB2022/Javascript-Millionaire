@@ -25,7 +25,7 @@ const StartGame = (props) => {
             <RecentWinners winners={props.winners} showViewAllWinners={showViewAllWinners}/>
             {viewAllWinnersVisible ? <ViewAllWinners showViewAllWinners={showViewAllWinners} /> : null}
             <Stats gamesPlayed={props.gamesPlayed}/>
-            <button onClick={() => startGameButton()}>START GAME</button>
+            <button className='start-game-button' onClick={() => startGameButton()}>START GAME</button>
             <p className="created-by">Created by <a href="https://twitter.com/rick99gtp">@rick99gtp</a></p>
         </div>
     );

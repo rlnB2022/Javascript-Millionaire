@@ -11,8 +11,8 @@
 }
 
 .sidebarActive {
-    background: url('../answer-box_selected.svg');
-    background-size: cover;
+    background-image: url('../answer-box_selected.svg');
+    background-size: 100% 100%;
 }
 
 .sidebar-level-number {

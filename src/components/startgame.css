@@ -7,7 +7,7 @@
     flex: 3;
 }
 
-button {
+button.start-game-button {
     width: 80%;
     margin: 0 auto;
     padding: 15px 25px;
@@ -38,7 +38,7 @@ button {
 
 @media screen and (min-width: 768px) {
  
-    button {
+    button.start-game-button {
         width: 20%;
     }
 
