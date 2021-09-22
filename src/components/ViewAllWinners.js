@@ -8,7 +8,7 @@ const ViewAllWinners = (props) => {
     const [visible, setVisible] = useState(false);
 
     async function getAllWinners() {
-        let ref = firebase.firestore().collection('winners');
+        let ref = firebase.firestore().collection('winners').orderBy('date', 'desc');
         const snapshotAllWinners = await ref.get();
         const newArray = [];
 
