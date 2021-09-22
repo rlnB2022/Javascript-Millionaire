@@ -21,8 +21,8 @@ const StartGame = (props) => {
     return (
         <div className={`start-game ${startGameVisible ? '' : 'fade-out-start-game'}`}>
             <img className='title-img' src={imgTitle} alt="title" />
-            <UserActions gamesPlayed={props.gamesPlayed}/>
             <div className='start-game-bottom'>
+                <UserActions gamesPlayed={props.gamesPlayed} />
                 <button className='start-game-button' onClick={() => startGameButton()}>START GAME</button>
                 <p className="created-by">Created by <a href="https://twitter.com/rick99gtp">@rick99gtp</a></p>
             </div>

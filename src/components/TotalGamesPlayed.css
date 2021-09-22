@@ -6,4 +6,9 @@
     font-size: 1rem;
     text-transform: uppercase;
     color: darkgray;
+    padding: 0.625rem 0;
+}
+
+.games-played-number {
+    color: white;
 }

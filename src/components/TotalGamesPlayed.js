@@ -6,6 +6,7 @@ const TotalGamesPlayed = props => {
         <div className='total-games-played action-button'>
             <BsController />
             <p className='games-played-name'>Games Played</p>
+            <p className='games-played-number'>{props.gamesPlayed}</p>
         </div>
     )
 };
