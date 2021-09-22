@@ -18,6 +18,10 @@
     
 }
 
+.winner-item {
+    margin: 10px;
+}
+
 .all-winners div {
     display: flex;
     justify-content: space-between;
