@@ -15,7 +15,7 @@
 }
 
 .all-winners {
-    
+    overflow-y: scroll;
 }
 
 .winner-item {
@@ -26,7 +26,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: green;
+    background-color: midnightblue;
+    color: white;
     border-radius: 5px;
     padding: 10px;
     font-size: 1.25rem;
@@ -34,14 +35,16 @@
 
 .btn-container {
     padding: 0.625rem;
+    position: relative;
+    bottom: -100%;
+    animation: move-winner-button-up .2s ease-in 1s forwards;
 }
 
 .btn-close-all-winners-list {
-    width: 70%;
     text-align: center;
     background-color: orange;
     color: #fff;
-    padding: 0.9375rem 1.5625rem;
+    padding: 25px 25px;
     border-radius: 0.4375rem;
     margin: 0 auto;
 }
@@ -56,5 +59,14 @@
     }
     to {
         transform: translateX(100vw);
+    }
+}
+
+@keyframes move-winner-button-up {
+    from {
+        transform: translateY(0%);
+    }
+    to {
+        transform: translateY(-100%);
     }
 }

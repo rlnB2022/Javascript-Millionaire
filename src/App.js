@@ -61,7 +61,7 @@ function App() {
 
   async function getWinners() {
     let ref = firebase.firestore().collection('winners');
-    const snapshotRecentWinners = await ref.limit(3).get();
+    const snapshotRecentWinners = await ref.get();
     const newArray = [];
 
     snapshotRecentWinners.forEach(doc => {

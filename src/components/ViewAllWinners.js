@@ -6,7 +6,6 @@ const ViewAllWinners = (props) => {
 
     const [allWinners, setAllWinners] = useState([]);
     const [visible, setVisible] = useState(false);
-    const [readyToAnimateWinners, setReadyToAnimateWinners] = useState(false);
 
     async function getAllWinners() {
         let ref = firebase.firestore().collection('winners');
@@ -23,7 +22,6 @@ const ViewAllWinners = (props) => {
     const hideAllWinners = () => {
         setVisible(false);
         setTimeout(() => {
-            setReadyToAnimateWinners(false);
             props.showViewAllWinners();
         }, 600);
     };
@@ -33,22 +31,10 @@ const ViewAllWinners = (props) => {
 
         setTimeout(() => {
             setVisible(!visible);
-
-            // wait 1/2 second to animate in winners
-            setTimeout(() => {
-                setReadyToAnimateWinners(true);
-            }, 500);
-
         }, 100);
     }, []);
 
-    useEffect(() => {
-        if (readyToAnimateWinners) {
-            console.log('yes');
-        }
-    }, [readyToAnimateWinners]);
-
-    const listItems = allWinners.map((e, idx) => <div className='winner-item' style={{position: 'relative', left: '-100vw', animation: `move-winners-in .4s ease-in forwards ${idx * .2}s`}} key={idx}><div>{e.name}</div><div>{e.date}</div></div>);
+    const listItems = allWinners.map((e, idx) => <div className='winner-item' style={{position: 'relative', left: '-100vw', animation: `move-winners-in .4s ease-out forwards ${idx * .1}s`}} key={idx}><div>{e.name}</div><div>{e.date}</div></div>);
 
     return (
         <div className={`view-all-winners-container ${visible ? 'fade-in' : ''}`}>
