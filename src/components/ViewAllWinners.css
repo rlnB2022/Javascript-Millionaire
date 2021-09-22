@@ -47,6 +47,7 @@
     padding: 25px 25px;
     border-radius: 0.4375rem;
     margin: 0 auto;
+    text-transform: uppercase;
 }
 
 .fade-in {
