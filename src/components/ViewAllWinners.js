@@ -48,7 +48,7 @@ const ViewAllWinners = (props) => {
         }
     }, [readyToAnimateWinners]);
 
-    const listItems = allWinners.map((e, idx) => <div key={idx}><div>{e.name}</div><div>{e.date}</div></div>);
+    const listItems = allWinners.map((e, idx) => <div style={{position: 'relative', left: '-100vw', animation: `move-winners-in .4s ease-in forwards ${idx * .2}s`}} key={idx}><div>{e.name}</div><div>{e.date}</div></div>);
 
     return (
         <div className={`view-all-winners-container ${visible ? 'fade-in' : ''}`}>
