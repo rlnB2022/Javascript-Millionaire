@@ -1,0 +1,9 @@
+.total-games-played {
+    color: goldenrod;
+}
+
+.games-played-name {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: darkgray;
+}

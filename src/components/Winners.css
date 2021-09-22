@@ -1,0 +1,10 @@
+.winners {
+    color: goldenrod;
+}
+
+.winners-name {
+    font-size: 1rem;
+    color: darkgray;
+    text-transform: uppercase;
+}
+
