@@ -5,35 +5,58 @@ import firebase from '../firebase';
 const ViewAllWinners = (props) => {
 
     const [allWinners, setAllWinners] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [readyToAnimateWinners, setReadyToAnimateWinners] = useState(false);
 
     async function getAllWinners() {
         let ref = firebase.firestore().collection('winners');
         const snapshotAllWinners = await ref.get();
         const newArray = [];
-    
+
         snapshotAllWinners.forEach(doc => {
-          newArray.push(doc.data());
+            newArray.push(doc.data());
         });
-    
+
         setAllWinners(oldArray => [...oldArray, ...newArray]);
     }
 
+    const hideAllWinners = () => {
+        setVisible(false);
+        setTimeout(() => {
+            setReadyToAnimateWinners(false);
+            props.showViewAllWinners();
+        }, 600);
+    };
+
     useEffect(() => {
         getAllWinners();
+
+        setTimeout(() => {
+            setVisible(!visible);
+
+            // wait 1/2 second to animate in winners
+            setTimeout(() => {
+                setReadyToAnimateWinners(true);
+            }, 500);
+
+        }, 100);
     }, []);
 
-    const listItems = allWinners.map((e, idx) => <li key={idx}><div>{e.name}</div><div>{e.date}</div></li>);
+    useEffect(() => {
+        if (readyToAnimateWinners) {
+            console.log('yes');
+        }
+    }, [readyToAnimateWinners]);
+
+    const listItems = allWinners.map((e, idx) => <div key={idx}><div>{e.name}</div><div>{e.date}</div></div>);
 
     return (
-        <div className='view-all-winners-container'>
-            <h1 className='total-winners'>Total Winners:</h1>
-            <div className='winners-list'>
-                <ul id='ul-all-winners'>
-                    {listItems}
-                </ul>
-                <div className='btn-container' onClick={props.showViewAllWinners}><div className='btn-close-all-winners-list'>Ok</div></div>
+        <div className={`view-all-winners-container ${visible ? 'fade-in' : ''}`}>
+            <div className='all-winners'>
+                {listItems}
             </div>
-        </div>
+            <div className='btn-container' onClick={hideAllWinners}><div className='btn-close-all-winners-list'>Ok</div></div>
+        </div >
     )
 };
 

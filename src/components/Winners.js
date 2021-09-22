@@ -3,10 +3,10 @@ import { BiTrophy } from 'react-icons/bi';
 
 const Winners = props => {
     return (
-        <div className='winners action-button'>
+        <div className='winners action-button' onClick={props.showViewAllWinners}>
             <BiTrophy />
             <p className='winners-name'>Winners</p>
-            <p>{props.winners}</p>
+            <p>{props.numWinners}</p>
         </div>
     )
 };

@@ -1,38 +1,31 @@
 .view-all-winners-container {
-    background-color: white;
+    background: url('../bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     position: absolute;
     inset: 0;
     display: grid;
-    grid-template-columns: 1;
-    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 9fr 1fr;
     z-index: 1;
+    opacity: 0;
+    transition: .5s ease-in-out;
+    padding: 0.625rem;
 }
 
-h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-color: orange;
-    color: #fff;
-}
-
-ul#ul-all-winners {
-    height: 100%;
-}
-
-li {
-    padding: 10px;
+.all-winners div {
     display: flex;
     justify-content: space-between;
-}
-
-.winners-list {
-    /* background-color: green; */
+    align-items: center;
+    background-color: green;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.25rem;
 }
 
 .btn-container {
-    padding: 10px;
+    padding: 0.625rem;
 }
 
 .btn-close-all-winners-list {
@@ -40,7 +33,11 @@ li {
     text-align: center;
     background-color: orange;
     color: #fff;
-    padding: 15px 25px;
-    border-radius: 7px;
+    padding: 0.9375rem 1.5625rem;
+    border-radius: 0.4375rem;
     margin: 0 auto;
+}
+
+.fade-in {
+    opacity: 1;
 }

@@ -22,10 +22,11 @@ const StartGame = (props) => {
         <div className={`start-game ${startGameVisible ? '' : 'fade-out-start-game'}`}>
             <img className='title-img' src={imgTitle} alt="title" />
             <div className='start-game-bottom'>
-                <UserActions gamesPlayed={props.gamesPlayed} />
+                <UserActions showViewAllWinners={showViewAllWinners} winners={props.winners} gamesPlayed={props.gamesPlayed} />
                 <button className='start-game-button' onClick={() => startGameButton()}>START GAME</button>
                 <p className="created-by">Created by <a href="https://twitter.com/rick99gtp">@rick99gtp</a></p>
             </div>
+            {viewAllWinnersVisible ? <ViewAllWinners winnersVisible={viewAllWinnersVisible} showViewAllWinners={showViewAllWinners} /> : null}
         </div>
     );
 }
