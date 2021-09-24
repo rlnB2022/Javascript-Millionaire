@@ -1,7 +1,7 @@
 .sidebar-level {
     display: flex;
     align-items: center;
-    padding: 0 60px;
+    padding: 0 6.25rem;
     color: orange;
 }
 
@@ -23,6 +23,6 @@
 
 .sidebar-level-amount {
     text-align: left;
-    width: 90%;
-    margin-left: 20px;
+    margin-left: 1.25rem;
+    width: 12.5rem;
 }
