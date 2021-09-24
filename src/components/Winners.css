@@ -1,5 +1,19 @@
 .winners {
     color: goldenrod;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+}
+
+.winners:hover {
+    background-color: white;
+}
+
+.winners-number {
+    transition: .4s ease-in-out;
+}
+
+.winners:hover .winners-number {
+    color: goldenrod;
 }
 
 .winners-name {

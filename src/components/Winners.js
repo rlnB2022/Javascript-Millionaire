@@ -6,7 +6,7 @@ const Winners = props => {
         <div className='winners action-button' onClick={props.showViewAllWinners}>
             <BiTrophy />
             <p className='winners-name'>Winners</p>
-            <p>{props.numWinners}</p>
+            <p className='winners-number'>{props.numWinners}</p>
         </div>
     )
 };

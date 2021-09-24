@@ -34,22 +34,23 @@ const ViewAllWinners = (props) => {
         }, 100);
     }, []);
 
+    // construct the list of winners
     const listItems = allWinners.map((e, idx) =>
-        <div className='winner-item'
+        <li className='winner-item'
             style={{
                 left: '-100vw',
-                animation: `move-winners-in .4s ease-out forwards ${idx * .05}s`
+                animation: `move-winners-in .4s ease-out forwards ${idx * .1}s`
             }}
             key={idx}>
             <div>{e.name}</div>
             <div>{e.date}</div>
-        </div>);
+        </li>);
 
     return (
         <div className={`view-all-winners-container ${visible ? 'fade-in' : ''}`}>
-            <div className='all-winners'>
+            <ul className='all-winners'>
                 {listItems}
-            </div>
+            </ul>
             <div className='btn-container' onClick={hideAllWinners}><div className='btn-close-all-winners-list'>Ok</div></div>
         </div >
     )

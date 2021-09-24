@@ -1,7 +1,9 @@
 import './sidebar.css';
 import SidebarLevel from './SidebarLevel';
+import { useState, useEffect } from 'react';
 
 const Sidebar = (props) => {
+    const [visible, setVisible] = useState(false);
     // reverse the array so the MILLION DOLLARS is on top
     const newArr = [...props.money].reverse();
     
@@ -15,8 +17,14 @@ const Sidebar = (props) => {
         level={15 - idx}
         money={e} />);
 
+    useEffect(() => {
+        setTimeout(() => {
+            setVisible(true);
+        }, 100);
+    }, []);
+
     return (
-        <div className='sidebar'>
+        <div className={`sidebar ${visible ? 'show-sidebar' : ''}`}>
             {elems}
         </div>
     )
