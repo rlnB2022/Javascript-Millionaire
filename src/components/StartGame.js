@@ -15,7 +15,10 @@ const StartGame = (props) => {
 
     const startGameButton = () => {
         setStartGameVisible(false);
-        props.startGame();
+
+        setTimeout(() => {
+            props.startGame();
+        }, 500);
     };
 
     return (

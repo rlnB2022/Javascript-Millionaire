@@ -132,7 +132,9 @@ function App() {
 
     // get today's date
     const d = new Date();
-    const newDate = d.getMonth() + '/' + d.getDay() + '/' + d.getFullYear();
+    console.log({d});
+    const newDate = (d.getMonth()+ 1) + '/' + d.getDate() + '/' + d.getFullYear();
+    console.log({newDate});
 
     const res = firebase.firestore().collection('winners').add({ name: name, date: newDate });
 
@@ -505,7 +507,7 @@ function App() {
         changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
         changeLifelineClickable={changeLifelineClickable}
       /> : null}
-      <Sidebar money={moneyArr} currentLevel={currentLevel}/>
+      {gameState >= 1 ? <Sidebar money={moneyArr} currentLevel={currentLevel}/> : null}
 
       {finalAnswerVisible ? <FinalAnswer
         changeVisible={changeFinalAnswerVisible}

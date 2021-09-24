@@ -14,3 +14,10 @@
     background-color: rgba(0, 0, 0, 0.65);
     font-size: 2rem;
 }
+
+@media screen and (min-width: 768px) {
+    .user-actions {
+        width: 50%;
+        margin: 0 auto;
+    }
+}

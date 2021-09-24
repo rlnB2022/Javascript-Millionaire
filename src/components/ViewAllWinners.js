@@ -34,7 +34,16 @@ const ViewAllWinners = (props) => {
         }, 100);
     }, []);
 
-    const listItems = allWinners.map((e, idx) => <div className='winner-item' style={{position: 'relative', left: '-100vw', animation: `move-winners-in .4s ease-out forwards ${idx * .1}s`}} key={idx}><div>{e.name}</div><div>{e.date}</div></div>);
+    const listItems = allWinners.map((e, idx) =>
+        <div className='winner-item'
+            style={{
+                left: '-100vw',
+                animation: `move-winners-in .4s ease-out forwards ${idx * .05}s`
+            }}
+            key={idx}>
+            <div>{e.name}</div>
+            <div>{e.date}</div>
+        </div>);
 
     return (
         <div className={`view-all-winners-container ${visible ? 'fade-in' : ''}`}>

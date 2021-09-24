@@ -1,4 +1,3 @@
-import { useEffect } from 'react/cjs/react.development';
 import './sidebar.css';
 import SidebarLevel from './SidebarLevel';
 
@@ -6,10 +5,6 @@ const Sidebar = (props) => {
     // reverse the array so the MILLION DOLLARS is on top
     const newArr = [...props.money].reverse();
     
-    useEffect(() => {
-        console.log(`Current Level: ${props.currentLevel}`);
-    }, [props.currentLevel]);
-
     // loop through array to create component list
     // shouldn't use the index but have no other option
     // also, elements won't be deleted so disrupting the order-not as important

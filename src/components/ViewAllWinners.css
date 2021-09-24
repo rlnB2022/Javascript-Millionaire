@@ -4,10 +4,10 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    inset: 0;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 9fr 1fr;
+    inset: 0;
     z-index: 1;
     opacity: 0;
     transition: .5s ease-in-out;
@@ -15,11 +15,16 @@
 }
 
 .all-winners {
+    /* position: absolute; */
+    /* inset: 0; */
+    display: grid;
+    grid-template-columns: 1fr;
     overflow-y: scroll;
+    background: green;
 }
 
 .winner-item {
-    margin: 10px;
+    position: relative;
 }
 
 .all-winners div {
@@ -34,10 +39,11 @@
 }
 
 .btn-container {
-    padding: 0.625rem;
+    height: 10vh;
+    background: pink;
     position: relative;
-    bottom: -100%;
-    animation: move-winner-button-up .2s ease-in 1s forwards;
+    /* bottom: -100%; */
+    /* animation: move-winner-button-up .2s ease-in 1s forwards; */
 }
 
 .btn-close-all-winners-list {
@@ -48,6 +54,7 @@
     border-radius: 0.4375rem;
     margin: 0 auto;
     text-transform: uppercase;
+    font-size: 1.25rem;
 }
 
 .fade-in {
@@ -69,5 +76,11 @@
     }
     to {
         transform: translateY(-100%);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .view-all-winners-container {
+        grid-template-columns: 1fr 1fr;
     }
 }

@@ -12,3 +12,9 @@
 .games-played-number {
     color: white;
 }
+
+@media screen and (min-width: 768px) {
+    .action-button {
+        font-size: 3rem;
+    }
+}
