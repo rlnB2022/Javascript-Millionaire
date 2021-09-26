@@ -5,6 +5,8 @@ const AnswerContainer = (props) => {
 
     let bgColors = [,,,];
 
+    console.log(props.answerSelected);
+
     bgColors[props.answerSelected] = 'orange';
 
     return (
