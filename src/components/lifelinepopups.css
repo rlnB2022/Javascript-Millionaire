@@ -1,6 +1,10 @@
 .lifeline-popups {
-    display: flex;
-    justify-content: space-between;
+    height: 15vh;
+    display: grid;
     align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    /* justify-content: space-between;
+    align-items: center; */
     position: relative;
 }

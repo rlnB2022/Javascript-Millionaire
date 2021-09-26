@@ -4,13 +4,6 @@
     grid-template-columns: 1fr;
 }
 
-.answer-container .answer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
-}
-
 .hide-answer {
     animation: hideAnswer .3s ease-in-out forwards;
 }

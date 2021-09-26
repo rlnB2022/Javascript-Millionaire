@@ -3,47 +3,27 @@
     width: 90%;
     margin: 0 auto;
     display: flex;
+    justify-content: center;
     align-items: center;
-}
-
-.question-container::after {
-    content: '';
-    position: absolute;
-    height: 0.1875rem;
-    width: 1.4rem;
-    background-color: #155eaef7;
-    right: -6%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.question-container::before {
-    content: '';
-    position: absolute;
-    height: 0.1875rem;
-    width: 1.4rem;
-    background-color: #155eaef7;
-    left: -5vw;
-    top: 50%;
-    transform: translateY(-50%);
+    border: 3px solid white;
+    background: rgba(255, 165, 0, .85);
+    border-radius: 50px;
+    width: 96%;
+    margin-bottom: 10px;
 }
 
 .question {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 0%;
-    width: 100%;
-    background: url('../answer-box.svg');
     animation: showQuestionContainer .25s ease-in-out forwards;
 }
 
 .question-container .question p {
     color: #fff;
     width: 70%;
-    font-size: 2.5vh;
+    font-size: 1.25rem;
     text-align: center;
-    padding: 2.5vh 0;
     line-height: 1.5;
     opacity: 0;
     animation: revealQuestion .25s ease-in-out forwards .5s;

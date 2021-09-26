@@ -17,5 +17,13 @@
 }
 
 @media screen and (min-width: 768px) {
-
+    .lifeline-container {
+        display: flex;
+        grid-template-rows: none;
+        grid-template-columns: none;
+        width: 50%;
+        height: 100%;
+        margin: 0 auto;
+        background-color: transparent;
+    }
 }
