@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/Javascript-Millionaire/static/css/main.cb146c1a.chunk.css",
+    "main.js": "/Javascript-Millionaire/static/js/main.22dbff98.chunk.js",
+    "main.js.map": "/Javascript-Millionaire/static/js/main.22dbff98.chunk.js.map",
+    "runtime-main.js": "/Javascript-Millionaire/static/js/runtime-main.ada2bee3.js",
+    "runtime-main.js.map": "/Javascript-Millionaire/static/js/runtime-main.ada2bee3.js.map",
+    "static/js/2.3756bd0a.chunk.js": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js",
+    "static/js/2.3756bd0a.chunk.js.map": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js.map",
+    "index.html": "/Javascript-Millionaire/index.html",
+    "static/css/main.cb146c1a.chunk.css.map": "/Javascript-Millionaire/static/css/main.cb146c1a.chunk.css.map",
+    "static/js/2.3756bd0a.chunk.js.LICENSE.txt": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js.LICENSE.txt",
+    "static/media/FinalAnswer.css": "/Javascript-Millionaire/static/media/answer-box.a2b169c4.svg",
+    "static/media/SidebarLevel.css": "/Javascript-Millionaire/static/media/answer-box_selected.7eae3add.svg",
+    "static/media/asktheaudience-bg.jpg": "/Javascript-Millionaire/static/media/asktheaudience-bg.5080cb67.jpg",
+    "static/media/asktheaudience.fdcca79f.png": "/Javascript-Millionaire/static/media/asktheaudience.fdcca79f.png",
+    "static/media/MillionaireWinner.css": "/Javascript-Millionaire/static/media/bg.ae1f8e7e.jpg",
+    "static/media/csaba-kissi.jpg": "/Javascript-Millionaire/static/media/csaba-kissi.89b94fa7.jpg",
+    "static/media/fiftyfifty.30f21584.png": "/Javascript-Millionaire/static/media/fiftyfifty.30f21584.png",
+    "static/media/logo.cff47a52.png": "/Javascript-Millionaire/static/media/logo.cff47a52.png",
+    "static/media/phoneafriend.f4849acd.png": "/Javascript-Millionaire/static/media/phoneafriend.f4849acd.png",
+    "static/media/shaundai.jpg": "/Javascript-Millionaire/static/media/shaundai.f89fb70a.jpg",
+    "static/media/thejackforge.jpg": "/Javascript-Millionaire/static/media/thejackforge.179a709e.jpg",
+    "static/media/traversymedia.jpg": "/Javascript-Millionaire/static/media/traversymedia.42ce704b.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ada2bee3.js",
+    "static/js/2.3756bd0a.chunk.js",
+    "static/css/main.cb146c1a.chunk.css",
+    "static/js/main.22dbff98.chunk.js"
+  ]
+}
