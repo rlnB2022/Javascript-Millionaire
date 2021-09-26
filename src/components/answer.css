@@ -10,6 +10,11 @@
     border: 2px solid orange;
     border-radius: 50px;
     width: 90%;
+    cursor: pointer;
+}
+
+.answer:hover {
+    background-color: orange;
 }
 
 .orange {
@@ -74,5 +79,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    
+    .answer {
+        width: 50%;
+    }
 }

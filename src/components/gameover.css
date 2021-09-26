@@ -29,7 +29,7 @@
     transform: translate(-50%, -50%);
     width: 80%;
     font-size: 1.5rem;
-    text-align: justify;
+    text-align: center;
     margin: 0 auto;
     padding: 20px 40px;
     color: #fff;
@@ -49,4 +49,17 @@
     color: white;
     font-size: 2rem;
     text-align: center;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+}
+
+.game-over-button:hover {
+    background-color: white;
+    color: orange;
+}
+
+@media screen and (min-width: 768px) {
+    .game-over-message, .game-over-button {
+        width: 50%;
+    }
 }

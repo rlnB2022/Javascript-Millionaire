@@ -38,6 +38,13 @@
     background-color: var(--orange);
     border-radius: 0 0 10px 10px;
     font-size: 1.25rem;
+    cursor: pointer;
+    transition: .4s ease-in-out;
+}
+
+.answer-popup__button:hover {
+    background-color: var(--purple);
+    color: var(--orange);
 }
 
 @keyframes answer-popup-fade-in {
@@ -46,5 +53,11 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .answer-popup-container {
+        width: 30%;
     }
 }

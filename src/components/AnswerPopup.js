@@ -1,9 +1,6 @@
 import './answerpopup.css';
 
 const AnswerPopup = (props) => {
-    const styles = {
-        transition: '.25s ease-in-out'
-    }
 
     let answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
 

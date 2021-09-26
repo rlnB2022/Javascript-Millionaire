@@ -8,6 +8,7 @@
     opacity: 0;
     transform: scale(0);
     animation: showLifeLine .3s ease-in-out forwards;
+    cursor: pointer;
 }
 
 .lifeline img {

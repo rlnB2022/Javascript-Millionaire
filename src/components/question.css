@@ -47,3 +47,9 @@
         opacity: 1;
     }
 }
+
+@media screen and (min-width: 768px) {
+    .question-container {
+        width: 50%;
+    }
+}

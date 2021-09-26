@@ -40,6 +40,7 @@
 
 .final-answer-buttons {
     display: flex;
+    cursor: pointer;
 }
 
 .final-answer-container .final-answer-selected {
@@ -61,10 +62,19 @@
     border-radius: 0 0 0 10px;
 }
 
+.final-answer-no:hover {
+    background-color: var(--orange);
+}
+
 .final-answer-yes {
-    background-color: orange;
+    background-color: var(--orange);
     border-left: 2px solid var(--dark-blue);
     border-radius: 0 0 10px 0px;
+}
+
+.final-answer-yes:hover {
+    background-color: white;
+    color: var(--orange);
 }
 
 @keyframes final-answer-fade-in {
@@ -73,5 +83,11 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .final-answer-container {
+        width: 30%;
     }
 }
