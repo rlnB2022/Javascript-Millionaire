@@ -4,9 +4,6 @@ const FinalAnswer = (props) => {
 
     const answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
 
-    console.log(answers);
-    console.log(props.answerSelected);
-
     return (
         <div className='final-answer-outer'>
             <div className='final-answer-container'>

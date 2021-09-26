@@ -14,8 +14,6 @@ const Answer = (props) => {
         color: '#fff'
     };
 
-    console.log(props.bgColor);
-
     return (
         <div className={`answer answer-visible ${props.bgColor}`} onClick={() => props.changeAnswerSelected(props.answerIndex)}>
             <div className='answer-text'>

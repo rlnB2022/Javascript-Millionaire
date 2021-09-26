@@ -131,9 +131,7 @@ function App() {
 
     // get today's date
     const d = new Date();
-    console.log({d});
-    const newDate = (d.getMonth()+ 1) + '/' + d.getDate() + '/' + d.getFullYear();
-    console.log({newDate});
+    const newDate = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
 
     const res = firebase.firestore().collection('winners').add({ name: name, date: newDate });
 
@@ -281,7 +279,6 @@ function App() {
         setViewPhoneAFriendModal(false);
 
         setViewMillionaireWinner(true);
-        // hide everything else
 
         return;
       }
@@ -471,6 +468,17 @@ function App() {
 
   }, [questions]);
 
+  // hide all visible elements except the game over modal if game is over
+  useEffect(() => {
+    if (gameState === 4) {
+      setFinalAnswerVisible(false);
+      setAnswerMessageVisible(false);
+      setViewLifeLineModal(false);
+      setViewAskTheAudienceModal(false);
+      setViewPhoneAFriendModal(false);
+    }
+  }, [gameState]);
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -506,7 +514,7 @@ function App() {
         changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
         changeLifelineClickable={changeLifelineClickable}
       /> : null}
-      {gameState >= 1 ? <Sidebar money={moneyArr} currentLevel={currentLevel}/> : null}
+      {gameState >= 1 ? <Sidebar money={moneyArr} currentLevel={currentLevel} /> : null}
 
       {finalAnswerVisible ? <FinalAnswer
         changeVisible={changeFinalAnswerVisible}
