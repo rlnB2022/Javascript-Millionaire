@@ -19,7 +19,7 @@
     animation: showQuestionContainer .25s ease-in-out forwards;
 }
 
-.question-container .question p {
+.question p {
     color: #fff;
     width: 70%;
     font-size: 1.25rem;
@@ -50,6 +50,10 @@
 
 @media screen and (min-width: 768px) {
     .question-container {
-        width: 50%;
+        width: 30%;
+    }
+
+    .question p {
+        width: 100%;
     }
 }

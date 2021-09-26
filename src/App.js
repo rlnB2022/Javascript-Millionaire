@@ -17,12 +17,12 @@ import MillionaireWinner from './components/MillionaireWinner';
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
   const [winners, setWinners] = useState([]);
-  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const [questions, setQuestions] = useState([]);
-  const [questionName, setQuestionName] = useState(['questions_easy', 'questions_medium', 'questions_hard', 'questions_million']);
+  const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
   const [loading, setLoading] = useState(false);
   const [gamesPlayed, setGamesPlayed] = useState();
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   // game states
   const [gameState, setGameState] = useState(0);
@@ -216,7 +216,7 @@ function App() {
   }, [currentLevel]);
 
   const animateStartGame = () => {
-    setSidebarVisible(false);
+    setSidebarVisible(true);
     // record game played in database
         storeGamePlayed();
 
@@ -478,8 +478,6 @@ function App() {
       setViewLifeLineModal(false);
       setViewAskTheAudienceModal(false);
       setViewPhoneAFriendModal(false);
-
-      // hide sidebar if visible
       setSidebarVisible(false);
     }
   }, [gameState]);
@@ -519,7 +517,7 @@ function App() {
         changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
         changeLifelineClickable={changeLifelineClickable}
       /> : null}
-      {gameState >= 1 && sidebarVisible ? <Sidebar visible={sidebarVisible} money={moneyArr} currentLevel={currentLevel} /> : null}
+      {gameState >= 1 && sidebarVisible ? <Sidebar money={moneyArr} currentLevel={currentLevel} /> : null}
 
       {finalAnswerVisible ? <FinalAnswer
         changeVisible={changeFinalAnswerVisible}
