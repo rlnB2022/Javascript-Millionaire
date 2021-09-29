@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Javascript-Millionaire/static/css/main.cb146c1a.chunk.css",
+    "main.css": "/Javascript-Millionaire/static/css/main.2de70f6e.chunk.css",
     "main.js": "/Javascript-Millionaire/static/js/main.22dbff98.chunk.js",
     "main.js.map": "/Javascript-Millionaire/static/js/main.22dbff98.chunk.js.map",
     "runtime-main.js": "/Javascript-Millionaire/static/js/runtime-main.ada2bee3.js",
@@ -8,7 +8,7 @@
     "static/js/2.3756bd0a.chunk.js": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js",
     "static/js/2.3756bd0a.chunk.js.map": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js.map",
     "index.html": "/Javascript-Millionaire/index.html",
-    "static/css/main.cb146c1a.chunk.css.map": "/Javascript-Millionaire/static/css/main.cb146c1a.chunk.css.map",
+    "static/css/main.2de70f6e.chunk.css.map": "/Javascript-Millionaire/static/css/main.2de70f6e.chunk.css.map",
     "static/js/2.3756bd0a.chunk.js.LICENSE.txt": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js.LICENSE.txt",
     "static/media/FinalAnswer.css": "/Javascript-Millionaire/static/media/answer-box.a2b169c4.svg",
     "static/media/SidebarLevel.css": "/Javascript-Millionaire/static/media/answer-box_selected.7eae3add.svg",
@@ -26,7 +26,7 @@
   "entrypoints": [
     "static/js/runtime-main.ada2bee3.js",
     "static/js/2.3756bd0a.chunk.js",
-    "static/css/main.cb146c1a.chunk.css",
+    "static/css/main.2de70f6e.chunk.css",
     "static/js/main.22dbff98.chunk.js"
   ]
 }
