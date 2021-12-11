@@ -1,7 +1,7 @@
 # Project title
 Javascript Millionaire
 
-https://user-images.githubusercontent.com/5834000/128256119-40132fe6-28a9-46ce-85fd-90ceb2fec24b.mp4
+https://user-images.githubusercontent.com/5834000/134794913-abec9501-9965-4ebe-9335-ac65ccfd3f08.mp4
 
 # Project Description
 
@@ -15,12 +15,6 @@ The game has 3 lifelines:
 
 There is a 30-second timer which I added as a component. It tracks the seconds in useState. When it detects that the timer is active again useEffect will trigger to reset the timer.
 
-Unfinished To-do list:
-
-* Once the timer runs out or the user answers incorrectly, the game over component should display.
-* I would like to have a 'Share on Twitter' link.
-* If a user answers all questions correctly, they should be able to either enter their name manually or login as a Twitter user to store in the database.
-
 # Technologies Used
 
 This project is created with:
@@ -28,7 +22,7 @@ This project is created with:
 * React - using useState and useEffect Hooks.
 * Firebase - using Firestore database CRUD operations.
 * HTML 5
-* CSS 3 - I'm considering implementing TailwindCSS once complete.
+* CSS 3
 * Javascript
 
 # Problems Faced
@@ -36,6 +30,8 @@ This project is created with:
 I had used React before, but not Firebase/Firestorm. So, it took reading the Firestorm docs and walking through the setup process on their website.
 
 I had an issue with too many renderings when I implement the Timer component from App.js. Instead of counting down from 30 when the game starts and the question is revealed, it began immediately. I moved the logic to the Timer component and that helped tremendously.
+
+I used SVG images for each question/answer. I ran into a problem wher ethe SVGs wouldn't resize to fit the grid. I replaced the SVGs with simple borders/border-radius styles applied. I understand that the viewbox setting in the SVG might be the culprit. I'll have to learn more about using SVGs to understand how to implement something like this in the future.
 
 # What I learned
 
@@ -45,6 +41,6 @@ I've learned that I get really excited when talking about React. It's the tech t
 
 # Takeaways
 
-So far, this has been a really fun project to work on. I'll be working on this throughout August, 2021.
+So far, this has been a really fun project to work on. I finished working on this project September 26, 2021...late into the night. Deployed on Github Pages.
 
 Thanks for reading!
