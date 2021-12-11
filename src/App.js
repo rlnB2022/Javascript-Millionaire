@@ -18,6 +18,7 @@ function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
   const [winners, setWinners] = useState([]);
 
+  
   const [questions, setQuestions] = useState([]);
   const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
   const [loading, setLoading] = useState(false);
@@ -115,6 +116,7 @@ function App() {
 
   const homeScreen = () => {
     resetGame();
+    getQuestions();
   };
 
   const resetGame = () => {
@@ -126,6 +128,7 @@ function App() {
     setCurrentLevel(0);
     setLifelineClickable(false);
     setViewMillionaireWinner(false);
+    setQuestions([]);
   };
 
   const storeWinnerName = (name) => {
@@ -218,7 +221,7 @@ function App() {
   const animateStartGame = () => {
     setSidebarVisible(true);
     // record game played in database
-        storeGamePlayed();
+    storeGamePlayed();
 
     changeGameState();
 
@@ -281,6 +284,7 @@ function App() {
         setViewPhoneAFriendModal(false);
 
         setViewMillionaireWinner(true);
+        setSidebarVisible(false);
 
         return;
       }
@@ -351,12 +355,24 @@ function App() {
     setSelectedAnswer(num);
   }
 
-  const shuffle = (arr) => {
-    arr.sort(function () {
-      return Math.random() - 0.5;
-    });
-
-    return arr;
+  function shuffle(originalArray) {
+    var array = [].concat(originalArray);
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
   }
 
   async function getStats() {
@@ -373,20 +389,20 @@ function App() {
     let ref = firebase.firestore().collection('questions_easy');
     const snapshot_easy = await ref.get();
 
-    const items_easy = [];
+    let items_easy = [];
 
     snapshot_easy.forEach(doc => {
       items_easy.push(doc.data());
     });
 
     // shuffle the array
-    shuffle(items_easy);
+    const a = shuffle(items_easy);
 
-    setQuestions(questions => [...questions, ...items_easy.slice(-5)]);
+    setQuestions(questions => [...questions, ...a.slice(-5)]);
 
     // medium questions
     ref = firebase.firestore().collection('questions_medium');
-    const snapshot_medium = await ref.limit(5).get();
+    const snapshot_medium = await ref.get();
 
     const items_medium = [];
 
@@ -401,7 +417,7 @@ function App() {
 
     // // hard questions
     ref = firebase.firestore().collection('questions_hard');
-    const snapshot_hard = await ref.limit(5).get();
+    const snapshot_hard = await ref.get();
 
     const items_hard = [];
 
@@ -465,10 +481,6 @@ function App() {
     getStats();
     getFriends();
   }, []);
-
-  useEffect(() => {
-
-  }, [questions]);
 
   // hide all visible elements except the game over modal if game is over
   useEffect(() => {

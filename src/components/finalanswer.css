@@ -1,12 +1,3 @@
-:root {
-    --light-purple: #8c90da;
-    --dark-blue: #0d1060;
-    --pink-purple: #9362cd;
-    --purple: #5b43bc;
-    --blue-purple: #4356a1;
-    --orange: #ffa500;
-}
-
 .final-answer-outer {
     position: absolute;
     inset: 0;
@@ -57,24 +48,19 @@
     border-color: var(--dark-blue);
 }
 
+.final-answer-btn:hover {
+    filter: brightness(80%);
+}
+
 .final-answer-no {
     background-color: var(--blue-purple);
     border-radius: 0 0 0 10px;
-}
-
-.final-answer-no:hover {
-    background-color: var(--orange);
 }
 
 .final-answer-yes {
     background-color: var(--orange);
     border-left: 2px solid var(--dark-blue);
     border-radius: 0 0 10px 0px;
-}
-
-.final-answer-yes:hover {
-    background-color: white;
-    color: var(--orange);
 }
 
 @keyframes final-answer-fade-in {
@@ -89,5 +75,6 @@
 @media screen and (min-width: 768px) {
     .final-answer-container {
         width: 30%;
+        transform: translate(-90%, -45%);
     }
 }

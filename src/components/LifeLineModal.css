@@ -52,6 +52,11 @@
     padding: 10px 15px;
     color: #fff;
     font-size: 2rem;
+    cursor: pointer;
+}
+
+.lifeline__button:hover {
+    filter: brightness(90%);
 }
 
 .show-modal {
@@ -78,4 +83,11 @@
     100% {
         opacity: 0;
     }
+}
+
+@media screen and (min-width: 768px) {
+    .lifeline__modal {
+        width: 30%;
+        transform: translate(-100%, -50%);
+    }   
 }

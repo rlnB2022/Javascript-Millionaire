@@ -1,3 +1,12 @@
+:root {
+    --light-purple: #8c90da;
+    --dark-blue: #0d1060;
+    --pink-purple: #9362cd;
+    --purple: #5b43bc;
+    --blue-purple: #4356a1;
+    --orange: #ffa500;
+}
+
 .app {
     background: url('./bg.jpg');
     background-position: center;

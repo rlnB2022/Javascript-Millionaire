@@ -97,5 +97,16 @@
     color: #fff;
     padding: 10px 15px;
     text-align: center;
+    cursor: pointer;
 }
 
+.ask-the-audience-modal__ok-button-container:hover {
+    filter: brightness(80%);
+}
+
+@media screen and (min-width: 768px) {
+    .ask-the-audience-modal {
+        width: 30%;
+        transform: translate(-90%, -50%);
+    }
+}

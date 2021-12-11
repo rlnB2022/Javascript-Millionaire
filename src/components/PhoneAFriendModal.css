@@ -35,6 +35,11 @@
     font-size: 1.25rem;
     border: 0.125rem solid orange;
     transition: .4s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-call-name:hover {
+    filter: brightness(90%);
 }
 
 .suggestion-box {
@@ -58,6 +63,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     transition: all .4s ease-in-out;
+    cursor: pointer;
 }
 
 .active-button {
@@ -87,5 +93,12 @@
     }
     100% {
         opacity: 1;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .phone-a-friend-modal__inner {
+        width: 30%;
+        transform: translate(-100%, -50%);
     }
 }

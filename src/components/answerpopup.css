@@ -43,8 +43,7 @@
 }
 
 .answer-popup__button:hover {
-    background-color: var(--purple);
-    color: var(--orange);
+    filter: brightness(80%);
 }
 
 @keyframes answer-popup-fade-in {
@@ -59,5 +58,6 @@
 @media screen and (min-width: 768px) {
     .answer-popup-container {
         width: 30%;
+        transform: translate(-90%, -45%);
     }
 }
