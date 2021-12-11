@@ -117,6 +117,7 @@ function App() {
   const homeScreen = () => {
     resetGame();
     getQuestions();
+    getStats();
   };
 
   const resetGame = () => {
