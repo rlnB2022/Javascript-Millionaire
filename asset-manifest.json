@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Javascript-Millionaire/static/css/main.2de70f6e.chunk.css",
-    "main.js": "/Javascript-Millionaire/static/js/main.f10b1b0a.chunk.js",
-    "main.js.map": "/Javascript-Millionaire/static/js/main.f10b1b0a.chunk.js.map",
+    "main.js": "/Javascript-Millionaire/static/js/main.7e4b9e43.chunk.js",
+    "main.js.map": "/Javascript-Millionaire/static/js/main.7e4b9e43.chunk.js.map",
     "runtime-main.js": "/Javascript-Millionaire/static/js/runtime-main.ada2bee3.js",
     "runtime-main.js.map": "/Javascript-Millionaire/static/js/runtime-main.ada2bee3.js.map",
     "static/js/2.3756bd0a.chunk.js": "/Javascript-Millionaire/static/js/2.3756bd0a.chunk.js",
@@ -27,6 +27,6 @@
     "static/js/runtime-main.ada2bee3.js",
     "static/js/2.3756bd0a.chunk.js",
     "static/css/main.2de70f6e.chunk.css",
-    "static/js/main.f10b1b0a.chunk.js"
+    "static/js/main.7e4b9e43.chunk.js"
   ]
 }
