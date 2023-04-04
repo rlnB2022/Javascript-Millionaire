@@ -37,7 +37,8 @@ button.start-game-button {
 }
 
 .title-img {
-    height: 50%;
+    width: 100%;
+    height: auto;
     margin: 0 auto;
 }
 
@@ -60,5 +61,9 @@ button.start-game-button {
  
     button.start-game-button {
         width: 20%;
+    }
+
+    .title-img {
+        width: auto;
     }
 }
