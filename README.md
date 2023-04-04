@@ -31,7 +31,7 @@ I had used React before, but not Firebase/Firestorm. So, it took reading the Fir
 
 I had an issue with too many renderings when I implement the Timer component from App.js. Instead of counting down from 30 when the game starts and the question is revealed, it began immediately. I moved the logic to the Timer component and that helped tremendously.
 
-I used SVG images for each question/answer. I ran into a problem wher ethe SVGs wouldn't resize to fit the grid. I replaced the SVGs with simple borders/border-radius styles applied. I understand that the viewbox setting in the SVG might be the culprit. I'll have to learn more about using SVGs to understand how to implement something like this in the future.
+I used SVG images for each question/answer. I ran into a problem where the SVGs wouldn't resize to fit the grid. I replaced the SVGs with simple borders/border-radius styles applied. I understand that the viewbox setting in the SVG might be the culprit. I'll have to learn more about using SVGs to understand how to implement something like this in the future.
 
 # What I learned
 
