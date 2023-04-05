@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Javascript-Millionaire/static/css/main.2b7e6131.css",
-    "main.js": "/Javascript-Millionaire/static/js/main.91567746.js",
+    "main.js": "/Javascript-Millionaire/static/js/main.5e8a4931.js",
     "static/media/asktheaudience-bg.jpg": "/Javascript-Millionaire/static/media/asktheaudience-bg.5080cb6798c9bba63410.jpg",
     "static/media/phoneafriend.png": "/Javascript-Millionaire/static/media/phoneafriend.f4849acdc6c5911091f7.png",
     "static/media/fiftyfifty.png": "/Javascript-Millionaire/static/media/fiftyfifty.30f215840126d5ab304d.png",
@@ -16,10 +16,10 @@
     "static/media/answer-box_selected.svg": "/Javascript-Millionaire/static/media/answer-box_selected.a3828c8eae7f6a982dda.svg",
     "index.html": "/Javascript-Millionaire/index.html",
     "main.2b7e6131.css.map": "/Javascript-Millionaire/static/css/main.2b7e6131.css.map",
-    "main.91567746.js.map": "/Javascript-Millionaire/static/js/main.91567746.js.map"
+    "main.5e8a4931.js.map": "/Javascript-Millionaire/static/js/main.5e8a4931.js.map"
   },
   "entrypoints": [
     "static/css/main.2b7e6131.css",
-    "static/js/main.91567746.js"
+    "static/js/main.5e8a4931.js"
   ]
 }
