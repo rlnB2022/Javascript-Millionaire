@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 const Friend = (props) => {
 
     let imageName = require('../' + props.twitter_id + '.jpg');
+    console.log('name: ', props.twitter_id);
 
     const [bColor, setBorderColor] = useState('gray');
     const [friendHasChanged, setFriendHasChanged] = useState(false);
@@ -33,7 +34,6 @@ const Friend = (props) => {
 
     return (
         <div className={`friend ${props.friendIsVisible ? '' : 'friend-hidden'} ${friendHasChanged ? 'profile-bounce' : 'profile-bounce-back'}`} style={{borderColor: bColor}} onClick={() => props.changeFriend(props.friendNum)}>
-            <img src={imageName.default} alt="friend" />
             <div>{props.name}</div>
         </div>
     )
