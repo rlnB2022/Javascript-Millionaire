@@ -12,10 +12,6 @@ const Friend = (props) => {
         setBorderColor(color);
     }
 
-    useState(() => {
-
-    },[props.friendIsVisible]);
-
     useEffect(() => {
         if(props.activeFriend === props.friendNum) {
             changeBorderColor('orange');
