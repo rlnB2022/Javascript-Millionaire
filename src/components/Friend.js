@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 const Friend = (props) => {
 
     let imageName = require('../' + props.twitter_id + '.jpg');
-    console.log('name: ', props.twitter_id);
 
     const [bColor, setBorderColor] = useState('gray');
     const [friendHasChanged, setFriendHasChanged] = useState(false);
