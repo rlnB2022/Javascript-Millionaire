@@ -233,6 +233,7 @@ function App() {
     const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
   }
 
+  /* Phone A Friend - makes a suggestion, which is not always correct. Percentage of correct answer gets less and less as the questions get more difficult */
   const changePhoneAFriendSuggestion = () => {
     let sugg = -1;
 
