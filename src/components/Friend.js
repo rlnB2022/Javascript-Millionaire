@@ -28,8 +28,15 @@ const Friend = (props) => {
     }, [props.activeFriend]);
 
     return (
-        <div className={`friend ${props.friendIsVisible ? '' : 'friend-hidden'} ${friendHasChanged ? 'profile-bounce' : 'profile-bounce-back'}`} style={{borderColor: bColor}} onClick={() => props.changeFriend(props.friendNum)}>
-            <div>{props.name}</div>
+        <div 
+            className={`friend ${props.friendIsVisible 
+                ? '' 
+                : 'friend-hidden'} ${friendHasChanged 
+                    ? 'profile-bounce' 
+                    : 'profile-bounce-back'}`} 
+            style={{borderColor: bColor}} 
+            onClick={() => props.changeFriend(props.friendNum)}>
+                <div>{props.name}</div>
         </div>
     )
 };
