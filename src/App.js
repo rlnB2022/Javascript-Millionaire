@@ -180,15 +180,15 @@ function App() {
   }
 
   const changeGameState = () => {
-    setGameState(gameState + 1);
+    setGameState(gameState => gameState + 1);
   }
 
   const changeMainState = () => {
-    setMainState(mainState + 1);
+    setMainState(mainState => mainState + 1);
   }
 
   const changeAnswerState = () => {
-    setAnswerState(answerState + 1);
+    setAnswerState(answerState => answerState + 1);
   }
 
   const nextQuestion = () => {
@@ -200,7 +200,7 @@ function App() {
     }
 
     if (currentLevel < moneyArr.length - 1) {
-      setCurrentLevel(currentLevel + 1);
+      setCurrentLevel(currentLevel => currentLevel + 1);
       setSelectedAnswer(null);
       setMainState(0);
       setAnswerState(0);
