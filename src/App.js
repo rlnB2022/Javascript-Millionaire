@@ -26,9 +26,9 @@ function App() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   // game states
-  const [gameState, setGameState] = useState(0);
-  const [mainState, setMainState] = useState(0);
-  const [answerState, setAnswerState] = useState(0);
+  const [gameState, setGameState] = useState(0); // StartGame, PreGame, ShowMoney, Main, GameOver screens
+  const [mainState, setMainState] = useState(0); // LifeLines
+  const [answerState, setAnswerState] = useState(0); // AnswerContainer
 
   // Lifeline state
   const [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
