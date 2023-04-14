@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Javascript-Millionaire/static/css/main.2b7e6131.css",
-    "main.js": "/Javascript-Millionaire/static/js/main.5e8a4931.js",
+    "main.css": "/Javascript-Millionaire/static/css/main.fc2d297b.css",
+    "main.js": "/Javascript-Millionaire/static/js/main.abc8ceb7.js",
     "static/media/asktheaudience-bg.jpg": "/Javascript-Millionaire/static/media/asktheaudience-bg.5080cb6798c9bba63410.jpg",
     "static/media/phoneafriend.png": "/Javascript-Millionaire/static/media/phoneafriend.f4849acdc6c5911091f7.png",
     "static/media/fiftyfifty.png": "/Javascript-Millionaire/static/media/fiftyfifty.30f215840126d5ab304d.png",
@@ -15,11 +15,11 @@
     "static/media/answer-box.svg": "/Javascript-Millionaire/static/media/answer-box.167e3d931f45590bd991.svg",
     "static/media/answer-box_selected.svg": "/Javascript-Millionaire/static/media/answer-box_selected.a3828c8eae7f6a982dda.svg",
     "index.html": "/Javascript-Millionaire/index.html",
-    "main.2b7e6131.css.map": "/Javascript-Millionaire/static/css/main.2b7e6131.css.map",
-    "main.5e8a4931.js.map": "/Javascript-Millionaire/static/js/main.5e8a4931.js.map"
+    "main.fc2d297b.css.map": "/Javascript-Millionaire/static/css/main.fc2d297b.css.map",
+    "main.abc8ceb7.js.map": "/Javascript-Millionaire/static/js/main.abc8ceb7.js.map"
   },
   "entrypoints": [
-    "static/css/main.2b7e6131.css",
-    "static/js/main.5e8a4931.js"
+    "static/css/main.fc2d297b.css",
+    "static/js/main.abc8ceb7.js"
   ]
 }
