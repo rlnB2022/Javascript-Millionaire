@@ -5,7 +5,7 @@ import TotalGamesPlayed from './TotalGamesPlayed';
 const UserActions = (props) => {
     return (
         <div className='user-actions'>
-            <Winners showViewAllWinners={props.showViewAllWinners} numWinners={props.winners.length} onClick={props.showViewAllWinners}/>
+            <Winners showViewAllWinners={props.showViewAllWinners} onClick={props.showViewAllWinners}/>
             <TotalGamesPlayed gamesPlayed={props.gamesPlayed}/>
         </div>
     )
