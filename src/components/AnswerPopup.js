@@ -1,4 +1,4 @@
-import './answerpopup.css';
+import '../styles/answerpopup.css';
 
 const AnswerPopup = (props) => {
 

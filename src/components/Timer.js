@@ -1,4 +1,4 @@
-import './timer.css';
+import '../styles/timer.css';
 import { useState, useEffect } from 'react';
 
 const Timer = (props) => {

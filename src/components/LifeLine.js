@@ -1,4 +1,4 @@
-import './LifeLine.css';
+import '../styles/LifeLine.css';
 
 const LifeLine = (props) => {
 

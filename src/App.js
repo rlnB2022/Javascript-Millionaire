@@ -1,11 +1,12 @@
-import './App.css';
+// styles
+import './styles/App.css';
+
+// components
 import StartGame from './components/StartGame';
 import PreGame from './components/PreGame';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 import ShowMoney from './components/ShowMoney';
-import firebase from './firebase';
-import React, { useState, useEffect } from 'react';
 import GameOver from './components/GameOver';
 import FinalAnswer from './components/FinalAnswer';
 import AnswerPopup from './components/AnswerPopup';
@@ -14,10 +15,15 @@ import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
 import MillionaireWinner from './components/MillionaireWinner';
 
+// add firebase
+import firebase from './firebase';
+
+// import hooks
+import React, { useState, useEffect } from 'react';
+
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
   const [winners, setWinners] = useState([]);
-
   
   const [questions, setQuestions] = useState([]);
   const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
@@ -62,14 +68,18 @@ function App() {
 
   async function getWinners() {
     let ref = firebase.firestore().collection('winners');
-    const snapshotRecentWinners = await ref.get();
-    const newArray = [];
-
-    snapshotRecentWinners.forEach(doc => {
-      newArray.push(doc.data());
-    });
-
-    setWinners(oldArray => [...oldArray, ...newArray]);
+    try {
+      const snapshotRecentWinners = await ref.get();
+      const newArray = [];
+  
+      snapshotRecentWinners.forEach(doc => {
+        newArray.push(doc.data());
+      });
+  
+      setWinners(oldArray => [...oldArray, ...newArray]);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
   const useLifeLine = (index) => {
@@ -315,26 +325,30 @@ function App() {
     // get reference to collection
     const collRef = firebase.firestore().collection(diff);
 
-    // query collection for specific document
-    const queryRef = await collRef.where('question', '==', questions[currentLevel].question).get();
-
-    if (queryRef.empty) {
-      console.log('No doc exists.');
-    }
-    else {
-
-      // get id of document
-      const docId = queryRef.docs[0].id;
-
-      // get value of user_selected answer
-      const totalSelected = queryRef.docs[0].data()['user_selected_' + (selectedAnswer + 1)] + 1;
-
-      const cityRef = collRef.doc(docId);
-
-      const userSel = 'user_selected_' + (selectedAnswer + 1);
-
-      const res = cityRef.update({ [userSel]: totalSelected });
-
+    try {
+      // query collection for specific document
+      const queryRef = await collRef.where('question', '==', questions[currentLevel].question).get();
+  
+      if (queryRef.empty) {
+        console.log('No doc exists.');
+      }
+      else {
+  
+        // get id of document
+        const docId = queryRef.docs[0].id;
+  
+        // get value of user_selected answer
+        const totalSelected = queryRef.docs[0].data()['user_selected_' + (selectedAnswer + 1)] + 1;
+  
+        const cityRef = collRef.doc(docId);
+  
+        const userSel = 'user_selected_' + (selectedAnswer + 1);
+  
+        const res = cityRef.update({ [userSel]: totalSelected });
+  
+      }
+    } catch (err) {
+      console.error(err.message);
     }
 
   };
@@ -379,72 +393,92 @@ function App() {
 
   async function getStats() {
     const statRef = firebase.firestore().collection('stats');
-    const snapshot_totalgames = await statRef.get();
-    const gp = snapshot_totalgames.docs[0].data().played;
-
-    setGamesPlayed(gp);
+    try {
+      const snapshot_totalgames = await statRef.get();
+      const gp = snapshot_totalgames.docs[0].data().played;
+  
+      setGamesPlayed(gp);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
   async function getQuestions() {
     setLoading(true);
 
     let ref = firebase.firestore().collection('questions_easy');
-    const snapshot_easy = await ref.get();
-
-    let items_easy = [];
-
-    snapshot_easy.forEach(doc => {
-      items_easy.push(doc.data());
-    });
-
-    // shuffle the array
-    const a = shuffle(items_easy);
-
-    setQuestions(questions => [...questions, ...a.slice(-5)]);
+    try {
+      const snapshot_easy = await ref.get();
+  
+      let items_easy = [];
+  
+      snapshot_easy.forEach(doc => {
+        items_easy.push(doc.data());
+      });
+  
+      // shuffle the array
+      const a = shuffle(items_easy);
+  
+      setQuestions(questions => [...questions, ...a.slice(-5)]);
+    } catch (err) {
+      console.error(err.message);
+    }
 
     // medium questions
     ref = firebase.firestore().collection('questions_medium');
-    const snapshot_medium = await ref.get();
-
-    const items_medium = [];
-
-    snapshot_medium.forEach(doc => {
-      items_medium.push(doc.data());
-    });
-
-    // // shuffle the array
-    shuffle(items_medium);
-
-    setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
+    try {
+      const snapshot_medium = await ref.get();
+  
+      const items_medium = [];
+  
+      snapshot_medium.forEach(doc => {
+        items_medium.push(doc.data());
+      });
+  
+      // // shuffle the array
+      shuffle(items_medium);
+  
+      setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
+    } catch (err) {
+      console.error(err.message);
+    }
 
     // // hard questions
     ref = firebase.firestore().collection('questions_hard');
-    const snapshot_hard = await ref.get();
-
-    const items_hard = [];
-
-    snapshot_hard.forEach(doc => {
-      items_hard.push(doc.data());
-    });
-
-    // // shuffle the array
-    shuffle(items_hard);
-
-    setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
+    try {
+      const snapshot_hard = await ref.get();
+  
+      const items_hard = [];
+  
+      snapshot_hard.forEach(doc => {
+        items_hard.push(doc.data());
+      });
+  
+      // // shuffle the array
+      shuffle(items_hard);
+  
+      setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
+    } catch (err) {
+      console.error(err.message);
+    }
 
     // // millionaire questions
     ref = firebase.firestore().collection('questions_million');
-    const snapshot_million = await ref.get();
-
-    const items_million = [];
-
-    snapshot_million.forEach(doc => {
-      items_million.push(doc.data());
-    });
-
-    setQuestions(a => [...a, ...items_million.slice(-1)]);
-
-    setLoading(false);
+    try {
+      const snapshot_million = await ref.get();
+  
+      const items_million = [];
+  
+      snapshot_million.forEach(doc => {
+        items_million.push(doc.data());
+      });
+  
+      setQuestions(a => [...a, ...items_million.slice(-1)]);
+  
+      setLoading(false);
+    } catch (err) {
+      console.error(err.message);
+    }
 
   }
 
@@ -465,16 +499,20 @@ function App() {
 
   async function getFriends() {
     let ref = firebase.firestore().collection('Friends');
-    const snapshotFriends = await ref.get();
-    const newArr = [];
-
-    snapshotFriends.forEach(doc => {
-      newArr.push(doc.data());
-    });
-
-    shuffle(newArr);
-
-    setFriends(oldArr => [...oldArr, ...newArr.slice(-3)]);
+    try {
+      const snapshotFriends = await ref.get();
+      const newArr = [];
+  
+      snapshotFriends.forEach(doc => {
+        newArr.push(doc.data());
+      });
+  
+      shuffle(newArr);
+  
+      setFriends(oldArr => [...oldArr, ...newArr.slice(-3)]);
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
   useEffect(() => {

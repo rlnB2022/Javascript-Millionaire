@@ -1,4 +1,4 @@
-import './Friend.css';
+import '../styles/Friend.css';
 import { useState, useEffect } from 'react';
 
 const Friend = (props) => {

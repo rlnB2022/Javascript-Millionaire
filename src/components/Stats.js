@@ -1,4 +1,4 @@
-import './stats.css';
+import '../styles/stats.css';
 
 const Stats = (props) => {
 

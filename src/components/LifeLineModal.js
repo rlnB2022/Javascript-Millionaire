@@ -1,4 +1,4 @@
-import './LifeLineModal.css';
+import '../styles/LifeLineModal.css';
 
 import fiftyfifty from '../fiftyfifty.png';
 import phoneafriend from '../phoneafriend.png';

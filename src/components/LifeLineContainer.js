@@ -1,4 +1,4 @@
-import './LifeLineContainer.css';
+import '../styles/LifeLineContainer.css';
 import LifeLine from './LifeLine';
 import fiftyfifty from '../fiftyfifty.png';
 import phoneafriend from '../phoneafriend.png';

@@ -1,4 +1,4 @@
-import './TotalGamesPlayed.css';
+import '../styles/TotalGamesPlayed.css';
 import { BsController } from 'react-icons/bs';
 
 const TotalGamesPlayed = props => {

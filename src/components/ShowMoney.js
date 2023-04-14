@@ -1,4 +1,4 @@
-import './showmoney.css';
+import '../styles/showmoney.css';
 import { useEffect } from 'react';
 
 const ShowMoney = (props) => {

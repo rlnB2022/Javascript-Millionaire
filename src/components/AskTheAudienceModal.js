@@ -1,4 +1,4 @@
-import './AskTheAudienceModal.css';
+import '../styles/AskTheAudienceModal.css';
 import asktheaudience from '../asktheaudience.png';
 import { useEffect } from 'react';
 

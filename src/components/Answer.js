@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import './answer.css';
+import '../styles/answer.css';
 
 const Answer = (props) => {
 

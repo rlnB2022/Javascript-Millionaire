@@ -1,4 +1,4 @@
-import './currentmoney.css';
+import '../styles/currentmoney.css';
 
 const CurrentMoney = (props) => {
     return (

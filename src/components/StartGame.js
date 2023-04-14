@@ -1,4 +1,4 @@
-import './StartGame.css';
+import '../styles/startgame.css';
 import imgTitle from '../logo.png';
 import ViewAllWinners from './ViewAllWinners';
 import UserActions from './UserActions';
