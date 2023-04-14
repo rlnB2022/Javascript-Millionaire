@@ -60,7 +60,7 @@ function App() {
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
-  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(true);
+  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(false);
 
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
