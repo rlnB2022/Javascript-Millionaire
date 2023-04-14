@@ -1,49 +1,51 @@
 import '../styles/ViewAllWinners.css';
+import { getWinners } from '../utils/utils';
 import { useState, useEffect } from 'react';
-import firebase from '../firebase';
 
-const ViewAllWinners = (props) => {
+const ViewAllWinners = ({showViewAllWinners}) => {
 
     const [allWinners, setAllWinners] = useState([]);
     const [visible, setVisible] = useState(false);
 
-    async function getAllWinners() {
-        let ref = firebase.firestore().collection('winners').orderBy('date', 'desc');
-        const snapshotAllWinners = await ref.get();
-        const newArray = [];
-
-        snapshotAllWinners.forEach(doc => {
-            newArray.push(doc.data());
-        });
-
-        setAllWinners(oldArray => [...oldArray, ...newArray]);
-    }
-
     const hideAllWinners = () => {
         setVisible(false);
         setTimeout(() => {
-            props.showViewAllWinners();
+            showViewAllWinners();
         }, 600);
     };
 
     useEffect(() => {
-        getAllWinners();
+        let isMounted = true;
+        // create the async data fetching function
+        const fetchWinners = async () => {
+            const listOfWinners = await getWinners();
+
+            // set state only if isMounted is true
+            if(isMounted) {
+                setAllWinners(listOfWinners);
+            }
+        }
+        // call the above function to run when the component first loads and catch any errors
+        fetchWinners().catch(console.error);
 
         setTimeout(() => {
-            setVisible(!visible);
+            setVisible(true);
         }, 100);
+
+        // cancel any future setTotalWinners
+        return () => isMounted = false;
     }, []);
 
     // construct the list of winners
-    const listItems = allWinners.map((e, idx) =>
+    const listItems = allWinners.map((winner, idx) =>
         <li className='winner-item'
             style={{
                 left: '-100vw',
                 animation: `move-winners-in .4s ease-out forwards ${idx * .1}s`
             }}
-            key={idx}>
-            <div>{e.name}</div>
-            <div>{e.date}</div>
+            key={winner + idx}>
+            <div>{winner.name}</div>
+            <div>{winner.date}</div>
         </li>);
 
     return (
@@ -51,7 +53,9 @@ const ViewAllWinners = (props) => {
             <ul className='all-winners'>
                 {listItems}
             </ul>
-            <div className='btn-container' onClick={hideAllWinners}><div className='btn-close-all-winners-list'>Ok</div></div>
+            <div className='btn-container' onClick={hideAllWinners}>
+                <div className='btn-close-all-winners-list'>Ok</div>
+            </div>
         </div >
     )
 };

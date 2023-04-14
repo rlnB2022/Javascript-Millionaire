@@ -2,11 +2,11 @@ import '../styles/UserActions.css';
 import Winners from './Winners';
 import TotalGamesPlayed from './TotalGamesPlayed';
 
-const UserActions = (props) => {
+const UserActions = () => {
     return (
         <div className='user-actions'>
-            <Winners showViewAllWinners={props.showViewAllWinners} onClick={props.showViewAllWinners}/>
-            <TotalGamesPlayed gamesPlayed={props.gamesPlayed}/>
+            <Winners/>
+            <TotalGamesPlayed />
         </div>
     )
 };
