@@ -14,6 +14,7 @@ import LifeLineModal from './components/LifeLineModal';
 import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
 import MillionaireWinner from './components/MillionaireWinner';
+import { getStats } from './utils/utils';
 
 // add firebase
 import firebase from './firebase';
@@ -27,7 +28,6 @@ function App() {
   const [questions, setQuestions] = useState([]);
   const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
   const [loading, setLoading] = useState(false);
-  const [gamesPlayed, setGamesPlayed] = useState();
   const [sidebarVisible, setSidebarVisible] = useState(false);
 
   // game states
@@ -60,7 +60,7 @@ function App() {
   const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
   const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
   const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
-  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(false);
+  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(true);
 
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
@@ -110,7 +110,6 @@ function App() {
   const homeScreen = () => {
     resetGame();
     getQuestions();
-    getStats();
   };
 
   const resetGame = () => {
@@ -123,18 +122,6 @@ function App() {
     setLifelineClickable(false);
     setViewMillionaireWinner(false);
     setQuestions([]);
-  };
-
-  const storeWinnerName = (name) => {
-
-    // get today's date
-    const d = new Date();
-    const newDate = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
-
-    const res = firebase.firestore().collection('winners').add({ name: name, date: newDate });
-
-    homeScreen();
-
   };
 
   const changeTimerInitSeconds = (num) => {
@@ -222,8 +209,9 @@ function App() {
     changeTimerInitSeconds(30);
   }
 
-  const storeGamePlayed = () => {
-    const res = firebase.firestore().collection('stats').doc('games').set({ played: gamesPlayed + 1 });
+  const storeGamePlayed = async () => {
+    const totalGamesPlayed = await getStats();
+    const res = firebase.firestore().collection('stats').doc('games').set({ played: totalGamesPlayed + 1 });
   }
 
   /* Phone A Friend - makes a suggestion, which is not always correct. Percentage of correct answer gets less and less as the questions get more difficult */
@@ -374,18 +362,6 @@ function App() {
     return array;
   }
 
-  async function getStats() {
-    const statRef = firebase.firestore().collection('stats');
-    try {
-      const snapshot_totalgames = await statRef.get();
-      const gp = snapshot_totalgames.docs[0].data().played;
-  
-      setGamesPlayed(gp);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
-
   async function getQuestions() {
     setLoading(true);
 
@@ -500,7 +476,6 @@ function App() {
 
   useEffect(() => {
     getQuestions();
-    getStats();
     getFriends();
   }, []);
 
@@ -522,7 +497,7 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame startGame={animateStartGame} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 0 ? <StartGame startGame={animateStartGame} /> : null}
       {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
         changeGameState={changeGameState}
@@ -577,7 +552,7 @@ function App() {
 
       {gameState === 4 ? <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> : null}
 
-      {viewMillionaireWinner ? <MillionaireWinner storeWinnerName={storeWinnerName} /> : null}
+      {viewMillionaireWinner ? <MillionaireWinner homeScreen={homeScreen} /> : null}
     </div>
   );
 }
