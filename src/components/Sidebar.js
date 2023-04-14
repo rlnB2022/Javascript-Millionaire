@@ -1,4 +1,4 @@
-import './sidebar.css';
+import '../styles/sidebar.css';
 import SidebarLevel from './SidebarLevel';
 import { useState, useEffect } from 'react';
 

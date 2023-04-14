@@ -1,4 +1,4 @@
-import './SidebarLevel.css';
+import '../styles/SidebarLevel.css';
 
 const SidebarLevel = (props) => {
     return (

@@ -1,4 +1,4 @@
-import './FinalAnswer.css';
+import '../styles/finalanswer.css';
 
 const FinalAnswer = (props) => {
 

@@ -1,4 +1,4 @@
-import './pregame.css';
+import '../styles/pregame.css';
 import { useEffect } from 'react';
 
 const PreGame = (props) => {

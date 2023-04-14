@@ -1,4 +1,4 @@
-import './Winners.css';
+import '../styles/Winners.css';
 import { BiTrophy } from 'react-icons/bi';
 
 const Winners = props => {

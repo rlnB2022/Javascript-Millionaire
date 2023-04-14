@@ -1,4 +1,4 @@
-import './question.css';
+import '../styles/question.css';
 import { useEffect } from 'react';
 
 const Question = (props) => {

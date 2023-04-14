@@ -1,4 +1,4 @@
-import './lifelinepopups.css';
+import '../styles/lifelinepopups.css';
 import Timer from './Timer';
 import CurrentMoney from './CurrentMoney';
 import { useEffect } from 'react';

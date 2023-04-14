@@ -2,7 +2,7 @@ import LifeLineContainer from './LifeLineContainer';
 import LifeLinePopUps from './LifeLinePopUps';
 import Question from './Question';
 import AnswerContainer from './AnswerContainer';
-import './main.css';
+import '../styles/main.css';
 import { useEffect } from 'react';
 
 const Main = (props) => {

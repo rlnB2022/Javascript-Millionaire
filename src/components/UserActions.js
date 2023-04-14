@@ -1,4 +1,4 @@
-import './UserActions.css';
+import '../styles/UserActions.css';
 import Winners from './Winners';
 import TotalGamesPlayed from './TotalGamesPlayed';
 

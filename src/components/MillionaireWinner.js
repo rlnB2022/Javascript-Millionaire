@@ -1,4 +1,4 @@
-import './MillionaireWinner.css';
+import '../styles/MillionaireWinner.css';
 import { useState } from 'react';
 
 const MillionaireWinner = (props) => {

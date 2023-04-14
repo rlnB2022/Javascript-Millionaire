@@ -1,4 +1,4 @@
-import './PhoneAFriendModal.css';
+import '../styles/PhoneAFriendModal.css';
 import phoneafriend from '../phoneafriend.png';
 import Friend from './Friend';
 import { useEffect, useState } from 'react';

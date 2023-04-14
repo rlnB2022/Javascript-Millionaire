@@ -1,4 +1,4 @@
-import './RecentWinners.css';
+import '../styles/RecentWinners.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
