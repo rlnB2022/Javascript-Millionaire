@@ -23,7 +23,6 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
-  const [winners, setWinners] = useState([]);
   
   const [questions, setQuestions] = useState([]);
   const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
@@ -65,22 +64,6 @@ function App() {
 
   const [friends, setFriends] = useState([]);
   const [lifelineClickable, setLifelineClickable] = useState(false);
-
-  async function getWinners() {
-    let ref = firebase.firestore().collection('winners');
-    try {
-      const snapshotRecentWinners = await ref.get();
-      const newArray = [];
-  
-      snapshotRecentWinners.forEach(doc => {
-        newArray.push(doc.data());
-      });
-  
-      setWinners(oldArray => [...oldArray, ...newArray]);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
 
   const useLifeLine = (index) => {
 
@@ -516,7 +499,6 @@ function App() {
 
   useEffect(() => {
     getQuestions();
-    getWinners();
     getStats();
     getFriends();
   }, []);
@@ -539,7 +521,7 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame winners={winners} startGame={animateStartGame} gamesPlayed={gamesPlayed} /> : null}
+      {gameState === 0 ? <StartGame startGame={animateStartGame} gamesPlayed={gamesPlayed} /> : null}
       {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
       {gameState === 2 ? <ShowMoney
         changeGameState={changeGameState}
