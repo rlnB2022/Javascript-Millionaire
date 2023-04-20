@@ -22,48 +22,52 @@ import firebase from './firebase';
 // import hooks
 import React, { useState, useEffect } from 'react';
 
+// import react-redux hooks
+import { useDispatch, useSelector, batch } from 'react-redux';
+
 function App() {
   const moneyArr = ['$100', '$200', '$300', '$500', '$1,000', '$2,000', '$4,000', '$8,000', '$16,000', '$32,000', '$64,000', '$125,000', '$250,000', '$500,000', '$1 MILLION'];
-  
-  const [questions, setQuestions] = useState([]);
   const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
-  const [loading, setLoading] = useState(false);
-  const [sidebarVisible, setSidebarVisible] = useState(false);
 
-  // game states
-  const [gameState, setGameState] = useState(0); // StartGame, PreGame, ShowMoney, Main, GameOver screens
-  const [mainState, setMainState] = useState(0); // LifeLines
-  const [answerState, setAnswerState] = useState(0); // AnswerContainer
+  const loading = useSelector(state => state.loading);
+  const sidebarVisible = useSelector(state => state.sidebarVisible);
+  const timerInitSeconds = useSelector(state => state.timerInitSeconds);
 
-  // Lifeline state
-  const [lifeLineFiftyFifty, setLifeLineFiftyFifty] = useState(1); // 1 = available
-  const [lifeLinePhoneAFriend, setLifeLinePhoneAFriend] = useState(1); // 1 = available
-  const [lifeLineAskTheAudience, setLifeLineAskTheAudience] = useState(1); // 1 = available
+  const gameState = useSelector(state => state.gameState);
+  const mainState = useSelector(state => state.mainState);
+  const answerState = useSelector(state => state.answerState);
 
-  const [moneyLevel, setMoneyLevel] = useState(moneyArr[0]);
-  const [currentLevel, setCurrentLevel] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null); // null = not selected
+  const lifeLineFiftyFifty = useSelector(state => state.lifeLineFiftyFifty);
+  const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
+  const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
 
-  // Timer state
-  const [timerVisible, setTimerVisible] = useState(false);
-  const [timerInitSeconds, setTimerInitSeconds] = useState(0);
+  const [questions, setQuestions] = useState([]);
 
-  const [finalAnswerVisible, setFinalAnswerVisible] = useState(false);
-  const [answerMessageOpacity, setAnswerMessageOpacity] = useState(0);
-  const [answerMessageScale, setAnswerMessageScale] = useState(0);
-  const [correctAnswerText, setCorrectAnswerText] = useState('Incorrect');
-  const [answerMessageVisible, setAnswerMessageVisible] = useState(false);
-  const [answerButtonText, setAnswerButtonText] = useState('End Game');
+  const moneyLevel = useSelector(state => state.moneyLevel);
+  const currentLevel = useSelector(state => state.currentLevel);
+  const selectedAnswer = useSelector(state => state.selectedAnswer);
+
+  const timerVisible = useSelector(state => state.timerVisible);
+  
+  const finalAnswerVisible = useSelector(state => state.finalAnswerVisible);
+  const answerMessageOpacity = useSelector(state => state.answerMessageOpacity);
+  const answerMessageScale = useSelector(state => state.answerMessageScale);
+  const correctAnswerText = useSelector(state => state.correctAnswerText);
+  const answerMessageVisible = useSelector(state => state.answerMessageVisible);
+  const answerButtonText = useSelector(state => state.answerButtonText);
 
   // modals
-  const [viewLifeLineModal, setViewLifeLineModal] = useState(false);
-  const [lifeLineModalImage, setLifeLineModalImage] = useState(0);
-  const [viewAskTheAudienceModal, setViewAskTheAudienceModal] = useState(false);
-  const [viewPhoneAFriendModal, setViewPhoneAFriendModal] = useState(false);
-  const [viewMillionaireWinner, setViewMillionaireWinner] = useState(false);
 
-  const [friends, setFriends] = useState([]);
-  const [lifelineClickable, setLifelineClickable] = useState(false);
+  const viewLifeLineModal = useSelector(state => state.viewLifeLineModal);
+  const lifeLineModalImage = useSelector(state => state.lifeLineModalImage);
+  const viewAskTheAudienceModal = useSelector(state => state.viewAskTheAudienceModal);
+  const viewPhoneAFriendModal = useSelector(state => state.viewPhoneAFriendModal);
+  const viewMillionaireWinner = useSelector(state => state.viewMillionaireWinner);
+
+  const friends = useSelector(state => state.friends);
+  const lifelineClickable = useSelector(state => state.lifelineClickable);
+
+  const dispatch = useDispatch();
 
   const useLifeLine = (index) => {
 
@@ -91,122 +95,111 @@ function App() {
       answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
 
       // disable 50:50 lifeline
-      setLifeLineFiftyFifty(0);
+      dispatch({ type: 'setLifeLineFiftyFifty', amount: 0 });
     }
     else if (index === 1) {
       // Phone A Friend lifeline used
       changeViewPhoneAFriend();
 
-      setLifeLinePhoneAFriend(0);
+      dispatch({ type: 'setLifeLinePhoneAFriend', amount: 0 });
     }
     else {
       // Ask The Audience lifeline used
       changeViewAskTheAudienceModal()
 
-      setLifeLineAskTheAudience(0);
+      dispatch({ type: 'setLifeLineAskTheAudience', amount: 0 });
     }
   }
 
   const homeScreen = () => {
-    resetGame();
+    dispatch({ type: 'resetGame' });
     getQuestions();
   };
 
-  const resetGame = () => {
-    setGameState(0);
-    setMainState(0);
-    setLifeLineFiftyFifty(1);
-    setLifeLinePhoneAFriend(1);
-    setLifeLineAskTheAudience(1);
-    setCurrentLevel(0);
-    setLifelineClickable(false);
-    setViewMillionaireWinner(false);
-    setQuestions([]);
-  };
-
   const changeTimerInitSeconds = (num) => {
-    setTimerInitSeconds(num);
+    dispatch({ type: 'changeTimerInitSeconds', amount: num });
   }
 
   const changeViewPhoneAFriend = () => {
-    setViewPhoneAFriendModal(!viewPhoneAFriendModal);
+    dispatch({ type: 'toggleViewPhoneAFriendModal' });
   }
 
   const changeViewAskTheAudienceModal = () => {
-    setViewAskTheAudienceModal(true);
+    dispatch({ type: 'toggleViewAskTheAudienceModal' });
   }
 
   const hideAskTheAudienceModal = () => {
-    setViewAskTheAudienceModal(false);
+    dispatch({ type: 'toggleViewAskTheAudienceModal' });
   }
 
   const changeViewLifeLineModal = img => {
     if (lifelineClickable) {
-      setLifeLineModalImage(img);
-      setViewLifeLineModal(!viewLifeLineModal);
+      // dispatch({ type: 'setLifeLineModalImage' })
+      // setLifeLineModalImage(img);
+      dispatch({ type: 'toggleViewLifeLineModal' });
     }
   }
 
   const changeLifelineClickable = () => {
-    setLifelineClickable(!lifelineClickable);
+    dispatch({ type: 'toggleLifeLineClickable' });
   }
 
   const changeTimerVisible = () => {
-    setTimerVisible(!timerVisible);
+    dispatch({ type: 'toggleTimerVisible' });
   }
 
   const changeFinalAnswerVisible = () => {
-    setFinalAnswerVisible(!finalAnswerVisible);
+    dispatch({ type: 'toggleFinalAnswerVisible' });
   }
 
   const changeGameState = () => {
-    setGameState(gameState => gameState + 1);
+    dispatch({ type: 'advanceGameState' });
   }
 
   const changeMainState = () => {
-    setMainState(mainState => mainState + 1);
+    dispatch({ type: 'advanceMainState' });
   }
 
   const changeAnswerState = () => {
-    setAnswerState(answerState => answerState + 1);
+    dispatch({ type: 'advanceAnswerState' });
   }
 
   const nextQuestion = () => {
 
     if (answerButtonText === 'End Game') {
-      setAnswerMessageVisible(false);
+      dispatch({ type: 'hideAnswerMessageVisible' });
       changeGameState();
       return;
     }
 
     if (currentLevel < moneyArr.length - 1) {
-      setCurrentLevel(currentLevel => currentLevel + 1);
-      setSelectedAnswer(null);
-      setMainState(0);
-      setAnswerState(0);
-      setLifelineClickable(false);
+      dispatch({ type: 'readyForNextQuestion' });
     }
 
-    setAnswerMessageVisible(false);
-    setGameState(2);
+    batch(() => {
+      dispatch({ type: 'hideAnswerMessageVisible' });
+      dispatch({ type: 'setGameState', amount: 2 });
+  
+      // reset messages
+      dispatch({ type: 'setCorrectAnswerText', text: 'Incorrect' });
+      dispatch({ type: 'setAnswerButtonText', text: 'End Game' });
 
-    // reset messages
-    setCorrectAnswerText('Incorrect');
-    setAnswerButtonText('End Game');
+    })
   }
 
   useEffect(() => {
-    setMoneyLevel(moneyArr[currentLevel]);
+    dispatch({ type: 'setMoneyLevel', amount: moneyArr[currentLevel]})
   }, [currentLevel]);
 
   const animateStartGame = () => {
-    setSidebarVisible(true);
+    batch(() => {
+      dispatch({ type: 'updateSideBar' });
+      dispatch({ type: 'changeTimerInitSeconds', amount: 30});
+      dispatch({ type: 'advanceGameState' });
+    })
+
     // record game played in database
     storeGamePlayed();
-
-    changeGameState();
-
-    changeTimerInitSeconds(30);
   }
 
   const storeGamePlayed = async () => {
@@ -250,31 +243,27 @@ function App() {
 
   const isAnswerCorrect = (num) => {
     storeAnswerSelected();
-    setFinalAnswerVisible(false);
-
-    setTimerVisible(false);
 
     if (num === questions[currentLevel].answer_correct) {
-      setCorrectAnswerText('Correct!');
 
       // if answered the last question, they won!
       if (currentLevel === 14) {
-        setGameState(5);
-        setFinalAnswerVisible(false);
-        setAnswerMessageVisible(false);
-        setViewLifeLineModal(false);
-        setViewAskTheAudienceModal(false);
-        setViewPhoneAFriendModal(false);
-
-        setViewMillionaireWinner(true);
-        setSidebarVisible(false);
-
+        batch(() => {
+          dispatch({ type: 'toggleFinalAnswerVisible '});
+          dispatch({ type: 'toggleTimerVisible' });
+          dispatch({ type: 'winner' });
+          dispatch({ type: 'setCorrectAnswerText', text: 'Correct!' });
+        })
         return;
       }
       else {
-        setAnswerButtonText('Next Question');
+        batch(() => {
+          dispatch({ type: 'toggleFinalAnswerVisible '});
+          dispatch({ type: 'toggleTimerVisible' });
+          dispatch({ type: 'setAnswerButtonText', text: 'Next Question' });
+          dispatch({ type: 'setCorrectAnswerText', text: 'Correct!' });
+        })
         showAnswerMessageVisible();
-        return;
       }
 
     }
@@ -326,20 +315,24 @@ function App() {
 
   const showAnswerMessageVisible = () => {
 
-    setAnswerMessageVisible(!answerMessageVisible);
-
     if (answerMessageVisible) {
-      setAnswerMessageOpacity(0);
-      setAnswerMessageScale(0);
+      batch(() => {
+        dispatch({ type: 'toggleAnswerMessageVisible' });
+        dispatch({ type: 'setAnswerMessageOpacity', amount: 0 });
+        dispatch({ type: 'setAnswerMessageScale', amount: 0 });
+      })
     }
     else {
-      setAnswerMessageOpacity(1);
-      setAnswerMessageScale(1);
+      batch(() => {
+        dispatch({ type: 'toggleAnswerMessageVisible' });
+        dispatch({ type: 'setAnswerMessageOpacity', amount: 1 });
+        dispatch({ type: 'setAnswerMessageScale', amount: 1 });
+      })
     }
   }
 
   const answerSelected = (num) => {
-    setSelectedAnswer(num);
+    dispatch({ type: 'setSelectedAnswer', answer: num})
   }
 
   function shuffle(originalArray) {
@@ -363,7 +356,9 @@ function App() {
   }
 
   async function getQuestions() {
-    setLoading(true);
+
+    // setLoading(true);
+    dispatch({ type: 'toggleLoading' });
 
     let ref = firebase.firestore().collection('questions_easy');
     try {
@@ -434,7 +429,7 @@ function App() {
   
       setQuestions(a => [...a, ...items_million.slice(-1)]);
   
-      setLoading(false);
+      dispatch({ type: 'toggleLoading' });
     } catch (err) {
       console.error(err.message);
     }
@@ -452,7 +447,7 @@ function App() {
 
   useEffect(() => {
     if (!finalAnswerVisible) {
-      setSelectedAnswer(null);
+      dispatch({ type: 'setSelectedAnswer', answer: null });
     }
   }, [finalAnswerVisible]);
 
@@ -468,7 +463,8 @@ function App() {
   
       shuffle(newArr);
   
-      setFriends(oldArr => [...oldArr, ...newArr.slice(-3)]);
+      dispatch({ type: 'setFriends', friends: newArr.slice(-3)})
+      // setFriends(oldArr => [...oldArr, ...newArr.slice(-3)]);
     } catch (err) {
       console.error(err.message);
     }
@@ -482,12 +478,7 @@ function App() {
   // hide all visible elements except the game over modal if game is over
   useEffect(() => {
     if (gameState === 4) {
-      setFinalAnswerVisible(false);
-      setAnswerMessageVisible(false);
-      setViewLifeLineModal(false);
-      setViewAskTheAudienceModal(false);
-      setViewPhoneAFriendModal(false);
-      setSidebarVisible(false);
+      dispatch({ type: 'gameOver' });
     }
   }, [gameState]);
 
@@ -497,62 +488,100 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 ? <StartGame startGame={animateStartGame} /> : null}
-      {gameState === 1 ? <PreGame changeGameState={changeGameState} /> : null}
-      {gameState === 2 ? <ShowMoney
-        changeGameState={changeGameState}
-        money={moneyArr[currentLevel]}
-      /> : null}
-      {gameState === 3 ? <Main
-        timerVisible={timerVisible}
-        changeTimerVisible={changeTimerVisible}
-        timerInitSeconds={timerInitSeconds}
-        theAnswerState={answerState}
-        answerStateFlag={changeAnswerState}
-        mainStateFlag={changeMainState}
-        theMainState={mainState}
-        changeGameState={changeGameState}
-        currentMoney={moneyLevel}
-        answers={questions[currentLevel]}
-        changeAnswerSelected={answerSelected}
-        answerSelected={selectedAnswer}
-        questionID={questions[currentLevel].id}
-        lifeline_fiftyfifty={lifeLineFiftyFifty}
-        lifeline_asktheaudience={lifeLineAskTheAudience}
-        lifeline_phoneafriend={lifeLinePhoneAFriend}
-        viewLifeLineModal={viewLifeLineModal}
-        changeViewLifeLineModal={changeViewLifeLineModal}
-        viewAskTheAudienceModal={viewAskTheAudienceModal}
-        changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
-        changeLifelineClickable={changeLifelineClickable}
-      /> : null}
+      {gameState === 0 
+        ? <StartGame startGame={animateStartGame} /> 
+        : null}
+      {gameState === 1 
+        ? <PreGame changeGameState={changeGameState} text='GET READY!' preGameClassName='pregame' /> 
+        : null}
+      {gameState === 2
+        ? <PreGame changeGameState={changeGameState} text={moneyArr[currentLevel]} preGameClassName='money' />
+        : null }
+      {/* {gameState === 2
+        ? <ShowMoney
+          changeGameState={changeGameState}
+          money={moneyArr[currentLevel]}/> 
+        : null} */}
+      {gameState === 3 
+        ? <Main
+          timerVisible={timerVisible}
+          changeTimerVisible={changeTimerVisible}
+          timerInitSeconds={timerInitSeconds}
+          theAnswerState={answerState}
+          answerStateFlag={changeAnswerState}
+          mainStateFlag={changeMainState}
+          theMainState={mainState}
+          changeGameState={changeGameState}
+          currentMoney={moneyLevel}
+          answers={questions[currentLevel]}
+          changeAnswerSelected={answerSelected}
+          answerSelected={selectedAnswer}
+          questionID={questions[currentLevel].id}
+          lifeline_fiftyfifty={lifeLineFiftyFifty}
+          lifeline_asktheaudience={lifeLineAskTheAudience}
+          lifeline_phoneafriend={lifeLinePhoneAFriend}
+          viewLifeLineModal={viewLifeLineModal}
+          changeViewLifeLineModal={changeViewLifeLineModal}
+          viewAskTheAudienceModal={viewAskTheAudienceModal}
+          changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
+          changeLifelineClickable={changeLifelineClickable}/> 
+        : null}
       {gameState >= 1 && sidebarVisible ? <Sidebar money={moneyArr} currentLevel={currentLevel} /> : null}
 
-      {finalAnswerVisible ? <FinalAnswer
-        changeVisible={changeFinalAnswerVisible}
-        isAnswerCorrect={isAnswerCorrect}
-        cancelSelected={answerSelected}
-        answers={questions[currentLevel]}
-        answerSelected={selectedAnswer} /> : null}
+      {finalAnswerVisible 
+        ? <FinalAnswer
+          changeVisible={changeFinalAnswerVisible}
+          isAnswerCorrect={isAnswerCorrect}
+          cancelSelected={answerSelected}
+          answers={questions[currentLevel]}
+          answerSelected={selectedAnswer} /> 
+        : null}
 
-      {answerMessageVisible ? <AnswerPopup
-        correctAnswerText={correctAnswerText}
-        op={answerMessageOpacity}
-        sc={answerMessageScale}
-        answers={questions[currentLevel]}
-        correctAnswer={questions[currentLevel].answer_correct}
-        answer_popup_button={answerButtonText}
-        nextQuestion={nextQuestion} /> : null}
+      {answerMessageVisible 
+        ? <AnswerPopup
+          correctAnswerText={correctAnswerText}
+          op={answerMessageOpacity}
+          sc={answerMessageScale}
+          answers={questions[currentLevel]}
+          correctAnswer={questions[currentLevel].answer_correct}
+          answer_popup_button={answerButtonText}
+          nextQuestion={nextQuestion} /> 
+        : null}
 
-      {viewLifeLineModal ? <LifeLineModal useLifeLine={useLifeLine} changeViewLifeLineModal={changeViewLifeLineModal} lifeLineModalImage={lifeLineModalImage} /> : null}
+      {viewLifeLineModal 
+        ? <LifeLineModal 
+            useLifeLine={useLifeLine} 
+            changeViewLifeLineModal={changeViewLifeLineModal} 
+            lifeLineModalImage={lifeLineModalImage} /> 
+        : null}
 
-      {viewAskTheAudienceModal ? <AskTheAudienceModal answer={questions[currentLevel]} hideAskTheAudienceModal={hideAskTheAudienceModal} changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> : null}
+      {viewAskTheAudienceModal 
+        ? <AskTheAudienceModal 
+        answer={questions[currentLevel]} 
+        hideAskTheAudienceModal={hideAskTheAudienceModal} 
+        changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> 
+        : null}
 
-      {viewPhoneAFriendModal ? <PhoneAFriendModal changeLifeLineClickable={changeLifelineClickable} changeTimerVisible={changeTimerVisible} changeTimerInitSeconds={changeTimerInitSeconds} answers={questions[currentLevel]} changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} friends={friends} changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> : null}
+      {viewPhoneAFriendModal 
+        ? <PhoneAFriendModal 
+        changeLifeLineClickable={changeLifelineClickable} 
+        changeTimerVisible={changeTimerVisible} 
+        changeTimerInitSeconds={changeTimerInitSeconds} 
+        answers={questions[currentLevel]} 
+        changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} 
+        friends={friends} 
+        changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> 
+        : null}
 
-      {gameState === 4 ? <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> : null}
+      {gameState === 4 
+        ? <GameOver 
+            homeScreen={homeScreen} 
+            level={moneyArr[currentLevel]} /> 
+        : null}
 
-      {viewMillionaireWinner ? <MillionaireWinner homeScreen={homeScreen} /> : null}
+      {viewMillionaireWinner 
+        ? <MillionaireWinner homeScreen={homeScreen} />
+        : null}
     </div>
   );
 }

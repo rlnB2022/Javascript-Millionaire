@@ -1,18 +1,19 @@
 import '../styles/pregame.css';
 import { useEffect } from 'react';
 
-const PreGame = (props) => {
+const PreGame = ({changeGameState, text}) => {
 
+    /* When this component loads, display the GET READY! text, delay for 2 seconds, then advance the game state */
     useEffect(() => {
-        const txtInterval = setInterval(function() {
-            clearInterval(txtInterval);
-            props.changeGameState();
+        const preGameTimeout = setTimeout(() => {
+            clearTimeout(preGameTimeout);
+            changeGameState();
         },2000);
     },[]);
 
     return (
         <div className='pregame'>
-            <p className='pregame-text'>GET READY!</p>
+            <p className='pregame-text'>{text}</p>
         </div>
     );
 }

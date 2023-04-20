@@ -5,8 +5,12 @@ import { useState } from 'react';
 
 const StartGame = ({startGame}) => {
 
+    /* When the user clicks the Start button, set this to false so the fade out class will apply */
     const [isVisible, setIsVisible] = useState(true);
 
+    /**
+     * Start Game button - begins the game with a delay and applies the fade out class
+     */
     const handleClick = () => {
         setIsVisible(false);
 

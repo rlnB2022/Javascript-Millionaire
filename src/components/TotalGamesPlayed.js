@@ -23,7 +23,7 @@ const TotalGamesPlayed = () => {
         // call the above function to run when the component first loads and catch any errors
         fetchGamesPlayed().catch(console.error);
 
-        // cancel any future setTotalWinners
+        // cancel any future setTotalGamesPlayed
         return () => isMounted = false;
     }, []);
 
