@@ -6,7 +6,6 @@ import StartGame from './components/StartGame';
 import PreGame from './components/PreGame';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
-import ShowMoney from './components/ShowMoney';
 import GameOver from './components/GameOver';
 import FinalAnswer from './components/FinalAnswer';
 import AnswerPopup from './components/AnswerPopup';
@@ -497,11 +496,6 @@ function App() {
       {gameState === 2
         ? <PreGame changeGameState={changeGameState} text={moneyArr[currentLevel]} preGameClassName='money' />
         : null }
-      {/* {gameState === 2
-        ? <ShowMoney
-          changeGameState={changeGameState}
-          money={moneyArr[currentLevel]}/> 
-        : null} */}
       {gameState === 3 
         ? <Main
           timerVisible={timerVisible}
