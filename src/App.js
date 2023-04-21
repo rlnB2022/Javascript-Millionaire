@@ -14,6 +14,8 @@ import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
 import MillionaireWinner from './components/MillionaireWinner';
 
+import { shuffle, getQuestions } from './utils/utils';
+
 // add firebase
 import firebase from './firebase';
 
@@ -38,8 +40,8 @@ function App() {
   const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
   const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
 
-  // const questions = useSelector(state => state.questions);
-  const [questions, setQuestions] = useState([]);
+  const questions = useSelector(state => state.questions);
+  // const [questions, setQuestions] = useState([]);
 
   const moneyLevel = useSelector(state => state.moneyLevel);
   const currentLevel = useSelector(state => state.currentLevel);
@@ -64,6 +66,48 @@ function App() {
   const lifeLineClickable = useSelector(state => state.lifeLineClickable);
 
   const dispatch = useDispatch();
+
+  // const useLifeLine = (index) => {
+
+  //       if (index === 0) {
+  //         // 50:50 lifeline used
+  //         const cor = questions[currentLevel].answer_correct - 1;
+    
+  //         // fix array so that only incorrect answer indexes are included
+  //         const incorrectAnswers = [0, 1, 2, 3];
+  //         incorrectAnswers.splice(cor, 1);
+    
+  //         // randomly choose one of these arrays to stay
+  //         const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
+    
+  //         // remove chosenNumber from array leaving only answers that should be hidden
+  //         incorrectAnswers.splice(chosenNumber, 1);
+    
+  //         // get all elements with .lifeline
+  //         const answerElems = document.querySelectorAll('.answer');
+  //         answerElems[incorrectAnswers[0]].classList.add('hide-answer');
+  //         answerElems[incorrectAnswers[1]].classList.add('hide-answer');
+  //         answerElems[incorrectAnswers[0]].classList.remove('answer-visible');
+  //         answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
+    
+  //         // disable 50:50 lifeline
+  //         dispatch({ type: 'setLifeLineFiftyFifty', amount: 0 });
+  //       }
+  //       else if (index === 1) {
+  //         // Phone A Friend lifeline used
+  //         batch(() => {
+  //             dispatch({ type: 'toggleViewPhoneAFriendModal' });    
+  //             dispatch({ type: 'setLifeLinePhoneAFriend', amount: 0 });
+  //         });
+  //       }
+  //       else {
+  //         // Ask The Audience lifeline used
+  //         batch(() => {
+  //             dispatch({ type: 'toggleViewAskTheAudienceModal' });
+  //             dispatch({ type: 'setLifeLineAskTheAudience', amount: 0 });
+  //         });
+  //       }
+  //   }
 
   const homeScreen = () => {
     dispatch({ type: 'resetGame' });
@@ -275,106 +319,105 @@ function App() {
     dispatch({ type: 'setSelectedAnswer', answer: num})
   }
 
-  function shuffle(originalArray) {
-    var array = [].concat(originalArray);
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  // function shuffle(originalArray) {
+  //   var array = [].concat(originalArray);
+  //   var currentIndex = array.length, temporaryValue, randomIndex;
   
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
+  //   // While there remain elements to shuffle...
+  //   while (0 !== currentIndex) {
   
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+  //     // Pick a remaining element...
+  //     randomIndex = Math.floor(Math.random() * currentIndex);
+  //     currentIndex -= 1;
   
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
+  //     // And swap it with the current element.
+  //     temporaryValue = array[currentIndex];
+  //     array[currentIndex] = array[randomIndex];
+  //     array[randomIndex] = temporaryValue;
+  //   }
   
-    return array;
-  }
+  //   return array;
+  // }
 
-  async function getQuestions() {
+  // async function getQuestions() {
 
-    // setLoading(true);
-    dispatch({ type: 'toggleLoading' });
+  //   dispatch({ type: 'toggleLoading' });
 
-    let ref = firebase.firestore().collection('questions_easy');
-    try {
-      const snapshot_easy = await ref.get();
+  //   let ref = firebase.firestore().collection('questions_easy');
+  //   try {
+  //     const snapshot_easy = await ref.get();
   
-      let items_easy = [];
+  //     let items_easy = [];
   
-      snapshot_easy.forEach(doc => {
-        items_easy.push(doc.data());
-      });
+  //     snapshot_easy.forEach(doc => {
+  //       items_easy.push(doc.data());
+  //     });
   
-      // shuffle the array
-      const a = shuffle(items_easy);
+  //     // shuffle the array
+  //     const a = shuffle(items_easy);
   
-      setQuestions(questions => [...questions, ...a.slice(-5)]);
-    } catch (err) {
-      console.error(err.message);
-    }
+  //     setQuestions(questions => [...questions, ...a.slice(-5)]);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
 
-    // medium questions
-    ref = firebase.firestore().collection('questions_medium');
-    try {
-      const snapshot_medium = await ref.get();
+  //   // medium questions
+  //   ref = firebase.firestore().collection('questions_medium');
+  //   try {
+  //     const snapshot_medium = await ref.get();
   
-      const items_medium = [];
+  //     const items_medium = [];
   
-      snapshot_medium.forEach(doc => {
-        items_medium.push(doc.data());
-      });
+  //     snapshot_medium.forEach(doc => {
+  //       items_medium.push(doc.data());
+  //     });
   
-      // // shuffle the array
-      shuffle(items_medium);
+  //     // // shuffle the array
+  //     shuffle(items_medium);
   
-      setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
-    } catch (err) {
-      console.error(err.message);
-    }
+  //     setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
 
-    // // hard questions
-    ref = firebase.firestore().collection('questions_hard');
-    try {
-      const snapshot_hard = await ref.get();
+  //   // // hard questions
+  //   ref = firebase.firestore().collection('questions_hard');
+  //   try {
+  //     const snapshot_hard = await ref.get();
   
-      const items_hard = [];
+  //     const items_hard = [];
   
-      snapshot_hard.forEach(doc => {
-        items_hard.push(doc.data());
-      });
+  //     snapshot_hard.forEach(doc => {
+  //       items_hard.push(doc.data());
+  //     });
   
-      // // shuffle the array
-      shuffle(items_hard);
+  //     // // shuffle the array
+  //     shuffle(items_hard);
   
-      setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
-    } catch (err) {
-      console.error(err.message);
-    }
+  //     setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
 
-    // // millionaire questions
-    ref = firebase.firestore().collection('questions_million');
-    try {
-      const snapshot_million = await ref.get();
+  //   // // millionaire questions
+  //   ref = firebase.firestore().collection('questions_million');
+  //   try {
+  //     const snapshot_million = await ref.get();
   
-      const items_million = [];
+  //     const items_million = [];
   
-      snapshot_million.forEach(doc => {
-        items_million.push(doc.data());
-      });
+  //     snapshot_million.forEach(doc => {
+  //       items_million.push(doc.data());
+  //     });
   
-      setQuestions(a => [...a, ...items_million.slice(-1)]);
+  //     setQuestions(a => [...a, ...items_million.slice(-1)]);
   
-      dispatch({ type: 'toggleLoading' });
-    } catch (err) {
-      console.error(err.message);
-    }
+  //     dispatch({ type: 'toggleLoading' });
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
 
-  }
+  // }
 
   useEffect(() => {
     if (selectedAnswer !== null) {

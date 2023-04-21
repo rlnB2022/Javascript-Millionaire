@@ -13,7 +13,7 @@ const LifeLine = (props) => {
         batch(() => {
             dispatch({ type: 'toggleLifeLineClickable' });
             dispatch({ type: 'toggleViewLifeLineModal' });
-            dispatch({ type: 'setLifeLineModalImageIndex', lifeLineImageIndex: props.lifeLineIndex})
+            dispatch({ type: 'setLifeLineModalIndex', lifeLineIndex: props.lifeLineIndex})
           })
     };
 

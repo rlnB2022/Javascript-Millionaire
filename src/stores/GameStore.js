@@ -147,10 +147,10 @@ const storeReducer = (state = initialState, action) => {
                 ...state,
                 lifelineAskTheAudience: action.amount
             }
-        case 'setLifeLineModalImageIndex':
+        case 'setLifeLineModalIndex':
             return {
                 ...state,
-                lifeLineImageIndex: action.lifeLineImageIndex
+                lifeLineIndex: action.lifeLineIndex
             }
         case 'toggleViewAskTheAudienceModal':
             return {
@@ -206,6 +206,11 @@ const storeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 friends: action.friends
+            }
+        case 'storeQuestions':
+            return {
+                ...state,
+                questions: [...state.questions, ...action.questions]
             }
         default:
             return state;
