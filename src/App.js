@@ -41,7 +41,6 @@ function App() {
   const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
 
   const questions = useSelector(state => state.questions);
-  // const [questions, setQuestions] = useState([]);
 
   const moneyLevel = useSelector(state => state.moneyLevel);
   const currentLevel = useSelector(state => state.currentLevel);

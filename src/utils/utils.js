@@ -41,83 +41,84 @@ export const getStats = async () => {
     let ref = firebase.firestore().collection('questions_easy');
     try {
       const snapshot_easy = await ref.get();
-  
-      let items_easy = [];
-  
+
+      const items_easy = [];
+    
+      /* Store the easy questions in an array */
       snapshot_easy.forEach(doc => {
         items_easy.push(doc.data());
       });
   
       // shuffle the array
-      const a = shuffle(items_easy);
+      const shuffledItems = shuffle(items_easy);
   
-      store.dispatch({ type: 'storeQuestions', questions: a.slice(-5) })
-      // setQuestions(questions => [...questions, ...a.slice(-5)]);
+      store.dispatch({ type: 'storeQuestions', questions: shuffledItems.slice(-5) })
     } catch (err) {
       console.error(err.message);
     }
 
     // medium questions
-    // ref = firebase.firestore().collection('questions_medium');
-    // try {
-    //   const snapshot_medium = await ref.get();
+    ref = firebase.firestore().collection('questions_medium');
+    try {
+      const snapshot_medium = await ref.get();
+
+      const items_medium = [];
+    
+      /* Store the medium questions in an array */
+      snapshot_medium.forEach(doc => {
+        items_medium.push(doc.data());
+      });
   
-    //   const items_medium = [];
+      // // shuffle the array
+      const shuffledItems = shuffle(items_medium);
   
-    //   snapshot_medium.forEach(doc => {
-    //     items_medium.push(doc.data());
-    //   });
-  
-    //   // // shuffle the array
-    //   shuffle(items_medium);
-  
-    //   setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
+      store.dispatch({ type: 'storeQuestions', questions: shuffledItems.slice(-5) })
+    } catch (err) {
+      console.error(err.message);
+    }
 
     // // // hard questions
-    // ref = firebase.firestore().collection('questions_hard');
-    // try {
-    //   const snapshot_hard = await ref.get();
+    ref = firebase.firestore().collection('questions_hard');
+    try {
+      const snapshot_hard = await ref.get();
+
+      const items_hard = [];
+    
+      /* Store the hard questions in an array */
+      snapshot_hard.forEach(doc => {
+        items_hard.push(doc.data());
+      });
   
-    //   const items_hard = [];
+      // // shuffle the array
+      const shuffledItems = shuffle(items_hard);
   
-    //   snapshot_hard.forEach(doc => {
-    //     items_hard.push(doc.data());
-    //   });
-  
-    //   // // shuffle the array
-    //   shuffle(items_hard);
-  
-    //   setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
+      store.dispatch({ type: 'storeQuestions', questions: shuffledItems.slice(-4) })
+    } catch (err) {
+      console.error(err.message);
+    }
 
     // // // millionaire questions
-    // ref = firebase.firestore().collection('questions_million');
-    // try {
-    //   const snapshot_million = await ref.get();
-  
-    //   const items_million = [];
-  
-    //   snapshot_million.forEach(doc => {
-    //     items_million.push(doc.data());
-    //   });
-  
-    //   setQuestions(a => [...a, ...items_million.slice(-1)]);
-  
-      store.dispatch({ type: 'toggleLoading' });
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
+    ref = firebase.firestore().collection('questions_million');
+    try {
+      const snapshot_million = await ref.get();
 
+      const items_million = [];
+  
+      /* Store the million dollar question in an array by itself */
+      snapshot_million.forEach(doc => {
+        items_million.push(doc.data());
+      });
+  
+      store.dispatch({ type: 'storeQuestions', questions: items_million.slice(-1) })
+        store.dispatch({ type: 'toggleLoading' });
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
   export const shuffle = (originalArray) => {
-    var array = [].concat(originalArray);
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let array = [].concat(originalArray);
+    let currentIndex = array.length, temporaryValue, randomIndex;
   
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
