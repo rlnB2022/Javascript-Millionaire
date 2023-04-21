@@ -8,7 +8,7 @@ import asktheaudience from '../asktheaudience.png';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 
-const LifeLineModal = (props) => {
+const LifeLineModal = () => {
 
     const imgs = [fiftyfifty, phoneafriend, asktheaudience];
     const lifelineName = ['50:50', 'Phone A Friend', 'Ask the Audience'];
@@ -78,7 +78,7 @@ const LifeLineModal = (props) => {
         <div className={`lifeline__modal--container ${isHidden ? 'hide-modal' : 'show-modal'}`}>
             <div className='lifeline__modal'>
                 <img src={imgs[lifeLineImageIndex]} alt="modal__image" />
-                <p>Are you sure you want to use your {lifelineName[props.lifeLineModalImage]} lifeline?</p>
+                <p>Are you sure you want to use your {lifelineName[lifeLineImageIndex]} lifeline?</p>
                 <div className='lifeline__modal--options'>
                     <div className='lifeline__button lifeline__modal--option-no' onClick={handleClickNo}>No</div>
                     <div className='lifeline__button lifeline__modal--option-yes' onClick={handleClickYes}>Yes</div>
