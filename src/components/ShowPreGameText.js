@@ -1,14 +1,16 @@
 import '../styles/pregame.css';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-const ShowPreGameText = ({changeGameState, text}) => {
+const ShowPreGameText = ({ text }) => {
+    const dispatch = useDispatch();
 
-    /* When this component loads, display the GET READY! text, delay for 2 seconds, then advance the game state */
+    /* When this component loads, display the text, delay for 1 second1, then advance the game state */
     useEffect(() => {
         const preGameTimeout = setTimeout(() => {
             clearTimeout(preGameTimeout);
-            changeGameState();
-        },2000);
+            dispatch({ type: 'advanceGameState' });
+        }, 2000);
     },[]);
 
     return (

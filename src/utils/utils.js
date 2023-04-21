@@ -115,6 +115,24 @@ export const getStats = async () => {
       console.error(err.message);
     }
   }
+  
+  export const getFriends = async () => {
+    let ref = firebase.firestore().collection('Friends');
+    try {
+      const snapshotFriends = await ref.get();
+      const newArr = [];
+  
+      snapshotFriends.forEach(doc => {
+        newArr.push(doc.data());
+      });
+  
+      shuffle(newArr);
+  
+      store.dispatch({ type: 'setFriends', friends: newArr.slice(-3)})
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
   export const shuffle = (originalArray) => {
     let array = [].concat(originalArray);

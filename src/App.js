@@ -14,13 +14,13 @@ import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
 import MillionaireWinner from './components/MillionaireWinner';
 
-import { shuffle, getQuestions } from './utils/utils';
+import { getFriends, getQuestions } from './utils/utils';
 
 // add firebase
 import firebase from './firebase';
 
 // import hooks
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 // import react-redux hooks
 import { useDispatch, useSelector, batch } from 'react-redux';
@@ -40,12 +40,11 @@ function App() {
   const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
   const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
 
-  const questions = useSelector(state => state.questions);
-
-  const moneyLevel = useSelector(state => state.moneyLevel);
   const currentLevel = useSelector(state => state.currentLevel);
-  const selectedAnswer = useSelector(state => state.selectedAnswer);
   
+  const questions = useSelector(state => state.questions);
+  
+  const selectedAnswer = useSelector(state => state.selectedAnswer);
   const finalAnswerVisible = useSelector(state => state.finalAnswerVisible);
   const answerMessageOpacity = useSelector(state => state.answerMessageOpacity);
   const answerMessageScale = useSelector(state => state.answerMessageScale);
@@ -56,7 +55,6 @@ function App() {
   // modals
 
   const viewLifeLineModal = useSelector(state => state.viewLifeLineModal);
-  const lifeLineModalImage = useSelector(state => state.lifeLineModalImage);
   const viewAskTheAudienceModal = useSelector(state => state.viewAskTheAudienceModal);
   const viewPhoneAFriendModal = useSelector(state => state.viewPhoneAFriendModal);
   const viewMillionaireWinner = useSelector(state => state.viewMillionaireWinner);
@@ -184,11 +182,6 @@ function App() {
   useEffect(() => {
     dispatch({ type: 'setMoneyLevel', amount: moneyArr[currentLevel]})
   }, [currentLevel]);
-
-  // const storeGamePlayed = async () => {
-  //   const totalGamesPlayed = await getStats();
-  //   const res = firebase.firestore().collection('stats').doc('games').set({ played: totalGamesPlayed + 1 });
-  // }
 
   /* Phone A Friend - makes a suggestion, which is not always correct. Percentage of correct answer gets less and less as the questions get more difficult */
   const changePhoneAFriendSuggestion = () => {
@@ -318,106 +311,6 @@ function App() {
     dispatch({ type: 'setSelectedAnswer', answer: num})
   }
 
-  // function shuffle(originalArray) {
-  //   var array = [].concat(originalArray);
-  //   var currentIndex = array.length, temporaryValue, randomIndex;
-  
-  //   // While there remain elements to shuffle...
-  //   while (0 !== currentIndex) {
-  
-  //     // Pick a remaining element...
-  //     randomIndex = Math.floor(Math.random() * currentIndex);
-  //     currentIndex -= 1;
-  
-  //     // And swap it with the current element.
-  //     temporaryValue = array[currentIndex];
-  //     array[currentIndex] = array[randomIndex];
-  //     array[randomIndex] = temporaryValue;
-  //   }
-  
-  //   return array;
-  // }
-
-  // async function getQuestions() {
-
-  //   dispatch({ type: 'toggleLoading' });
-
-  //   let ref = firebase.firestore().collection('questions_easy');
-  //   try {
-  //     const snapshot_easy = await ref.get();
-  
-  //     let items_easy = [];
-  
-  //     snapshot_easy.forEach(doc => {
-  //       items_easy.push(doc.data());
-  //     });
-  
-  //     // shuffle the array
-  //     const a = shuffle(items_easy);
-  
-  //     setQuestions(questions => [...questions, ...a.slice(-5)]);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-
-  //   // medium questions
-  //   ref = firebase.firestore().collection('questions_medium');
-  //   try {
-  //     const snapshot_medium = await ref.get();
-  
-  //     const items_medium = [];
-  
-  //     snapshot_medium.forEach(doc => {
-  //       items_medium.push(doc.data());
-  //     });
-  
-  //     // // shuffle the array
-  //     shuffle(items_medium);
-  
-  //     setQuestions(questions => [...questions, ...items_medium.slice(-5)]);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-
-  //   // // hard questions
-  //   ref = firebase.firestore().collection('questions_hard');
-  //   try {
-  //     const snapshot_hard = await ref.get();
-  
-  //     const items_hard = [];
-  
-  //     snapshot_hard.forEach(doc => {
-  //       items_hard.push(doc.data());
-  //     });
-  
-  //     // // shuffle the array
-  //     shuffle(items_hard);
-  
-  //     setQuestions(questions => [...questions, ...items_hard.slice(-4)]);
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-
-  //   // // millionaire questions
-  //   ref = firebase.firestore().collection('questions_million');
-  //   try {
-  //     const snapshot_million = await ref.get();
-  
-  //     const items_million = [];
-  
-  //     snapshot_million.forEach(doc => {
-  //       items_million.push(doc.data());
-  //     });
-  
-  //     setQuestions(a => [...a, ...items_million.slice(-1)]);
-  
-  //     dispatch({ type: 'toggleLoading' });
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-
-  // }
-
   useEffect(() => {
     if (selectedAnswer !== null) {
 
@@ -432,25 +325,6 @@ function App() {
       dispatch({ type: 'setSelectedAnswer', answer: null });
     }
   }, [finalAnswerVisible]);
-
-  async function getFriends() {
-    let ref = firebase.firestore().collection('Friends');
-    try {
-      const snapshotFriends = await ref.get();
-      const newArr = [];
-  
-      snapshotFriends.forEach(doc => {
-        newArr.push(doc.data());
-      });
-  
-      shuffle(newArr);
-  
-      dispatch({ type: 'setFriends', friends: newArr.slice(-3)})
-      // setFriends(oldArr => [...oldArr, ...newArr.slice(-3)]);
-    } catch (err) {
-      console.error(err.message);
-    }
-  }
 
   useEffect(() => {
     getQuestions();
@@ -475,12 +349,10 @@ function App() {
         : null}
       {gameState === 1 
         ? <ShowPreGameText
-            changeGameState={changeGameState} 
             text='GET READY!' /> 
         : null}
       {gameState === 2
         ? <ShowPreGameText 
-            changeGameState={changeGameState} 
             text={moneyArr[currentLevel]} />
         : null }
       {gameState === 3 

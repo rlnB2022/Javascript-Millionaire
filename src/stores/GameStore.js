@@ -28,7 +28,8 @@ const initialState = {
     viewPhoneAFriendModal: false,
     viewMillionaireWinner: false,
     friends: [],
-    lifeLineClickable: false
+    lifeLineClickable: false,
+    visibleAnswers: [0, 1, 2, 3]
 };
 
 // Create the Reducer Function to pass to the store
@@ -211,6 +212,11 @@ const storeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 questions: [...state.questions, ...action.questions]
+            }
+        case 'visibleAnswers':
+            return {
+                ...state,
+                visibleAnswers: action.visibleAnswers
             }
         default:
             return state;

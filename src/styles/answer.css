@@ -34,6 +34,7 @@
     transform: translateY(-50%);
     width: 80%;
     height: 90%;
+    color: #fff;
 }
 
 .answer .answer-text p {

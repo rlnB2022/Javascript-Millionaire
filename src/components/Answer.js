@@ -1,23 +1,21 @@
-import { useEffect } from 'react';
 import '../styles/answer.css';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Answer = (props) => {
 
+    const visibleAnswers = useSelector(state => state.visibleAnswers);
+
     useEffect(() => {
-        const txtInterval = setInterval(function () {
-            clearInterval(txtInterval);
+        const txtTimeout = setTimeout(() => {
             props.answerStateFlag();
         }, 25);
     }, []);
 
-    let answer_selected_color = {
-        color: '#fff'
-    };
-
     return (
-        <div className={`answer answer-visible ${props.bgColor}`} onClick={() => props.changeAnswerSelected(props.answerIndex)}>
+        <div className={`answer ${props.bgColor} ${!visibleAnswers.includes(props.answerIndex) ? 'hide-answer' : 'answer-visible'}`} onClick={() => props.changeAnswerSelected(props.answerIndex)}>
             <div className='answer-text'>
-                <span style={answer_selected_color}>{props.letter}</span><p style={answer_selected_color}>{props.answer}</p>
+                <span>{props.letter}</span><p>{props.answer}</p>
             </div>
         </div>
     )

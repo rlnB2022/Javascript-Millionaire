@@ -18,7 +18,7 @@ const Main = (props) => {
             if(mainState >= 3) {
                 clearInterval(mainTimeout);
             }
-        }, 2000);
+        }, 1000);
     }, []);
 
     useEffect(() => {

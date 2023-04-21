@@ -13,6 +13,7 @@ const LifeLineModal = () => {
     const imgs = [fiftyfifty, phoneafriend, asktheaudience];
     const lifelineName = ['50:50', 'Phone A Friend', 'Ask the Audience'];
     const [isHidden, setIsHidden] = useState(false);
+
     const lifeLineIndex = useSelector(state => state.lifeLineIndex);
     const currentLevel = useSelector(state => state.currentLevel);
     const questions = useSelector(state => state.questions);
@@ -31,40 +32,39 @@ const LifeLineModal = () => {
         setIsHidden(true);
         
         if (lifeLineIndex === 0) {
-            // 50:50 lifeline used
-            const cor = questions[currentLevel].answer_correct - 1;
+            // 50:50 lifeline
+
+            // get the correctAnswer index
+            const correctAnswer = questions[currentLevel].answer_correct - 1;
       
             // fix array so that only incorrect answer indexes are included
             const incorrectAnswers = [0, 1, 2, 3];
-            incorrectAnswers.splice(cor, 1);
+            incorrectAnswers.splice(correctAnswer, 1);
       
-            // randomly choose one of these arrays to stay
+            // randomly choose one of these answers to stay
             const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
       
             // remove chosenNumber from array leaving only answers that should be hidden
             incorrectAnswers.splice(chosenNumber, 1);
-      
-            // get all elements with .lifeline
-            const answerElems = document.querySelectorAll('.answer');
-            answerElems[incorrectAnswers[0]].classList.add('hide-answer');
-            answerElems[incorrectAnswers[1]].classList.add('hide-answer');
-            answerElems[incorrectAnswers[0]].classList.remove('answer-visible');
-            answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
-      
+
+            dispatch({ type: 'visibleAnswers', visibleAnswers: [correctAnswer, chosenNumber]});
+
             // disable 50:50 lifeline
             dispatch({ type: 'setLifeLineFiftyFifty', amount: 0 });
           }
           else if (lifeLineIndex === 1) {
-            // Phone A Friend lifeline used
+            // Phone A Friend lifeline
             batch(() => {
-                dispatch({ type: 'toggleViewPhoneAFriendModal' });    
+                dispatch({ type: 'toggleViewPhoneAFriendModal' });
+                // disable phone a friend lifeline
                 dispatch({ type: 'setLifeLinePhoneAFriend', amount: 0 });
             });
           }
           else {
-            // Ask The Audience lifeline used
+            // Ask The Audience lifeline
             batch(() => {
                 dispatch({ type: 'toggleViewAskTheAudienceModal' });
+                // disable ask the audience lifeline
                 dispatch({ type: 'setLifeLineAskTheAudience', amount: 0 });
             });
           }
@@ -73,48 +73,6 @@ const LifeLineModal = () => {
             dispatch({ type: 'toggleViewLifeLineModal' });
         }, 500);
     };
-
-    // const useLifeLine = (index) => {
-
-    //     if (index === 0) {
-    //       // 50:50 lifeline used
-    //       const cor = questions[currentLevel].answer_correct - 1;
-    
-    //       // fix array so that only incorrect answer indexes are included
-    //       const incorrectAnswers = [0, 1, 2, 3];
-    //       incorrectAnswers.splice(cor, 1);
-    
-    //       // randomly choose one of these arrays to stay
-    //       const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
-    
-    //       // remove chosenNumber from array leaving only answers that should be hidden
-    //       incorrectAnswers.splice(chosenNumber, 1);
-    
-    //       // get all elements with .lifeline
-    //       const answerElems = document.querySelectorAll('.answer');
-    //       answerElems[incorrectAnswers[0]].classList.add('hide-answer');
-    //       answerElems[incorrectAnswers[1]].classList.add('hide-answer');
-    //       answerElems[incorrectAnswers[0]].classList.remove('answer-visible');
-    //       answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
-    
-    //       // disable 50:50 lifeline
-    //       dispatch({ type: 'setLifeLineFiftyFifty', amount: 0 });
-    //     }
-    //     else if (index === 1) {
-    //       // Phone A Friend lifeline used
-    //       batch(() => {
-    //           dispatch({ type: 'toggleViewPhoneAFriendModal' });    
-    //           dispatch({ type: 'setLifeLinePhoneAFriend', amount: 0 });
-    //       });
-    //     }
-    //     else {
-    //       // Ask The Audience lifeline used
-    //       batch(() => {
-    //           dispatch({ type: 'toggleViewAskTheAudienceModal' });
-    //           dispatch({ type: 'setLifeLineAskTheAudience', amount: 0 });
-    //       });
-    //     }
-    // }
 
     return (
         <div className={`lifeline__modal--container ${isHidden ? 'hide-modal' : 'show-modal'}`}>
