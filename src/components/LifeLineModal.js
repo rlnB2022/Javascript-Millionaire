@@ -13,7 +13,7 @@ const LifeLineModal = (props) => {
     const imgs = [fiftyfifty, phoneafriend, asktheaudience];
     const lifelineName = ['50:50', 'Phone A Friend', 'Ask the Audience'];
     const [isHidden, setIsHidden] = useState(false);
-    // const [usingLifeline, setUsingLifeline] = useState(false);
+    const lifeLineImageIndex = useSelector(state => state.lifeLineImageIndex);
 
     const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ const LifeLineModal = (props) => {
 
     const hideModal = () => {
         setIsHidden(true);
-        const modalimeout = setTimeout(() => {
+        const modalTimeout = setTimeout(() => {
             dispatch({ type: 'toggleViewLifeLineModal' });
         }, 500);
     };
@@ -77,7 +77,7 @@ const LifeLineModal = (props) => {
     return (
         <div className={`lifeline__modal--container ${isHidden ? 'hide-modal' : 'show-modal'}`}>
             <div className='lifeline__modal'>
-                {/* <img src={modalImg} alt="modal__image" /> */}
+                <img src={imgs[lifeLineImageIndex]} alt="modal__image" />
                 <p>Are you sure you want to use your {lifelineName[props.lifeLineModalImage]} lifeline?</p>
                 <div className='lifeline__modal--options'>
                     <div className='lifeline__button lifeline__modal--option-no' onClick={handleClickNo}>No</div>

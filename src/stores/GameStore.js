@@ -23,7 +23,7 @@ const initialState = {
     answerMessageVisible: false,
     answerButtonText: 'End Game',
     viewLifeLineModal: false,
-    lifelineModalImage: 0,
+    lifeLineModalImageIndex: 0,
     viewAskTheAudienceModal: false,
     viewPhoneAFriendModal: false,
     viewMillionaireWinner: false,
@@ -147,10 +147,10 @@ const storeReducer = (state = initialState, action) => {
                 ...state,
                 lifelineAskTheAudience: action.amount
             }
-        case 'setLifeLineModalImage':
+        case 'setLifeLineModalImageIndex':
             return {
                 ...state,
-                lifeLineImage: action.idx
+                lifeLineImageIndex: action.lifeLineImageIndex
             }
         case 'toggleViewAskTheAudienceModal':
             return {
