@@ -147,6 +147,11 @@ const storeReducer = (state = initialState, action) => {
                 ...state,
                 lifelineAskTheAudience: action.amount
             }
+        case 'setLifeLineModalImage':
+            return {
+                ...state,
+                lifeLineImage: action.idx
+            }
         case 'toggleViewAskTheAudienceModal':
             return {
                 ...state,

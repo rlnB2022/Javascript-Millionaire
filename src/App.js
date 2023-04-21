@@ -38,6 +38,7 @@ function App() {
   const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
   const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
 
+  // const questions = useSelector(state => state.questions);
   const [questions, setQuestions] = useState([]);
 
   const moneyLevel = useSelector(state => state.moneyLevel);
@@ -64,48 +65,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  const useLifeLine = (index) => {
-
-    changeViewLifeLineModal();
-
-    if (index === 0) {
-      // 50:50 lifeline used
-      const cor = questions[currentLevel].answer_correct - 1;
-
-      // fix array so that only incorrect answer indexes are included
-      const incorrectAnswers = [0, 1, 2, 3];
-      incorrectAnswers.splice(cor, 1);
-
-      // randomly choose one of these arrays to stay
-      const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
-
-      // remove chosenNumber from array leaving only answers that should be hidden
-      incorrectAnswers.splice(chosenNumber, 1);
-
-      // get all elements with .lifeline
-      const answerElems = document.querySelectorAll('.answer');
-      answerElems[incorrectAnswers[0]].classList.add('hide-answer');
-      answerElems[incorrectAnswers[1]].classList.add('hide-answer');
-      answerElems[incorrectAnswers[0]].classList.remove('answer-visible');
-      answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
-
-      // disable 50:50 lifeline
-      dispatch({ type: 'setLifeLineFiftyFifty', amount: 0 });
-    }
-    else if (index === 1) {
-      // Phone A Friend lifeline used
-      changeViewPhoneAFriend();
-
-      dispatch({ type: 'setLifeLinePhoneAFriend', amount: 0 });
-    }
-    else {
-      // Ask The Audience lifeline used
-      changeViewAskTheAudienceModal()
-
-      dispatch({ type: 'setLifeLineAskTheAudience', amount: 0 });
-    }
-  }
-
   const homeScreen = () => {
     dispatch({ type: 'resetGame' });
     getQuestions();
@@ -127,11 +86,10 @@ function App() {
     dispatch({ type: 'toggleViewAskTheAudienceModal' });
   }
 
-  const changeViewLifeLineModal = img => {
+  const changeViewLifeLineModal = index => {
     if (lifeLineClickable) {
       batch(() => {
-        dispatch({ type: 'setLifeLineModalImage', idx: img })
-        // setLifeLineModalImage(img);
+        dispatch({ type: 'setLifeLineModalImage', imageName: index })
         dispatch({ type: 'toggleViewLifeLineModal' });
       })
     }
@@ -139,7 +97,6 @@ function App() {
 
   const changeLifelineClickable = () => {
     dispatch({ type: 'toggleLifeLineClickable' });
-    console.log('Clickable changed');
   }
 
   const changeTimerVisible = () => {
@@ -499,8 +456,7 @@ function App() {
             viewLifeLineModal={viewLifeLineModal}
             changeViewLifeLineModal={changeViewLifeLineModal}
             viewAskTheAudienceModal={viewAskTheAudienceModal}
-            changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
-            changeLifelineClickable={changeLifelineClickable}/> 
+            changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}/> 
         : null}
       {gameState >= 1 && sidebarVisible 
         ? <Sidebar 
@@ -529,10 +485,7 @@ function App() {
         : null}
 
       {viewLifeLineModal 
-        ? <LifeLineModal 
-              useLifeLine={useLifeLine} 
-              changeViewLifeLineModal={changeViewLifeLineModal} 
-              lifeLineModalImage={lifeLineModalImage} /> 
+        ? <LifeLineModal /> 
         : null}
 
       {viewAskTheAudienceModal 

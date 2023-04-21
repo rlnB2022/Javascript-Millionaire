@@ -17,22 +17,18 @@ const LifeLineContainer = (props) => {
         <div className="lifeline-container">
             {lifeLineFiftyFifty 
                 ? <LifeLine 
-                    changeViewLifeLineModal={props.changeViewLifeLineModal}
-                    changeLifelineClickable={props.changeLifelineClickable}
                     lifeLineIndex={0}
                     imageName={imageNames[0]} 
                     alt='50:50 LifeLine' /> 
                 : null}
             {lifeLinePhoneAFriend 
                 ? <LifeLine 
-                    changeViewLifeLineModal={props.changeViewLifeLineModal}
                     lifeLineIndex={1}
                     imageName={imageNames[1]} 
                     alt='Phone A Friend LifeLine' /> 
                 : null}
             {lifeLineAskTheAudience 
                 ? <LifeLine 
-                    changeViewLifeLineModal={props.changeViewLifeLineModal}
                     lifeLineIndex={2}
                     imageName={imageNames[2]} 
                     alt='Ask The Audience LifeLine' /> 

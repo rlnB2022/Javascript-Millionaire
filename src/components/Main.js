@@ -36,9 +36,7 @@ const Main = (props) => {
                 ? <LifeLineContainer
                     lifeline_fiftyfifty={props.lifeline_fiftyfifty}
                     lifeline_phoneafriend={props.lifeline_phoneafriend}
-                    lifeline_asktheaudience={props.lifeline_asktheaudience}
-                    changeViewLifeLineModal={props.changeViewLifeLineModal}
-                    changeLifelineClickable={props.changeLifelineClickable} />
+                    lifeline_asktheaudience={props.lifeline_asktheaudience}/>
                 : null}
             {mainState >= 1 
                 ? <LifeLinePopUps /> 

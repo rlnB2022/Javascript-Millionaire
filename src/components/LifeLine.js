@@ -1,11 +1,15 @@
 import '../styles/LifeLine.css';
+import { useDispatch, batch } from 'react-redux';
 
 const LifeLine = (props) => {
+    const dispatch = useDispatch();
 
     const useLifeline = () => {
         // show modal
-        props.changeViewLifeLineModal(props.lifeLineIndex);
-        props.changeLifelineClickable();
+        batch(() => {
+            dispatch({ type: 'toggleLifeLineClickable' });
+            dispatch({ type: 'toggleViewLifeLineModal' });
+          })
     };
 
     return (
