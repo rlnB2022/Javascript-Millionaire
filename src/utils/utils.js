@@ -1,6 +1,6 @@
 import firebase from '../firebase';
 
-export async function getWinners() {
+export const getWinners = async () => {
     let ref = firebase.firestore().collection('winners').orderBy('date', 'desc');
     try {
       const snapshotRecentWinners = await ref.get();
@@ -16,7 +16,7 @@ export async function getWinners() {
     }
 }
 
-export async function getStats() {
+export const getStats = async () => {
     const statRef = firebase.firestore().collection('stats');
     try {
       const snapshot_totalgames = await statRef.get();
@@ -26,4 +26,9 @@ export async function getStats() {
     } catch (err) {
       console.error(err.message);
     }
+  }
+
+  export const storeGamePlayed = async () => {
+    const totalGamesPlayed = await getStats();
+    const res = firebase.firestore().collection('stats').doc('games').set({ played: totalGamesPlayed + 1 });
   }

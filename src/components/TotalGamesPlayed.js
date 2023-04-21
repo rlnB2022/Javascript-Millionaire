@@ -4,7 +4,7 @@ import { getStats } from '../utils/utils';
 import { useEffect, useState } from 'react';
 
 const TotalGamesPlayed = () => {
-    const [gamesPlayed, setGamesPlayed] = useState();
+    const [gamesPlayed, setTotalGamesPlayed] = useState();
 
     /**
      * sets state to the total number of winners
@@ -17,7 +17,7 @@ const TotalGamesPlayed = () => {
 
             // set state only if isMounted is true
             if(isMounted) {
-                setGamesPlayed(totalGamesPlayed);
+                setTotalGamesPlayed(totalGamesPlayed);
             }
         }
         // call the above function to run when the component first loads and catch any errors

@@ -1,9 +1,11 @@
 import '../styles/currentmoney.css';
+import { useSelector } from 'react-redux';
 
-const CurrentMoney = (props) => {
+const CurrentMoney = () => {
+    const moneyLevel = useSelector(state => state.moneyLevel);
     return (
         <div className='current-money'>
-            <p>{props.amount}</p>
+            <p>{moneyLevel}</p>
         </div>
     );
 }

@@ -22,12 +22,15 @@ const Winners = () => {
         let isMounted = true;
         // create the async data fetching function
         const fetchWinners = async () => {
-            const listOfWinners = await getWinners();
-            const winnersCount = listOfWinners.length;
-
-            // set state only if isMounted is true
-            if(isMounted) {
-                setTotalWinners(winnersCount);
+            try {
+                const listOfWinners = await getWinners();
+                const winnersCount = listOfWinners.length;
+                // set state only if isMounted is true
+                if(isMounted) {
+                    setTotalWinners(winnersCount);
+                }
+            } catch (err) {
+                console.error(err.message);
             }
         }
         // call the above function to run when the component first loads and catch any errors
@@ -42,7 +45,10 @@ const Winners = () => {
             <BiTrophy />
             <p className='winners-name'>Winners</p>
             <p className='winners-number'>{totalWinners}</p>
-            {viewAllWinnersVisible ? <ViewAllWinners showViewAllWinners={showViewAllWinners} /> : null}
+            {viewAllWinnersVisible 
+                ? <ViewAllWinners 
+                    showViewAllWinners={showViewAllWinners} /> 
+                : null}
         </div>
     )
 };

@@ -28,7 +28,7 @@ const initialState = {
     viewPhoneAFriendModal: false,
     viewMillionaireWinner: false,
     friends: [],
-    lifelineClickable: false
+    lifeLineClickable: false
 };
 
 // Create the Reducer Function to pass to the store
@@ -43,7 +43,7 @@ const storeReducer = (state = initialState, action) => {
                 lifelinePhoneAFriend: 1,
                 lifelineAskTheAudience: 1,
                 currentLevel: 0,
-                lifelineClickable: false,
+                lifeLineClickable: false,
                 viewMillionaireWinner: false,
                 questions: []
             }
@@ -110,7 +110,7 @@ const storeReducer = (state = initialState, action) => {
                 selectedAnswer: null,
                 mainState: 0,
                 answerState: 0,
-                lifelineClickable: false
+                lifeLineClickable: false
             }
         case 'setGameState':
             return {
@@ -190,12 +190,12 @@ const storeReducer = (state = initialState, action) => {
         case 'toggleViewLifeLineModal':
             return {
                 ...state,
-                viewLifeLinemodal: !state.viewLifeLineModal
+                viewLifeLineModal: !state.viewLifeLineModal
             }
         case 'toggleLifeLineClickable':
             return {
                 ...state,
-                lifelineClickable: !state.lifelineClickable
+                lifeLineClickable: !state.lifeLineClickable
             }
         case 'setFriends':
             return {

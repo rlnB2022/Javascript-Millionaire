@@ -1,29 +1,28 @@
 import '../styles/timer.css';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector, batch } from 'react-redux';
 
-const Timer = (props) => {
+const Timer = () => {
+
+    const timerInitSeconds = useSelector(state => state.timerInitSeconds);
+    const dispatch = useDispatch();
 
     let [seconds, setSeconds] = useState(0);
 
+    /* When the component mounts, setup the amount of seconds to countdown from and hide the lifelines */
     useEffect(() => {
-        if(props.timerVisible) {
-            const timerText = document.querySelector('.timer span');
-            const timer = document.querySelector('.timer');
-            timer.classList.add('show-timer');
-            timerText.classList.add('timer-text-anim');
-            props.changeLifelineClickable();
-        }
-    }, [props.timerVisible]);
+        setSeconds(timerInitSeconds);
+        dispatch({ type: 'toggleLifeLineClickable' });
+    }, []);
 
-    useEffect(() => {
-        setSeconds(props.timerInitSeconds);
-    },[props.timerInitSeconds]);
-
+    /* Countdown the timer, once it falls below 0, the game is over */
     useEffect(() => {
         if (seconds < 0) {
-            // game is over, advance gameState
-          props.changeTimerVisible(false);
-          props.changeGameState();
+            // game is over, hide the timer, advance gameState
+            batch(() => {
+                dispatch({ type: 'toggleTimerVisible' });
+                dispatch({ type: 'advanceGameState' });
+            })
           return;
         }
     
@@ -35,8 +34,8 @@ const Timer = (props) => {
       }, [seconds]);
 
     return (
-        <div className='timer'>
-            <span>{seconds}</span>
+        <div className='timer show-timer'>
+            <span className='timer-text-anim'>{seconds}</span>
         </div>
     );
 }

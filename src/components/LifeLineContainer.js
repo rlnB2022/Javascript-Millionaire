@@ -3,36 +3,40 @@ import LifeLine from './LifeLine';
 import fiftyfifty from '../fiftyfifty.png';
 import phoneafriend from '../phoneafriend.png';
 import asktheaudience from '../asktheaudience.png';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const LifeLineContainer = (props) => {
 
-    useEffect(() => {
-        const txtInterval = setInterval(function () {
-            clearInterval(txtInterval);
-            props.mainStateFlag();
-        }, 2000);
-    }, []);
-
+    const lifeLineFiftyFifty = useSelector(state => state.lifeLineFiftyFifty);
+    const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
+    const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
+    
     let imageNames = [fiftyfifty, phoneafriend, asktheaudience];
 
     return (
         <div className="lifeline-container">
-            {props.lifeline_fiftyfifty ?
-                <LifeLine changeLifelineClickable={props.changeLifelineClickable}
+            {lifeLineFiftyFifty 
+                ? <LifeLine 
                     changeViewLifeLineModal={props.changeViewLifeLineModal}
-                    lifelineindex={0}
-                    imagename={imageNames[0]} alt='50:50 LifeLine' /> : <div></div>}
-            {props.lifeline_phoneafriend ?
-                <LifeLine changeLifelineClickable={props.changeLifelineClickable}
+                    changeLifelineClickable={props.changeLifelineClickable}
+                    lifeLineIndex={0}
+                    imageName={imageNames[0]} 
+                    alt='50:50 LifeLine' /> 
+                : null}
+            {lifeLinePhoneAFriend 
+                ? <LifeLine 
                     changeViewLifeLineModal={props.changeViewLifeLineModal}
-                    lifelineindex={1}
-                    imagename={imageNames[1]} alt='Phone A Friend LifeLine' /> : <div></div>}
-            {props.lifeline_asktheaudience ?
-                <LifeLine changeLifelineClickable={props.changeLifelineClickable}
+                    lifeLineIndex={1}
+                    imageName={imageNames[1]} 
+                    alt='Phone A Friend LifeLine' /> 
+                : null}
+            {lifeLineAskTheAudience 
+                ? <LifeLine 
                     changeViewLifeLineModal={props.changeViewLifeLineModal}
-                    lifelineindex={2}
-                    imagename={imageNames[2]} alt='Ask The Audience LifeLine' /> : <div></div>}
+                    lifeLineIndex={2}
+                    imageName={imageNames[2]} 
+                    alt='Ask The Audience LifeLine' /> 
+                : null}
         </div>
     );
 }

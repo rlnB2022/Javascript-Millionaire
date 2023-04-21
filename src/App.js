@@ -3,7 +3,7 @@ import './styles/App.css';
 
 // components
 import StartGame from './components/StartGame';
-import PreGame from './components/PreGame';
+import ShowPreGameText from './components/ShowPreGameText';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
 import GameOver from './components/GameOver';
@@ -13,7 +13,6 @@ import LifeLineModal from './components/LifeLineModal';
 import AskTheAudienceModal from './components/AskTheAudienceModal';
 import PhoneAFriendModal from './components/PhoneAFriendModal';
 import MillionaireWinner from './components/MillionaireWinner';
-import { getStats } from './utils/utils';
 
 // add firebase
 import firebase from './firebase';
@@ -33,7 +32,6 @@ function App() {
   const timerInitSeconds = useSelector(state => state.timerInitSeconds);
 
   const gameState = useSelector(state => state.gameState);
-  const mainState = useSelector(state => state.mainState);
   const answerState = useSelector(state => state.answerState);
 
   const lifeLineFiftyFifty = useSelector(state => state.lifeLineFiftyFifty);
@@ -45,8 +43,6 @@ function App() {
   const moneyLevel = useSelector(state => state.moneyLevel);
   const currentLevel = useSelector(state => state.currentLevel);
   const selectedAnswer = useSelector(state => state.selectedAnswer);
-
-  const timerVisible = useSelector(state => state.timerVisible);
   
   const finalAnswerVisible = useSelector(state => state.finalAnswerVisible);
   const answerMessageOpacity = useSelector(state => state.answerMessageOpacity);
@@ -64,7 +60,7 @@ function App() {
   const viewMillionaireWinner = useSelector(state => state.viewMillionaireWinner);
 
   const friends = useSelector(state => state.friends);
-  const lifelineClickable = useSelector(state => state.lifelineClickable);
+  const lifeLineClickable = useSelector(state => state.lifeLineClickable);
 
   const dispatch = useDispatch();
 
@@ -132,15 +128,18 @@ function App() {
   }
 
   const changeViewLifeLineModal = img => {
-    if (lifelineClickable) {
-      // dispatch({ type: 'setLifeLineModalImage' })
-      // setLifeLineModalImage(img);
-      dispatch({ type: 'toggleViewLifeLineModal' });
+    if (lifeLineClickable) {
+      batch(() => {
+        dispatch({ type: 'setLifeLineModalImage', idx: img })
+        // setLifeLineModalImage(img);
+        dispatch({ type: 'toggleViewLifeLineModal' });
+      })
     }
   }
 
   const changeLifelineClickable = () => {
     dispatch({ type: 'toggleLifeLineClickable' });
+    console.log('Clickable changed');
   }
 
   const changeTimerVisible = () => {
@@ -153,10 +152,6 @@ function App() {
 
   const changeGameState = () => {
     dispatch({ type: 'advanceGameState' });
-  }
-
-  const changeMainState = () => {
-    dispatch({ type: 'advanceMainState' });
   }
 
   const changeAnswerState = () => {
@@ -190,21 +185,10 @@ function App() {
     dispatch({ type: 'setMoneyLevel', amount: moneyArr[currentLevel]})
   }, [currentLevel]);
 
-  const animateStartGame = () => {
-    batch(() => {
-      dispatch({ type: 'updateSideBar' });
-      dispatch({ type: 'changeTimerInitSeconds', amount: 30});
-      dispatch({ type: 'advanceGameState' });
-    })
-
-    // record game played in database
-    storeGamePlayed();
-  }
-
-  const storeGamePlayed = async () => {
-    const totalGamesPlayed = await getStats();
-    const res = firebase.firestore().collection('stats').doc('games').set({ played: totalGamesPlayed + 1 });
-  }
+  // const storeGamePlayed = async () => {
+  //   const totalGamesPlayed = await getStats();
+  //   const res = firebase.firestore().collection('stats').doc('games').set({ played: totalGamesPlayed + 1 });
+  // }
 
   /* Phone A Friend - makes a suggestion, which is not always correct. Percentage of correct answer gets less and less as the questions get more difficult */
   const changePhoneAFriendSuggestion = () => {
@@ -488,83 +472,85 @@ function App() {
   return (
     <div className='app'>
       {gameState === 0 
-        ? <StartGame startGame={animateStartGame} /> 
+        ? <StartGame /> 
         : null}
       {gameState === 1 
-        ? <PreGame changeGameState={changeGameState} text='GET READY!' preGameClassName='pregame' /> 
+        ? <ShowPreGameText
+            changeGameState={changeGameState} 
+            text='GET READY!' /> 
         : null}
       {gameState === 2
-        ? <PreGame changeGameState={changeGameState} text={moneyArr[currentLevel]} preGameClassName='money' />
+        ? <ShowPreGameText 
+            changeGameState={changeGameState} 
+            text={moneyArr[currentLevel]} />
         : null }
       {gameState === 3 
         ? <Main
-          timerVisible={timerVisible}
-          changeTimerVisible={changeTimerVisible}
-          timerInitSeconds={timerInitSeconds}
-          theAnswerState={answerState}
-          answerStateFlag={changeAnswerState}
-          mainStateFlag={changeMainState}
-          theMainState={mainState}
-          changeGameState={changeGameState}
-          currentMoney={moneyLevel}
-          answers={questions[currentLevel]}
-          changeAnswerSelected={answerSelected}
-          answerSelected={selectedAnswer}
-          questionID={questions[currentLevel].id}
-          lifeline_fiftyfifty={lifeLineFiftyFifty}
-          lifeline_asktheaudience={lifeLineAskTheAudience}
-          lifeline_phoneafriend={lifeLinePhoneAFriend}
-          viewLifeLineModal={viewLifeLineModal}
-          changeViewLifeLineModal={changeViewLifeLineModal}
-          viewAskTheAudienceModal={viewAskTheAudienceModal}
-          changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
-          changeLifelineClickable={changeLifelineClickable}/> 
+            timerInitSeconds={timerInitSeconds}
+            theAnswerState={answerState}
+            answerStateFlag={changeAnswerState}
+            answers={questions[currentLevel]}
+            changeAnswerSelected={answerSelected}
+            answerSelected={selectedAnswer}
+            questionID={questions[currentLevel].id}
+            lifeline_fiftyfifty={lifeLineFiftyFifty}
+            lifeline_asktheaudience={lifeLineAskTheAudience}
+            lifeline_phoneafriend={lifeLinePhoneAFriend}
+            viewLifeLineModal={viewLifeLineModal}
+            changeViewLifeLineModal={changeViewLifeLineModal}
+            viewAskTheAudienceModal={viewAskTheAudienceModal}
+            changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}
+            changeLifelineClickable={changeLifelineClickable}/> 
         : null}
-      {gameState >= 1 && sidebarVisible ? <Sidebar money={moneyArr} currentLevel={currentLevel} /> : null}
+      {gameState >= 1 && sidebarVisible 
+        ? <Sidebar 
+            money={moneyArr} 
+            currentLevel={currentLevel} /> 
+        : null}
 
       {finalAnswerVisible 
         ? <FinalAnswer
-          changeVisible={changeFinalAnswerVisible}
-          isAnswerCorrect={isAnswerCorrect}
-          cancelSelected={answerSelected}
-          answers={questions[currentLevel]}
-          answerSelected={selectedAnswer} /> 
+            changeVisible={changeFinalAnswerVisible}
+            isAnswerCorrect={isAnswerCorrect}
+            cancelSelected={answerSelected}
+            answers={questions[currentLevel]}
+            answerSelected={selectedAnswer} /> 
         : null}
 
       {answerMessageVisible 
         ? <AnswerPopup
-          correctAnswerText={correctAnswerText}
-          op={answerMessageOpacity}
-          sc={answerMessageScale}
-          answers={questions[currentLevel]}
-          correctAnswer={questions[currentLevel].answer_correct}
-          answer_popup_button={answerButtonText}
-          nextQuestion={nextQuestion} /> 
+            correctAnswerText={correctAnswerText}
+            op={answerMessageOpacity}
+            sc={answerMessageScale}
+            answers={questions[currentLevel]}
+            correctAnswer={questions[currentLevel].answer_correct}
+            answer_popup_button={answerButtonText}
+            nextQuestion={nextQuestion} /> 
         : null}
 
       {viewLifeLineModal 
         ? <LifeLineModal 
-            useLifeLine={useLifeLine} 
-            changeViewLifeLineModal={changeViewLifeLineModal} 
-            lifeLineModalImage={lifeLineModalImage} /> 
+              useLifeLine={useLifeLine} 
+              changeViewLifeLineModal={changeViewLifeLineModal} 
+              lifeLineModalImage={lifeLineModalImage} /> 
         : null}
 
       {viewAskTheAudienceModal 
         ? <AskTheAudienceModal 
-        answer={questions[currentLevel]} 
-        hideAskTheAudienceModal={hideAskTheAudienceModal} 
-        changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> 
+            answer={questions[currentLevel]} 
+            hideAskTheAudienceModal={hideAskTheAudienceModal} 
+            changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> 
         : null}
 
       {viewPhoneAFriendModal 
         ? <PhoneAFriendModal 
-        changeLifeLineClickable={changeLifelineClickable} 
-        changeTimerVisible={changeTimerVisible} 
-        changeTimerInitSeconds={changeTimerInitSeconds} 
-        answers={questions[currentLevel]} 
-        changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} 
-        friends={friends} 
-        changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> 
+            changeLifeLineClickable={changeLifelineClickable} 
+            changeTimerVisible={changeTimerVisible} 
+            changeTimerInitSeconds={changeTimerInitSeconds} 
+            answers={questions[currentLevel]} 
+            changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} 
+            friends={friends} 
+            changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> 
         : null}
 
       {gameState === 4 

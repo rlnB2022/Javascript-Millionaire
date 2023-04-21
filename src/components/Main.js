@@ -4,49 +4,58 @@ import Question from './Question';
 import AnswerContainer from './AnswerContainer';
 import '../styles/main.css';
 import { useEffect } from 'react';
+import { useDispatch, useSelector, batch } from 'react-redux';
 
 const Main = (props) => {
+    const mainState = useSelector(state => state.mainState);
+    const answerState = useSelector(state => state.answerState);
+    const dispatch = useDispatch();
+
+    /* When the main component mounts, introduce each of the components below one after the other */
+    useEffect(() => {
+        const mainTimeout = setInterval(() => {
+            dispatch({ type: 'advanceMainState' });
+            if(mainState >= 3) {
+                clearInterval(mainTimeout);
+            }
+        }, 2000);
+    }, []);
 
     useEffect(() => {
-        if (props.theAnswerState === 4) {
-            props.changeTimerVisible();
+        if (answerState === 4) {
+            batch(() => {
+                dispatch({ type: 'toggleTimerVisible' });
+                dispatch({ type: 'toggleLifeLineClickable '});
+            })
         }
-    }, [props.theAnswerState]);
+    }, [answerState]);
 
     return (
         <div className='main'>
-            {props.theMainState >= 0 ? <LifeLineContainer
-                mainStateFlag={props.mainStateFlag}
-                lifeline_fiftyfifty={props.lifeline_fiftyfifty}
-                lifeline_phoneafriend={props.lifeline_phoneafriend}
-                lifeline_asktheaudience={props.lifeline_asktheaudience}
-                changeViewLifeLineModal={props.changeViewLifeLineModal}
-                changeLifelineClickable={props.changeLifelineClickable}
-            /> : null}
-            {props.theMainState >= 1 ? <LifeLinePopUps
-                changeTimerVisible={props.changeTimerVisible}
-                timerVisible={props.timerVisible}
-                timerInitSeconds={props.timerInitSeconds}
-                mainStateFlag={props.mainStateFlag}
-                current_money={props.currentMoney}
-                viewAskTheAudienceModal={props.viewAskTheAudienceModal}
-                changeViewAskTheAudienceModal={props.changeViewAskTheAudienceModal}
-                changeGameState={props.changeGameState}
-                changeLifelineClickable={props.changeLifelineClickable}
-            /> : null}
-            {props.theMainState >= 2 ? <Question
-                answers={props.answers}
-                mainStateFlag={props.mainStateFlag}
-                questionID={props.questionID}
-            /> : null}
-            {props.theMainState >= 3 ? <AnswerContainer
-                changeAnswerSelected={props.changeAnswerSelected}
-                answerSelected={props.answerSelected}
-                theAnswerState={props.theAnswerState}
-                answerStateFlag={props.answerStateFlag}
-                mainStateFlag={props.mainStateFlag}
-                answers={props.answers}
-            /> : null}
+            {mainState >= 0 
+                ? <LifeLineContainer
+                    lifeline_fiftyfifty={props.lifeline_fiftyfifty}
+                    lifeline_phoneafriend={props.lifeline_phoneafriend}
+                    lifeline_asktheaudience={props.lifeline_asktheaudience}
+                    changeViewLifeLineModal={props.changeViewLifeLineModal}
+                    changeLifelineClickable={props.changeLifelineClickable} />
+                : null}
+            {mainState >= 1 
+                ? <LifeLinePopUps /> 
+                : null}
+            {mainState >= 2 
+                ? <Question
+                    answers={props.answers}
+                    questionID={props.questionID}/> 
+                : null}
+            {mainState >= 3 
+                ? <AnswerContainer
+                    changeAnswerSelected={props.changeAnswerSelected}
+                    answerSelected={props.answerSelected}
+                    theAnswerState={props.theAnswerState}
+                    answerStateFlag={props.answerStateFlag}
+                    answers={props.answers}/> 
+                : null}
         </div>
     );
 }

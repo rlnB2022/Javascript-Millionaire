@@ -2,14 +2,15 @@ import '../styles/LifeLine.css';
 
 const LifeLine = (props) => {
 
-    const usingLifeline = () => {
+    const useLifeline = () => {
         // show modal
-        props.changeViewLifeLineModal(props.lifelineindex);
+        props.changeViewLifeLineModal(props.lifeLineIndex);
+        props.changeLifelineClickable();
     };
 
     return (
-        <div className={`lifeline lifeline-visible-${props.lifelineindex}`}>
-            <img src={props.imagename} alt={props.alt} onClick={usingLifeline} />
+        <div className={`lifeline lifeline-visible-${props.lifeLineIndex}`}>
+            <img src={props.imageName} alt={props.alt} onClick={useLifeline} />
         </div>
     );
 
