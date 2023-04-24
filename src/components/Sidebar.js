@@ -6,7 +6,7 @@ const Sidebar = (props) => {
     const [visible, setVisible] = useState(false);
     
     // reverse the array so the MILLION DOLLARS is on top
-    const newArr = [...props.money].reverse();
+    const newArr = [...props.moneyArr].reverse();
     
     // loop through array to create component list
     // shouldn't use the index but have no other option
@@ -14,13 +14,13 @@ const Sidebar = (props) => {
     const elems = newArr.map((e, idx) =>
 
     <SidebarLevel
-        currentLevel={props.currentLevel}
         key={idx}
         level={15 - idx}
         money={e} />);
 
     useEffect(() => {
         setTimeout(() => {
+            console.log('should be visible');
             setVisible(true);
         }, 100);
     }, []);

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 const AskTheAudienceModal = (props) => {
 
     const arrPct = [props.answer.user_selected_1, props.answer.user_selected_2, props.answer.user_selected_3, props.answer.user_selected_4];
+    // Get total number of answers
     const pctTotal = arrPct.reduce((a, b) => a + b);
 
     // get perentages of each answer
@@ -15,6 +16,8 @@ const AskTheAudienceModal = (props) => {
     
     // store percentages in an array
     let pct = [100 - pctOne, 100 - pctTwo, 100 - pctThree, 100 - pctFour];
+
+    console.log('percentages: ', pct);
 
     // count only answers that remain on screen
     // if user used the 50:50 lifeline, there should only be two answers showing

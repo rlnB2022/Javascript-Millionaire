@@ -5,7 +5,7 @@ import fiftyfifty from '../fiftyfifty.png';
 import phoneafriend from '../phoneafriend.png';
 import asktheaudience from '../asktheaudience.png';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 
 const LifeLineModal = () => {
@@ -69,7 +69,7 @@ const LifeLineModal = () => {
             });
           }
         
-        const modalTimeout = setTimeout(() => {
+        setTimeout(() => {
             dispatch({ type: 'toggleViewLifeLineModal' });
         }, 500);
     };

@@ -1,7 +1,14 @@
 import '../styles/AnswerContainer.css';
 import Answer from './Answer';
+import { useSelector } from 'react-redux';
 
 const AnswerContainer = (props) => {
+
+    const answerState = useSelector(state => state.answerState);
+    const questions = useSelector(state => state.questions);
+    const currentLevel = useSelector(state => state.currentLevel);
+
+    const answers = questions[currentLevel];
 
     let bgColors = [,,,];
 
@@ -9,38 +16,31 @@ const AnswerContainer = (props) => {
 
     return (
         <div className='answer-container'>
-            {props.theAnswerState >= 0 ? <Answer answerStateFlag={props.answerStateFlag}
+            {answerState >= 0 ? <Answer
                 answerIndex={0}
-                changeAnswerSelected={props.changeAnswerSelected}
                 bgColor={bgColors[0]}
                 letter='A:'
-                answer={props.answers.answer_1}
+                answer={answers.answer_1}
                 changeFinalAnswerVisible={props.changeFinalAnswerVisible}
             /> : null}
-            {props.theAnswerState >= 1 ? <Answer
-                answerStateFlag={props.answerStateFlag}
+            {answerState >= 1 ? <Answer
                 answerIndex={1}
-                changeAnswerSelected={props.changeAnswerSelected}
                 changeFinalAnswerVisible={props.changeFinalAnswerVisible}
                 bgColor={bgColors[1]}
                 letter='B:'
-                answer={props.answers.answer_2} /> : null}
-            {props.theAnswerState >= 2 ? <Answer
-                answerStateFlag={props.answerStateFlag}
+                answer={answers.answer_2} /> : null}
+            {answerState >= 2 ? <Answer
                 answerIndex={2}
-                changeAnswerSelected={props.changeAnswerSelected}
                 changeFinalAnswerVisible={props.changeFinalAnswerVisible}
                 bgColor={bgColors[2]}
                 letter='C:'
-                answer={props.answers.answer_3}
+                answer={answers.answer_3}
             /> : null}
-            {props.theAnswerState >= 3 ? <Answer
-                answerStateFlag={props.answerStateFlag}
+            {answerState >= 3 ? <Answer
                 answerIndex={3}
-                changeAnswerSelected={props.changeAnswerSelected}
                 bgColor={bgColors[3]}
                 letter='D:'
-                answer={props.answers.answer_4}
+                answer={answers.answer_4}
             /> : null}
         </div>
     );

@@ -33,26 +33,18 @@ const Main = (props) => {
     return (
         <div className='main'>
             {mainState >= 0 
-                ? <LifeLineContainer
-                    lifeline_fiftyfifty={props.lifeline_fiftyfifty}
-                    lifeline_phoneafriend={props.lifeline_phoneafriend}
-                    lifeline_asktheaudience={props.lifeline_asktheaudience}/>
+                ? <LifeLineContainer />
                 : null}
             {mainState >= 1 
                 ? <LifeLinePopUps /> 
                 : null}
             {mainState >= 2 
                 ? <Question
-                    answers={props.answers}
                     questionID={props.questionID}/> 
                 : null}
             {mainState >= 3 
                 ? <AnswerContainer
-                    changeAnswerSelected={props.changeAnswerSelected}
-                    answerSelected={props.answerSelected}
-                    theAnswerState={props.theAnswerState}
-                    answerStateFlag={props.answerStateFlag}
-                    answers={props.answers}/> 
+                    answerSelected={props.answerSelected}/> 
                 : null}
         </div>
     );

@@ -31,14 +31,8 @@ function App() {
 
   const loading = useSelector(state => state.loading);
   const sidebarVisible = useSelector(state => state.sidebarVisible);
-  const timerInitSeconds = useSelector(state => state.timerInitSeconds);
 
   const gameState = useSelector(state => state.gameState);
-  const answerState = useSelector(state => state.answerState);
-
-  const lifeLineFiftyFifty = useSelector(state => state.lifeLineFiftyFifty);
-  const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
-  const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
 
   const currentLevel = useSelector(state => state.currentLevel);
   
@@ -59,65 +53,16 @@ function App() {
   const viewPhoneAFriendModal = useSelector(state => state.viewPhoneAFriendModal);
   const viewMillionaireWinner = useSelector(state => state.viewMillionaireWinner);
 
-  const friends = useSelector(state => state.friends);
-  const lifeLineClickable = useSelector(state => state.lifeLineClickable);
-
   const dispatch = useDispatch();
 
-  // const useLifeLine = (index) => {
-
-  //       if (index === 0) {
-  //         // 50:50 lifeline used
-  //         const cor = questions[currentLevel].answer_correct - 1;
-    
-  //         // fix array so that only incorrect answer indexes are included
-  //         const incorrectAnswers = [0, 1, 2, 3];
-  //         incorrectAnswers.splice(cor, 1);
-    
-  //         // randomly choose one of these arrays to stay
-  //         const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
-    
-  //         // remove chosenNumber from array leaving only answers that should be hidden
-  //         incorrectAnswers.splice(chosenNumber, 1);
-    
-  //         // get all elements with .lifeline
-  //         const answerElems = document.querySelectorAll('.answer');
-  //         answerElems[incorrectAnswers[0]].classList.add('hide-answer');
-  //         answerElems[incorrectAnswers[1]].classList.add('hide-answer');
-  //         answerElems[incorrectAnswers[0]].classList.remove('answer-visible');
-  //         answerElems[incorrectAnswers[1]].classList.remove('answer-visible');
-    
-  //         // disable 50:50 lifeline
-  //         dispatch({ type: 'setLifeLineFiftyFifty', amount: 0 });
-  //       }
-  //       else if (index === 1) {
-  //         // Phone A Friend lifeline used
-  //         batch(() => {
-  //             dispatch({ type: 'toggleViewPhoneAFriendModal' });    
-  //             dispatch({ type: 'setLifeLinePhoneAFriend', amount: 0 });
-  //         });
-  //       }
-  //       else {
-  //         // Ask The Audience lifeline used
-  //         batch(() => {
-  //             dispatch({ type: 'toggleViewAskTheAudienceModal' });
-  //             dispatch({ type: 'setLifeLineAskTheAudience', amount: 0 });
-  //         });
-  //       }
-  //   }
+  useEffect(() => {
+    console.log(sidebarVisible);
+  }, [sidebarVisible]);
 
   const homeScreen = () => {
     dispatch({ type: 'resetGame' });
     getQuestions();
   };
-
-  const changeTimerInitSeconds = (num) => {
-    dispatch({ type: 'changeTimerInitSeconds', amount: num });
-  }
-
-  const changeViewPhoneAFriend = () => {
-    dispatch({ type: 'toggleViewPhoneAFriendModal' });
-  }
 
   const changeViewAskTheAudienceModal = () => {
     dispatch({ type: 'toggleViewAskTheAudienceModal' });
@@ -127,40 +72,18 @@ function App() {
     dispatch({ type: 'toggleViewAskTheAudienceModal' });
   }
 
-  const changeViewLifeLineModal = index => {
-    if (lifeLineClickable) {
-      batch(() => {
-        dispatch({ type: 'setLifeLineModalImage', imageName: index })
-        dispatch({ type: 'toggleViewLifeLineModal' });
-      })
-    }
-  }
-
-  const changeLifelineClickable = () => {
-    dispatch({ type: 'toggleLifeLineClickable' });
-  }
-
-  const changeTimerVisible = () => {
-    dispatch({ type: 'toggleTimerVisible' });
-  }
-
   const changeFinalAnswerVisible = () => {
     dispatch({ type: 'toggleFinalAnswerVisible' });
-  }
-
-  const changeGameState = () => {
-    dispatch({ type: 'advanceGameState' });
-  }
-
-  const changeAnswerState = () => {
-    dispatch({ type: 'advanceAnswerState' });
   }
 
   const nextQuestion = () => {
 
     if (answerButtonText === 'End Game') {
-      dispatch({ type: 'hideAnswerMessageVisible' });
-      changeGameState();
+      console.log('end game button text');
+      batch(() => {
+        dispatch({ type: 'hideAnswerMessageVisible' });
+        dispatch({ type: 'advanceGameState' });
+      });
       return;
     }
 
@@ -222,7 +145,7 @@ function App() {
 
     if (num === questions[currentLevel].answer_correct) {
 
-      // if answered the last question, they won!
+      // if answered the last question correctly, they won!
       if (currentLevel === 14) {
         batch(() => {
           dispatch({ type: 'toggleFinalAnswerVisible '});
@@ -240,6 +163,7 @@ function App() {
           dispatch({ type: 'setCorrectAnswerText', text: 'Correct!' });
         })
         showAnswerMessageVisible();
+        return;
       }
 
     }
@@ -307,17 +231,11 @@ function App() {
     }
   }
 
-  const answerSelected = (num) => {
-    dispatch({ type: 'setSelectedAnswer', answer: num})
-  }
-
   useEffect(() => {
     if (selectedAnswer !== null) {
-
       // show popup for 'Final Answer?'
       changeFinalAnswerVisible();
     }
-
   }, [selectedAnswer]);
 
   useEffect(() => {
@@ -344,47 +262,18 @@ function App() {
 
   return (
     <div className='app'>
-      {gameState === 0 
-        ? <StartGame /> 
-        : null}
-      {gameState === 1 
-        ? <ShowPreGameText
-            text='GET READY!' /> 
-        : null}
-      {gameState === 2
-        ? <ShowPreGameText 
-            text={moneyArr[currentLevel]} />
-        : null }
-      {gameState === 3 
-        ? <Main
-            timerInitSeconds={timerInitSeconds}
-            theAnswerState={answerState}
-            answerStateFlag={changeAnswerState}
-            answers={questions[currentLevel]}
-            changeAnswerSelected={answerSelected}
-            answerSelected={selectedAnswer}
-            questionID={questions[currentLevel].id}
-            lifeline_fiftyfifty={lifeLineFiftyFifty}
-            lifeline_asktheaudience={lifeLineAskTheAudience}
-            lifeline_phoneafriend={lifeLinePhoneAFriend}
-            viewLifeLineModal={viewLifeLineModal}
-            changeViewLifeLineModal={changeViewLifeLineModal}
-            viewAskTheAudienceModal={viewAskTheAudienceModal}
-            changeViewAskTheAudienceModal={changeViewAskTheAudienceModal}/> 
-        : null}
-      {gameState >= 1 && sidebarVisible 
-        ? <Sidebar 
-            money={moneyArr} 
-            currentLevel={currentLevel} /> 
-        : null}
+      {gameState === 0 && <StartGame />}
+      {gameState === 1 && <ShowPreGameText text='GET READY!' />}
+      {gameState === 2 && <ShowPreGameText text={moneyArr[currentLevel]} />}
+      {gameState === 3 && <Main answerSelected={selectedAnswer} questionID={questions[currentLevel].id}/> }
+      {gameState === 4  && <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> }
+
+      {gameState >= 1 && <Sidebar moneyArr={moneyArr} />}
 
       {finalAnswerVisible 
         ? <FinalAnswer
             changeVisible={changeFinalAnswerVisible}
-            isAnswerCorrect={isAnswerCorrect}
-            cancelSelected={answerSelected}
-            answers={questions[currentLevel]}
-            answerSelected={selectedAnswer} /> 
+            isAnswerCorrect={isAnswerCorrect} />
         : null}
 
       {answerMessageVisible 
@@ -398,9 +287,7 @@ function App() {
             nextQuestion={nextQuestion} /> 
         : null}
 
-      {viewLifeLineModal 
-        ? <LifeLineModal /> 
-        : null}
+      {viewLifeLineModal &&  <LifeLineModal /> }
 
       {viewAskTheAudienceModal 
         ? <AskTheAudienceModal 
@@ -411,24 +298,10 @@ function App() {
 
       {viewPhoneAFriendModal 
         ? <PhoneAFriendModal 
-            changeLifeLineClickable={changeLifelineClickable} 
-            changeTimerVisible={changeTimerVisible} 
-            changeTimerInitSeconds={changeTimerInitSeconds} 
-            answers={questions[currentLevel]} 
-            changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} 
-            friends={friends} 
-            changeViewPhoneAFriendModal={changeViewPhoneAFriend} /> 
+            changePhoneAFriendSuggestion={changePhoneAFriendSuggestion} /> 
         : null}
 
-      {gameState === 4 
-        ? <GameOver 
-            homeScreen={homeScreen} 
-            level={moneyArr[currentLevel]} /> 
-        : null}
-
-      {viewMillionaireWinner 
-        ? <MillionaireWinner homeScreen={homeScreen} />
-        : null}
+      {viewMillionaireWinner &&  <MillionaireWinner homeScreen={homeScreen} />}
     </div>
   );
 }

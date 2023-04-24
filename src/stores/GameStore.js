@@ -4,7 +4,7 @@ import { createStore } from 'redux';
 const initialState = {
     questions: [],
     loading: false,
-    siderbarVisible: false,
+    sidebarVisible: false,
     gameState: 0,
     mainState: 0,
     answerState: 0,
@@ -37,16 +37,35 @@ const storeReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'resetGame':
             return {
-                ...state,
+                questions: [],
+                loading: false,
+                sidebarVisible: false,
                 gameState: 0,
                 mainState: 0,
-                lifelineFiftyFifty: 1,
-                lifelinePhoneAFriend: 1,
-                lifelineAskTheAudience: 1,
+                answerState: 0,
+                lifeLineFiftyFifty: 1,
+                lifeLinePhoneAFriend: 1,
+                lifeLineAskTheAudience: 1,
+                moneyLevel: 0,
                 currentLevel: 0,
-                lifeLineClickable: false,
+                selectedAnswer: null,
+                timerVisible: false,
+                timerInitSeconds: 0,
+                finalAnswerVisible: false,
+                answerMessageOpacity: 0,
+                answerMessageScale: 0,
+                correctAnswerText: 'Incorrect',
+                answerMessageVisible: false,
+                answerButtonText: 'End Game',
+                viewLifeLineModal: false,
+                lifeLineModalImageIndex: 0,
+                viewAskTheAudienceModal: false,
+                viewPhoneAFriendModal: false,
                 viewMillionaireWinner: false,
-                questions: []
+                friends: [],
+                lifeLineClickable: false,
+                visibleAnswers: [0, 1, 2, 3]
+
             }
         case 'gameOver':
             return {
@@ -55,7 +74,7 @@ const storeReducer = (state = initialState, action) => {
                 answerMessageVisible: false,
                 viewAskTheAudienceModal: false,
                 viewPhoneAFriendModal: false,
-                siderbarVisible: false
+                sidebarVisible: false
             }
         case 'winner':
             return {
@@ -67,18 +86,18 @@ const storeReducer = (state = initialState, action) => {
                 viewAskTheAudienceModal: false,
                 viewPhoneAFriendModal: false,
                 viewMillionaireWinner: true,
-                siderbarVisible: false
+                sidebarVisible: false
             }
         case 'toggleLoading':
             return {
                 ...state,
                 loading: !state.loading
             }
-        case 'updateSidebar':
-            return {
-                ...state,
-                siderbarVisible: !state.siderbarVisible
-            }
+        // case 'updateSidebar':
+        //     return {
+        //         ...state,
+        //         sidebarVisible: !state.sidebarVisible
+        //     }
         case 'changeTimerInitSeconds':
             return {
                 ...state,

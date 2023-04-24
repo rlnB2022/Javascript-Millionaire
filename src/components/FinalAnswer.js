@@ -1,8 +1,15 @@
 import '../styles/finalanswer.css';
+import { useSelector } from 'react-redux';
 
 const FinalAnswer = (props) => {
 
-    const answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
+    const questions = useSelector(state => state.questions);
+    const currentLevel = useSelector(state => state.currentLevel);
+    const selectedAnswer = useSelector(state => state.selectedAnswer);
+    
+    const answers = questions[currentLevel];
+
+    const choices = [answers.answer_1, answers.answer_2, answers.answer_3, answers.answer_4];
 
     return (
         <div className='final-answer-outer'>
@@ -11,13 +18,13 @@ const FinalAnswer = (props) => {
                     <p className='final-answer-header'>Final Answer?</p>
                 </div>
                 <div className='final-answer-selected'>
-                    {answers[props.answerSelected]}
+                    {choices[selectedAnswer]}
                 </div>
                 <div className='final-answer-buttons'>
                     <div className='final-answer-btn final-answer-no' onClick={() => props.changeVisible()}>
                         <p>No</p>
                     </div>
-                    <div className='final-answer-btn final-answer-yes' onClick={() => props.isAnswerCorrect(props.answerSelected + 1)}>
+                    <div className='final-answer-btn final-answer-yes' onClick={() => props.isAnswerCorrect(selectedAnswer + 1)}>
                         <p>Yes</p>
                     </div>
                 </div>

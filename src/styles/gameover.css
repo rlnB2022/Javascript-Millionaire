@@ -1,4 +1,5 @@
 .game-over {
+    position: relative;
     background: url('../bg.jpg');
     background-position: center;
     background-repeat: no-repeat;

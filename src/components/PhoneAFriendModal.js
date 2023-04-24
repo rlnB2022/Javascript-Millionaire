@@ -2,6 +2,7 @@ import '../styles/PhoneAFriendModal.css';
 import phoneafriend from '../phoneafriend.png';
 import Friend from './Friend';
 import { useEffect, useState } from 'react';
+import { batch, useDispatch, useSelector } from 'react-redux';
 
 const PhoneAFriendModal = (props) => {
 
@@ -14,10 +15,18 @@ const PhoneAFriendModal = (props) => {
     const [visibleFriends, setVisibleFriends] = useState(true);
     const [friendAnswer, setFriendAnswer] = useState('');
 
+    const questions = useSelector(state => state.questions);
+    const currentLevel = useSelector(state => state.currentLevel);
+    const friends = useSelector(state => state.friends);
+
+    const answers = questions[currentLevel] ;
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (isPhoneAFriendModalHidden) {
             const myTimer = setTimeout(() => {
-                props.changeViewPhoneAFriendModal();
+                dispatch({ type: 'toggleViewPhoneAFriendModal' });
                 clearTimeout(myTimer);
             }, 500);
         }
@@ -26,9 +35,11 @@ const PhoneAFriendModal = (props) => {
     useEffect(() => {
         const callTimer = setTimeout(() => {
             if(callTimeLeft <= 0) {
-                props.changeViewPhoneAFriendModal();
-                props.changeTimerInitSeconds(15);
-                props.changeTimerVisible();
+                batch(() => {
+                    dispatch({ type: 'changeTimerInitSeconds', amount: 15 });
+                    dispatch({ type: 'toggleTimerVisible' });
+                    dispatch({ type: 'toggleViewPhoneAFriendModal' });
+                })
             }
             setCallTimeLeft(callTimeLeft - 1);
             clearTimeout(callTimer);
@@ -39,9 +50,9 @@ const PhoneAFriendModal = (props) => {
 
     useEffect(() => {
         // when suggestion changes, show what answer the friend chooses
-        const answers = [props.answers.answer_1, props.answers.answer_2, props.answers.answer_3, props.answers.answer_4];
+        const choices = [answers.answer_1, answers.answer_2, answers.answer_3, answers.answer_4];
         const letterAnswer = ['A: ', 'B: ', 'C: ', 'D: '];
-        setFriendAnswer(`${letterAnswer[suggestion]} ${answers[suggestion]}`);
+        setFriendAnswer(`${letterAnswer[suggestion]} ${choices[suggestion]}`);
 
         // change button text
         setButtonText('OK');
@@ -63,7 +74,7 @@ const PhoneAFriendModal = (props) => {
         }
     }, [visibleFriends]);
 
-    const listFriends = props.friends.map((e, idx) => <Friend friendIsVisible={visibleFriends} activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
+    const listFriends = friends.map((e, idx) => <Friend friendIsVisible={visibleFriends} activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
 
     const btnCall = () => {
         // randomly pick one of the remaining answers
@@ -74,9 +85,11 @@ const PhoneAFriendModal = (props) => {
             setVisibleFriends(false);
         }
         else {
-            props.changeTimerInitSeconds(15);
-            props.changeTimerVisible();
-            props.changeViewPhoneAFriendModal();
+            batch(() => {
+                dispatch({ type: 'changeTimerInitSeconds', amount: 15 });
+                dispatch({ type: 'toggleTimerVisible' });
+                dispatch({ type: 'toggleViewPhoneAFriendModal' });
+            })
         }
         
     };
@@ -86,12 +99,14 @@ const PhoneAFriendModal = (props) => {
     }
 
     useEffect(() => {
-        setButtonText(`Call ${props.friends[activeFriend].name}`);
+        setButtonText(`Call ${friends[activeFriend].name}`);
     }, [activeFriend]);
 
     useEffect(() => {
-        props.changeTimerVisible();
-        props.changeLifeLineClickable();
+        batch(() => {
+            dispatch({ type: 'toggleTimerVisible' });
+            dispatch({ type: 'toggleLifeLineClickable' });
+        })
     }, []);
 
     return (
@@ -99,7 +114,7 @@ const PhoneAFriendModal = (props) => {
             <div className='phone-a-friend-modal__inner'>
                 <img className='lifeline-image' src={phoneafriend} alt="modal__image" />
                 {showSuggestion ? null : <div className='friend-container'>{listFriends}</div>}
-                {showSuggestion ? <div className='friend-grid'><Friend friendIsVisible={true} name={props.friends[activeFriend].name} twitter_id={props.friends[activeFriend].twitter_id} /><div className='suggestion-box'>{friendAnswer}</div></div> : null}
+                {showSuggestion ? <div className='friend-grid'><Friend friendIsVisible={true} name={friends[activeFriend].name} twitter_id={friends[activeFriend].twitter_id} /><div className='suggestion-box'>{friendAnswer}</div></div> : null}
                 <div className='btn-call-name' onClick={btnCall}>{buttonText} - {callTimeLeft}</div>
             </div>
         </div>
