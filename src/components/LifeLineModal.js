@@ -21,7 +21,7 @@ const LifeLineModal = () => {
     const dispatch = useDispatch();
 
     const handleClickNo = () => {
-        hideModal();
+        dispatch({ type: 'toggleViewLifeLineModal' });
     };
 
     const handleClickYes = () => {

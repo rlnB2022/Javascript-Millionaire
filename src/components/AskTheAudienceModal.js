@@ -17,8 +17,6 @@ const AskTheAudienceModal = (props) => {
     // store percentages in an array
     let pct = [100 - pctOne, 100 - pctTwo, 100 - pctThree, 100 - pctFour];
 
-    console.log('percentages: ', pct);
-
     // count only answers that remain on screen
     // if user used the 50:50 lifeline, there should only be two answers showing
     const answerElems = document.querySelectorAll('.answer');

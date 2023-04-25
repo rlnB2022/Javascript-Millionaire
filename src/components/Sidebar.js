@@ -20,7 +20,6 @@ const Sidebar = (props) => {
 
     useEffect(() => {
         setTimeout(() => {
-            console.log('should be visible');
             setVisible(true);
         }, 100);
     }, []);

@@ -14,17 +14,17 @@ const LifeLineContainer = () => {
                 ? <LifeLine 
                     lifeLineIndex={0}
                     alt='50:50 LifeLine' /> 
-                : null}
+                : <div></div>}
             {lifeLinePhoneAFriend 
                 ? <LifeLine 
                     lifeLineIndex={1}
                     alt='Phone A Friend LifeLine' /> 
-                : null}
+                : <div></div>}
             {lifeLineAskTheAudience 
                 ? <LifeLine 
                     lifeLineIndex={2}
                     alt='Ask The Audience LifeLine' /> 
-                : null}
+                : <div></div>}
         </div>
     );
 }

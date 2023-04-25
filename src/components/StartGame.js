@@ -17,10 +17,9 @@ const StartGame = () => {
 
         // give the animation time before starting the game
         setTimeout(() => {
-            console.log('running');
             batch(() => {
             //   dispatch({ type: 'updateSideBar' });
-              dispatch({ type: 'changeTimerInitSeconds', amount: 30});
+              dispatch({ type: 'changeTimerInitSeconds', amount: 300});
               dispatch({ type: 'advanceGameState' });
             })
         }, 500);

@@ -74,7 +74,14 @@ const PhoneAFriendModal = (props) => {
         }
     }, [visibleFriends]);
 
-    const listFriends = friends.map((e, idx) => <Friend friendIsVisible={visibleFriends} activeFriend={activeFriend} changeFriend={changeFriend} key={idx} friendNum={idx} name={e.name} twitter_id={e.twitter_id} />);
+    const listFriends = friends.map((e, idx) => <Friend 
+        friendIsVisible={visibleFriends} 
+        activeFriend={activeFriend} 
+        changeFriend={changeFriend} 
+        key={idx} 
+        friendNum={idx} 
+        name={e.name} 
+        twitter_id={e.twitter_id} />);
 
     const btnCall = () => {
         // randomly pick one of the remaining answers
@@ -99,7 +106,12 @@ const PhoneAFriendModal = (props) => {
     }
 
     useEffect(() => {
-        setButtonText(`Call ${friends[activeFriend].name}`);
+        if(friends[activeFriend] && friends[activeFriend].name) {
+            setButtonText(`Call ${friends[activeFriend].name}`);
+        }
+        else {
+            setButtonText('Make the call');
+        }
     }, [activeFriend]);
 
     useEffect(() => {
@@ -113,8 +125,18 @@ const PhoneAFriendModal = (props) => {
         <div className={`phone-a-friend-modal__container ${isPhoneAFriendModalHidden ? 'hide-modal' : 'show-modal'}`}>
             <div className='phone-a-friend-modal__inner'>
                 <img className='lifeline-image' src={phoneafriend} alt="modal__image" />
-                {showSuggestion ? null : <div className='friend-container'>{listFriends}</div>}
-                {showSuggestion ? <div className='friend-grid'><Friend friendIsVisible={true} name={friends[activeFriend].name} twitter_id={friends[activeFriend].twitter_id} /><div className='suggestion-box'>{friendAnswer}</div></div> : null}
+                {showSuggestion 
+                    ? null 
+                    : <div className='friend-container'>{listFriends}</div>}
+                {showSuggestion 
+                    ? <div 
+                            className='friend-grid'><Friend 
+                            friendIsVisible={true} 
+                            name={friends[activeFriend].name || ''} 
+                            twitter_id={friends[activeFriend].twitter_id} />
+                            <div className='suggestion-box'>{friendAnswer}</div>
+                        </div> 
+                    : null}
                 <div className='btn-call-name' onClick={btnCall}>{buttonText} - {callTimeLeft}</div>
             </div>
         </div>

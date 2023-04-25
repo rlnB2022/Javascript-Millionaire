@@ -21,13 +21,12 @@
 
 .question p {
     color: #fff;
-    width: 70%;
     font-size: 1.25rem;
     text-align: center;
     line-height: 1.5;
     opacity: 0;
     animation: revealQuestion .25s ease-in-out forwards .5s;
-    white-space: pre-line;
+    white-space: pre;
 }
 
 @keyframes showQuestionContainer {
@@ -50,10 +49,10 @@
 
 @media screen and (min-width: 768px) {
     .question-container {
-        width: 30%;
+        width: 60%;
     }
 
     .question p {
-        width: 100%;
+        width: 85%;
     }
 }

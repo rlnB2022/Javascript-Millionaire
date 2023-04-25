@@ -1,7 +1,9 @@
 import '../styles/finalanswer.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const FinalAnswer = (props) => {
+
+    const dispatch = useDispatch();
 
     const questions = useSelector(state => state.questions);
     const currentLevel = useSelector(state => state.currentLevel);
@@ -10,6 +12,10 @@ const FinalAnswer = (props) => {
     const answers = questions[currentLevel];
 
     const choices = [answers.answer_1, answers.answer_2, answers.answer_3, answers.answer_4];
+
+    const changeVisible = () => {
+        dispatch({ type: 'toggleFinalAnswerVisible' });
+    };
 
     return (
         <div className='final-answer-outer'>
@@ -21,7 +27,7 @@ const FinalAnswer = (props) => {
                     {choices[selectedAnswer]}
                 </div>
                 <div className='final-answer-buttons'>
-                    <div className='final-answer-btn final-answer-no' onClick={() => props.changeVisible()}>
+                    <div className='final-answer-btn final-answer-no' onClick={changeVisible}>
                         <p>No</p>
                     </div>
                     <div className='final-answer-btn final-answer-yes' onClick={() => props.isAnswerCorrect(selectedAnswer + 1)}>

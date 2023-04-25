@@ -13,7 +13,8 @@
 .sidebarActive {
     background-image: url('../answer-box_selected.svg');
     background-size: 100% 100%;
-    color: darkblue;
+    /* color: darkblue; */
+    color: white;
 }
 
 .sidebar-level-number {

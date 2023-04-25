@@ -121,7 +121,7 @@ const storeReducer = (state = initialState, action) => {
         case 'hideAnswerMessageVisible':
             return {
                 ...state,
-                hideAnswerMessageVisible: false
+                answerMessageVisible: false
             }
         case 'readyForNextQuestion':
             return {
@@ -130,7 +130,8 @@ const storeReducer = (state = initialState, action) => {
                 selectedAnswer: null,
                 mainState: 0,
                 answerState: 0,
-                lifeLineClickable: false
+                lifeLineClickable: false,
+                visibleAnswers: [0, 1, 2, 3]
             }
         case 'setGameState':
             return {
@@ -155,17 +156,17 @@ const storeReducer = (state = initialState, action) => {
         case 'setLifeLineFiftyFifty':
             return {
                 ...state,
-                lifelineFiftyFifty: action.amount
+                lifeLineFiftyFifty: action.amount
             }
         case 'setLifeLinePhoneAFriend':
             return {
                 ...state,
-                lifelinePhoneAFriend: action.amount
+                lifeLinePhoneAFriend: action.amount
             }
         case 'setLifeLineAskTheAudience':
             return {
                 ...state,
-                lifelineAskTheAudience: action.amount
+                lifeLineAskTheAudience: action.amount
             }
         case 'setLifeLineModalIndex':
             return {

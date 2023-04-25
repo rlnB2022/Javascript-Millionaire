@@ -125,10 +125,10 @@ export const getStats = async () => {
       snapshotFriends.forEach(doc => {
         newArr.push(doc.data());
       });
-  
-      shuffle(newArr);
-  
-      store.dispatch({ type: 'setFriends', friends: newArr.slice(-3)})
+
+      console.log(newArr);
+    
+      store.dispatch({ type: 'setFriends', friends: newArr})
     } catch (err) {
       console.error(err.message);
     }

@@ -30,10 +30,7 @@ function App() {
   const questionName = ['questions_easy', 'questions_medium', 'questions_hard', 'questions_million'];
 
   const loading = useSelector(state => state.loading);
-  const sidebarVisible = useSelector(state => state.sidebarVisible);
-
   const gameState = useSelector(state => state.gameState);
-
   const currentLevel = useSelector(state => state.currentLevel);
   
   const questions = useSelector(state => state.questions);
@@ -55,10 +52,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(sidebarVisible);
-  }, [sidebarVisible]);
-
   const homeScreen = () => {
     dispatch({ type: 'resetGame' });
     getQuestions();
@@ -72,18 +65,12 @@ function App() {
     dispatch({ type: 'toggleViewAskTheAudienceModal' });
   }
 
-  const changeFinalAnswerVisible = () => {
-    dispatch({ type: 'toggleFinalAnswerVisible' });
-  }
-
   const nextQuestion = () => {
 
+    dispatch({ type: 'hideAnswerMessageVisible' });
+
     if (answerButtonText === 'End Game') {
-      console.log('end game button text');
-      batch(() => {
-        dispatch({ type: 'hideAnswerMessageVisible' });
-        dispatch({ type: 'advanceGameState' });
-      });
+      dispatch({ type: 'advanceGameState' });
       return;
     }
 
@@ -92,13 +79,12 @@ function App() {
     }
 
     batch(() => {
-      dispatch({ type: 'hideAnswerMessageVisible' });
       dispatch({ type: 'setGameState', amount: 2 });
+      dispatch({ type: 'toggleFinalAnswerVisible' });
   
       // reset messages
       dispatch({ type: 'setCorrectAnswerText', text: 'Incorrect' });
       dispatch({ type: 'setAnswerButtonText', text: 'End Game' });
-
     })
   }
 
@@ -145,7 +131,7 @@ function App() {
 
     if (num === questions[currentLevel].answer_correct) {
 
-      // if answered the last question correctly, they won!
+      // if the last question was answered correctly, they won!
       if (currentLevel === 14) {
         batch(() => {
           dispatch({ type: 'toggleFinalAnswerVisible '});
@@ -190,7 +176,7 @@ function App() {
       const queryRef = await collRef.where('question', '==', questions[currentLevel].question).get();
   
       if (queryRef.empty) {
-        console.log('No doc exists.');
+        console.warn('No doc exists.');
       }
       else {
   
@@ -234,7 +220,7 @@ function App() {
   useEffect(() => {
     if (selectedAnswer !== null) {
       // show popup for 'Final Answer?'
-      changeFinalAnswerVisible();
+      dispatch({ type: 'toggleFinalAnswerVisible' });
     }
   }, [selectedAnswer]);
 
@@ -269,12 +255,8 @@ function App() {
       {gameState === 4  && <GameOver homeScreen={homeScreen} level={moneyArr[currentLevel]} /> }
 
       {gameState >= 1 && <Sidebar moneyArr={moneyArr} />}
-
-      {finalAnswerVisible 
-        ? <FinalAnswer
-            changeVisible={changeFinalAnswerVisible}
-            isAnswerCorrect={isAnswerCorrect} />
-        : null}
+      {finalAnswerVisible && <FinalAnswer isAnswerCorrect={isAnswerCorrect} />}
+      {viewLifeLineModal &&  <LifeLineModal /> }
 
       {answerMessageVisible 
         ? <AnswerPopup
@@ -287,7 +269,6 @@ function App() {
             nextQuestion={nextQuestion} /> 
         : null}
 
-      {viewLifeLineModal &&  <LifeLineModal /> }
 
       {viewAskTheAudienceModal 
         ? <AskTheAudienceModal 
