@@ -10,8 +10,8 @@ const AnswerContainer = (props) => {
 
     const answers = questions[currentLevel];
 
+    /* This is used to pass the selected color (orange) to the correct Answer component */
     let bgColors = [,,,];
-
     bgColors[props.answerSelected] = 'orange';
 
     return (

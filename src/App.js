@@ -39,7 +39,6 @@ function App() {
   const finalAnswerVisible = useSelector(state => state.finalAnswerVisible);
   const answerMessageOpacity = useSelector(state => state.answerMessageOpacity);
   const answerMessageScale = useSelector(state => state.answerMessageScale);
-  const correctAnswerText = useSelector(state => state.correctAnswerText);
   const answerMessageVisible = useSelector(state => state.answerMessageVisible);
   const answerButtonText = useSelector(state => state.answerButtonText);
 
@@ -58,10 +57,6 @@ function App() {
   };
 
   const changeViewAskTheAudienceModal = () => {
-    dispatch({ type: 'toggleViewAskTheAudienceModal' });
-  }
-
-  const hideAskTheAudienceModal = () => {
     dispatch({ type: 'toggleViewAskTheAudienceModal' });
   }
 
@@ -258,22 +253,11 @@ function App() {
       {finalAnswerVisible && <FinalAnswer isAnswerCorrect={isAnswerCorrect} />}
       {viewLifeLineModal &&  <LifeLineModal /> }
 
-      {answerMessageVisible 
-        ? <AnswerPopup
-            correctAnswerText={correctAnswerText}
-            op={answerMessageOpacity}
-            sc={answerMessageScale}
-            answers={questions[currentLevel]}
-            correctAnswer={questions[currentLevel].answer_correct}
-            answer_popup_button={answerButtonText}
-            nextQuestion={nextQuestion} /> 
-        : null}
-
+      {answerMessageVisible && <AnswerPopup nextQuestion={nextQuestion} /> }
 
       {viewAskTheAudienceModal 
         ? <AskTheAudienceModal 
             answer={questions[currentLevel]} 
-            hideAskTheAudienceModal={hideAskTheAudienceModal} 
             changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> 
         : null}
 
