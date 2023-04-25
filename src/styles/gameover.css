@@ -45,7 +45,7 @@
     bottom: 10%;
     transform: translateX(-50%);
     padding: 15px 25px;
-    border-radius: 5px;
+    border-radius: .625rem;
     background-color: orange;
     color: white;
     font-size: 2rem;

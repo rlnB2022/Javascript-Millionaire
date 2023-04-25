@@ -125,8 +125,6 @@ export const getStats = async () => {
       snapshotFriends.forEach(doc => {
         newArr.push(doc.data());
       });
-
-      console.log(newArr);
     
       store.dispatch({ type: 'setFriends', friends: newArr})
     } catch (err) {

@@ -19,7 +19,7 @@ const StartGame = () => {
         setTimeout(() => {
             batch(() => {
             //   dispatch({ type: 'updateSideBar' });
-              dispatch({ type: 'changeTimerInitSeconds', amount: 300});
+              dispatch({ type: 'changeTimerInitSeconds', amount: 30});
               dispatch({ type: 'advanceGameState' });
             })
         }, 500);
