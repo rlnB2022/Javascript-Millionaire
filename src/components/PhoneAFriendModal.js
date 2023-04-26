@@ -4,33 +4,24 @@ import Friend from './Friend';
 import { useEffect, useState } from 'react';
 import { batch, useDispatch, useSelector } from 'react-redux';
 
-const PhoneAFriendModal = (props) => {
+const PhoneAFriendModal = ({changePhoneAFriendSuggestion}) => {
 
+    // setup local state
     const [activeFriend, setActiveFriend] = useState(0);
     const [buttonText, setButtonText] = useState('Call');
-    const [isPhoneAFriendModalHidden, setIsPhoneAFriendModalHidden] = useState(false);
     const [callTimeLeft, setCallTimeLeft] = useState(10);
     const [suggestion, setSuggestion] = useState('');
     const [showSuggestion, setShowSuggestion] = useState(false);
     const [visibleFriends, setVisibleFriends] = useState(true);
     const [friendAnswer, setFriendAnswer] = useState('');
 
+    // get global state from the store
     const questions = useSelector(state => state.questions);
     const currentLevel = useSelector(state => state.currentLevel);
     const friends = useSelector(state => state.friends);
-
     const answers = questions[currentLevel] ;
 
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (isPhoneAFriendModalHidden) {
-            const myTimer = setTimeout(() => {
-                dispatch({ type: 'toggleViewPhoneAFriendModal' });
-                clearTimeout(myTimer);
-            }, 500);
-        }
-    }, [isPhoneAFriendModalHidden]);
 
     useEffect(() => {
         const callTimer = setTimeout(() => {
@@ -63,13 +54,13 @@ const PhoneAFriendModal = (props) => {
         if(!visibleFriends) {
             const friendTimer = setTimeout(() => {
                 const friendElems = document.querySelectorAll('.friend-hidden');
-    
+
                 [...friendElems].map(e => e.style.display = 'none');
-    
+
                 setShowSuggestion(true);
-    
+
             }, 500);
-    
+
             return () => clearTimeout(friendTimer);
         }
     }, [visibleFriends]);
@@ -85,9 +76,11 @@ const PhoneAFriendModal = (props) => {
 
     const btnCall = () => {
         // randomly pick one of the remaining answers
+        // After the user clicks the Call button, the suggestion will display
+        // Then, the user will click the same button to dismiss the modal
 
         if(buttonText.search('Call') === 0) {
-            setSuggestion(props.changePhoneAFriendSuggestion());
+            setSuggestion(changePhoneAFriendSuggestion());
 
             setVisibleFriends(false);
         }
@@ -101,10 +94,12 @@ const PhoneAFriendModal = (props) => {
         
     };
 
+    /* Set the active friend */
     function changeFriend(key) {
         setActiveFriend(key);
     }
 
+    /* When the activeFriend changes, change the button text to read the friend's name */
     useEffect(() => {
         if(friends[activeFriend] && friends[activeFriend].name) {
             setButtonText(`Call ${friends[activeFriend].name}`);
@@ -114,6 +109,7 @@ const PhoneAFriendModal = (props) => {
         }
     }, [activeFriend]);
 
+    /* When the component mounts, start the local timer and disable lifelines */
     useEffect(() => {
         batch(() => {
             dispatch({ type: 'toggleTimerVisible' });
@@ -122,7 +118,7 @@ const PhoneAFriendModal = (props) => {
     }, []);
 
     return (
-        <div className={`phone-a-friend-modal__container ${isPhoneAFriendModalHidden ? 'hide-modal' : 'show-modal'}`}>
+        <div className={`phone-a-friend-modal__container show-modal}`}>
             <div className='phone-a-friend-modal__inner'>
                 <img className='lifeline-image' src={phoneafriend} alt="modal__image" />
                 {showSuggestion 

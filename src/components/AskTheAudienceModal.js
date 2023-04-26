@@ -3,21 +3,26 @@ import asktheaudience from '../asktheaudience.png';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const AskTheAudienceModal = (props) => {
+const AskTheAudienceModal = () => {
     const dispatch = useDispatch();
     
     const visibleAnswers = useSelector(state => state.visibleAnswers);
+    const questions = useSelector(state => state.questions);
+    const currentLevel = useSelector(state => state.currentLevel);
+
+    const answers = questions[currentLevel];
+
     const [arrPct, setArrPct] = useState([100, 100, 100, 100]);
 
     useEffect(() => {
         // Get total number of answers
-        const arrUserAnswers = [props.answer.user_selected_1, props.answer.user_selected_2, props.answer.user_selected_3, props.answer.user_selected_4];
+        const arrUserAnswers = [answers.user_selected_1, answers.user_selected_2, answers.user_selected_3, answers.user_selected_4];
         const total = arrUserAnswers.reduce((a, b) => a + b);
 
         // get perentages of each answer
-        const pctAnswerOne = Math.round((props.answer.user_selected_1 / total) * 100) || 0;
-        const pctAnswerTwo = Math.round((props.answer.user_selected_2 / total) * 100) || 0;
-        const pctAnswerThree = Math.round((props.answer.user_selected_3 / total) * 100) || 0;
+        const pctAnswerOne = Math.round((answers.user_selected_1 / total) * 100) || 0;
+        const pctAnswerTwo = Math.round((answers.user_selected_2 / total) * 100) || 0;
+        const pctAnswerThree = Math.round((answers.user_selected_3 / total) * 100) || 0;
         const pctAnswerFour = 100 - pctAnswerOne - pctAnswerTwo - pctAnswerThree || 0;
         
         // store percentages in an array
@@ -32,7 +37,7 @@ const AskTheAudienceModal = (props) => {
             }
         });
 
-        // wait for Modal to mount, then animate bars
+        // wait for component to mount, then set the array which will animate the bars
         const audienceTimeout = setTimeout(() => {
             clearTimeout(audienceTimeout);
 

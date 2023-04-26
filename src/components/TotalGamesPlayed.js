@@ -6,9 +6,7 @@ import { useEffect, useState } from 'react';
 const TotalGamesPlayed = () => {
     const [gamesPlayed, setTotalGamesPlayed] = useState();
 
-    /**
-     * sets state to the total number of winners
-     */
+    /* When the component mounts, set the local state to the total number of winners */
     useEffect(() => {
         let isMounted = true;
         // create the async data fetching function
@@ -20,7 +18,7 @@ const TotalGamesPlayed = () => {
                 setTotalGamesPlayed(totalGamesPlayed);
             }
         }
-        // call the above function to run when the component first loads and catch any errors
+        // call the above function to run when the component first loads - catch any errors
         fetchGamesPlayed().catch(console.error);
 
         // cancel any future setTotalGamesPlayed

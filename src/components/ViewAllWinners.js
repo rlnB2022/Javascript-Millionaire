@@ -14,6 +14,7 @@ const ViewAllWinners = ({showViewAllWinners}) => {
         }, 600);
     };
 
+    /* When the component mounts, get the list of winners to display */
     useEffect(() => {
         let isMounted = true;
         // create the async data fetching function

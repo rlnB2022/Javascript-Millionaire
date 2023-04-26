@@ -12,6 +12,8 @@ const LifeLineModal = () => {
 
     const imgs = [fiftyfifty, phoneafriend, asktheaudience];
     const lifelineName = ['50:50', 'Phone A Friend', 'Ask the Audience'];
+
+    /* Using local state to show/hide the modal - which adds a class using animation */
     const [isHidden, setIsHidden] = useState(false);
 
     const lifeLineIndex = useSelector(state => state.lifeLineIndex);
@@ -20,15 +22,13 @@ const LifeLineModal = () => {
 
     const dispatch = useDispatch();
 
+    /* The user clicked no, only toggle the lifeline modal */
     const handleClickNo = () => {
         dispatch({ type: 'toggleViewLifeLineModal' });
     };
 
+    /* The user clicked yes, hide the modal and handle the lifeline effects */
     const handleClickYes = () => {
-        hideModal();
-    };
-
-    const hideModal = () => {
         setIsHidden(true);
         
         if (lifeLineIndex === 0) {

@@ -2,7 +2,7 @@ import '../styles/AnswerContainer.css';
 import Answer from './Answer';
 import { useSelector } from 'react-redux';
 
-const AnswerContainer = (props) => {
+const AnswerContainer = ({answerSelected, changeFinalAnswerVisible}) => {
 
     const answerState = useSelector(state => state.answerState);
     const questions = useSelector(state => state.questions);
@@ -12,7 +12,7 @@ const AnswerContainer = (props) => {
 
     /* This is used to pass the selected color (orange) to the correct Answer component */
     let bgColors = [,,,];
-    bgColors[props.answerSelected] = 'orange';
+    bgColors[answerSelected] = 'orange';
 
     return (
         <div className='answer-container'>
@@ -21,17 +21,17 @@ const AnswerContainer = (props) => {
                 bgColor={bgColors[0]}
                 letter='A:'
                 answer={answers.answer_1}
-                changeFinalAnswerVisible={props.changeFinalAnswerVisible}
+                changeFinalAnswerVisible={changeFinalAnswerVisible}
             /> : null}
             {answerState >= 1 ? <Answer
                 answerIndex={1}
-                changeFinalAnswerVisible={props.changeFinalAnswerVisible}
+                changeFinalAnswerVisible={changeFinalAnswerVisible}
                 bgColor={bgColors[1]}
                 letter='B:'
                 answer={answers.answer_2} /> : null}
             {answerState >= 2 ? <Answer
                 answerIndex={2}
-                changeFinalAnswerVisible={props.changeFinalAnswerVisible}
+                changeFinalAnswerVisible={changeFinalAnswerVisible}
                 bgColor={bgColors[2]}
                 letter='C:'
                 answer={answers.answer_3}

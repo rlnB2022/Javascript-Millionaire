@@ -17,8 +17,6 @@ const initialState = {
     timerVisible: false,
     timerInitSeconds: 0,
     finalAnswerVisible: false,
-    answerMessageOpacity: 0,
-    answerMessageScale: 0,
     correctAnswerText: 'Incorrect',
     answerMessageVisible: false,
     answerButtonText: 'End Game',
@@ -52,8 +50,6 @@ const storeReducer = (state = initialState, action) => {
                 timerVisible: false,
                 timerInitSeconds: 0,
                 finalAnswerVisible: false,
-                answerMessageOpacity: 0,
-                answerMessageScale: 0,
                 correctAnswerText: 'Incorrect',
                 answerMessageVisible: false,
                 answerButtonText: 'End Game',
@@ -202,16 +198,6 @@ const storeReducer = (state = initialState, action) => {
             return {
                 ...state,
                 answerMessageVisible: !state.answerMessageVisible
-            }
-        case 'setAnswerMessageOpacity':
-            return {
-                ...state,
-                answerMessageOpacity: action.amount
-            }
-        case 'setAnswerMessageScale':
-            return {
-                ...state,
-                answerMessageScale: action.amount
             }
         case 'toggleViewLifeLineModal':
             return {

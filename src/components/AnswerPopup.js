@@ -1,7 +1,7 @@
 import '../styles/answerpopup.css';
 import { useSelector } from 'react-redux';
 
-const AnswerPopup = (props) => {
+const AnswerPopup = ({nextQuestion}) => {
 
     /* Get the questions, answers and text from the store */
     const questions = useSelector(state => state.questions);
@@ -19,7 +19,7 @@ const AnswerPopup = (props) => {
             <div className='answer-popup-container'>
                 <div className='answer-popup__message answer-popup__padding'>{correctAnswerText}</div>
                 <div className='answer-popup__correct answer-popup__padding'>{choices[correctAnswer - 1]}</div>
-                <div className='answer-popup__button answer-popup__padding' onClick={props.nextQuestion}>{answerButtonText}</div>
+                <div className='answer-popup__button answer-popup__padding' onClick={nextQuestion}>{answerButtonText}</div>
             </div>
         </div>
     )

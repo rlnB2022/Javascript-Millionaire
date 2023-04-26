@@ -18,6 +18,7 @@ const Sidebar = (props) => {
         level={15 - idx}
         money={e} />);
 
+    /* When the component mounts, delay 1/10 of a second, then display the sidebar (animates in thorugh the class) */
     useEffect(() => {
         setTimeout(() => {
             setVisible(true);

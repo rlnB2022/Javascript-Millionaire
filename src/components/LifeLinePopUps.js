@@ -8,9 +8,7 @@ const LifeLinePopUps = () => {
 
     return (
         <div className="lifeline-popups">
-            {timerVisible 
-                ? <Timer/> 
-                : null}
+            {timerVisible && <Timer/>}
             <CurrentMoney />
         </div>
     )

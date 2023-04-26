@@ -8,16 +8,12 @@ const Winners = () => {
     const [ totalWinners, setTotalWinners] = useState('');
     const [ viewAllWinnersVisible, setViewAllWinnersVisible ] = useState(false);
 
-    /**
-     * Display all winners toggle
-     */
+    /* Toggle the winners to display */
     const showViewAllWinners = () => {
         setViewAllWinnersVisible(!viewAllWinnersVisible);
     };
 
-    /**
-     * sets state to the total number of winners
-     */
+    /* sets local state to the total number of winners */
     useEffect(() => {
         let isMounted = true;
         // create the async data fetching function

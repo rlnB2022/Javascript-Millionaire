@@ -1,7 +1,7 @@
 import '../styles/finalanswer.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-const FinalAnswer = (props) => {
+const FinalAnswer = ({isAnswerCorrect}) => {
 
     const dispatch = useDispatch();
 
@@ -13,6 +13,7 @@ const FinalAnswer = (props) => {
 
     const choices = [answers.answer_1, answers.answer_2, answers.answer_3, answers.answer_4];
 
+    /* Hide the Final Answer component */
     const changeVisible = () => {
         dispatch({ type: 'toggleFinalAnswerVisible' });
     };
@@ -30,7 +31,7 @@ const FinalAnswer = (props) => {
                     <div className='final-answer-btn final-answer-no' onClick={changeVisible}>
                         <p>No</p>
                     </div>
-                    <div className='final-answer-btn final-answer-yes' onClick={() => props.isAnswerCorrect(selectedAnswer + 1)}>
+                    <div className='final-answer-btn final-answer-yes' onClick={() => isAnswerCorrect(selectedAnswer + 1)}>
                         <p>Yes</p>
                     </div>
                 </div>

@@ -37,8 +37,6 @@ function App() {
   
   const selectedAnswer = useSelector(state => state.selectedAnswer);
   const finalAnswerVisible = useSelector(state => state.finalAnswerVisible);
-  const answerMessageOpacity = useSelector(state => state.answerMessageOpacity);
-  const answerMessageScale = useSelector(state => state.answerMessageScale);
   const answerMessageVisible = useSelector(state => state.answerMessageVisible);
   const answerButtonText = useSelector(state => state.answerButtonText);
 
@@ -55,10 +53,6 @@ function App() {
     dispatch({ type: 'resetGame' });
     getQuestions();
   };
-
-  const changeViewAskTheAudienceModal = () => {
-    dispatch({ type: 'toggleViewAskTheAudienceModal' });
-  }
 
   const nextQuestion = () => {
 
@@ -241,6 +235,8 @@ function App() {
     return <h1>Loading...</h1>;
   }
 
+  
+
   return (
     <div className='app'>
       {gameState === 0 && <StartGame />}
@@ -255,11 +251,7 @@ function App() {
 
       {answerMessageVisible && <AnswerPopup nextQuestion={nextQuestion} /> }
 
-      {viewAskTheAudienceModal 
-        ? <AskTheAudienceModal 
-            answer={questions[currentLevel]} 
-            changeViewAskTheAudienceModal={changeViewAskTheAudienceModal} /> 
-        : null}
+      {viewAskTheAudienceModal && <AskTheAudienceModal /> }
 
       {viewPhoneAFriendModal 
         ? <PhoneAFriendModal 

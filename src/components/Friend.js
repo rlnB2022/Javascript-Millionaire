@@ -1,17 +1,19 @@
 import '../styles/Friend.css';
 import { useState, useEffect } from 'react';
 
-const Friend = (props) => {
+const Friend = ({activeFriend, changeFriend, friendIsVisible, friendNum, name}) => {
 
     const [bColor, setBorderColor] = useState('gray');
     const [friendHasChanged, setFriendHasChanged] = useState(false);
     
+    /* Set the border to the selected/active friend */
     function changeBorderColor(color) {
         setBorderColor(color);
     }
 
+    /* When the active friend changes, update local state, if necessary - change the border color */
     useEffect(() => {
-        if(props.activeFriend === props.friendNum) {
+        if(activeFriend === friendNum) {
             changeBorderColor('orange');
             setFriendHasChanged(true);
 
@@ -23,18 +25,18 @@ const Friend = (props) => {
             setFriendHasChanged(false);
             changeBorderColor('#0172FF');
         }
-    }, [props.activeFriend]);
+    }, [activeFriend]);
 
     return (
         <div 
-            className={`friend ${props.friendIsVisible 
+            className={`friend ${friendIsVisible 
                 ? '' 
                 : 'friend-hidden'} ${friendHasChanged 
                     ? 'profile-bounce' 
                     : 'profile-bounce-back'}`} 
             style={{borderColor: bColor}} 
-            onClick={() => props.changeFriend(props.friendNum)}>
-                <div>{props.name}</div>
+            onClick={() => changeFriend(friendNum)}>
+                <div>{name}</div>
         </div>
     )
 };

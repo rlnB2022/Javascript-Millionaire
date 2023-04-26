@@ -3,20 +3,19 @@ import firebase from '../firebase';
 import { useState } from 'react';
 
 const MillionaireWinner = ({homeScreen}) => {
-    const [winnerName, setWinnerName] = useState('');
+    const [winnerName, setWinnerName] = useState('Anonymous Winner');
 
     // submit button
     const handleClick = () => {
-        // if user has entered a name
-        if(winnerName.length) {
-            // get today's date
-            const d = new Date();
-            const newDate = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
-        
-            const res = firebase.firestore().collection('winners').add({ name: winnerName, date: newDate });
-        
-            homeScreen();
-        }
+        // get today's date
+        const d = new Date();
+        const newDate = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+    
+        // store name in the firebase database
+        const res = firebase.firestore().collection('winners').add({ name: winnerName, date: newDate });
+    
+        // back to the home screen
+        homeScreen();
     };
 
     return (
@@ -34,7 +33,7 @@ const MillionaireWinner = ({homeScreen}) => {
                     onFocus={event => event.target.select()}
                     type='text' 
                     value={winnerName} />
-                <div className='submit-name' onClick={handleClick}>Submit</div>
+                <button className='submit-name' disabled={!winnerName.length} onClick={handleClick}>Submit</button>
             </div>
         </div>
     )

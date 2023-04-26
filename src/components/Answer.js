@@ -2,7 +2,7 @@ import '../styles/answer.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-const Answer = (props) => {
+const Answer = ({answer, answerIndex, bgColor, letter}) => {
 
     const visibleAnswers = useSelector(state => state.visibleAnswers);
     const dispatch = useDispatch();
@@ -21,10 +21,10 @@ const Answer = (props) => {
 
     return (
         <div 
-            className={`answer ${props.bgColor} ${!visibleAnswers.includes(props.answerIndex) ? 'hide-answer' : 'answer-visible'}`} 
-            onClick={() => changeAnswerSelected(props.answerIndex)}>
+            className={`answer ${bgColor} ${!visibleAnswers.includes(answerIndex) ? 'hide-answer' : 'answer-visible'}`} 
+            onClick={() => changeAnswerSelected(answerIndex)}>
             <div className='answer-text'>
-                <span>{props.letter}</span><p>{props.answer}</p>
+                <span>{letter}</span><p>{answer}</p>
             </div>
         </div>
     )

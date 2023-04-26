@@ -1,10 +1,10 @@
 import '../styles/stats.css';
 
-const Stats = (props) => {
+const Stats = ({gamesPlayed}) => {
 
     return (
         <div className="stats">
-            <h2 className='games-played'>Total Games Played: {props.gamesPlayed}</h2>
+            <h2 className='games-played'>Total Games Played: {gamesPlayed}</h2>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 const ShowPreGameText = ({ text }) => {
     const dispatch = useDispatch();
 
-    /* When this component loads, display the text, delay for 1 second1, then advance the game state */
+    /* When this component loads, display the text, delay for 1 second, then advance the game state */
     useEffect(() => {
         const preGameTimeout = setTimeout(() => {
             clearTimeout(preGameTimeout);

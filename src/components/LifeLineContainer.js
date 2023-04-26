@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 const LifeLineContainer = () => {
 
+    /* These values hold the boolean for whether they are displayed or not */
     const lifeLineFiftyFifty = useSelector(state => state.lifeLineFiftyFifty);
     const lifeLinePhoneAFriend = useSelector(state => state.lifeLinePhoneAFriend);
     const lifeLineAskTheAudience = useSelector(state => state.lifeLineAskTheAudience);
@@ -13,17 +14,17 @@ const LifeLineContainer = () => {
             {lifeLineFiftyFifty 
                 ? <LifeLine 
                     lifeLineIndex={0}
-                    alt='50:50 LifeLine' /> 
+                    altText='50:50 LifeLine' /> 
                 : <div></div>}
             {lifeLinePhoneAFriend 
                 ? <LifeLine 
                     lifeLineIndex={1}
-                    alt='Phone A Friend LifeLine' /> 
+                    altText='Phone A Friend LifeLine' /> 
                 : <div></div>}
             {lifeLineAskTheAudience 
                 ? <LifeLine 
                     lifeLineIndex={2}
-                    alt='Ask The Audience LifeLine' /> 
+                    altText='Ask The Audience LifeLine' /> 
                 : <div></div>}
         </div>
     );

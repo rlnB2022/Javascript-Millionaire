@@ -1,7 +1,7 @@
 import '../styles/question.css';
 import { useSelector } from 'react-redux';
 
-const Question = (props) => {
+const Question = () => {
     const questions = useSelector(state => state.questions);
     const currentLevel = useSelector(state => state.currentLevel);
 

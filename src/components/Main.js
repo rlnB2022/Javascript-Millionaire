@@ -6,12 +6,12 @@ import '../styles/main.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 
-const Main = (props) => {
+const Main = ({answerSelected, questionID}) => {
     const mainState = useSelector(state => state.mainState);
     const answerState = useSelector(state => state.answerState);
     const dispatch = useDispatch();
 
-    /* When the main component mounts, introduce each of the components below one after the other */
+    /* When the main component mounts, introduce each of the components below, one after the other */
     useEffect(() => {
         const mainTimeout = setInterval(() => {
             dispatch({ type: 'advanceMainState' });
@@ -19,6 +19,8 @@ const Main = (props) => {
                 clearInterval(mainTimeout);
             }
         }, 1000);
+        /* Cleanup: clear the interval from memory */
+        return () => clearInterval(mainTimeout);
     }, []);
 
     useEffect(() => {
@@ -32,20 +34,10 @@ const Main = (props) => {
 
     return (
         <div className='main'>
-            {mainState >= 0 
-                ? <LifeLineContainer />
-                : null}
-            {mainState >= 1 
-                ? <LifeLinePopUps /> 
-                : null}
-            {mainState >= 2 
-                ? <Question
-                    questionID={props.questionID}/> 
-                : null}
-            {mainState >= 3 
-                ? <AnswerContainer
-                    answerSelected={props.answerSelected}/> 
-                : null}
+            {mainState >= 0 && <LifeLineContainer />}
+            {mainState >= 1 && <LifeLinePopUps />}
+            {mainState >= 2 && <Question questionID={questionID}/>}
+            {mainState >= 3 && <AnswerContainer answerSelected={answerSelected}/>}
         </div>
     );
 }
