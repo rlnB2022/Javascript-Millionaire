@@ -4,8 +4,9 @@ https://user-images.githubusercontent.com/5834000/134794913-abec9501-9965-4ebe-9
 
 # Project Description
 
-This project was created to further my React knowledge using React, Firebase, and a Firestore database.
-The idea behind this was it could be used to help new Javascript developers learn while playing the game.
+I created this project in 2021 to further my React knowledge using React 17, Firebase, useState/useEffect hooks and a Firestore database. I thought that this would be a fun project to create and that I could use this app to help new Javascript developers learn Javascript while playing the game.
+
+Now, after being employed as a React Software Engineer for a company, I have revisited this project to apply a lot of what I have learned. One, was implementing React redux to manage state.
 
 The game has 3 lifelines:
 * Ask the Audience - Each question records each answer the user gives to the database, so I can then use this data to create a bar graph representing the percentage of the audience that answered each question. It is then up to the user to choose the answer they believe is correct.
@@ -18,7 +19,8 @@ There is a 30-second timer which I added as a component. It tracks the seconds i
 
 This project is created with:
 
-* React - using useState and useEffect Hooks.
+* React 17 - using useState and useEffect Hooks.
+* Redux - Maintaining state globally in a store
 * Firebase - using Firestore database CRUD operations.
 * HTML 5
 * CSS 3
