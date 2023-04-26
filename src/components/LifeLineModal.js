@@ -42,10 +42,14 @@ const LifeLineModal = () => {
             incorrectAnswers.splice(correctAnswer, 1);
       
             // randomly choose one of these answers to stay
-            const chosenNumber = Math.floor(Math.random() * incorrectAnswers.length);
+            const chosenNumber = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
+            console.log('chosenNumber', chosenNumber);
       
             // remove chosenNumber from array leaving only answers that should be hidden
             incorrectAnswers.splice(chosenNumber, 1);
+            console.log('incorrectAnswers', incorrectAnswers);
+
+            console.log([correctAnswer, chosenNumber]);
 
             dispatch({ type: 'visibleAnswers', visibleAnswers: [correctAnswer, chosenNumber]});
 
