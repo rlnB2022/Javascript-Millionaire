@@ -36,12 +36,10 @@ I used SVG images for each question/answer. I ran into a problem where the SVGs 
 
 # What I learned
 
-I learned that React is the library that was just made for me. I love it! I understand that TailwindCSS and React work well together so I can't wait to try that. Firestore databases are amazing. Coming from a SQL background, using a noSQL database with documents wasn't as difficult as I thought it would be.
-
-I've learned that I get really excited when talking about React. It's the tech that I want to use in my first development job!
+I learned that React is the library that was just made for me. I love it! Firestore databases are amazing. Coming from a SQL background, using a noSQL database with documents wasn't as difficult as I thought it would be. Implementing React Redux to manage the state of the app was also not as difficult as I expected. Although, my last employer used Flux, so it was easy to adapt and learn.
 
 # Takeaways
 
-So far, this has been a really fun project to work on. I finished working on this project September 26, 2021...late into the night. Deployed on Github Pages.
+This was  a really fun project to create. I finished working on this project September 26, 2021...late into the night. Deployed on Github Pages.
 
 Thanks for reading!
