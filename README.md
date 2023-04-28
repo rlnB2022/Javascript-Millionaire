@@ -19,7 +19,7 @@ There is a 30-second timer which I added as a component. It tracks the seconds i
 
 This project is created with:
 
-* React 17 - using useState and useEffect Hooks.
+* React 17 - useState and useEffect Hooks.
 * Redux - Maintaining state globally in a store
 * Firebase - using Firestore database CRUD operations.
 * HTML 5
