@@ -1,3 +1,7 @@
+<div id="header" align="center">
+  <img src="https://media.giphy.com/media/M9gbBd9nbDrOTu1Mqx/giphy.gif" width="100"/>
+</div>
+
 # Javascript Millionaire
 
 https://user-images.githubusercontent.com/5834000/134794913-abec9501-9965-4ebe-9335-ac65ccfd3f08.mp4
