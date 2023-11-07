@@ -11,7 +11,7 @@ Now, after being employed as a React Software Engineer for an amazing company, I
 The game has 3 lifelines:
 * Ask the Audience - Each question records each answer the user selects to the database, so I can then use this data to create a bar graph representing the percentage of the audience that answered each question. It is then up to the user to choose the answer they believe is correct.
 * 50:50 - Selecting this lifeline RANDOMLY removes two of the four available answers, leaving the correct answer and one other.
-* Phone A Friend - This randomly choose from a choice of 'friends' to help them with the question. Their answers aren't always correct. Depending on the difficulty of the question, their suggestion accuracy diminishes.
+* Phone A Friend - This randomly chooses from a selection of 'friends' to help them with the question. Their answers aren't always correct. Depending on the difficulty of the question, their suggestion accuracy diminishes.
 
 # Technologies Used
 
@@ -34,10 +34,10 @@ This project is created with:
 
 # What I learned
 
-I learned that React is the library that was just made for me. I love it! Firestore databases are amazing. Coming from a SQL background, a noSQL database with documents wasn't as difficult as I thought it would be. Implementing React Redux to manage the state of the app was also not as difficult as I expected, either. At my last job, we used Flux, so it was easy to adapt and learn.
+I learned that React is the library that was just made for me. I love it! Firestore databases are amazing. Coming from a SQL background, a noSQL database with documents wasn't as difficult as I thought it would be. Implementing React Redux to manage the state of the app was also not as difficult as I expected, either. At my current job, we used Flux, so it was easy to adapt and learn.
 
 # Takeaways
 
-This was  a really fun project to create. I finished working on this project September 26, 2021...late into the night. Deployed on Github Pages.
+This was a really fun project to create. I finished working on this project September 26, 2021...late into the night. Deployed on Github Pages.
 
 Thanks for reading!
