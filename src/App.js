@@ -2,7 +2,7 @@
 import './styles/App.css';
 
 // components
-import StartGame from './components/StartGame';
+import StartGame from './components/StartGame/StartGame';
 import ShowPreGameText from './components/ShowPreGameText';
 import Main from './components/Main';
 import Sidebar from './components/Sidebar';
@@ -234,8 +234,6 @@ function App() {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-
-  
 
   return (
     <div className='app'>

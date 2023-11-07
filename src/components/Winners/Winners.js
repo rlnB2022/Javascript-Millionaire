@@ -1,7 +1,7 @@
-import '../styles/Winners.css';
+import '../../styles/Winners.css';
 import { BiTrophy } from 'react-icons/bi';
-import ViewAllWinners from './ViewAllWinners';
-import { getWinners } from '../utils/utils';
+import ViewAllWinners from '../ViewAllWinners';
+import { getWinners } from '../../utils/utils';
 import { useEffect, useState } from 'react';
 
 const Winners = () => {

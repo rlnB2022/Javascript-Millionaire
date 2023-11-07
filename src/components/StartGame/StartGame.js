@@ -1,8 +1,8 @@
-import '../styles/startgame.css';
-import imgTitle from '../logo.png';
-import UserActions from './UserActions';
+import '../../styles/startgame.css';
+import imgTitle from '../../logo.png';
+import UserActions from '../UserActions';
 import { useState } from 'react';
-import { storeGamePlayed } from '../utils/utils';
+import { storeGamePlayed } from '../../utils/utils';
 import { useDispatch, batch } from 'react-redux';
 
 const StartGame = () => {

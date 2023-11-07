@@ -1,5 +1,5 @@
 import '../styles/UserActions.css';
-import Winners from './Winners';
+import Winners from './Winners/Winners';
 import TotalGamesPlayed from './TotalGamesPlayed';
 
 const UserActions = () => {
