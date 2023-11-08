@@ -1,93 +1,93 @@
 .lifeline__modal--container {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, .9);
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.9);
 }
 
-.lifeline__modal{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    border: 3px solid orange;
-    width: 80%;
-    text-align: center;
-    color: #000;
-    padding: 3rem;
-    border-radius: 10px;
-    background-color: gray;
+.lifeline__modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	border: 3px solid orange;
+	width: 80%;
+	text-align: center;
+	color: #000;
+	padding: 3rem;
+	border-radius: 10px;
+	background-color: gray;
 }
 
 .lifeline__modal img {
-    position: absolute;
-    width: 10rem;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
+	position: absolute;
+	width: 10rem;
+	top: -20%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .lifeline__modal p {
-    width: 80%;
-    margin: 0 auto;
-    line-height: 1.5rem;
-    padding: 20px;
+	width: 80%;
+	margin: 0 auto;
+	line-height: 1.5rem;
+	padding: 20px;
 }
 
 .lifeline__modal--options {
-    display: flex;
+	display: flex;
 }
 
 .lifeline__modal--option-no {
-    flex: 1;
-    background-color: red;
+	flex: 1;
+	background-color: red;
 }
 
 .lifeline__modal--option-yes {
-    flex: 1;
-    background-color: green;
+	flex: 1;
+	background-color: green;
 }
 
 .lifeline__button {
-    padding: 10px 15px;
-    color: #fff;
-    font-size: 2rem;
-    cursor: pointer;
+	padding: 10px 15px;
+	color: #fff;
+	font-size: 2rem;
+	cursor: pointer;
 }
 
 .lifeline__button:hover {
-    filter: brightness(90%);
+	filter: brightness(90%);
 }
 
 .show-modal {
-    animation: showModal .4s ease-in-out forwards;
+	animation: showModal 0.4s ease-in-out forwards;
 }
 
 .hide-modal {
-    animation: hideModal .4s ease-in-out forwards;
+	animation: hideModal 0.4s ease-in-out forwards;
 }
 
 @keyframes showModal {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 @keyframes hideModal {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 
 @media screen and (min-width: 768px) {
-    .lifeline__modal {
-        width: 30%;
-        transform: translate(-100%, -50%);
-    }   
+	.lifeline__modal {
+		width: 30%;
+		transform: translate(-50%, -50%);
+	}
 }

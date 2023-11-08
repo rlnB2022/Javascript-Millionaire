@@ -26,12 +26,13 @@ const Timer = () => {
 			return;
 		}
 
-		const timer = setTimeout(() => {
-			setSeconds(seconds - 1);
-		}, 1000);
-
-		return () => clearTimeout(timer);
-	}, [seconds]);
+		if (timerVisible) {
+			const timer = setTimeout(() => {
+				setSeconds(seconds - 1);
+			}, 1000);
+			return () => clearTimeout(timer);
+		}
+	}, [timerVisible, seconds]);
 
 	return (
 		<div className={`timer ${timerVisible ? "show-timer" : ""}`}>
