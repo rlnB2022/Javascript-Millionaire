@@ -1,69 +1,68 @@
 .start-game {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    transition: opacity .4s;
-    padding: 1.25rem;
-    width: 100%;
+	position: relative;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	transition: opacity 0.4s;
+	padding: 1.25rem;
+	width: 100%;
 }
 
 .start-game-bottom {
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	text-align: center;
 }
 
 button.start-game-button {
-    width: 90%;
-    margin: 0 auto;
-    padding: 0.625rem 0;
-    border-radius: 0.625rem;
-    background-color: orange;
-    color: white;
-    font-size: 1.5rem;
-    height: 10vh;
-    cursor: pointer;
-    transition: .3s ease-in-out;
+	width: 90%;
+	margin: 0 auto;
+	padding: 0.625rem 0;
+	border-radius: 0.625rem;
+	background-color: orange;
+	color: white;
+	font-size: 1.5rem;
+	height: 10vh;
+	cursor: pointer;
+	transition: 0.3s ease-in-out;
 }
 
 .start-game-button:hover {
-    background-color: white;
-    color: orange;
-    font-size: 2.5rem;
-    font-weight: bold;
+	background-color: white;
+	color: orange;
+	font-weight: bold;
 }
 
 .title-img {
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
 }
 
 .created-by {
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    font-size: .75rem;
+	text-align: center;
+	color: white;
+	text-transform: uppercase;
+	font-size: 0.75rem;
 }
 
-.created-by a:active, .created-by a:visited {
-    color: white;
+.created-by a:active,
+.created-by a:visited {
+	color: white;
 }
 
 .fade-out-start-game {
-    opacity: 0;
+	opacity: 0;
 }
 
 @media screen and (min-width: 768px) {
- 
-    button.start-game-button {
-        width: 20%;
-    }
-    
-    .title-img {
-        width: auto;
-    }
+	button.start-game-button {
+		width: 20%;
+	}
+
+	.title-img {
+		width: auto;
+	}
 }

@@ -1,46 +1,41 @@
 .current-money {
-    position: absolute;
-    width: 55%;
-    right: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: showCurrentMoneyContainer .25s ease-in-out forwards;
-    border: 2px solid orange;
-    border-radius: 50px;
-    width: 30%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	animation: showCurrentMoneyContainer 0.25s ease-in-out forwards;
+	border: 2px solid orange;
+	border-radius: 50px;
 }
 
 .current-money p {
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    font-size: 2rem;
-    animation: showCurrentMoney .5s ease-in-out forwards .25s;
-    opacity: 0;
-    padding: 5px;
+	color: #fff;
+	width: 100%;
+	text-align: center;
+	font-size: 2rem;
+	animation: showCurrentMoney 0.5s ease-in-out forwards 0.25s;
+	opacity: 0;
+	padding: 0.5rem;
 }
 
 @keyframes showCurrentMoneyContainer {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0);
+	}
 }
 
 @keyframes showCurrentMoney {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 @media screen and (min-width: 768px) {
-    .current-money {
-        height: 100%;
-    }
+	.current-money {
+	}
 }

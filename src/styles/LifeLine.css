@@ -1,56 +1,58 @@
 .lifeline {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    transition: .4s ease-in-out forwards;
-    opacity: 0;
-    transform: scale(0);
-    animation: showLifeLine .3s ease-in-out forwards;
-    cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	transition: 0.4s ease-in-out forwards;
+	opacity: 0;
+	transform: scale(0);
+	animation: showLifeLine 0.3s ease-in-out forwards;
+	cursor: pointer;
 }
 
 .lifeline img {
-    width: 90%;
-    height: 90%;
+	width: 90%;
+	height: 90%;
 }
 
 .lifeline-visible-0 {
-    animation-delay: .25s;
+	animation-delay: 0.25s;
 }
 
 .lifeline-visible-1 {
-    animation-delay: .35s;
+	animation-delay: 0.35s;
 }
 
 .lifeline-visible-2 {
-    animation-delay: .45s;
+	animation-delay: 0.45s;
 }
 
 @keyframes showLifeLine {
-    0% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+	0% {
+		opacity: 0;
+		transform: scale(0);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 
 @keyframes hideLifeLine {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
+	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+		opacity: 0;
+	}
 }
 
-
 @media screen and (min-width: 768px) {
-        
+	.lifeline {
+		height: 80%;
+		width: 80%;
+	}
 }

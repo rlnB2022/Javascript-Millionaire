@@ -104,8 +104,6 @@ export const getQuestions = async () => {
 			snapshot_million.docs.map((doc) => doc.data())
 		).slice(-1);
 
-		console.log(items_million);
-
 		store.dispatch({
 			type: "storeQuestions",
 			questions: items_million,

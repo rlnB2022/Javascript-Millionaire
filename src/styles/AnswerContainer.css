@@ -1,20 +1,21 @@
 .answer-container {
-    display: grid;
-    grid-template-rows: repeat(4, 1fr);
-    grid-template-columns: 1fr;
+	display: grid;
+	grid-template-rows: repeat(4, 1fr);
+	grid-template-columns: 1fr;
+	flex: 1;
 }
 
 .hide-answer {
-    animation: hideAnswer .3s ease-in-out forwards;
+	animation: hideAnswer 0.3s ease-in-out forwards;
 }
 
 @keyframes hideAnswer {
-    0% {
-        opacity: 1;
-        transform: scale(.9);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0);
-    }
+	0% {
+		opacity: 1;
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0);
+	}
 }
