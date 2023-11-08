@@ -1,25 +1,21 @@
 {
   "files": {
-    "main.css": "/Javascript-Millionaire/static/css/main.fc2d297b.css",
-    "main.js": "/Javascript-Millionaire/static/js/main.abc8ceb7.js",
+    "main.css": "/Javascript-Millionaire/static/css/main.c3bb8973.css",
+    "main.js": "/Javascript-Millionaire/static/js/main.0f3efb47.js",
     "static/media/asktheaudience-bg.jpg": "/Javascript-Millionaire/static/media/asktheaudience-bg.5080cb6798c9bba63410.jpg",
     "static/media/phoneafriend.png": "/Javascript-Millionaire/static/media/phoneafriend.f4849acdc6c5911091f7.png",
     "static/media/fiftyfifty.png": "/Javascript-Millionaire/static/media/fiftyfifty.30f215840126d5ab304d.png",
     "static/media/logo.png": "/Javascript-Millionaire/static/media/logo.2bc8f890dbe8ba93f0c2.png",
-    "static/media/thejackforge.jpg": "/Javascript-Millionaire/static/media/thejackforge.179a709e99dff1d358bd.jpg",
     "static/media/asktheaudience.png": "/Javascript-Millionaire/static/media/asktheaudience.fdcca79f01ad04d41dcb.png",
-    "static/media/shaundai.jpg": "/Javascript-Millionaire/static/media/shaundai.f89fb70a7ac05bf4d18b.jpg",
-    "static/media/csaba-kissi.jpg": "/Javascript-Millionaire/static/media/csaba-kissi.89b94fa787bb702891ef.jpg",
-    "static/media/traversymedia.jpg": "/Javascript-Millionaire/static/media/traversymedia.42ce704b7209df66005f.jpg",
     "static/media/bg.jpg": "/Javascript-Millionaire/static/media/bg.ae1f8e7e0240f4345ad0.jpg",
     "static/media/answer-box.svg": "/Javascript-Millionaire/static/media/answer-box.167e3d931f45590bd991.svg",
     "static/media/answer-box_selected.svg": "/Javascript-Millionaire/static/media/answer-box_selected.a3828c8eae7f6a982dda.svg",
     "index.html": "/Javascript-Millionaire/index.html",
-    "main.fc2d297b.css.map": "/Javascript-Millionaire/static/css/main.fc2d297b.css.map",
-    "main.abc8ceb7.js.map": "/Javascript-Millionaire/static/js/main.abc8ceb7.js.map"
+    "main.c3bb8973.css.map": "/Javascript-Millionaire/static/css/main.c3bb8973.css.map",
+    "main.0f3efb47.js.map": "/Javascript-Millionaire/static/js/main.0f3efb47.js.map"
   },
   "entrypoints": [
-    "static/css/main.fc2d297b.css",
-    "static/js/main.abc8ceb7.js"
+    "static/css/main.c3bb8973.css",
+    "static/js/main.0f3efb47.js"
   ]
 }
