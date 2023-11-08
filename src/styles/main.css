@@ -12,5 +12,8 @@
 	padding: 0.5rem;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1200px) {
+	.main {
+		width: 75vw;
+	}
 }

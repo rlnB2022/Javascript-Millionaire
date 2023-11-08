@@ -1,18 +1,18 @@
 .sidebar {
-    display: none;
-    flex: 1;
-    padding: 20px;
+	display: none;
+	flex: 1;
+	padding: 20px;
 }
 
 @media screen and (min-width: 768px) {
-    .sidebar {
-        display: grid;
-        grid-template-columns: 1fr;
-        border-left: 5px solid #fff;
-        transform: translateX(100%);
-    }
+	.sidebar {
+		display: grid;
+		grid-template-columns: 1fr;
+		border-left: 5px solid #fff;
+		transform: translateX(100%);
+	}
 
-    .show-sidebar {
-        transform: translateX(0%);
-    }
+	.show-sidebar {
+		transform: translateX(0%);
+	}
 }

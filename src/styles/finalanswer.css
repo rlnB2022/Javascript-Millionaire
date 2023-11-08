@@ -1,80 +1,88 @@
 .final-answer-outer {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, .9);
-    opacity: 0;
-    animation: final-answer-fade-in .4s ease-in-out forwards;
+	position: absolute;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.9);
+	opacity: 0;
+	animation: final-answer-fade-in 0.4s ease-in-out forwards;
 }
 
 .final-answer-container {
-    position: absolute;
-    width: 90%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -45%);
-    text-align: center;
-    border-radius: 10px;
-    border: 2px solid var(--dark-blue);
-    color: #fff;
-    background-color: var(--dark-blue);
+	position: absolute;
+	width: 90%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -45%);
+	text-align: center;
+	border-radius: 10px;
+	border: 2px solid var(--dark-blue);
+	color: #fff;
+	background-color: var(--dark-blue);
 }
 
 .final-answer-container > .bg-image {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: url('../answer-box.svg');
-    padding: 20px 0;
-    font-size: 2rem;
-    width: 75%;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: url("../answer-box.svg");
+	padding: 20px 0;
+	font-size: 2rem;
+	width: 75%;
 }
 
 .final-answer-buttons {
-    display: flex;
-    cursor: pointer;
+	display: flex;
+	cursor: pointer;
 }
 
 .final-answer-container .final-answer-selected {
-    margin-top: 30px;
-    color: #fff;
-    padding: 30px 0;
-    font-size: 1.5rem;
+	margin-top: 30px;
+	color: #fff;
+	padding: 30px 0;
+	font-size: 1.5rem;
 }
 
 .final-answer-btn {
-    flex: 1;
-    padding: 30px 0;
-    border-top: 2px solid;
-    border-color: var(--dark-blue);
+	flex: 1;
+	padding: 30px 0;
+	border-top: 2px solid;
+	border-color: var(--dark-blue);
 }
 
 .final-answer-btn:hover {
-    filter: brightness(80%);
+	filter: brightness(80%);
 }
 
 .final-answer-no {
-    background-color: var(--blue-purple);
-    border-radius: 0 0 0 10px;
+	background-color: var(--blue-purple);
+	border-radius: 0 0 0 10px;
 }
 
 .final-answer-yes {
-    background-color: var(--orange);
-    border-left: 2px solid var(--dark-blue);
-    border-radius: 0 0 10px 0px;
+	background-color: var(--orange);
+	border-left: 2px solid var(--dark-blue);
+	border-radius: 0 0 10px 0px;
 }
 
 @keyframes final-answer-fade-in {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 @media screen and (min-width: 768px) {
-    .final-answer-container {
-        width: 30%;
-        transform: translate(-90%, -45%);
-    }
+	.final-answer-container {
+		width: 30%;
+		/* transform: translate(-90%, -45%); */
+	}
+}
+
+@media screen and (max-width: 300px) {
+	.final-answer-outer .final-answer-container .final-answer-selected {
+		font-size: 1rem;
+		top: 0.5rem;
+		position: relative;
+	}
 }

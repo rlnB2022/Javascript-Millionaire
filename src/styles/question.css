@@ -56,3 +56,9 @@
 		width: 85%;
 	}
 }
+
+@media screen and (max-width: 300px) {
+	.question-container .question p {
+		font-size: 1rem;
+	}
+}

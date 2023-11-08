@@ -1,29 +1,30 @@
 .sidebar-level {
-    display: flex;
-    align-items: center;
-    padding: 0 6.25rem;
-    color: orange;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 6.25rem;
+	color: orange;
 }
 
 .sidebar-level p {
-    display: inline-block;
-    font-size: 1.5rem;
+	display: inline-block;
+	font-size: 1.5rem;
 }
 
 .sidebarActive {
-    background-image: url('../answer-box_selected.svg');
-    background-size: 100% 100%;
-    /* color: darkblue; */
-    color: white;
+	background-image: url("../answer-box_selected.svg");
+	background-size: 100% 100%;
+	/* color: darkblue; */
+	color: white;
 }
 
 .sidebar-level-number {
-    text-align: right;
-    width: 10%;
+	text-align: right;
+	width: 10%;
 }
 
 .sidebar-level-amount {
-    text-align: left;
-    margin-left: 1.25rem;
-    width: 12.5rem;
+	text-align: center;
+	margin-left: 1.25rem;
+	width: 12.5rem;
 }

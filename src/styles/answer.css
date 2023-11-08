@@ -84,3 +84,9 @@
 		width: 100%;
 	}
 }
+
+@media screen and (max-width: 300px) {
+	.answer .answer-text p {
+		font-size: 0.75rem;
+	}
+}
