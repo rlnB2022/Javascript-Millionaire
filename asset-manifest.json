@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Javascript-Millionaire/static/css/main.3734281a.css",
+    "main.css": "/Javascript-Millionaire/static/css/main.f4d07aeb.css",
     "main.js": "/Javascript-Millionaire/static/js/main.c4ba980e.js",
     "static/media/asktheaudience-bg.jpg": "/Javascript-Millionaire/static/media/asktheaudience-bg.5080cb6798c9bba63410.jpg",
     "static/media/phoneafriend.png": "/Javascript-Millionaire/static/media/phoneafriend.f4849acdc6c5911091f7.png",
@@ -11,11 +11,11 @@
     "static/media/answer-box.svg": "/Javascript-Millionaire/static/media/answer-box.167e3d931f45590bd991.svg",
     "static/media/answer-box_selected.svg": "/Javascript-Millionaire/static/media/answer-box_selected.a3828c8eae7f6a982dda.svg",
     "index.html": "/Javascript-Millionaire/index.html",
-    "main.3734281a.css.map": "/Javascript-Millionaire/static/css/main.3734281a.css.map",
+    "main.f4d07aeb.css.map": "/Javascript-Millionaire/static/css/main.f4d07aeb.css.map",
     "main.c4ba980e.js.map": "/Javascript-Millionaire/static/js/main.c4ba980e.js.map"
   },
   "entrypoints": [
-    "static/css/main.3734281a.css",
+    "static/css/main.f4d07aeb.css",
     "static/js/main.c4ba980e.js"
   ]
 }
