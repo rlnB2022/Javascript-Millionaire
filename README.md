@@ -34,7 +34,7 @@ This project is created with:
 
 # What I learned
 
-I learned that React is the library that was just made for me. I love it! Firestore databases are amazing. Coming from a SQL background, a noSQL database with documents wasn't as difficult as I thought it would be. Implementing React Redux to manage the state of the app was also not as difficult as I expected, either. At my current job, we used Flux, so it was easy to adapt and learn.
+Firestore databases are amazing. Coming from a SQL background, a noSQL database with documents wasn’t as difficult as I initially anticipated. This was the first project where I learned how to implement React Redux to manage the state of the app. Given my work-experience with Flux, adapting and learning was a relatively smooth transition.
 
 # Takeaways
 
