@@ -24,20 +24,16 @@ This project is created with:
 * CSS 3
 * Javascript
 
-# Problems Faced
+# Process
 
-* Having never used Firebase/Firestorm before, I took it as a challenge. (I love learning new things!) Reading through the Firestorm docs and walking through the setup process on their website wasn't too difficult.
+* I love a good challenge. So, when I needed a way to store the questions and answers in a database, I welcomed the opportunity to explore and experiment with Firebase/Firestore.
 
-* I had an issue with too many renderings when I implement the Timer component from App.js. Instead of counting down from 30 when the game starts and the question is revealed, it began immediately. I moved the logic to the Timer component and that helped tremendously.
+* Reading through the Firestore docs and reviewing the setup procedure on their website proved to be fairly straightforward.
 
-* I used SVG images for each question/answer. I ran into a problem where the SVGs wouldn't resize to fit the grid. I replaced the SVGs with simple borders/border-radius styles applied. I understand that the viewbox setting in the SVG might be the culprit. I'll have to learn more about using SVGs to understand how to implement something like this in the future.
+* Encountering excessive renderings became an issue when implementing the Timer component from App.js. Rather than initiating a countdown from 30 when the game starts and the question is revealed, it began immediately. Shifting the logic to the Timer component made a significant improvement in performance.
 
 # What I learned
 
 Firestore databases are amazing. Coming from a SQL background, a noSQL database with documents wasn’t as difficult as I initially anticipated. This was the first project where I learned how to implement React Redux to manage the state of the app. Given my work-experience with Flux, adapting and learning was a relatively smooth transition.
-
-# Takeaways
-
-This was a really fun project to create. I finished working on this project September 26, 2021...late into the night. Deployed on Github Pages.
 
 Thanks for reading!
