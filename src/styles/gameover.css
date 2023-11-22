@@ -1,66 +1,68 @@
 .game-over {
-    position: relative;
-    background: url('../bg.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
+	position: relative;
+	background: url("../bg.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100vw;
+	height: 100dvh;
 }
 
-.game-over-title, .game-over-message {
-    color: #fff;
+.game-over-title,
+.game-over-message {
+	color: #fff;
 }
 
 .game-over-title {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 3rem;
-    text-align: center;
-    width: 100%;
-    color: orange;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 3rem;
+	text-align: center;
+	width: 100%;
+	color: orange;
 }
 
 .game-over-message {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 0 auto;
-    padding: 20px 40px;
-    color: #fff;
-    background-color: rgba(255, 255, 255, .25);
-    border-radius: 10px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 80%;
+	font-size: 1.5rem;
+	text-align: center;
+	margin: 0 auto;
+	padding: 20px 40px;
+	color: #fff;
+	background-color: rgba(255, 255, 255, 0.25);
+	border-radius: 10px;
 }
 
 .game-over-button {
-    width: 80%;
-    position: absolute;
-    left: 50%;
-    bottom: 10%;
-    transform: translateX(-50%);
-    padding: 15px 25px;
-    border-radius: .625rem;
-    background-color: orange;
-    color: white;
-    font-size: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: .4s ease-in-out;
+	width: 80%;
+	position: absolute;
+	left: 50%;
+	bottom: 10%;
+	transform: translateX(-50%);
+	padding: 15px 25px;
+	border-radius: 0.625rem;
+	background-color: orange;
+	color: white;
+	font-size: 2rem;
+	text-align: center;
+	cursor: pointer;
+	transition: 0.4s ease-in-out;
 }
 
 .game-over-button:hover {
-    background-color: white;
-    color: orange;
+	background-color: white;
+	color: orange;
 }
 
 @media screen and (min-width: 768px) {
-    .game-over-message, .game-over-button {
-        width: 50%;
-    }
+	.game-over-message,
+	.game-over-button {
+		width: 50%;
+	}
 }
