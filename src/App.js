@@ -43,12 +43,6 @@ function App() {
 		"$500,000",
 		"$1 MILLION",
 	];
-	const questionName = [
-		"questions_easy",
-		"questions_medium",
-		"questions_hard",
-		"questions_million",
-	];
 
 	const loading = useSelector((state) => state.loading);
 	const gameState = useSelector((state) => state.gameState);
@@ -173,6 +167,12 @@ function App() {
 	};
 
 	const getDifficultyName = () => {
+		const questionName = [
+			"questions_easy",
+			"questions_medium",
+			"questions_hard",
+			"questions_million",
+		];
 		return questionName[Math.floor((currentLevel + 1) / 5)];
 	};
 
